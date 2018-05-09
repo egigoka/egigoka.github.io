@@ -27,8 +27,9 @@ while True:
                 if file[:1] != ".":
                     File.move(Path.extend(path_of_updates, file), Path.extend(path_where_to_store, file))
                     pyperclip.copy("pics_realty" + "/" + file)
-                    print(file, "moved")
+                    #print(file, "moved")
                     Process.start("python3", "git8.py", "new", "screenshot", file)
-                else:
-                    print("skip file, wait for full writing...")
+                    print("git synced!")
+                #else:
+                    #print("skip file, wait for full writing...")
         old_list = new_list
