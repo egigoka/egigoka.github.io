@@ -27,7 +27,7 @@ while True:
                 if file[:1] != ".":
                     File.move(Path.extend(path_of_updates, file), Path.extend(path_where_to_store, file))
                     pyperclip.copy("pics_realty" + "/" + file)
-                    macOS.nofitication("updates.py", "copied now")
+                    macOS.notification("updates.py", "copied now")
                     #print(file, "moved")
                 else:
                     pass#print("skip file, wait for full writing...")
