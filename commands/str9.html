@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions for managing strings.
 &#34;&#34;&#34;
-__version__ = &#34;0.12.0&#34;
+__version__ = &#34;0.12.1&#34;
 
 
 class Str:
@@ -194,7 +194,7 @@ class Str:
             startfrom = 0
             if not safe:
                 if isinstance(exception_message, str):
-                    exception_message += &#39;\n&#39;
+                    exception_message += &#39;. &#39;
                 raise KeyError(f&#34;{exception_message}The line preceding ({before}) the search string was not found&#34;)
         if after:
             after = str(after)
@@ -210,7 +210,7 @@ class Str:
                     after_substring = &#34;&#34;
                 if not safe:
                     if isinstance(exception_message, str):
-                        exception_message += &#39;\n&#39;
+                        exception_message += &#39;. &#39;
                     raise KeyError(f&#34;{exception_message}The string ({after}) that followed the search string was not found&#34;)
         else:
             substring = string[startfrom:]
@@ -539,7 +539,7 @@ class Str:
             startfrom = 0
             if not safe:
                 if isinstance(exception_message, str):
-                    exception_message += &#39;\n&#39;
+                    exception_message += &#39;. &#39;
                 raise KeyError(f&#34;{exception_message}The line preceding ({before}) the search string was not found&#34;)
         if after:
             after = str(after)
@@ -555,7 +555,7 @@ class Str:
                     after_substring = &#34;&#34;
                 if not safe:
                     if isinstance(exception_message, str):
-                        exception_message += &#39;\n&#39;
+                        exception_message += &#39;. &#39;
                     raise KeyError(f&#34;{exception_message}The string ({after}) that followed the search string was not found&#34;)
         else:
             substring = string[startfrom:]
@@ -1144,7 +1144,7 @@ def substring(string, before, after=None, return_after_substring=False, safe=Fal
         startfrom = 0
         if not safe:
             if isinstance(exception_message, str):
-                exception_message += &#39;\n&#39;
+                exception_message += &#39;. &#39;
             raise KeyError(f&#34;{exception_message}The line preceding ({before}) the search string was not found&#34;)
     if after:
         after = str(after)
@@ -1160,7 +1160,7 @@ def substring(string, before, after=None, return_after_substring=False, safe=Fal
                 after_substring = &#34;&#34;
             if not safe:
                 if isinstance(exception_message, str):
-                    exception_message += &#39;\n&#39;
+                    exception_message += &#39;. &#39;
                 raise KeyError(f&#34;{exception_message}The string ({after}) that followed the search string was not found&#34;)
     else:
         substring = string[startfrom:]

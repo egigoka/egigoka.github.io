@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with terminal|console
 &#34;&#34;&#34;
-__version__ = &#34;0.8.9&#34;
+__version__ = &#34;0.8.11&#34;
 
 
 class Console:
@@ -258,6 +258,7 @@ class Console:
         return out, err
 
     windows_utf8 = False
+    windows_utf8_fail = False
 
     @classmethod
     def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False,
@@ -285,20 +286,25 @@ class Console:
         if (&#34;py&#34; in commands or &#34;py&#34; in commands[0]) and print_std and auto_disable_py_buffering:
             if &#34;-u&#34; not in commands:
                 list_commands = list(commands)
-
                 list_commands.insert(1, &#34;-u&#34;)
                 commands = list_commands
-
-        # end disabling buffering for python
 
         # set decoding and init
         if auto_decoding and not decoding and not universal_newlines:
             if OS.windows:
-                if not cls.windows_utf8:
+                if cls.windows_utf8:
+                    decoding = &#34;utf_8&#34;
+                elif cls.windows_utf8_fail:
+                    decoding = &#34;cp866&#34;
+                else:
                     from .windows9 import Windows
-                    Windows.fix_unicode_encode_error(quiet=True)
-                    cls.windows_utf8 = True
-                decoding = &#34;utf_8&#34;
+                    try:
+                        Windows.fix_unicode_encode_error()
+                        cls.windows_utf8 = True
+                        decoding = &#34;utf_8&#34;
+                    except UnicodeEncodeError:  # if cp65001 cannot be setted
+                        cls.windows_utf8_fail = True
+                        decoding = f&#34;cp{Windows.get_cmd_code_page()}&#34;
             elif OS.unix_family:
                 decoding = &#34;utf8&#34;
             else:
@@ -613,6 +619,7 @@ class Console:
         return out, err
 
     windows_utf8 = False
+    windows_utf8_fail = False
 
     @classmethod
     def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False,
@@ -640,20 +647,25 @@ class Console:
         if (&#34;py&#34; in commands or &#34;py&#34; in commands[0]) and print_std and auto_disable_py_buffering:
             if &#34;-u&#34; not in commands:
                 list_commands = list(commands)
-
                 list_commands.insert(1, &#34;-u&#34;)
                 commands = list_commands
-
-        # end disabling buffering for python
 
         # set decoding and init
         if auto_decoding and not decoding and not universal_newlines:
             if OS.windows:
-                if not cls.windows_utf8:
+                if cls.windows_utf8:
+                    decoding = &#34;utf_8&#34;
+                elif cls.windows_utf8_fail:
+                    decoding = &#34;cp866&#34;
+                else:
                     from .windows9 import Windows
-                    Windows.fix_unicode_encode_error(quiet=True)
-                    cls.windows_utf8 = True
-                decoding = &#34;utf_8&#34;
+                    try:
+                        Windows.fix_unicode_encode_error()
+                        cls.windows_utf8 = True
+                        decoding = &#34;utf_8&#34;
+                    except UnicodeEncodeError:  # if cp65001 cannot be setted
+                        cls.windows_utf8_fail = True
+                        decoding = f&#34;cp{Windows.get_cmd_code_page()}&#34;
             elif OS.unix_family:
                 decoding = &#34;utf8&#34;
             else:
@@ -726,6 +738,10 @@ class Console:
 <h3>Class variables</h3>
 <dl>
 <dt id="commands.console9.Console.windows_utf8"><code class="name">var <span class="ident">windows_utf8</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+<dt id="commands.console9.Console.windows_utf8_fail"><code class="name">var <span class="ident">windows_utf8_fail</span></code></dt>
 <dd>
 <section class="desc"></section>
 </dd>
@@ -891,20 +907,25 @@ def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, 
     if (&#34;py&#34; in commands or &#34;py&#34; in commands[0]) and print_std and auto_disable_py_buffering:
         if &#34;-u&#34; not in commands:
             list_commands = list(commands)
-
             list_commands.insert(1, &#34;-u&#34;)
             commands = list_commands
-
-    # end disabling buffering for python
 
     # set decoding and init
     if auto_decoding and not decoding and not universal_newlines:
         if OS.windows:
-            if not cls.windows_utf8:
+            if cls.windows_utf8:
+                decoding = &#34;utf_8&#34;
+            elif cls.windows_utf8_fail:
+                decoding = &#34;cp866&#34;
+            else:
                 from .windows9 import Windows
-                Windows.fix_unicode_encode_error(quiet=True)
-                cls.windows_utf8 = True
-            decoding = &#34;utf_8&#34;
+                try:
+                    Windows.fix_unicode_encode_error()
+                    cls.windows_utf8 = True
+                    decoding = &#34;utf_8&#34;
+                except UnicodeEncodeError:  # if cp65001 cannot be setted
+                    cls.windows_utf8_fail = True
+                    decoding = f&#34;cp{Windows.get_cmd_code_page()}&#34;
         elif OS.unix_family:
             decoding = &#34;utf8&#34;
         else:
@@ -1015,6 +1036,7 @@ def width():
 <li><code><a title="commands.console9.Console.height" href="#commands.console9.Console.height">height</a></code></li>
 <li><code><a title="commands.console9.Console.width" href="#commands.console9.Console.width">width</a></code></li>
 <li><code><a title="commands.console9.Console.windows_utf8" href="#commands.console9.Console.windows_utf8">windows_utf8</a></code></li>
+<li><code><a title="commands.console9.Console.windows_utf8_fail" href="#commands.console9.Console.windows_utf8_fail">windows_utf8_fail</a></code></li>
 </ul>
 </li>
 </ul>
