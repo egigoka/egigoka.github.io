@@ -214,7 +214,7 @@ class File:
                         if sym != 0:
                             fail_symbols += 1
                 utf_16_le = False
-                if fail_symbols/(len(slice_of_raw_data)/2) &lt; 0.99:
+                if fail_symbols/(len(slice_of_raw_data)/2) &lt; 0.3:
                     utf_16_le = True
                 if utf_16_le:
                     encoding = &#34;utf-16-le&#34;
@@ -510,7 +510,7 @@ class File:
                         if sym != 0:
                             fail_symbols += 1
                 utf_16_le = False
-                if fail_symbols/(len(slice_of_raw_data)/2) &lt; 0.99:
+                if fail_symbols/(len(slice_of_raw_data)/2) &lt; 0.3:
                     utf_16_le = True
                 if utf_16_le:
                     encoding = &#34;utf-16-le&#34;
@@ -923,7 +923,7 @@ def read(path, encoding=&#34;utf-8&#34;, auto_detect_encoding=False, quiet=True,
                     if sym != 0:
                         fail_symbols += 1
             utf_16_le = False
-            if fail_symbols/(len(slice_of_raw_data)/2) &lt; 0.99:
+            if fail_symbols/(len(slice_of_raw_data)/2) &lt; 0.3:
                 utf_16_le = True
             if utf_16_le:
                 encoding = &#34;utf-16-le&#34;

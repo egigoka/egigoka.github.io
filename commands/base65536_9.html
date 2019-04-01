@@ -50,9 +50,9 @@ class Base65536:
         File.write(file_path, encoded)
 
     @classmethod
-    def from_file(cls, file_path):
+    def from_file(cls, file_path, encoding=None, auto_detect_encoding=True):
         from .file9 import File
-        encoded = File.read(file_path, auto_detect_encoding=True)
+        encoded = File.read(file_path, encoding=encoding, auto_detect_encoding=auto_detect_encoding)
         decoded = cls.b65kdecode(encoded)
         return decoded</code></pre>
 </details>
@@ -95,9 +95,9 @@ class Base65536:
         File.write(file_path, encoded)
 
     @classmethod
-    def from_file(cls, file_path):
+    def from_file(cls, file_path, encoding=None, auto_detect_encoding=True):
         from .file9 import File
-        encoded = File.read(file_path, auto_detect_encoding=True)
+        encoded = File.read(file_path, encoding=encoding, auto_detect_encoding=auto_detect_encoding)
         decoded = cls.b65kdecode(encoded)
         return decoded</code></pre>
 </details>
@@ -134,16 +134,16 @@ def b65kencode(input):
 </details>
 </dd>
 <dt id="commands.base65536_9.Base65536.from_file"><code class="name flex">
-<span>def <span class="ident">from_file</span></span>(<span>cls, file_path)</span>
+<span>def <span class="ident">from_file</span></span>(<span>cls, file_path, encoding=None, auto_detect_encoding=True)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@classmethod
-def from_file(cls, file_path):
+def from_file(cls, file_path, encoding=None, auto_detect_encoding=True):
     from .file9 import File
-    encoded = File.read(file_path, auto_detect_encoding=True)
+    encoded = File.read(file_path, encoding=encoding, auto_detect_encoding=auto_detect_encoding)
     decoded = cls.b65kdecode(encoded)
     return decoded</code></pre>
 </details>
