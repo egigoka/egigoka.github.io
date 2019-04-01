@@ -25,14 +25,14 @@
 <pre><code class="python">#! python3
 # -*- coding: utf-8 -*-
 
-__version__ = &#34;0.0.2&#34;
+__version__ = &#34;0.0.3&#34;
 
 class Resources:
     @classmethod
     def to_file(cls, name, path):
         from .os9 import OS
         from .base65536_9 import Base65536
-        string = cls.resources_dict[f&#34;{name}_{OS.name}_{OS.architecture}&#34;]
+        string = cls.resources_dict[f&#34;{name.lower()}_{OS.name}_{OS.architecture}&#34;]
         return Base65536.to_file(string, path)
 
     resources_dict = {
@@ -64,7 +64,7 @@ class Resources:
     def to_file(cls, name, path):
         from .os9 import OS
         from .base65536_9 import Base65536
-        string = cls.resources_dict[f&#34;{name}_{OS.name}_{OS.architecture}&#34;]
+        string = cls.resources_dict[f&#34;{name.lower()}_{OS.name}_{OS.architecture}&#34;]
         return Base65536.to_file(string, path)
 
     resources_dict = {
@@ -94,7 +94,7 @@ class Resources:
 def to_file(cls, name, path):
     from .os9 import OS
     from .base65536_9 import Base65536
-    string = cls.resources_dict[f&#34;{name}_{OS.name}_{OS.architecture}&#34;]
+    string = cls.resources_dict[f&#34;{name.lower()}_{OS.name}_{OS.architecture}&#34;]
     return Base65536.to_file(string, path)</code></pre>
 </details>
 </dd>
