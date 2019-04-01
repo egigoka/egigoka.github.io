@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module wrapper to cli wget
 &#34;&#34;&#34;
-__version__ = &#34;0.1.1&#34;
+__version__ = &#34;0.1.2&#34;
 
 
 class Wget:  # pylint: disable=too-few-public-methods
@@ -46,7 +46,6 @@ class Wget:  # pylint: disable=too-few-public-methods
                     &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;
 
         from .console9 import Console
-        # from .const9 import backslash
         from .dir9 import Dir
         import os
 
@@ -54,9 +53,8 @@ class Wget:  # pylint: disable=too-few-public-methods
         if no_check_certificate:
             no_check_certificate_cli_arg = &#34;--no-check-certificate&#34;
 
-        # url = url.replace(&#34;&amp;&#34;, backslash + &#34;&amp;&#34;)
         command = f&#34;wget {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
-        if not Dir.exist(os.path.split(output_filename)[0]):
+        if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
             Dir.create(os.path.split(output_filename)[0])
         try:
             return Console.get_output(command, print_std=not quiet)
@@ -97,7 +95,6 @@ class Wget:  # pylint: disable=too-few-public-methods
                     &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;
 
         from .console9 import Console
-        # from .const9 import backslash
         from .dir9 import Dir
         import os
 
@@ -105,9 +102,8 @@ class Wget:  # pylint: disable=too-few-public-methods
         if no_check_certificate:
             no_check_certificate_cli_arg = &#34;--no-check-certificate&#34;
 
-        # url = url.replace(&#34;&amp;&#34;, backslash + &#34;&amp;&#34;)
         command = f&#34;wget {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
-        if not Dir.exist(os.path.split(output_filename)[0]):
+        if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
             Dir.create(os.path.split(output_filename)[0])
         try:
             return Console.get_output(command, print_std=not quiet)
@@ -140,7 +136,6 @@ def download(url, output_filename, quiet=False, no_check_certificate=False):  # 
                 &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;
 
     from .console9 import Console
-    # from .const9 import backslash
     from .dir9 import Dir
     import os
 
@@ -148,9 +143,8 @@ def download(url, output_filename, quiet=False, no_check_certificate=False):  # 
     if no_check_certificate:
         no_check_certificate_cli_arg = &#34;--no-check-certificate&#34;
 
-    # url = url.replace(&#34;&amp;&#34;, backslash + &#34;&amp;&#34;)
     command = f&#34;wget {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
-    if not Dir.exist(os.path.split(output_filename)[0]):
+    if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
         Dir.create(os.path.split(output_filename)[0])
     try:
         return Console.get_output(command, print_std=not quiet)
