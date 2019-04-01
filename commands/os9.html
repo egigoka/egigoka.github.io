@@ -54,13 +54,21 @@ class OS:  # pylint: disable=too-few-public-methods
     display = None  # didn&#39;t work yet
     cyrillic_support = None  # boolean variable of cyrrilic output support
 
-    if sys.platform == &#34;linux&#34; or sys.platform == &#34;linux2&#34;:
+    sys_platfrom = sys.platform
+    if sys_platfrom == &#34;linux&#34; or sys_platfrom == &#34;linux2&#34;:
         linux = True
-    elif sys.platform == &#34;win32&#34; or sys.platform == &#34;cygwin&#34;:
+        name = &#34;linux&#34;
+    elif sys_platfrom == &#34;win32&#34; or sys_platfrom == &#34;cygwin&#34;:
         windows = True
         windows_version = sys.getwindowsversion().major
-    elif sys.platform == &#34;darwin&#34;:
+        name = &#34;windows&#34;
+    elif sys_platfrom == &#34;darwin&#34;:
         macos = True
+        name = &#34;macos&#34;
+    else:
+        name = &#34;unknown&#34;
+
+    architecture = platform.architecture()[0]
 
     if platform.python_implementation == &#34;PyPy&#34;:
         python_implementation = &#34;pypy&#34;
@@ -145,13 +153,21 @@ class OS:  # pylint: disable=too-few-public-methods
     display = None  # didn&#39;t work yet
     cyrillic_support = None  # boolean variable of cyrrilic output support
 
-    if sys.platform == &#34;linux&#34; or sys.platform == &#34;linux2&#34;:
+    sys_platfrom = sys.platform
+    if sys_platfrom == &#34;linux&#34; or sys_platfrom == &#34;linux2&#34;:
         linux = True
-    elif sys.platform == &#34;win32&#34; or sys.platform == &#34;cygwin&#34;:
+        name = &#34;linux&#34;
+    elif sys_platfrom == &#34;win32&#34; or sys_platfrom == &#34;cygwin&#34;:
         windows = True
         windows_version = sys.getwindowsversion().major
-    elif sys.platform == &#34;darwin&#34;:
+        name = &#34;windows&#34;
+    elif sys_platfrom == &#34;darwin&#34;:
         macos = True
+        name = &#34;macos&#34;
+    else:
+        name = &#34;unknown&#34;
+
+    architecture = platform.architecture()[0]
 
     if platform.python_implementation == &#34;PyPy&#34;:
         python_implementation = &#34;pypy&#34;
@@ -199,6 +215,10 @@ class OS:  # pylint: disable=too-few-public-methods
 </details>
 <h3>Class variables</h3>
 <dl>
+<dt id="commands.os9.OS.architecture"><code class="name">var <span class="ident">architecture</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
 <dt id="commands.os9.OS.cyr_line"><code class="name">var <span class="ident">cyr_line</span></code></dt>
 <dd>
 <section class="desc"></section>
@@ -227,6 +247,10 @@ class OS:  # pylint: disable=too-few-public-methods
 <dd>
 <section class="desc"></section>
 </dd>
+<dt id="commands.os9.OS.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
 <dt id="commands.os9.OS.nt_family"><code class="name">var <span class="ident">nt_family</span></code></dt>
 <dd>
 <section class="desc"></section>
@@ -240,6 +264,10 @@ class OS:  # pylint: disable=too-few-public-methods
 <section class="desc"></section>
 </dd>
 <dt id="commands.os9.OS.python_version_major"><code class="name">var <span class="ident">python_version_major</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+<dt id="commands.os9.OS.sys_platfrom"><code class="name">var <span class="ident">sys_platfrom</span></code></dt>
 <dd>
 <section class="desc"></section>
 </dd>
@@ -300,6 +328,7 @@ def running_in_repl():
 <li>
 <h4><code><a title="commands.os9.OS" href="#commands.os9.OS">OS</a></code></h4>
 <ul class="">
+<li><code><a title="commands.os9.OS.architecture" href="#commands.os9.OS.architecture">architecture</a></code></li>
 <li><code><a title="commands.os9.OS.cyr_line" href="#commands.os9.OS.cyr_line">cyr_line</a></code></li>
 <li><code><a title="commands.os9.OS.cyr_symbol" href="#commands.os9.OS.cyr_symbol">cyr_symbol</a></code></li>
 <li><code><a title="commands.os9.OS.cyrillic_support" href="#commands.os9.OS.cyrillic_support">cyrillic_support</a></code></li>
@@ -307,11 +336,13 @@ def running_in_repl():
 <li><code><a title="commands.os9.OS.is_python3" href="#commands.os9.OS.is_python3">is_python3</a></code></li>
 <li><code><a title="commands.os9.OS.linux" href="#commands.os9.OS.linux">linux</a></code></li>
 <li><code><a title="commands.os9.OS.macos" href="#commands.os9.OS.macos">macos</a></code></li>
+<li><code><a title="commands.os9.OS.name" href="#commands.os9.OS.name">name</a></code></li>
 <li><code><a title="commands.os9.OS.nt_family" href="#commands.os9.OS.nt_family">nt_family</a></code></li>
 <li><code><a title="commands.os9.OS.python_commandline_version" href="#commands.os9.OS.python_commandline_version">python_commandline_version</a></code></li>
 <li><code><a title="commands.os9.OS.python_implementation" href="#commands.os9.OS.python_implementation">python_implementation</a></code></li>
 <li><code><a title="commands.os9.OS.python_version_major" href="#commands.os9.OS.python_version_major">python_version_major</a></code></li>
 <li><code><a title="commands.os9.OS.running_in_repl" href="#commands.os9.OS.running_in_repl">running_in_repl</a></code></li>
+<li><code><a title="commands.os9.OS.sys_platfrom" href="#commands.os9.OS.sys_platfrom">sys_platfrom</a></code></li>
 <li><code><a title="commands.os9.OS.sys_version_info" href="#commands.os9.OS.sys_version_info">sys_version_info</a></code></li>
 <li><code><a title="commands.os9.OS.unix_family" href="#commands.os9.OS.unix_family">unix_family</a></code></li>
 <li><code><a title="commands.os9.OS.windows" href="#commands.os9.OS.windows">windows</a></code></li>
