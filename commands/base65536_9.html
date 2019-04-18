@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.5.3" />
-<title>commands.wget9 API documentation</title>
-<meta name="description" content="Internal module wrapper to cli wget" />
+<title>commands.base65536_9 API documentation</title>
+<meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,50 +17,44 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title"><code>commands.wget9</code> module</h1>
+<h1 class="title"><code>commands.base65536_9</code> module</h1>
 </header>
 <section id="section-intro">
-<p>Internal module wrapper to cli wget</p>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">#! python3
 # -*- coding: utf-8 -*-
-&#34;&#34;&#34;Internal module wrapper to cli wget
-&#34;&#34;&#34;
+
 __version__ = &#34;0.1.2&#34;
 
 
-class Wget:  # pylint: disable=too-few-public-methods
-    &#34;&#34;&#34;Class wrapper to cli wget
-    &#34;&#34;&#34;
+class Base65536:
     @staticmethod
-    def download(url, output_filename, quiet=False, no_check_certificate=False):  # pylint: disable=inconsistent-return-statements
-        &#34;&#34;&#34;Wrapper to wget cli
-        &lt;br&gt;`param url` string, url to some file
-        &lt;br&gt;`param output_filename` string, path to filename
-        &lt;br&gt;`param quiet` boolean, suppress print to console
-        &lt;br&gt;`return` output from wget if &#39;quiet&#39; argument is True
-        &#34;&#34;&#34;
-        arguments = &#39;--header=&#34;Accept: text/html&#34; &#39; + \
-                    &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; + \
-                    &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;
+    def encode(input):
+        import base65536
+        bytes = input.encode()
+        b65k = base65536.encode(bytes)
+        return b65k
 
-        from .console9 import Console
-        from .dir9 import Dir
-        import os
+    @staticmethod
+    def decode(input):
+        import base65536
+        bytes = base65536.decode(input)
+        string = bytes.decode()
+        return string
 
-        no_check_certificate_cli_arg = &#34;&#34;
-        if no_check_certificate:
-            no_check_certificate_cli_arg = &#34;--no-check-certificate&#34;
+    @classmethod
+    def to_file(cls, string, file_path):
+        from .file9 import File
+        decoded = cls.decode(string)
+        File.write(file_path, decoded)
 
-        command = f&#34;wget {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
-        if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
-            Dir.create(os.path.split(output_filename)[0])
-        try:
-            return Console.get_output(command, print_std=not quiet)
-        except FileNotFoundError as exception:
-            raise OSError(exception, &#34;install wget&#34;)
-        # Another way to fix blocks by creating ~/.wgetrc file https://stackoverflow.com/a/34166756</code></pre>
+    @classmethod
+    def from_file(cls, file_path, encoding=None, auto_detect_encoding=True):
+        from .file9 import File
+        decoded = File.read(file_path, encoding=encoding, auto_detect_encoding=auto_detect_encoding)
+        encoded = cls.encode(decoded)
+        return encoded</code></pre>
 </details>
 </section>
 <section>
@@ -72,84 +66,100 @@ class Wget:  # pylint: disable=too-few-public-methods
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="commands.wget9.Wget"><code class="flex name class">
-<span>class <span class="ident">Wget</span></span>
+<dt id="commands.base65536_9.Base65536"><code class="flex name class">
+<span>class <span class="ident">Base65536</span></span>
 </code></dt>
 <dd>
-<section class="desc"><p>Class wrapper to cli wget</p></section>
+<section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">class Wget:  # pylint: disable=too-few-public-methods
-    &#34;&#34;&#34;Class wrapper to cli wget
-    &#34;&#34;&#34;
+<pre><code class="python">class Base65536:
     @staticmethod
-    def download(url, output_filename, quiet=False, no_check_certificate=False):  # pylint: disable=inconsistent-return-statements
-        &#34;&#34;&#34;Wrapper to wget cli
-        &lt;br&gt;`param url` string, url to some file
-        &lt;br&gt;`param output_filename` string, path to filename
-        &lt;br&gt;`param quiet` boolean, suppress print to console
-        &lt;br&gt;`return` output from wget if &#39;quiet&#39; argument is True
-        &#34;&#34;&#34;
-        arguments = &#39;--header=&#34;Accept: text/html&#34; &#39; + \
-                    &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; + \
-                    &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;
+    def encode(input):
+        import base65536
+        bytes = input.encode()
+        b65k = base65536.encode(bytes)
+        return b65k
 
-        from .console9 import Console
-        from .dir9 import Dir
-        import os
+    @staticmethod
+    def decode(input):
+        import base65536
+        bytes = base65536.decode(input)
+        string = bytes.decode()
+        return string
 
-        no_check_certificate_cli_arg = &#34;&#34;
-        if no_check_certificate:
-            no_check_certificate_cli_arg = &#34;--no-check-certificate&#34;
+    @classmethod
+    def to_file(cls, string, file_path):
+        from .file9 import File
+        decoded = cls.decode(string)
+        File.write(file_path, decoded)
 
-        command = f&#34;wget {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
-        if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
-            Dir.create(os.path.split(output_filename)[0])
-        try:
-            return Console.get_output(command, print_std=not quiet)
-        except FileNotFoundError as exception:
-            raise OSError(exception, &#34;install wget&#34;)</code></pre>
+    @classmethod
+    def from_file(cls, file_path, encoding=None, auto_detect_encoding=True):
+        from .file9 import File
+        decoded = File.read(file_path, encoding=encoding, auto_detect_encoding=auto_detect_encoding)
+        encoded = cls.encode(decoded)
+        return encoded</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
-<dt id="commands.wget9.Wget.download"><code class="name flex">
-<span>def <span class="ident">download</span></span>(<span>url, output_filename, quiet=False, no_check_certificate=False)</span>
+<dt id="commands.base65536_9.Base65536.decode"><code class="name flex">
+<span>def <span class="ident">decode</span></span>(<span>input)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Wrapper to wget cli
-<br><code>param url</code> string, url to some file
-<br><code>param output_filename</code> string, path to filename
-<br><code>param quiet</code> boolean, suppress print to console
-<br><code>return</code> output from wget if 'quiet' argument is True</p></section>
+<section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
-def download(url, output_filename, quiet=False, no_check_certificate=False):  # pylint: disable=inconsistent-return-statements
-    &#34;&#34;&#34;Wrapper to wget cli
-    &lt;br&gt;`param url` string, url to some file
-    &lt;br&gt;`param output_filename` string, path to filename
-    &lt;br&gt;`param quiet` boolean, suppress print to console
-    &lt;br&gt;`return` output from wget if &#39;quiet&#39; argument is True
-    &#34;&#34;&#34;
-    arguments = &#39;--header=&#34;Accept: text/html&#34; &#39; + \
-                &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; + \
-                &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;
-
-    from .console9 import Console
-    from .dir9 import Dir
-    import os
-
-    no_check_certificate_cli_arg = &#34;&#34;
-    if no_check_certificate:
-        no_check_certificate_cli_arg = &#34;--no-check-certificate&#34;
-
-    command = f&#34;wget {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
-    if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
-        Dir.create(os.path.split(output_filename)[0])
-    try:
-        return Console.get_output(command, print_std=not quiet)
-    except FileNotFoundError as exception:
-        raise OSError(exception, &#34;install wget&#34;)</code></pre>
+def decode(input):
+    import base65536
+    bytes = base65536.decode(input)
+    string = bytes.decode()
+    return string</code></pre>
+</details>
+</dd>
+<dt id="commands.base65536_9.Base65536.encode"><code class="name flex">
+<span>def <span class="ident">encode</span></span>(<span>input)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def encode(input):
+    import base65536
+    bytes = input.encode()
+    b65k = base65536.encode(bytes)
+    return b65k</code></pre>
+</details>
+</dd>
+<dt id="commands.base65536_9.Base65536.from_file"><code class="name flex">
+<span>def <span class="ident">from_file</span></span>(<span>cls, file_path, encoding=None, auto_detect_encoding=True)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def from_file(cls, file_path, encoding=None, auto_detect_encoding=True):
+    from .file9 import File
+    decoded = File.read(file_path, encoding=encoding, auto_detect_encoding=auto_detect_encoding)
+    encoded = cls.encode(decoded)
+    return encoded</code></pre>
+</details>
+</dd>
+<dt id="commands.base65536_9.Base65536.to_file"><code class="name flex">
+<span>def <span class="ident">to_file</span></span>(<span>cls, string, file_path)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def to_file(cls, string, file_path):
+    from .file9 import File
+    decoded = cls.decode(string)
+    File.write(file_path, decoded)</code></pre>
 </details>
 </dd>
 </dl>
@@ -171,9 +181,12 @@ def download(url, output_filename, quiet=False, no_check_certificate=False):  # 
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="commands.wget9.Wget" href="#commands.wget9.Wget">Wget</a></code></h4>
+<h4><code><a title="commands.base65536_9.Base65536" href="#commands.base65536_9.Base65536">Base65536</a></code></h4>
 <ul class="">
-<li><code><a title="commands.wget9.Wget.download" href="#commands.wget9.Wget.download">download</a></code></li>
+<li><code><a title="commands.base65536_9.Base65536.decode" href="#commands.base65536_9.Base65536.decode">decode</a></code></li>
+<li><code><a title="commands.base65536_9.Base65536.encode" href="#commands.base65536_9.Base65536.encode">encode</a></code></li>
+<li><code><a title="commands.base65536_9.Base65536.from_file" href="#commands.base65536_9.Base65536.from_file">from_file</a></code></li>
+<li><code><a title="commands.base65536_9.Base65536.to_file" href="#commands.base65536_9.Base65536.to_file">to_file</a></code></li>
 </ul>
 </li>
 </ul>

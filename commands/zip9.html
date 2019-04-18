@@ -28,19 +28,19 @@
 &#34;&#34;&#34;Internal module to work with zip archives
 &#34;&#34;&#34;
 # https://code.tutsplus.com/ru/tutorials/compressing-and-extracting-files-in-python--cms-26816
-__version__ = &#34;0.1.0&#34;
+__version__ = &#34;0.2.0&#34;
 
 
 class Zip:
     @staticmethod
-    def file(input_file, output_zip, arcname=None):
+    def file(input_file, output_zip, arcname=None, mode=&#34;w&#34;):
         import zipfile
         import os
 
         if not os.path.isfile(input_file):
             raise IOError(input_file + &#34; is not file&#34;)
 
-        temp_zip = zipfile.ZipFile(output_zip, &#39;w&#39;)
+        temp_zip = zipfile.ZipFile(output_zip, mode=mode)
         temp_zip.write(input_file, arcname=arcname, compress_type=zipfile.ZIP_DEFLATED)
 
         temp_zip.close()
@@ -169,14 +169,14 @@ def single(input_zip, output_dir, output_file):
 <summary>Source code</summary>
 <pre><code class="python">class Zip:
     @staticmethod
-    def file(input_file, output_zip, arcname=None):
+    def file(input_file, output_zip, arcname=None, mode=&#34;w&#34;):
         import zipfile
         import os
 
         if not os.path.isfile(input_file):
             raise IOError(input_file + &#34; is not file&#34;)
 
-        temp_zip = zipfile.ZipFile(output_zip, &#39;w&#39;)
+        temp_zip = zipfile.ZipFile(output_zip, mode=mode)
         temp_zip.write(input_file, arcname=arcname, compress_type=zipfile.ZIP_DEFLATED)
 
         temp_zip.close()
@@ -234,21 +234,21 @@ def dir(input_dir, output_zip, quiet=True):
 </details>
 </dd>
 <dt id="commands.zip9.Zip.file"><code class="name flex">
-<span>def <span class="ident">file</span></span>(<span>input_file, output_zip, arcname=None)</span>
+<span>def <span class="ident">file</span></span>(<span>input_file, output_zip, arcname=None, mode=&#39;w&#39;)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
-def file(input_file, output_zip, arcname=None):
+def file(input_file, output_zip, arcname=None, mode=&#34;w&#34;):
     import zipfile
     import os
 
     if not os.path.isfile(input_file):
         raise IOError(input_file + &#34; is not file&#34;)
 
-    temp_zip = zipfile.ZipFile(output_zip, &#39;w&#39;)
+    temp_zip = zipfile.ZipFile(output_zip, mode=mode)
     temp_zip.write(input_file, arcname=arcname, compress_type=zipfile.ZIP_DEFLATED)
 
     temp_zip.close()</code></pre>

@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with Windows-specific functions
 &#34;&#34;&#34;
-__version__ = &#34;0.3.6&#34;
+__version__ = &#34;0.3.7&#34;
 
 
 class Windows:
@@ -46,15 +46,44 @@ class Windows:
             raise OSError(&#34;Locking work only on Windows &lt; 10&#34;)
 
     @staticmethod
-    def fix_unicode_encode_error(quiet=False):
-        &#34;&#34;&#34;Fix UnicodeConsoleError on old versions of Python
-        &lt;br&gt;`param quiet` boolean, suppress print to console
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
+    def set_cmd_code_page(code_page):
         import os
         import subprocess
-        subprocess.Popen(&#34;chcp 65001&#34;.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        subprocess.Popen(f&#34;chcp {code_page}&#34;.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         os.system(&#34;set PYTHONIOENCODING = utf - 8&#34;)
+
+    @staticmethod
+    def get_cmd_code_page():
+        import subprocess
+        from .str9 import Str
+        out, err = subprocess.Popen(&#34;chcp&#34;, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+        if err:
+            return &#34;Error getting current codepage&#34;
+        try:
+            out = Str.substring(out.lower(), &#34;active code page:&#34;).strip()
+            return out
+        except KeyError:
+            return &#34;Cannot get current codepage&#34;
+
+    @classmethod
+    def fix_unicode_encode_error(cls, safe=False):
+        &#34;&#34;&#34;Fix UnicodeConsoleError on old versions of Python
+        &lt;br&gt;`return` None
+        &#34;&#34;&#34;
+        previous_codepage = cls.get_cmd_code_page()
+        try:
+            code_page = cls.set_cmd_code_page(65001)
+            print(&#34;йЙ&#34;, end=&#34;\r&#34;)
+            print(&#34;  &#34;, end=&#34;\r&#34;)
+            return code_page
+        except PermissionError:
+            if previous_codepage &gt;= 0:
+                cls.set_cmd_code_page(previous_codepage)
+                from .os9 import OS
+                OS.cyrillic_support = False
+            if not safe:
+                raise UnicodeEncodeError(f&#34;Cannot use codepage 65001, returning to {previous_codepage}, you can set other by Windows.set_cmd_code_page&#34;)
+            return code_page
 
     @staticmethod
     def user_exists(self, username):
@@ -181,15 +210,44 @@ class Windows:
             raise OSError(&#34;Locking work only on Windows &lt; 10&#34;)
 
     @staticmethod
-    def fix_unicode_encode_error(quiet=False):
-        &#34;&#34;&#34;Fix UnicodeConsoleError on old versions of Python
-        &lt;br&gt;`param quiet` boolean, suppress print to console
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
+    def set_cmd_code_page(code_page):
         import os
         import subprocess
-        subprocess.Popen(&#34;chcp 65001&#34;.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        subprocess.Popen(f&#34;chcp {code_page}&#34;.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         os.system(&#34;set PYTHONIOENCODING = utf - 8&#34;)
+
+    @staticmethod
+    def get_cmd_code_page():
+        import subprocess
+        from .str9 import Str
+        out, err = subprocess.Popen(&#34;chcp&#34;, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+        if err:
+            return &#34;Error getting current codepage&#34;
+        try:
+            out = Str.substring(out.lower(), &#34;active code page:&#34;).strip()
+            return out
+        except KeyError:
+            return &#34;Cannot get current codepage&#34;
+
+    @classmethod
+    def fix_unicode_encode_error(cls, safe=False):
+        &#34;&#34;&#34;Fix UnicodeConsoleError on old versions of Python
+        &lt;br&gt;`return` None
+        &#34;&#34;&#34;
+        previous_codepage = cls.get_cmd_code_page()
+        try:
+            code_page = cls.set_cmd_code_page(65001)
+            print(&#34;йЙ&#34;, end=&#34;\r&#34;)
+            print(&#34;  &#34;, end=&#34;\r&#34;)
+            return code_page
+        except PermissionError:
+            if previous_codepage &gt;= 0:
+                cls.set_cmd_code_page(previous_codepage)
+                from .os9 import OS
+                OS.cyrillic_support = False
+            if not safe:
+                raise UnicodeEncodeError(f&#34;Cannot use codepage 65001, returning to {previous_codepage}, you can set other by Windows.set_cmd_code_page&#34;)
+            return code_page
 
     @staticmethod
     def user_exists(self, username):
@@ -312,24 +370,53 @@ def dump_auditpol(filename=None, category=&#34;*&#34;, fastname=None, quiet=Fals
 </details>
 </dd>
 <dt id="commands.windows9.Windows.fix_unicode_encode_error"><code class="name flex">
-<span>def <span class="ident">fix_unicode_encode_error</span></span>(<span>quiet=False)</span>
+<span>def <span class="ident">fix_unicode_encode_error</span></span>(<span>cls, safe=False)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Fix UnicodeConsoleError on old versions of Python
-<br><code>param quiet</code> boolean, suppress print to console
 <br><code>return</code> None</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">@staticmethod
-def fix_unicode_encode_error(quiet=False):
+<pre><code class="python">@classmethod
+def fix_unicode_encode_error(cls, safe=False):
     &#34;&#34;&#34;Fix UnicodeConsoleError on old versions of Python
-    &lt;br&gt;`param quiet` boolean, suppress print to console
     &lt;br&gt;`return` None
     &#34;&#34;&#34;
-    import os
+    previous_codepage = cls.get_cmd_code_page()
+    try:
+        code_page = cls.set_cmd_code_page(65001)
+        print(&#34;йЙ&#34;, end=&#34;\r&#34;)
+        print(&#34;  &#34;, end=&#34;\r&#34;)
+        return code_page
+    except PermissionError:
+        if previous_codepage &gt;= 0:
+            cls.set_cmd_code_page(previous_codepage)
+            from .os9 import OS
+            OS.cyrillic_support = False
+        if not safe:
+            raise UnicodeEncodeError(f&#34;Cannot use codepage 65001, returning to {previous_codepage}, you can set other by Windows.set_cmd_code_page&#34;)
+        return code_page</code></pre>
+</details>
+</dd>
+<dt id="commands.windows9.Windows.get_cmd_code_page"><code class="name flex">
+<span>def <span class="ident">get_cmd_code_page</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def get_cmd_code_page():
     import subprocess
-    subprocess.Popen(&#34;chcp 65001&#34;.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-    os.system(&#34;set PYTHONIOENCODING = utf - 8&#34;)</code></pre>
+    from .str9 import Str
+    out, err = subprocess.Popen(&#34;chcp&#34;, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+    if err:
+        return &#34;Error getting current codepage&#34;
+    try:
+        out = Str.substring(out.lower(), &#34;active code page:&#34;).strip()
+        return out
+    except KeyError:
+        return &#34;Cannot get current codepage&#34;</code></pre>
 </details>
 </dd>
 <dt id="commands.windows9.Windows.lock"><code class="name flex">
@@ -351,6 +438,21 @@ def lock():
         ctypes.windll.LockWorkStation()  # todo fix Windows 10
     else:
         raise OSError(&#34;Locking work only on Windows &lt; 10&#34;)</code></pre>
+</details>
+</dd>
+<dt id="commands.windows9.Windows.set_cmd_code_page"><code class="name flex">
+<span>def <span class="ident">set_cmd_code_page</span></span>(<span>code_page)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def set_cmd_code_page(code_page):
+    import os
+    import subprocess
+    subprocess.Popen(f&#34;chcp {code_page}&#34;.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    os.system(&#34;set PYTHONIOENCODING = utf - 8&#34;)</code></pre>
 </details>
 </dd>
 <dt id="commands.windows9.Windows.user_exists"><code class="name flex">
@@ -439,8 +541,10 @@ def user_exists(self, username):
 <li><code><a title="commands.windows9.Windows.create_user" href="#commands.windows9.Windows.create_user">create_user</a></code></li>
 <li><code><a title="commands.windows9.Windows.dump_auditpol" href="#commands.windows9.Windows.dump_auditpol">dump_auditpol</a></code></li>
 <li><code><a title="commands.windows9.Windows.fix_unicode_encode_error" href="#commands.windows9.Windows.fix_unicode_encode_error">fix_unicode_encode_error</a></code></li>
+<li><code><a title="commands.windows9.Windows.get_cmd_code_page" href="#commands.windows9.Windows.get_cmd_code_page">get_cmd_code_page</a></code></li>
 <li><code><a title="commands.windows9.Windows.lock" href="#commands.windows9.Windows.lock">lock</a></code></li>
 <li><code><a title="commands.windows9.Windows.remove_user" href="#commands.windows9.Windows.remove_user">remove_user</a></code></li>
+<li><code><a title="commands.windows9.Windows.set_cmd_code_page" href="#commands.windows9.Windows.set_cmd_code_page">set_cmd_code_page</a></code></li>
 <li><code><a title="commands.windows9.Windows.user_exists" href="#commands.windows9.Windows.user_exists">user_exists</a></code></li>
 </ul>
 </li>
