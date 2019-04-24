@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with funtions to work with path strings
 &#34;&#34;&#34;
-__version__ = &#34;2.2.2&#34;
+__version__ = &#34;2.3.0&#34;
 
 
 class Path:
@@ -145,7 +145,12 @@ class Path:
         from .file9 import File
         extension = File.get_extension(filepath)
         filepath_without_extension = filepath.rstrip(extension)
-        return filepath_without_extension + str(infix) + extension</code></pre>
+        return filepath_without_extension + str(infix) + extension
+
+    @staticmethod
+    def python():
+        import sys
+        return sys.executable</code></pre>
 </details>
 </section>
 <section>
@@ -279,7 +284,12 @@ class Path:
         from .file9 import File
         extension = File.get_extension(filepath)
         filepath_without_extension = filepath.rstrip(extension)
-        return filepath_without_extension + str(infix) + extension</code></pre>
+        return filepath_without_extension + str(infix) + extension
+
+    @staticmethod
+    def python():
+        import sys
+        return sys.executable</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -433,6 +443,19 @@ def home():
     return path</code></pre>
 </details>
 </dd>
+<dt id="commands.path9.Path.python"><code class="name flex">
+<span>def <span class="ident">python</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def python():
+    import sys
+    return sys.executable</code></pre>
+</details>
+</dd>
 <dt id="commands.path9.Path.set_working"><code class="name flex">
 <span>def <span class="ident">set_working</span></span>(<span>path, quiet=True)</span>
 </code></dt>
@@ -502,6 +525,7 @@ def working():
 <li><code><a title="commands.path9.Path.full" href="#commands.path9.Path.full">full</a></code></li>
 <li><code><a title="commands.path9.Path.get_parent" href="#commands.path9.Path.get_parent">get_parent</a></code></li>
 <li><code><a title="commands.path9.Path.home" href="#commands.path9.Path.home">home</a></code></li>
+<li><code><a title="commands.path9.Path.python" href="#commands.path9.Path.python">python</a></code></li>
 <li><code><a title="commands.path9.Path.set_working" href="#commands.path9.Path.set_working">set_working</a></code></li>
 <li><code><a title="commands.path9.Path.working" href="#commands.path9.Path.working">working</a></code></li>
 </ul>

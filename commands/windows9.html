@@ -27,8 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with Windows-specific functions
 &#34;&#34;&#34;
-__version__ = &#34;0.3.10&#34;
-
+__version__ = &#34;0.4.0&#34;
 
 class Windows:
     &#34;&#34;&#34;Class to work with Windows-specific functions
@@ -71,8 +70,11 @@ class Windows:
         &#34;&#34;&#34;Fix UnicodeConsoleError on old versions of Python
         &lt;br&gt;`return` int, current code_page number
         &#34;&#34;&#34;
-        # todo Make Windows.fix_unicode_console safe for async or not change code page for winserver &lt;= 2008
-        print(&#34;# todo Make Windows.fix_unicode_console safe for async or not change code page for winserver &lt;= 2008&#34;)
+        from .path9 import Path
+        from .file9 import File
+        lockfile = Path.combine(Path.commands(), &#34;.windows_codepage_lock&#34;)
+        if File.exist(lockfile):
+            return cls.get_cmd_code_page()
         previous_codepage = cls.get_cmd_code_page()
         try:
             code_page = cls.set_cmd_code_page(65001)
@@ -89,6 +91,7 @@ class Windows:
                 print(&#34;  &#34;, end=&#34;\r&#34;)
                 from .os9 import OS
                 OS.cyrillic_support = False
+                File.create(lockfile)
                 if not safe:
                     raise IOError(f&#34;Cannot use codepage 65001, returning to {previous_codepage}, you can set other by Windows.set_cmd_code_page&#34;)
                 return previous_codepage
@@ -183,7 +186,52 @@ class Windows:
             raise OSError(&#34;Try to run under elevated commandline&#34;)
         File.write(filename, output)
         if not quiet:
-            print(f&#34;Audit politics saved to {filename}&#34;)</code></pre>
+            print(f&#34;Audit politics saved to {filename}&#34;)
+
+    @staticmethod
+    def getenv(name, scope=&#34;user&#34;):
+        from .os9 import OS
+        if OS.is_python3:
+            import winreg
+        else:
+            import _winreg as winreg
+        assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
+        if scope == &#39;user&#39;:
+            root = winreg.HKEY_CURRENT_USER
+            subkey = &#39;Environment&#39;
+        else:
+            root = winreg.HKEY_LOCAL_MACHINE
+            subkey = r&#39;SYSTEM\CurrentControlSet\Control\Session Manager\Environment&#39;
+        key = winreg.OpenKey(root, subkey, 0, winreg.KEY_READ)
+        try:
+            value, _ = winreg.QueryValueEx(key, name)
+        except WindowsError:
+            value = &#39;&#39;
+        return value
+
+    @staticmethod
+    def setenv(name, value, scope):
+        # Note: for &#39;system&#39; scope, you must run this as Administrator
+        from .console9 import Console
+        from .path9 import Path
+        from .os9 import OS
+        if OS.is_python3:
+            import winreg
+        else:
+            import _winreg as winreg
+        assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
+        if scope == &#39;user&#39;:
+            root = winreg.HKEY_CURRENT_USER
+            subkey = &#39;Environment&#39;
+        else:
+            root = winreg.HKEY_LOCAL_MACHINE
+            subkey = r&#39;SYSTEM\CurrentControlSet\Control\Session Manager\Environment&#39;
+        key = winreg.OpenKey(root, subkey, 0, winreg.KEY_ALL_ACCESS)
+        winreg.SetValueEx(key, name, 0, winreg.REG_EXPAND_SZ, value)
+        winreg.CloseKey(key)
+        # For some strange reason, calling SendMessage from the current process
+        # doesn&#39;t propagate environment changes at all.
+        return Console.get_output(Path.python(), &#34;-c&#34;, &#34;import win32api, win32con; assert win32api.SendMessage(win32con.HWND_BROADCAST, win32con.WM_SETTINGCHANGE, 0, &#39;Environment&#39;)&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -243,8 +291,11 @@ class Windows:
         &#34;&#34;&#34;Fix UnicodeConsoleError on old versions of Python
         &lt;br&gt;`return` int, current code_page number
         &#34;&#34;&#34;
-        # todo Make Windows.fix_unicode_console safe for async or not change code page for winserver &lt;= 2008
-        print(&#34;# todo Make Windows.fix_unicode_console safe for async or not change code page for winserver &lt;= 2008&#34;)
+        from .path9 import Path
+        from .file9 import File
+        lockfile = Path.combine(Path.commands(), &#34;.windows_codepage_lock&#34;)
+        if File.exist(lockfile):
+            return cls.get_cmd_code_page()
         previous_codepage = cls.get_cmd_code_page()
         try:
             code_page = cls.set_cmd_code_page(65001)
@@ -261,6 +312,7 @@ class Windows:
                 print(&#34;  &#34;, end=&#34;\r&#34;)
                 from .os9 import OS
                 OS.cyrillic_support = False
+                File.create(lockfile)
                 if not safe:
                     raise IOError(f&#34;Cannot use codepage 65001, returning to {previous_codepage}, you can set other by Windows.set_cmd_code_page&#34;)
                 return previous_codepage
@@ -355,7 +407,52 @@ class Windows:
             raise OSError(&#34;Try to run under elevated commandline&#34;)
         File.write(filename, output)
         if not quiet:
-            print(f&#34;Audit politics saved to {filename}&#34;)</code></pre>
+            print(f&#34;Audit politics saved to {filename}&#34;)
+
+    @staticmethod
+    def getenv(name, scope=&#34;user&#34;):
+        from .os9 import OS
+        if OS.is_python3:
+            import winreg
+        else:
+            import _winreg as winreg
+        assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
+        if scope == &#39;user&#39;:
+            root = winreg.HKEY_CURRENT_USER
+            subkey = &#39;Environment&#39;
+        else:
+            root = winreg.HKEY_LOCAL_MACHINE
+            subkey = r&#39;SYSTEM\CurrentControlSet\Control\Session Manager\Environment&#39;
+        key = winreg.OpenKey(root, subkey, 0, winreg.KEY_READ)
+        try:
+            value, _ = winreg.QueryValueEx(key, name)
+        except WindowsError:
+            value = &#39;&#39;
+        return value
+
+    @staticmethod
+    def setenv(name, value, scope):
+        # Note: for &#39;system&#39; scope, you must run this as Administrator
+        from .console9 import Console
+        from .path9 import Path
+        from .os9 import OS
+        if OS.is_python3:
+            import winreg
+        else:
+            import _winreg as winreg
+        assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
+        if scope == &#39;user&#39;:
+            root = winreg.HKEY_CURRENT_USER
+            subkey = &#39;Environment&#39;
+        else:
+            root = winreg.HKEY_LOCAL_MACHINE
+            subkey = r&#39;SYSTEM\CurrentControlSet\Control\Session Manager\Environment&#39;
+        key = winreg.OpenKey(root, subkey, 0, winreg.KEY_ALL_ACCESS)
+        winreg.SetValueEx(key, name, 0, winreg.REG_EXPAND_SZ, value)
+        winreg.CloseKey(key)
+        # For some strange reason, calling SendMessage from the current process
+        # doesn&#39;t propagate environment changes at all.
+        return Console.get_output(Path.python(), &#34;-c&#34;, &#34;import win32api, win32con; assert win32api.SendMessage(win32con.HWND_BROADCAST, win32con.WM_SETTINGCHANGE, 0, &#39;Environment&#39;)&#34;)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -398,8 +495,11 @@ def fix_unicode_encode_error(cls, safe=False):
     &#34;&#34;&#34;Fix UnicodeConsoleError on old versions of Python
     &lt;br&gt;`return` int, current code_page number
     &#34;&#34;&#34;
-    # todo Make Windows.fix_unicode_console safe for async or not change code page for winserver &lt;= 2008
-    print(&#34;# todo Make Windows.fix_unicode_console safe for async or not change code page for winserver &lt;= 2008&#34;)
+    from .path9 import Path
+    from .file9 import File
+    lockfile = Path.combine(Path.commands(), &#34;.windows_codepage_lock&#34;)
+    if File.exist(lockfile):
+        return cls.get_cmd_code_page()
     previous_codepage = cls.get_cmd_code_page()
     try:
         code_page = cls.set_cmd_code_page(65001)
@@ -416,6 +516,7 @@ def fix_unicode_encode_error(cls, safe=False):
             print(&#34;  &#34;, end=&#34;\r&#34;)
             from .os9 import OS
             OS.cyrillic_support = False
+            File.create(lockfile)
             if not safe:
                 raise IOError(f&#34;Cannot use codepage 65001, returning to {previous_codepage}, you can set other by Windows.set_cmd_code_page&#34;)
             return previous_codepage</code></pre>
@@ -439,6 +540,35 @@ def get_cmd_code_page():
         return int(out)
     except KeyError:
         return &#34;Cannot get current codepage&#34;</code></pre>
+</details>
+</dd>
+<dt id="commands.windows9.Windows.getenv"><code class="name flex">
+<span>def <span class="ident">getenv</span></span>(<span>name, scope=&#39;user&#39;)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def getenv(name, scope=&#34;user&#34;):
+    from .os9 import OS
+    if OS.is_python3:
+        import winreg
+    else:
+        import _winreg as winreg
+    assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
+    if scope == &#39;user&#39;:
+        root = winreg.HKEY_CURRENT_USER
+        subkey = &#39;Environment&#39;
+    else:
+        root = winreg.HKEY_LOCAL_MACHINE
+        subkey = r&#39;SYSTEM\CurrentControlSet\Control\Session Manager\Environment&#39;
+    key = winreg.OpenKey(root, subkey, 0, winreg.KEY_READ)
+    try:
+        value, _ = winreg.QueryValueEx(key, name)
+    except WindowsError:
+        value = &#39;&#39;
+    return value</code></pre>
 </details>
 </dd>
 <dt id="commands.windows9.Windows.lock"><code class="name flex">
@@ -477,6 +607,38 @@ def set_cmd_code_page(cls, code_page):
     os.system(&#34;set PYTHONIOENCODING = utf - 8&#34;)
     cls.get_cmd_code_page()  # it&#39;s fucking magick, don&#39;t touch
     return code_page</code></pre>
+</details>
+</dd>
+<dt id="commands.windows9.Windows.setenv"><code class="name flex">
+<span>def <span class="ident">setenv</span></span>(<span>name, value, scope)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def setenv(name, value, scope):
+    # Note: for &#39;system&#39; scope, you must run this as Administrator
+    from .console9 import Console
+    from .path9 import Path
+    from .os9 import OS
+    if OS.is_python3:
+        import winreg
+    else:
+        import _winreg as winreg
+    assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
+    if scope == &#39;user&#39;:
+        root = winreg.HKEY_CURRENT_USER
+        subkey = &#39;Environment&#39;
+    else:
+        root = winreg.HKEY_LOCAL_MACHINE
+        subkey = r&#39;SYSTEM\CurrentControlSet\Control\Session Manager\Environment&#39;
+    key = winreg.OpenKey(root, subkey, 0, winreg.KEY_ALL_ACCESS)
+    winreg.SetValueEx(key, name, 0, winreg.REG_EXPAND_SZ, value)
+    winreg.CloseKey(key)
+    # For some strange reason, calling SendMessage from the current process
+    # doesn&#39;t propagate environment changes at all.
+    return Console.get_output(Path.python(), &#34;-c&#34;, &#34;import win32api, win32con; assert win32api.SendMessage(win32con.HWND_BROADCAST, win32con.WM_SETTINGCHANGE, 0, &#39;Environment&#39;)&#34;)</code></pre>
 </details>
 </dd>
 <dt id="commands.windows9.Windows.user_exists"><code class="name flex">
@@ -566,9 +728,11 @@ def user_exists(self, username):
 <li><code><a title="commands.windows9.Windows.dump_auditpol" href="#commands.windows9.Windows.dump_auditpol">dump_auditpol</a></code></li>
 <li><code><a title="commands.windows9.Windows.fix_unicode_encode_error" href="#commands.windows9.Windows.fix_unicode_encode_error">fix_unicode_encode_error</a></code></li>
 <li><code><a title="commands.windows9.Windows.get_cmd_code_page" href="#commands.windows9.Windows.get_cmd_code_page">get_cmd_code_page</a></code></li>
+<li><code><a title="commands.windows9.Windows.getenv" href="#commands.windows9.Windows.getenv">getenv</a></code></li>
 <li><code><a title="commands.windows9.Windows.lock" href="#commands.windows9.Windows.lock">lock</a></code></li>
 <li><code><a title="commands.windows9.Windows.remove_user" href="#commands.windows9.Windows.remove_user">remove_user</a></code></li>
 <li><code><a title="commands.windows9.Windows.set_cmd_code_page" href="#commands.windows9.Windows.set_cmd_code_page">set_cmd_code_page</a></code></li>
+<li><code><a title="commands.windows9.Windows.setenv" href="#commands.windows9.Windows.setenv">setenv</a></code></li>
 <li><code><a title="commands.windows9.Windows.user_exists" href="#commands.windows9.Windows.user_exists">user_exists</a></code></li>
 </ul>
 </li>
