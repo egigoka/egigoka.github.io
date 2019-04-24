@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with lists
 &#34;&#34;&#34;
-__version__ = &#34;0.4.2&#34;
+__version__ = &#34;0.4.3&#34;
 
 
 class List:
@@ -86,7 +86,7 @@ class List:
     def remove_duplicates(source_list, preserve_order=True):
         if preserve_order:
             from collections import OrderedDict
-            return OrderedDict((x, True) for x in source_list).keys()
+            return list(OrderedDict((x, True) for x in source_list).keys())
         else:
             return list(set(source_list))</code></pre>
 </details>
@@ -163,7 +163,7 @@ class List:
     def remove_duplicates(source_list, preserve_order=True):
         if preserve_order:
             from collections import OrderedDict
-            return OrderedDict((x, True) for x in source_list).keys()
+            return list(OrderedDict((x, True) for x in source_list).keys())
         else:
             return list(set(source_list))</code></pre>
 </details>
@@ -209,7 +209,7 @@ def flatterize(input_list):
 def remove_duplicates(source_list, preserve_order=True):
     if preserve_order:
         from collections import OrderedDict
-        return OrderedDict((x, True) for x in source_list).keys()
+        return list(OrderedDict((x, True) for x in source_list).keys())
     else:
         return list(set(source_list))</code></pre>
 </details>
