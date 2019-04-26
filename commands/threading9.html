@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;0.1.2&#34;
+__version__ = &#34;0.2.0&#34;
 
 from .dict9 import imdict
 
@@ -35,9 +35,10 @@ from .dict9 import imdict
 class MyThread:
     _imdict = imdict({})
 
-    def __init__(self, thread_id, name, func, args=(), kwargs=_imdict):
+    def __init__(self, thread_id, name, func, args=(), kwargs=_imdict, daemon=False):
         import threading
         self.thread = threading.Thread()
+        self.thread.daemon = daemon
         self.thread_id = thread_id
         self.name = name
         self.func = func
@@ -48,8 +49,8 @@ class MyThread:
         print(&#34;Starting &#34; + self.name)
         try:
             self.func(*self.args, **self.kwargs)
-        except SystemExit:  # test
-            print(&#34;Exiting &#34; + self.name)
+        except SystemExit:
+            print(&#34;Quited &#34; + self.name)
 
     def start(self):
         self.thread.run = self.run
@@ -78,13 +79,17 @@ class MyThread:
 class Threading:
     _imdict = imdict({})
 
-    def __init__(self):
+    def __init__(self, daemons=None):
         from .id9 import ID
         self.threads = []
         self.thread_ids = ID()
+        self.daemons = daemons
 
-    def add(self, name, func, args=(), kwargs=_imdict):
-        self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))
+    def add(self, name, func, args=(), kwargs=_imdict, daemon=None):
+        if daemon is None:
+            daemon = self.daemons
+        self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs,
+                                     daemon=daemon))
 
     def start(self):
         &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
@@ -128,9 +133,10 @@ class Threading:
 <pre><code class="python">class MyThread:
     _imdict = imdict({})
 
-    def __init__(self, thread_id, name, func, args=(), kwargs=_imdict):
+    def __init__(self, thread_id, name, func, args=(), kwargs=_imdict, daemon=False):
         import threading
         self.thread = threading.Thread()
+        self.thread.daemon = daemon
         self.thread_id = thread_id
         self.name = name
         self.func = func
@@ -141,8 +147,8 @@ class Threading:
         print(&#34;Starting &#34; + self.name)
         try:
             self.func(*self.args, **self.kwargs)
-        except SystemExit:  # test
-            print(&#34;Exiting &#34; + self.name)
+        except SystemExit:
+            print(&#34;Quited &#34; + self.name)
 
     def start(self):
         self.thread.run = self.run
@@ -170,16 +176,17 @@ class Threading:
 <h3>Methods</h3>
 <dl>
 <dt id="commands.threading9.MyThread.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, thread_id, name, func, args=(), kwargs={})</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, thread_id, name, func, args=(), kwargs={}, daemon=False)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Initialize self.
 See help(type(self)) for accurate signature.</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def __init__(self, thread_id, name, func, args=(), kwargs=_imdict):
+<pre><code class="python">def __init__(self, thread_id, name, func, args=(), kwargs=_imdict, daemon=False):
     import threading
     self.thread = threading.Thread()
+    self.thread.daemon = daemon
     self.thread_id = thread_id
     self.name = name
     self.func = func
@@ -232,8 +239,8 @@ See help(type(self)) for accurate signature.</p></section>
     print(&#34;Starting &#34; + self.name)
     try:
         self.func(*self.args, **self.kwargs)
-    except SystemExit:  # test
-        print(&#34;Exiting &#34; + self.name)</code></pre>
+    except SystemExit:
+        print(&#34;Quited &#34; + self.name)</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.start"><code class="name flex">
@@ -260,13 +267,17 @@ See help(type(self)) for accurate signature.</p></section>
 <pre><code class="python">class Threading:
     _imdict = imdict({})
 
-    def __init__(self):
+    def __init__(self, daemons=None):
         from .id9 import ID
         self.threads = []
         self.thread_ids = ID()
+        self.daemons = daemons
 
-    def add(self, name, func, args=(), kwargs=_imdict):
-        self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))
+    def add(self, name, func, args=(), kwargs=_imdict, daemon=None):
+        if daemon is None:
+            daemon = self.daemons
+        self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs,
+                                     daemon=daemon))
 
     def start(self):
         &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
@@ -293,28 +304,32 @@ See help(type(self)) for accurate signature.</p></section>
 <h3>Methods</h3>
 <dl>
 <dt id="commands.threading9.Threading.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self)</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, daemons=None)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Initialize self.
 See help(type(self)) for accurate signature.</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def __init__(self):
+<pre><code class="python">def __init__(self, daemons=None):
     from .id9 import ID
     self.threads = []
-    self.thread_ids = ID()</code></pre>
+    self.thread_ids = ID()
+    self.daemons = daemons</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.add"><code class="name flex">
-<span>def <span class="ident">add</span></span>(<span>self, name, func, args=(), kwargs={})</span>
+<span>def <span class="ident">add</span></span>(<span>self, name, func, args=(), kwargs={}, daemon=None)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def add(self, name, func, args=(), kwargs=_imdict):
-    self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))</code></pre>
+<pre><code class="python">def add(self, name, func, args=(), kwargs=_imdict, daemon=None):
+    if daemon is None:
+        daemon = self.daemons
+    self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs,
+                                 daemon=daemon))</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.cleanup"><code class="name flex">
