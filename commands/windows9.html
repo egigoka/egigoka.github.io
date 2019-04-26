@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with Windows-specific functions
 &#34;&#34;&#34;
-__version__ = &#34;0.4.0&#34;
+__version__ = &#34;0.4.2&#34;
 
 class Windows:
     &#34;&#34;&#34;Class to work with Windows-specific functions
@@ -77,7 +77,8 @@ class Windows:
             return cls.get_cmd_code_page()
         previous_codepage = cls.get_cmd_code_page()
         try:
-            code_page = cls.set_cmd_code_page(65001)
+            if previous_codepage != 65001:
+                code_page = cls.set_cmd_code_page(65001)
             import os
             command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ&#39;, end=&#39;\r&#39;)&#34;&#39;&#39;&#39;
             print(&#34;йЙ&#34;, end=&#34;\r&#34;)
@@ -87,7 +88,10 @@ class Windows:
             return cls.get_cmd_code_page()
         except Exception as e:
             if int(previous_codepage) &gt;= 0:
-                cls.set_cmd_code_page(previous_codepage)
+                if previous_codepage != 65001:
+                    cls.set_cmd_code_page(previous_codepage)
+                else:
+                    cls.set_cmd_code_page(437)
                 print(&#34;  &#34;, end=&#34;\r&#34;)
                 from .os9 import OS
                 OS.cyrillic_support = False
@@ -188,13 +192,23 @@ class Windows:
         if not quiet:
             print(f&#34;Audit politics saved to {filename}&#34;)
 
-    @staticmethod
-    def getenv(name, scope=&#34;user&#34;):
-        from .os9 import OS
-        if OS.is_python3:
-            import winreg
-        else:
-            import _winreg as winreg
+    winreg_imported = False
+
+    @classmethod
+    def import_winreg(cls):
+        if not cls.winreg_imported:
+            from .os9 import OS
+            if OS.is_python3:
+                import winreg
+            else:
+                import _winreg as winreg
+            cls.winreg = winreg
+            cls.winreg_imported = True
+        return cls.winreg
+
+    @classmethod
+    def getenv(cls, name, scope=&#34;user&#34;):
+        winreg = cls.import_winreg()
         assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
         if scope == &#39;user&#39;:
             root = winreg.HKEY_CURRENT_USER
@@ -209,16 +223,12 @@ class Windows:
             value = &#39;&#39;
         return value
 
-    @staticmethod
-    def setenv(name, value, scope):
+    @classmethod
+    def setenv(cls, name, value, scope=&#34;user&#34;):
         # Note: for &#39;system&#39; scope, you must run this as Administrator
         from .console9 import Console
         from .path9 import Path
-        from .os9 import OS
-        if OS.is_python3:
-            import winreg
-        else:
-            import _winreg as winreg
+        winreg = cls.import_winreg()
         assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
         if scope == &#39;user&#39;:
             root = winreg.HKEY_CURRENT_USER
@@ -298,7 +308,8 @@ class Windows:
             return cls.get_cmd_code_page()
         previous_codepage = cls.get_cmd_code_page()
         try:
-            code_page = cls.set_cmd_code_page(65001)
+            if previous_codepage != 65001:
+                code_page = cls.set_cmd_code_page(65001)
             import os
             command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ&#39;, end=&#39;\r&#39;)&#34;&#39;&#39;&#39;
             print(&#34;йЙ&#34;, end=&#34;\r&#34;)
@@ -308,7 +319,10 @@ class Windows:
             return cls.get_cmd_code_page()
         except Exception as e:
             if int(previous_codepage) &gt;= 0:
-                cls.set_cmd_code_page(previous_codepage)
+                if previous_codepage != 65001:
+                    cls.set_cmd_code_page(previous_codepage)
+                else:
+                    cls.set_cmd_code_page(437)
                 print(&#34;  &#34;, end=&#34;\r&#34;)
                 from .os9 import OS
                 OS.cyrillic_support = False
@@ -409,13 +423,23 @@ class Windows:
         if not quiet:
             print(f&#34;Audit politics saved to {filename}&#34;)
 
-    @staticmethod
-    def getenv(name, scope=&#34;user&#34;):
-        from .os9 import OS
-        if OS.is_python3:
-            import winreg
-        else:
-            import _winreg as winreg
+    winreg_imported = False
+
+    @classmethod
+    def import_winreg(cls):
+        if not cls.winreg_imported:
+            from .os9 import OS
+            if OS.is_python3:
+                import winreg
+            else:
+                import _winreg as winreg
+            cls.winreg = winreg
+            cls.winreg_imported = True
+        return cls.winreg
+
+    @classmethod
+    def getenv(cls, name, scope=&#34;user&#34;):
+        winreg = cls.import_winreg()
         assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
         if scope == &#39;user&#39;:
             root = winreg.HKEY_CURRENT_USER
@@ -430,16 +454,12 @@ class Windows:
             value = &#39;&#39;
         return value
 
-    @staticmethod
-    def setenv(name, value, scope):
+    @classmethod
+    def setenv(cls, name, value, scope=&#34;user&#34;):
         # Note: for &#39;system&#39; scope, you must run this as Administrator
         from .console9 import Console
         from .path9 import Path
-        from .os9 import OS
-        if OS.is_python3:
-            import winreg
-        else:
-            import _winreg as winreg
+        winreg = cls.import_winreg()
         assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
         if scope == &#39;user&#39;:
             root = winreg.HKEY_CURRENT_USER
@@ -454,6 +474,13 @@ class Windows:
         # doesn&#39;t propagate environment changes at all.
         return Console.get_output(Path.python(), &#34;-c&#34;, &#34;import win32api, win32con; assert win32api.SendMessage(win32con.HWND_BROADCAST, win32con.WM_SETTINGCHANGE, 0, &#39;Environment&#39;)&#34;)</code></pre>
 </details>
+<h3>Class variables</h3>
+<dl>
+<dt id="commands.windows9.Windows.winreg_imported"><code class="name">var <span class="ident">winreg_imported</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+</dl>
 <h3>Static methods</h3>
 <dl>
 <dt id="commands.windows9.Windows.dump_auditpol"><code class="name flex">
@@ -502,7 +529,8 @@ def fix_unicode_encode_error(cls, safe=False):
         return cls.get_cmd_code_page()
     previous_codepage = cls.get_cmd_code_page()
     try:
-        code_page = cls.set_cmd_code_page(65001)
+        if previous_codepage != 65001:
+            code_page = cls.set_cmd_code_page(65001)
         import os
         command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ&#39;, end=&#39;\r&#39;)&#34;&#39;&#39;&#39;
         print(&#34;йЙ&#34;, end=&#34;\r&#34;)
@@ -512,7 +540,10 @@ def fix_unicode_encode_error(cls, safe=False):
         return cls.get_cmd_code_page()
     except Exception as e:
         if int(previous_codepage) &gt;= 0:
-            cls.set_cmd_code_page(previous_codepage)
+            if previous_codepage != 65001:
+                cls.set_cmd_code_page(previous_codepage)
+            else:
+                cls.set_cmd_code_page(437)
             print(&#34;  &#34;, end=&#34;\r&#34;)
             from .os9 import OS
             OS.cyrillic_support = False
@@ -543,19 +574,15 @@ def get_cmd_code_page():
 </details>
 </dd>
 <dt id="commands.windows9.Windows.getenv"><code class="name flex">
-<span>def <span class="ident">getenv</span></span>(<span>name, scope=&#39;user&#39;)</span>
+<span>def <span class="ident">getenv</span></span>(<span>cls, name, scope=&#39;user&#39;)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">@staticmethod
-def getenv(name, scope=&#34;user&#34;):
-    from .os9 import OS
-    if OS.is_python3:
-        import winreg
-    else:
-        import _winreg as winreg
+<pre><code class="python">@classmethod
+def getenv(cls, name, scope=&#34;user&#34;):
+    winreg = cls.import_winreg()
     assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
     if scope == &#39;user&#39;:
         root = winreg.HKEY_CURRENT_USER
@@ -569,6 +596,26 @@ def getenv(name, scope=&#34;user&#34;):
     except WindowsError:
         value = &#39;&#39;
     return value</code></pre>
+</details>
+</dd>
+<dt id="commands.windows9.Windows.import_winreg"><code class="name flex">
+<span>def <span class="ident">import_winreg</span></span>(<span>cls)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def import_winreg(cls):
+    if not cls.winreg_imported:
+        from .os9 import OS
+        if OS.is_python3:
+            import winreg
+        else:
+            import _winreg as winreg
+        cls.winreg = winreg
+        cls.winreg_imported = True
+    return cls.winreg</code></pre>
 </details>
 </dd>
 <dt id="commands.windows9.Windows.lock"><code class="name flex">
@@ -610,22 +657,18 @@ def set_cmd_code_page(cls, code_page):
 </details>
 </dd>
 <dt id="commands.windows9.Windows.setenv"><code class="name flex">
-<span>def <span class="ident">setenv</span></span>(<span>name, value, scope)</span>
+<span>def <span class="ident">setenv</span></span>(<span>cls, name, value, scope=&#39;user&#39;)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">@staticmethod
-def setenv(name, value, scope):
+<pre><code class="python">@classmethod
+def setenv(cls, name, value, scope=&#34;user&#34;):
     # Note: for &#39;system&#39; scope, you must run this as Administrator
     from .console9 import Console
     from .path9 import Path
-    from .os9 import OS
-    if OS.is_python3:
-        import winreg
-    else:
-        import _winreg as winreg
+    winreg = cls.import_winreg()
     assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
     if scope == &#39;user&#39;:
         root = winreg.HKEY_CURRENT_USER
@@ -729,11 +772,13 @@ def user_exists(self, username):
 <li><code><a title="commands.windows9.Windows.fix_unicode_encode_error" href="#commands.windows9.Windows.fix_unicode_encode_error">fix_unicode_encode_error</a></code></li>
 <li><code><a title="commands.windows9.Windows.get_cmd_code_page" href="#commands.windows9.Windows.get_cmd_code_page">get_cmd_code_page</a></code></li>
 <li><code><a title="commands.windows9.Windows.getenv" href="#commands.windows9.Windows.getenv">getenv</a></code></li>
+<li><code><a title="commands.windows9.Windows.import_winreg" href="#commands.windows9.Windows.import_winreg">import_winreg</a></code></li>
 <li><code><a title="commands.windows9.Windows.lock" href="#commands.windows9.Windows.lock">lock</a></code></li>
 <li><code><a title="commands.windows9.Windows.remove_user" href="#commands.windows9.Windows.remove_user">remove_user</a></code></li>
 <li><code><a title="commands.windows9.Windows.set_cmd_code_page" href="#commands.windows9.Windows.set_cmd_code_page">set_cmd_code_page</a></code></li>
 <li><code><a title="commands.windows9.Windows.setenv" href="#commands.windows9.Windows.setenv">setenv</a></code></li>
 <li><code><a title="commands.windows9.Windows.user_exists" href="#commands.windows9.Windows.user_exists">user_exists</a></code></li>
+<li><code><a title="commands.windows9.Windows.winreg_imported" href="#commands.windows9.Windows.winreg_imported">winreg_imported</a></code></li>
 </ul>
 </li>
 </ul>

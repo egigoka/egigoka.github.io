@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with dicts
 &#34;&#34;&#34;
-__version__ = &#34;0.1.0&#34;
+__version__ = &#34;0.2.0&#34;
 
 
 class Dict:
@@ -59,7 +59,24 @@ class Dict:
                 output[i] = dict_[i]
             return output
         import collections
-        return collections.OrderedDict(sorted(dict_.items()))</code></pre>
+        return collections.OrderedDict(sorted(dict_.items()))
+
+
+class imdict(dict):
+    &#34;&#34;&#34;Rejected PEP 351&#34;&#34;&#34;
+    def __hash__(self):
+        return id(self)
+
+    def _immutable(self, *args, **kws):
+        raise TypeError(&#39;object is immutable&#39;)
+
+    __setitem__ = _immutable
+    __delitem__ = _immutable
+    clear = _immutable
+    update = _immutable
+    setdefault = _immutable
+    pop = _immutable
+    popitem = _immutable</code></pre>
 </details>
 </section>
 <section>
@@ -163,6 +180,89 @@ def sorted_by_key(dict_, case_insensitive=False):
 </dd>
 </dl>
 </dd>
+<dt id="commands.dict9.imdict"><code class="flex name class">
+<span>class <span class="ident">imdict</span></span>
+<span>(</span><span><small>ancestors:</small> builtins.dict)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Rejected PEP 351</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">class imdict(dict):
+    &#34;&#34;&#34;Rejected PEP 351&#34;&#34;&#34;
+    def __hash__(self):
+        return id(self)
+
+    def _immutable(self, *args, **kws):
+        raise TypeError(&#39;object is immutable&#39;)
+
+    __setitem__ = _immutable
+    __delitem__ = _immutable
+    clear = _immutable
+    update = _immutable
+    setdefault = _immutable
+    pop = _immutable
+    popitem = _immutable</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="commands.dict9.imdict.clear"><code class="name flex">
+<span>def <span class="ident">clear</span></span>(<span>self, *args, **kws)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def _immutable(self, *args, **kws):
+    raise TypeError(&#39;object is immutable&#39;)</code></pre>
+</details>
+</dd>
+<dt id="commands.dict9.imdict.pop"><code class="name flex">
+<span>def <span class="ident">pop</span></span>(<span>self, *args, **kws)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def _immutable(self, *args, **kws):
+    raise TypeError(&#39;object is immutable&#39;)</code></pre>
+</details>
+</dd>
+<dt id="commands.dict9.imdict.popitem"><code class="name flex">
+<span>def <span class="ident">popitem</span></span>(<span>self, *args, **kws)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def _immutable(self, *args, **kws):
+    raise TypeError(&#39;object is immutable&#39;)</code></pre>
+</details>
+</dd>
+<dt id="commands.dict9.imdict.setdefault"><code class="name flex">
+<span>def <span class="ident">setdefault</span></span>(<span>self, *args, **kws)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def _immutable(self, *args, **kws):
+    raise TypeError(&#39;object is immutable&#39;)</code></pre>
+</details>
+</dd>
+<dt id="commands.dict9.imdict.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self, *args, **kws)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def _immutable(self, *args, **kws):
+    raise TypeError(&#39;object is immutable&#39;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
 </dl>
 </section>
 </article>
@@ -184,6 +284,16 @@ def sorted_by_key(dict_, case_insensitive=False):
 <ul class="">
 <li><code><a title="commands.dict9.Dict.iterable" href="#commands.dict9.Dict.iterable">iterable</a></code></li>
 <li><code><a title="commands.dict9.Dict.sorted_by_key" href="#commands.dict9.Dict.sorted_by_key">sorted_by_key</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="commands.dict9.imdict" href="#commands.dict9.imdict">imdict</a></code></h4>
+<ul class="">
+<li><code><a title="commands.dict9.imdict.clear" href="#commands.dict9.imdict.clear">clear</a></code></li>
+<li><code><a title="commands.dict9.imdict.pop" href="#commands.dict9.imdict.pop">pop</a></code></li>
+<li><code><a title="commands.dict9.imdict.popitem" href="#commands.dict9.imdict.popitem">popitem</a></code></li>
+<li><code><a title="commands.dict9.imdict.setdefault" href="#commands.dict9.imdict.setdefault">setdefault</a></code></li>
+<li><code><a title="commands.dict9.imdict.update" href="#commands.dict9.imdict.update">update</a></code></li>
 </ul>
 </li>
 </ul>

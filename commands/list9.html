@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with lists
 &#34;&#34;&#34;
-__version__ = &#34;0.4.3&#34;
+__version__ = &#34;0.5.0&#34;
 
 
 class List:
@@ -88,7 +88,13 @@ class List:
             from collections import OrderedDict
             return list(OrderedDict((x, True) for x in source_list).keys())
         else:
-            return list(set(source_list))</code></pre>
+            return list(set(source_list))
+
+    @staticmethod
+    def most_common(list, count):
+        import collections
+        c = collections.Counter(list)
+        return c.most_common(count)</code></pre>
 </details>
 </section>
 <section>
@@ -165,7 +171,13 @@ class List:
             from collections import OrderedDict
             return list(OrderedDict((x, True) for x in source_list).keys())
         else:
-            return list(set(source_list))</code></pre>
+            return list(set(source_list))
+
+    @staticmethod
+    def most_common(list, count):
+        import collections
+        c = collections.Counter(list)
+        return c.most_common(count)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -196,6 +208,20 @@ def flatterize(input_list):
                 output_list.insert(cnt, item)
         cnt += 1
     return output_list</code></pre>
+</details>
+</dd>
+<dt id="commands.list9.List.most_common"><code class="name flex">
+<span>def <span class="ident">most_common</span></span>(<span>list, count)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def most_common(list, count):
+    import collections
+    c = collections.Counter(list)
+    return c.most_common(count)</code></pre>
 </details>
 </dd>
 <dt id="commands.list9.List.remove_duplicates"><code class="name flex">
@@ -304,6 +330,7 @@ def wildcard_search(list_input, regexp):
 <h4><code><a title="commands.list9.List" href="#commands.list9.List">List</a></code></h4>
 <ul class="two-column">
 <li><code><a title="commands.list9.List.flatterize" href="#commands.list9.List.flatterize">flatterize</a></code></li>
+<li><code><a title="commands.list9.List.most_common" href="#commands.list9.List.most_common">most_common</a></code></li>
 <li><code><a title="commands.list9.List.remove_duplicates" href="#commands.list9.List.remove_duplicates">remove_duplicates</a></code></li>
 <li><code><a title="commands.list9.List.replace_string" href="#commands.list9.List.replace_string">replace_string</a></code></li>
 <li><code><a title="commands.list9.List.split_every" href="#commands.list9.List.split_every">split_every</a></code></li>
