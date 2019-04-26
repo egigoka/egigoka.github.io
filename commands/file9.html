@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with files
 &#34;&#34;&#34;
-__version__ = &#34;1.0.4&#34;
+__version__ = &#34;1.0.5&#34;
 # pylint: disable=c-extension-no-member
 
 
@@ -254,6 +254,8 @@ class File:
                 file.write(what_to_write.encode(&#34;utf-8&#34;))
         else:
             with open(filename, mode=mode) as file:  # open file then closes it
+                if isinstance(what_to_write, int):
+                    what_to_write = str(what_to_write)
                 file.write(what_to_write)
         if not quiet:
             print(f&#34;Writed to file {filename}&#34;)
@@ -553,6 +555,8 @@ class File:
                 file.write(what_to_write.encode(&#34;utf-8&#34;))
         else:
             with open(filename, mode=mode) as file:  # open file then closes it
+                if isinstance(what_to_write, int):
+                    what_to_write = str(what_to_write)
                 file.write(what_to_write)
         if not quiet:
             print(f&#34;Writed to file {filename}&#34;)
@@ -1037,6 +1041,8 @@ def write(filename, what_to_write, mode=&#34;a&#34;, quiet=True):
             file.write(what_to_write.encode(&#34;utf-8&#34;))
     else:
         with open(filename, mode=mode) as file:  # open file then closes it
+            if isinstance(what_to_write, int):
+                what_to_write = str(what_to_write)
             file.write(what_to_write)
     if not quiet:
         print(f&#34;Writed to file {filename}&#34;)</code></pre>

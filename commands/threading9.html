@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;0.0.4&#34;
+__version__ = &#34;0.0.5&#34;
 
 from .dict9 import imdict
 
@@ -63,7 +63,7 @@ class Threading:
         self.thread_ids = ID()
 
     def add(self, name, func, args=(), kwargs=_imdict):
-        self.threads.insert(0,MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))
+        self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))
 
     def start(self):
         &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
@@ -178,7 +178,7 @@ See help(type(self)) for accurate signature.</p></section>
         self.thread_ids = ID()
 
     def add(self, name, func, args=(), kwargs=_imdict):
-        self.threads.insert(0,MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))
+        self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))
 
     def start(self):
         &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
@@ -216,7 +216,7 @@ See help(type(self)) for accurate signature.</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def add(self, name, func, args=(), kwargs=_imdict):
-    self.threads.insert(0,MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))</code></pre>
+    self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.cleanup"><code class="name flex">
