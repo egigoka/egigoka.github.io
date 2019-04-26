@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;0.2.0&#34;
+__version__ = &#34;0.3.0&#34;
 
 from .dict9 import imdict
 
@@ -91,7 +91,16 @@ class Threading:
         self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs,
                                      daemon=daemon))
 
-    def start(self):
+    def start(self, exitable=False):
+        if exitable:
+            def waiter(self_t):
+                import time
+                try:
+                    while 1:
+                        time.sleep(1)  # wait for KeyboardInterrupt
+                except (KeyboardInterrupt, SystemExit):
+                    self_t.raise_exception()
+            self.add(&#34;Waiter&#34;, waiter, args=(self,), daemon=True)
         &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
         if len(self.threads) == 0:
             raise ValueError(&#34;No threads&#34;)
@@ -279,7 +288,16 @@ See help(type(self)) for accurate signature.</p></section>
         self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs,
                                      daemon=daemon))
 
-    def start(self):
+    def start(self, exitable=False):
+        if exitable:
+            def waiter(self_t):
+                import time
+                try:
+                    while 1:
+                        time.sleep(1)  # wait for KeyboardInterrupt
+                except (KeyboardInterrupt, SystemExit):
+                    self_t.raise_exception()
+            self.add(&#34;Waiter&#34;, waiter, args=(self,), daemon=True)
         &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
         if len(self.threads) == 0:
             raise ValueError(&#34;No threads&#34;)
@@ -372,13 +390,22 @@ See help(type(self)) for accurate signature.</p></section>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.start"><code class="name flex">
-<span>def <span class="ident">start</span></span>(<span>self)</span>
+<span>def <span class="ident">start</span></span>(<span>self, exitable=False)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Starts all added threads</p></section>
+<section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def start(self):
+<pre><code class="python">def start(self, exitable=False):
+    if exitable:
+        def waiter(self_t):
+            import time
+            try:
+                while 1:
+                    time.sleep(1)  # wait for KeyboardInterrupt
+            except (KeyboardInterrupt, SystemExit):
+                self_t.raise_exception()
+        self.add(&#34;Waiter&#34;, waiter, args=(self,), daemon=True)
     &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
     if len(self.threads) == 0:
         raise ValueError(&#34;No threads&#34;)
