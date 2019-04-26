@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;0.0.3&#34;
+__version__ = &#34;0.0.4&#34;
 
 from .dict9 import imdict
 
@@ -38,7 +38,6 @@ class MyThread:
     def __init__(self, thread_id, name, func, args=(), kwargs=_imdict):
         import threading
         self.thread = threading.Thread()
-        print(type(self.thread))
         self.thread_id = thread_id
         self.name = name
         self.func = func
@@ -64,7 +63,7 @@ class Threading:
         self.thread_ids = ID()
 
     def add(self, name, func, args=(), kwargs=_imdict):
-        self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))
+        self.threads.insert(0,MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))
 
     def start(self):
         &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
@@ -75,7 +74,6 @@ class Threading:
 
     def cleanup(self):
         &#34;&#34;&#34;Just clean queue&#34;&#34;&#34;
-        from .id9 import ID
         self.threads = []
         self.thread_ids.__init__()</code></pre>
 </details>
@@ -102,7 +100,6 @@ class Threading:
     def __init__(self, thread_id, name, func, args=(), kwargs=_imdict):
         import threading
         self.thread = threading.Thread()
-        print(type(self.thread))
         self.thread_id = thread_id
         self.name = name
         self.func = func
@@ -131,7 +128,6 @@ See help(type(self)) for accurate signature.</p></section>
 <pre><code class="python">def __init__(self, thread_id, name, func, args=(), kwargs=_imdict):
     import threading
     self.thread = threading.Thread()
-    print(type(self.thread))
     self.thread_id = thread_id
     self.name = name
     self.func = func
@@ -182,7 +178,7 @@ See help(type(self)) for accurate signature.</p></section>
         self.thread_ids = ID()
 
     def add(self, name, func, args=(), kwargs=_imdict):
-        self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))
+        self.threads.insert(0,MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))
 
     def start(self):
         &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
@@ -193,7 +189,6 @@ See help(type(self)) for accurate signature.</p></section>
 
     def cleanup(self):
         &#34;&#34;&#34;Just clean queue&#34;&#34;&#34;
-        from .id9 import ID
         self.threads = []
         self.thread_ids.__init__()</code></pre>
 </details>
@@ -221,7 +216,7 @@ See help(type(self)) for accurate signature.</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def add(self, name, func, args=(), kwargs=_imdict):
-    self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))</code></pre>
+    self.threads.insert(0,MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs))</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.cleanup"><code class="name flex">
@@ -233,7 +228,6 @@ See help(type(self)) for accurate signature.</p></section>
 <summary>Source code</summary>
 <pre><code class="python">def cleanup(self):
     &#34;&#34;&#34;Just clean queue&#34;&#34;&#34;
-    from .id9 import ID
     self.threads = []
     self.thread_ids.__init__()</code></pre>
 </details>
