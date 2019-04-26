@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;0.3.1&#34;
+__version__ = &#34;0.3.2&#34;
 
 from .dict9 import imdict
 
@@ -73,7 +73,7 @@ class MyThread:
         for id, thread in threading._active.items():
             if thread is self.thread:
                 return id
-        raise RuntimeError(&#34;Thread ID not found&#34;)
+        print(&#34;Thread ID not found&#34;)
 
     def raise_exception(self):
         import ctypes
@@ -187,7 +187,7 @@ class Threading:
         for id, thread in threading._active.items():
             if thread is self.thread:
                 return id
-        raise RuntimeError(&#34;Thread ID not found&#34;)
+        print(&#34;Thread ID not found&#34;)
 
     def raise_exception(self):
         import ctypes
@@ -233,7 +233,7 @@ See help(type(self)) for accurate signature.</p></section>
     for id, thread in threading._active.items():
         if thread is self.thread:
             return id
-    raise RuntimeError(&#34;Thread ID not found&#34;)</code></pre>
+    print(&#34;Thread ID not found&#34;)</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.raise_exception"><code class="name flex">
