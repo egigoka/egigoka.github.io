@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;0.1.0&#34;
+__version__ = &#34;0.1.2&#34;
 
 from .dict9 import imdict
 
@@ -46,8 +46,10 @@ class MyThread:
 
     def run(self):
         print(&#34;Starting &#34; + self.name)
-        self.func(*self.args, **self.kwargs)
-        print(&#34;Exiting &#34; + self.name)
+        try:
+            self.func(*self.args, **self.kwargs)
+        except SystemExit:  # test
+            print(&#34;Exiting &#34; + self.name)
 
     def start(self):
         self.thread.run = self.run
@@ -60,8 +62,9 @@ class MyThread:
         if hasattr(self.thread, &#39;_thread_id&#39;):
             return self.thread._thread_id
         for id, thread in threading._active.items():
-            if self.thread is self:
+            if thread is self.thread:
                 return id
+        raise RuntimeError(&#34;Thread ID not found&#34;)
 
     def raise_exception(self):
         import ctypes
@@ -69,7 +72,7 @@ class MyThread:
         res = ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, ctypes.py_object(SystemExit))
         if res &gt; 1:
             ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, 0)
-            print(&#39;Exception raise failure&#39;)
+            raise RuntimeError(&#39;Thread Exception raise failure&#39;)
 
 
 class Threading:
@@ -136,8 +139,10 @@ class Threading:
 
     def run(self):
         print(&#34;Starting &#34; + self.name)
-        self.func(*self.args, **self.kwargs)
-        print(&#34;Exiting &#34; + self.name)
+        try:
+            self.func(*self.args, **self.kwargs)
+        except SystemExit:  # test
+            print(&#34;Exiting &#34; + self.name)
 
     def start(self):
         self.thread.run = self.run
@@ -150,8 +155,9 @@ class Threading:
         if hasattr(self.thread, &#39;_thread_id&#39;):
             return self.thread._thread_id
         for id, thread in threading._active.items():
-            if self.thread is self:
+            if thread is self.thread:
                 return id
+        raise RuntimeError(&#34;Thread ID not found&#34;)
 
     def raise_exception(self):
         import ctypes
@@ -159,7 +165,7 @@ class Threading:
         res = ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, ctypes.py_object(SystemExit))
         if res &gt; 1:
             ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, 0)
-            print(&#39;Exception raise failure&#39;)</code></pre>
+            raise RuntimeError(&#39;Thread Exception raise failure&#39;)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -194,8 +200,9 @@ See help(type(self)) for accurate signature.</p></section>
     if hasattr(self.thread, &#39;_thread_id&#39;):
         return self.thread._thread_id
     for id, thread in threading._active.items():
-        if self.thread is self:
-            return id</code></pre>
+        if thread is self.thread:
+            return id
+    raise RuntimeError(&#34;Thread ID not found&#34;)</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.raise_exception"><code class="name flex">
@@ -211,7 +218,7 @@ See help(type(self)) for accurate signature.</p></section>
     res = ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, ctypes.py_object(SystemExit))
     if res &gt; 1:
         ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, 0)
-        print(&#39;Exception raise failure&#39;)</code></pre>
+        raise RuntimeError(&#39;Thread Exception raise failure&#39;)</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.run"><code class="name flex">
@@ -223,8 +230,10 @@ See help(type(self)) for accurate signature.</p></section>
 <summary>Source code</summary>
 <pre><code class="python">def run(self):
     print(&#34;Starting &#34; + self.name)
-    self.func(*self.args, **self.kwargs)
-    print(&#34;Exiting &#34; + self.name)</code></pre>
+    try:
+        self.func(*self.args, **self.kwargs)
+    except SystemExit:  # test
+        print(&#34;Exiting &#34; + self.name)</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.start"><code class="name flex">
