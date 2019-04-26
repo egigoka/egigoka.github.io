@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;0.3.2&#34;
+__version__ = &#34;1.0.0&#34;
 
 from .dict9 import imdict
 
@@ -35,22 +35,30 @@ from .dict9 import imdict
 class MyThread:
     _imdict = imdict({})
 
-    def __init__(self, thread_id, name, func, args=(), kwargs=_imdict, daemon=False):
+    def __init__(self, thread_id, func, name=None, args=(), kwargs=_imdict, daemon=False, quiet=True):
         import threading
+        if name is None:
+            name = f&#34;Thread {func.__name__}&#34;
         self.thread = threading.Thread()
         self.thread.daemon = daemon
         self.thread_id = thread_id
-        self.name = name
+        self.thread.name = name
         self.func = func
         self.args = args
         self.kwargs = kwargs
+        self.quiet = quiet
+
+    def qprint(self, *args, **kwargs):
+        if not self.quiet:
+            print(*args, **kwargs)
 
     def run(self):
-        print(&#34;Starting &#34; + self.name)
+        self.qprint(&#34;Starting &#34; + self.thread.name)
         try:
             self.func(*self.args, **self.kwargs)
+            self.qprint(&#34;Ended &#34; + self.thread.name)
         except SystemExit:
-            print(&#34;Quited &#34; + self.name)
+            self.qprint(&#34;Quited &#34; + self.thread.name)
 
     def start(self):
         self.thread.run = self.run
@@ -59,7 +67,7 @@ class MyThread:
     def wait_for_keyboard_interrupt(self):
         import time
         try:
-            while True:
+            while self.thread.is_alive():
                 time.sleep(1)  # wait for KeyboardInterrupt
         except (KeyboardInterrupt, SystemExit):
             self.raise_exception()
@@ -73,7 +81,7 @@ class MyThread:
         for id, thread in threading._active.items():
             if thread is self.thread:
                 return id
-        print(&#34;Thread ID not found&#34;)
+        self.qprint(&#34;Thread ID not found&#34;)
 
     def raise_exception(self):
         import ctypes
@@ -87,17 +95,20 @@ class MyThread:
 class Threading:
     _imdict = imdict({})
 
-    def __init__(self, daemons=None):
+    def __init__(self, daemons=None, quiet=None):
         from .id9 import ID
         self.threads = []
         self.thread_ids = ID()
         self.daemons = daemons
+        self.quiet = quiet
 
-    def add(self, name, func, args=(), kwargs=_imdict, daemon=None):
+    def add(self, func, name, args=(), kwargs=_imdict, daemon=None, quiet=None):
         if daemon is None:
             daemon = self.daemons
-        self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs,
-                                     daemon=daemon))
+        if quiet is None:
+            quiet = self.quiet
+        self.threads.append(MyThread(thread_id=self.thread_ids.get(), func=func, name=name, args=args, kwargs=kwargs,
+                                     daemon=daemon, quiet=quiet))
 
     def start(self, wait_for_keyboard_interrupt=False):
         &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
@@ -109,10 +120,16 @@ class Threading:
     def wait_for_keyboard_interrupt(self):
         import time
         try:
-            while True:
-                time.sleep(1)  # wait for KeyboardInterrupt
+            while True:  # wait for KeyboardInterrupt
+                is_alive = False  # is even single process alive
+                for thread in self.threads:
+                    if thread.thread.is_alive():
+                        time.sleep(1)
+                        is_alive = True
+                if not is_alive:  # if none of processes alive
+                    return
         except (KeyboardInterrupt, SystemExit):
-            self.raise_exception()
+                self.raise_exception()
 
     def cleanup(self):
         &#34;&#34;&#34;Just clean queue&#34;&#34;&#34;
@@ -149,22 +166,30 @@ class Threading:
 <pre><code class="python">class MyThread:
     _imdict = imdict({})
 
-    def __init__(self, thread_id, name, func, args=(), kwargs=_imdict, daemon=False):
+    def __init__(self, thread_id, func, name=None, args=(), kwargs=_imdict, daemon=False, quiet=True):
         import threading
+        if name is None:
+            name = f&#34;Thread {func.__name__}&#34;
         self.thread = threading.Thread()
         self.thread.daemon = daemon
         self.thread_id = thread_id
-        self.name = name
+        self.thread.name = name
         self.func = func
         self.args = args
         self.kwargs = kwargs
+        self.quiet = quiet
+
+    def qprint(self, *args, **kwargs):
+        if not self.quiet:
+            print(*args, **kwargs)
 
     def run(self):
-        print(&#34;Starting &#34; + self.name)
+        self.qprint(&#34;Starting &#34; + self.thread.name)
         try:
             self.func(*self.args, **self.kwargs)
+            self.qprint(&#34;Ended &#34; + self.thread.name)
         except SystemExit:
-            print(&#34;Quited &#34; + self.name)
+            self.qprint(&#34;Quited &#34; + self.thread.name)
 
     def start(self):
         self.thread.run = self.run
@@ -173,7 +198,7 @@ class Threading:
     def wait_for_keyboard_interrupt(self):
         import time
         try:
-            while True:
+            while self.thread.is_alive():
                 time.sleep(1)  # wait for KeyboardInterrupt
         except (KeyboardInterrupt, SystemExit):
             self.raise_exception()
@@ -187,7 +212,7 @@ class Threading:
         for id, thread in threading._active.items():
             if thread is self.thread:
                 return id
-        print(&#34;Thread ID not found&#34;)
+        self.qprint(&#34;Thread ID not found&#34;)
 
     def raise_exception(self):
         import ctypes
@@ -200,22 +225,25 @@ class Threading:
 <h3>Methods</h3>
 <dl>
 <dt id="commands.threading9.MyThread.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, thread_id, name, func, args=(), kwargs={}, daemon=False)</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, thread_id, func, name=None, args=(), kwargs={}, daemon=False, quiet=True)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Initialize self.
 See help(type(self)) for accurate signature.</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def __init__(self, thread_id, name, func, args=(), kwargs=_imdict, daemon=False):
+<pre><code class="python">def __init__(self, thread_id, func, name=None, args=(), kwargs=_imdict, daemon=False, quiet=True):
     import threading
+    if name is None:
+        name = f&#34;Thread {func.__name__}&#34;
     self.thread = threading.Thread()
     self.thread.daemon = daemon
     self.thread_id = thread_id
-    self.name = name
+    self.thread.name = name
     self.func = func
     self.args = args
-    self.kwargs = kwargs</code></pre>
+    self.kwargs = kwargs
+    self.quiet = quiet</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.get_id"><code class="name flex">
@@ -233,7 +261,19 @@ See help(type(self)) for accurate signature.</p></section>
     for id, thread in threading._active.items():
         if thread is self.thread:
             return id
-    print(&#34;Thread ID not found&#34;)</code></pre>
+    self.qprint(&#34;Thread ID not found&#34;)</code></pre>
+</details>
+</dd>
+<dt id="commands.threading9.MyThread.qprint"><code class="name flex">
+<span>def <span class="ident">qprint</span></span>(<span>self, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def qprint(self, *args, **kwargs):
+    if not self.quiet:
+        print(*args, **kwargs)</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.raise_exception"><code class="name flex">
@@ -260,11 +300,12 @@ See help(type(self)) for accurate signature.</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def run(self):
-    print(&#34;Starting &#34; + self.name)
+    self.qprint(&#34;Starting &#34; + self.thread.name)
     try:
         self.func(*self.args, **self.kwargs)
+        self.qprint(&#34;Ended &#34; + self.thread.name)
     except SystemExit:
-        print(&#34;Quited &#34; + self.name)</code></pre>
+        self.qprint(&#34;Quited &#34; + self.thread.name)</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.start"><code class="name flex">
@@ -289,7 +330,7 @@ See help(type(self)) for accurate signature.</p></section>
 <pre><code class="python">def wait_for_keyboard_interrupt(self):
     import time
     try:
-        while True:
+        while self.thread.is_alive():
             time.sleep(1)  # wait for KeyboardInterrupt
     except (KeyboardInterrupt, SystemExit):
         self.raise_exception()</code></pre>
@@ -307,17 +348,20 @@ See help(type(self)) for accurate signature.</p></section>
 <pre><code class="python">class Threading:
     _imdict = imdict({})
 
-    def __init__(self, daemons=None):
+    def __init__(self, daemons=None, quiet=None):
         from .id9 import ID
         self.threads = []
         self.thread_ids = ID()
         self.daemons = daemons
+        self.quiet = quiet
 
-    def add(self, name, func, args=(), kwargs=_imdict, daemon=None):
+    def add(self, func, name, args=(), kwargs=_imdict, daemon=None, quiet=None):
         if daemon is None:
             daemon = self.daemons
-        self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs,
-                                     daemon=daemon))
+        if quiet is None:
+            quiet = self.quiet
+        self.threads.append(MyThread(thread_id=self.thread_ids.get(), func=func, name=name, args=args, kwargs=kwargs,
+                                     daemon=daemon, quiet=quiet))
 
     def start(self, wait_for_keyboard_interrupt=False):
         &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
@@ -329,10 +373,16 @@ See help(type(self)) for accurate signature.</p></section>
     def wait_for_keyboard_interrupt(self):
         import time
         try:
-            while True:
-                time.sleep(1)  # wait for KeyboardInterrupt
+            while True:  # wait for KeyboardInterrupt
+                is_alive = False  # is even single process alive
+                for thread in self.threads:
+                    if thread.thread.is_alive():
+                        time.sleep(1)
+                        is_alive = True
+                if not is_alive:  # if none of processes alive
+                    return
         except (KeyboardInterrupt, SystemExit):
-            self.raise_exception()
+                self.raise_exception()
 
     def cleanup(self):
         &#34;&#34;&#34;Just clean queue&#34;&#34;&#34;
@@ -352,32 +402,35 @@ See help(type(self)) for accurate signature.</p></section>
 <h3>Methods</h3>
 <dl>
 <dt id="commands.threading9.Threading.__init__"><code class="name flex">
-<span>def <span class="ident">__init__</span></span>(<span>self, daemons=None)</span>
+<span>def <span class="ident">__init__</span></span>(<span>self, daemons=None, quiet=None)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Initialize self.
 See help(type(self)) for accurate signature.</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def __init__(self, daemons=None):
+<pre><code class="python">def __init__(self, daemons=None, quiet=None):
     from .id9 import ID
     self.threads = []
     self.thread_ids = ID()
-    self.daemons = daemons</code></pre>
+    self.daemons = daemons
+    self.quiet = quiet</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.add"><code class="name flex">
-<span>def <span class="ident">add</span></span>(<span>self, name, func, args=(), kwargs={}, daemon=None)</span>
+<span>def <span class="ident">add</span></span>(<span>self, func, name, args=(), kwargs={}, daemon=None, quiet=None)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def add(self, name, func, args=(), kwargs=_imdict, daemon=None):
+<pre><code class="python">def add(self, func, name, args=(), kwargs=_imdict, daemon=None, quiet=None):
     if daemon is None:
         daemon = self.daemons
-    self.threads.append(MyThread(thread_id=self.thread_ids.get(), name=name, func=func, args=args, kwargs=kwargs,
-                                 daemon=daemon))</code></pre>
+    if quiet is None:
+        quiet = self.quiet
+    self.threads.append(MyThread(thread_id=self.thread_ids.get(), func=func, name=name, args=args, kwargs=kwargs,
+                                 daemon=daemon, quiet=quiet))</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.cleanup"><code class="name flex">
@@ -444,10 +497,16 @@ See help(type(self)) for accurate signature.</p></section>
 <pre><code class="python">def wait_for_keyboard_interrupt(self):
     import time
     try:
-        while True:
-            time.sleep(1)  # wait for KeyboardInterrupt
+        while True:  # wait for KeyboardInterrupt
+            is_alive = False  # is even single process alive
+            for thread in self.threads:
+                if thread.thread.is_alive():
+                    time.sleep(1)
+                    is_alive = True
+            if not is_alive:  # if none of processes alive
+                return
     except (KeyboardInterrupt, SystemExit):
-        self.raise_exception()</code></pre>
+            self.raise_exception()</code></pre>
 </details>
 </dd>
 </dl>
@@ -473,6 +532,7 @@ See help(type(self)) for accurate signature.</p></section>
 <ul class="">
 <li><code><a title="commands.threading9.MyThread.__init__" href="#commands.threading9.MyThread.__init__">__init__</a></code></li>
 <li><code><a title="commands.threading9.MyThread.get_id" href="#commands.threading9.MyThread.get_id">get_id</a></code></li>
+<li><code><a title="commands.threading9.MyThread.qprint" href="#commands.threading9.MyThread.qprint">qprint</a></code></li>
 <li><code><a title="commands.threading9.MyThread.raise_exception" href="#commands.threading9.MyThread.raise_exception">raise_exception</a></code></li>
 <li><code><a title="commands.threading9.MyThread.run" href="#commands.threading9.MyThread.run">run</a></code></li>
 <li><code><a title="commands.threading9.MyThread.start" href="#commands.threading9.MyThread.start">start</a></code></li>
