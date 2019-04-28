@@ -102,7 +102,7 @@ class Threading:
         self.daemons = daemons
         self.quiet = quiet
 
-    def add(self, func, name, args=(), kwargs=_imdict, daemon=None, quiet=None):
+    def add(self, func, name=None, args=(), kwargs=_imdict, daemon=None, quiet=None):
         if daemon is None:
             daemon = self.daemons
         if quiet is None:
@@ -355,7 +355,7 @@ See help(type(self)) for accurate signature.</p></section>
         self.daemons = daemons
         self.quiet = quiet
 
-    def add(self, func, name, args=(), kwargs=_imdict, daemon=None, quiet=None):
+    def add(self, func, name=None, args=(), kwargs=_imdict, daemon=None, quiet=None):
         if daemon is None:
             daemon = self.daemons
         if quiet is None:
@@ -418,13 +418,13 @@ See help(type(self)) for accurate signature.</p></section>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.add"><code class="name flex">
-<span>def <span class="ident">add</span></span>(<span>self, func, name, args=(), kwargs={}, daemon=None, quiet=None)</span>
+<span>def <span class="ident">add</span></span>(<span>self, func, name=None, args=(), kwargs={}, daemon=None, quiet=None)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def add(self, func, name, args=(), kwargs=_imdict, daemon=None, quiet=None):
+<pre><code class="python">def add(self, func, name=None, args=(), kwargs=_imdict, daemon=None, quiet=None):
     if daemon is None:
         daemon = self.daemons
     if quiet is None:
