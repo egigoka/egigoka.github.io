@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;1.0.0&#34;
+__version__ = &#34;1.0.1&#34;
 
 from .dict9 import imdict
 
@@ -60,15 +60,17 @@ class MyThread:
         except SystemExit:
             self.qprint(&#34;Quited &#34; + self.thread.name)
 
-    def start(self):
+    def start(self, wait_for_keyboard_interrupt=False):
         self.thread.run = self.run
         self.thread.start()
+        if wait_for_keyboard_interrupt:
+            self.wait_for_keyboard_interrupt()
 
     def wait_for_keyboard_interrupt(self):
         import time
         try:
             while self.thread.is_alive():
-                time.sleep(1)  # wait for KeyboardInterrupt
+                time.sleep(1)
         except (KeyboardInterrupt, SystemExit):
             self.raise_exception()
 
@@ -117,10 +119,13 @@ class Threading:
         for thread in self.threads:
             thread.start()
 
+        if wait_for_keyboard_interrupt:
+            self.wait_for_keyboard_interrupt()
+
     def wait_for_keyboard_interrupt(self):
         import time
         try:
-            while True:  # wait for KeyboardInterrupt
+            while True:
                 is_alive = False  # is even single process alive
                 for thread in self.threads:
                     if thread.thread.is_alive():
@@ -191,15 +196,17 @@ class Threading:
         except SystemExit:
             self.qprint(&#34;Quited &#34; + self.thread.name)
 
-    def start(self):
+    def start(self, wait_for_keyboard_interrupt=False):
         self.thread.run = self.run
         self.thread.start()
+        if wait_for_keyboard_interrupt:
+            self.wait_for_keyboard_interrupt()
 
     def wait_for_keyboard_interrupt(self):
         import time
         try:
             while self.thread.is_alive():
-                time.sleep(1)  # wait for KeyboardInterrupt
+                time.sleep(1)
         except (KeyboardInterrupt, SystemExit):
             self.raise_exception()
 
@@ -309,15 +316,17 @@ See help(type(self)) for accurate signature.</p></section>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.start"><code class="name flex">
-<span>def <span class="ident">start</span></span>(<span>self)</span>
+<span>def <span class="ident">start</span></span>(<span>self, wait_for_keyboard_interrupt=False)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def start(self):
+<pre><code class="python">def start(self, wait_for_keyboard_interrupt=False):
     self.thread.run = self.run
-    self.thread.start()</code></pre>
+    self.thread.start()
+    if wait_for_keyboard_interrupt:
+        self.wait_for_keyboard_interrupt()</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.wait_for_keyboard_interrupt"><code class="name flex">
@@ -331,7 +340,7 @@ See help(type(self)) for accurate signature.</p></section>
     import time
     try:
         while self.thread.is_alive():
-            time.sleep(1)  # wait for KeyboardInterrupt
+            time.sleep(1)
     except (KeyboardInterrupt, SystemExit):
         self.raise_exception()</code></pre>
 </details>
@@ -370,10 +379,13 @@ See help(type(self)) for accurate signature.</p></section>
         for thread in self.threads:
             thread.start()
 
+        if wait_for_keyboard_interrupt:
+            self.wait_for_keyboard_interrupt()
+
     def wait_for_keyboard_interrupt(self):
         import time
         try:
-            while True:  # wait for KeyboardInterrupt
+            while True:
                 is_alive = False  # is even single process alive
                 for thread in self.threads:
                     if thread.thread.is_alive():
@@ -484,7 +496,10 @@ See help(type(self)) for accurate signature.</p></section>
     assert len(self.threads) != 0, &#34;No threads&#34;
 
     for thread in self.threads:
-        thread.start()</code></pre>
+        thread.start()
+
+    if wait_for_keyboard_interrupt:
+        self.wait_for_keyboard_interrupt()</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.wait_for_keyboard_interrupt"><code class="name flex">
@@ -497,7 +512,7 @@ See help(type(self)) for accurate signature.</p></section>
 <pre><code class="python">def wait_for_keyboard_interrupt(self):
     import time
     try:
-        while True:  # wait for KeyboardInterrupt
+        while True:
             is_alive = False  # is even single process alive
             for thread in self.threads:
                 if thread.thread.is_alive():
