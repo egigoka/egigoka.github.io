@@ -43,6 +43,7 @@ class MyThread:
         self.thread.daemon = daemon
         self.thread_id = thread_id
         self.thread.name = name
+        self.thread.result = None
         self.func = func
         self.args = args
         self.kwargs = kwargs
@@ -55,7 +56,7 @@ class MyThread:
     def run(self):
         self.qprint(&#34;Starting &#34; + self.thread.name)
         try:
-            self.func(*self.args, **self.kwargs)
+            self.result = self.func(*self.args, **self.kwargs)
             self.qprint(&#34;Ended &#34; + self.thread.name)
         except SystemExit:
             self.qprint(&#34;Quited &#34; + self.thread.name)
@@ -180,6 +181,7 @@ class Threading:
         self.thread.daemon = daemon
         self.thread_id = thread_id
         self.thread.name = name
+        self.thread.result = None
         self.func = func
         self.args = args
         self.kwargs = kwargs
@@ -192,7 +194,7 @@ class Threading:
     def run(self):
         self.qprint(&#34;Starting &#34; + self.thread.name)
         try:
-            self.func(*self.args, **self.kwargs)
+            self.result = self.func(*self.args, **self.kwargs)
             self.qprint(&#34;Ended &#34; + self.thread.name)
         except SystemExit:
             self.qprint(&#34;Quited &#34; + self.thread.name)
@@ -288,7 +290,7 @@ class Threading:
 <pre><code class="python">def run(self):
     self.qprint(&#34;Starting &#34; + self.thread.name)
     try:
-        self.func(*self.args, **self.kwargs)
+        self.result = self.func(*self.args, **self.kwargs)
         self.qprint(&#34;Ended &#34; + self.thread.name)
     except SystemExit:
         self.qprint(&#34;Quited &#34; + self.thread.name)</code></pre>
