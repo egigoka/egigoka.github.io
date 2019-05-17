@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;1.0.1&#34;
+__version__ = &#34;1.0.2&#34;
 
 from .dict9 import imdict
 
@@ -38,7 +38,7 @@ class MyThread:
     def __init__(self, thread_id, func, name=None, args=(), kwargs=_imdict, daemon=False, quiet=True):
         import threading
         if name is None:
-            name = f&#34;Thread {func.__name__}&#34;
+            name = f&#34;Thread {func.__name__}.{thread_id}&#34;
         self.thread = threading.Thread()
         self.thread.daemon = daemon
         self.thread_id = thread_id
@@ -176,7 +176,7 @@ class Threading:
     def __init__(self, thread_id, func, name=None, args=(), kwargs=_imdict, daemon=False, quiet=True):
         import threading
         if name is None:
-            name = f&#34;Thread {func.__name__}&#34;
+            name = f&#34;Thread {func.__name__}.{thread_id}&#34;
         self.thread = threading.Thread()
         self.thread.daemon = daemon
         self.thread_id = thread_id
