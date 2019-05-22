@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions for managing strings.
 &#34;&#34;&#34;
-__version__ = &#34;0.13.0&#34;
+__version__ = &#34;0.13.1&#34;
 
 
 class Str:
@@ -350,11 +350,11 @@ class Str:
 
     @classmethod
     def guid_by_seed(cls, seed, uniq_in_process=True):
-        if uniq_in_process:
-            if seed in cls.seeds:
+        if seed in cls.seeds:
+            if uniq_in_process:
                 raise KeyError(fr&#34;seed &#39;{seed}&#39; already used by guid_by_seed&#34;)
-            else:
-                cls.seeds.append(seed)
+        else:
+            cls.seeds.append(seed)
         import hashlib
         bseed = bytes(seed, &#34;utf-8&#34;)
         hash = hashlib.sha256(bseed)
@@ -715,11 +715,11 @@ class Str:
 
     @classmethod
     def guid_by_seed(cls, seed, uniq_in_process=True):
-        if uniq_in_process:
-            if seed in cls.seeds:
+        if seed in cls.seeds:
+            if uniq_in_process:
                 raise KeyError(fr&#34;seed &#39;{seed}&#39; already used by guid_by_seed&#34;)
-            else:
-                cls.seeds.append(seed)
+        else:
+            cls.seeds.append(seed)
         import hashlib
         bseed = bytes(seed, &#34;utf-8&#34;)
         hash = hashlib.sha256(bseed)
@@ -912,11 +912,11 @@ def get_words(string_):
 <summary>Source code</summary>
 <pre><code class="python">@classmethod
 def guid_by_seed(cls, seed, uniq_in_process=True):
-    if uniq_in_process:
-        if seed in cls.seeds:
+    if seed in cls.seeds:
+        if uniq_in_process:
             raise KeyError(fr&#34;seed &#39;{seed}&#39; already used by guid_by_seed&#34;)
-        else:
-            cls.seeds.append(seed)
+    else:
+        cls.seeds.append(seed)
     import hashlib
     bseed = bytes(seed, &#34;utf-8&#34;)
     hash = hashlib.sha256(bseed)
