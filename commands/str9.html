@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions for managing strings.
 &#34;&#34;&#34;
-__version__ = &#34;0.12.1&#34;
+__version__ = &#34;0.13.0&#34;
 
 
 class Str:
@@ -345,6 +345,25 @@ class Str:
             password_sym = password[cnt % password_len]
             output_string += chr(numb + ord(password_sym))
         return output_string
+
+    seeds = []
+
+    @classmethod
+    def guid_by_seed(cls, seed, uniq_in_process=True):
+        if uniq_in_process:
+            if seed in cls.seeds:
+                raise KeyError(fr&#34;seed &#39;{seed}&#39; already used by guid_by_seed&#34;)
+            else:
+                cls.seeds.append(seed)
+        import hashlib
+        bseed = bytes(seed, &#34;utf-8&#34;)
+        hash = hashlib.sha256(bseed)
+        hashhex = hash.hexdigest()
+        strhashhex = str(hashhex)
+        symbols = strhashhex.zfill(32)[-32:]  # adds zeros if needed and cut unneded symbols
+        string = symbols[:8] + &#34;-&#34; + symbols[8:12] + &#34;-&#34; + symbols[12:16] + &#34;-&#34; + symbols[16:20] + &#34;-&#34; + symbols[20:]
+        return string
+
 
     python_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp737&#39;, &#39;cp775&#39;, &#39;cp850&#39;,
                         &#39;cp852&#39;, &#39;cp855&#39;, &#39;cp856&#39;, &#39;cp857&#39;, &#39;cp860&#39;, &#39;cp861&#39;, &#39;cp862&#39;, &#39;cp863&#39;, &#39;cp864&#39;, &#39;cp865&#39;,
@@ -692,6 +711,25 @@ class Str:
             output_string += chr(numb + ord(password_sym))
         return output_string
 
+    seeds = []
+
+    @classmethod
+    def guid_by_seed(cls, seed, uniq_in_process=True):
+        if uniq_in_process:
+            if seed in cls.seeds:
+                raise KeyError(fr&#34;seed &#39;{seed}&#39; already used by guid_by_seed&#34;)
+            else:
+                cls.seeds.append(seed)
+        import hashlib
+        bseed = bytes(seed, &#34;utf-8&#34;)
+        hash = hashlib.sha256(bseed)
+        hashhex = hash.hexdigest()
+        strhashhex = str(hashhex)
+        symbols = strhashhex.zfill(32)[-32:]  # adds zeros if needed and cut unneded symbols
+        string = symbols[:8] + &#34;-&#34; + symbols[8:12] + &#34;-&#34; + symbols[12:16] + &#34;-&#34; + symbols[16:20] + &#34;-&#34; + symbols[20:]
+        return string
+
+
     python_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp737&#39;, &#39;cp775&#39;, &#39;cp850&#39;,
                         &#39;cp852&#39;, &#39;cp855&#39;, &#39;cp856&#39;, &#39;cp857&#39;, &#39;cp860&#39;, &#39;cp861&#39;, &#39;cp862&#39;, &#39;cp863&#39;, &#39;cp864&#39;, &#39;cp865&#39;,
                         &#39;cp866&#39;, &#39;cp869&#39;, &#39;cp874&#39;, &#39;cp875&#39;, &#39;cp932&#39;, &#39;cp949&#39;, &#39;cp950&#39;, &#39;cp1006&#39;, &#39;cp1026&#39;, &#39;cp1140&#39;,
@@ -707,6 +745,10 @@ class Str:
 <h3>Class variables</h3>
 <dl>
 <dt id="commands.str9.Str.python_encodings"><code class="name">var <span class="ident">python_encodings</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+<dt id="commands.str9.Str.seeds"><code class="name">var <span class="ident">seeds</span></code></dt>
 <dd>
 <section class="desc"></section>
 </dd>
@@ -859,6 +901,30 @@ def get_words(string_):
     if words == [&#34;&#34;]:
         words = []
     return words</code></pre>
+</details>
+</dd>
+<dt id="commands.str9.Str.guid_by_seed"><code class="name flex">
+<span>def <span class="ident">guid_by_seed</span></span>(<span>seed, uniq_in_process=True)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def guid_by_seed(cls, seed, uniq_in_process=True):
+    if uniq_in_process:
+        if seed in cls.seeds:
+            raise KeyError(fr&#34;seed &#39;{seed}&#39; already used by guid_by_seed&#34;)
+        else:
+            cls.seeds.append(seed)
+    import hashlib
+    bseed = bytes(seed, &#34;utf-8&#34;)
+    hash = hashlib.sha256(bseed)
+    hashhex = hash.hexdigest()
+    strhashhex = str(hashhex)
+    symbols = strhashhex.zfill(32)[-32:]  # adds zeros if needed and cut unneded symbols
+    string = symbols[:8] + &#34;-&#34; + symbols[8:12] + &#34;-&#34; + symbols[12:16] + &#34;-&#34; + symbols[16:20] + &#34;-&#34; + symbols[20:]
+    return string</code></pre>
 </details>
 </dd>
 <dt id="commands.str9.Str.guid_from_seed"><code class="name flex">
@@ -1230,6 +1296,7 @@ def to_quotes_2(some_string):
 <li><code><a title="commands.str9.Str.encrypt" href="#commands.str9.Str.encrypt">encrypt</a></code></li>
 <li><code><a title="commands.str9.Str.get_integers" href="#commands.str9.Str.get_integers">get_integers</a></code></li>
 <li><code><a title="commands.str9.Str.get_words" href="#commands.str9.Str.get_words">get_words</a></code></li>
+<li><code><a title="commands.str9.Str.guid_by_seed" href="#commands.str9.Str.guid_by_seed">guid_by_seed</a></code></li>
 <li><code><a title="commands.str9.Str.guid_from_seed" href="#commands.str9.Str.guid_from_seed">guid_from_seed</a></code></li>
 <li><code><a title="commands.str9.Str.input_int" href="#commands.str9.Str.input_int">input_int</a></code></li>
 <li><code><a title="commands.str9.Str.input_pass" href="#commands.str9.Str.input_pass">input_pass</a></code></li>
@@ -1239,6 +1306,7 @@ def to_quotes_2(some_string):
 <li><code><a title="commands.str9.Str.python_encodings" href="#commands.str9.Str.python_encodings">python_encodings</a></code></li>
 <li><code><a title="commands.str9.Str.remove_spaces" href="#commands.str9.Str.remove_spaces">remove_spaces</a></code></li>
 <li><code><a title="commands.str9.Str.rightpad" href="#commands.str9.Str.rightpad">rightpad</a></code></li>
+<li><code><a title="commands.str9.Str.seeds" href="#commands.str9.Str.seeds">seeds</a></code></li>
 <li><code><a title="commands.str9.Str.split_every" href="#commands.str9.Str.split_every">split_every</a></code></li>
 <li><code><a title="commands.str9.Str.substring" href="#commands.str9.Str.substring">substring</a></code></li>
 <li><code><a title="commands.str9.Str.to_quotes" href="#commands.str9.Str.to_quotes">to_quotes</a></code></li>
