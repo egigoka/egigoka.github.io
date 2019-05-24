@@ -27,11 +27,51 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with Windows-specific functions
 &#34;&#34;&#34;
-__version__ = &#34;0.4.2&#34;
+__version__ = &#34;0.5.0&#34;
 
 class Windows:
     &#34;&#34;&#34;Class to work with Windows-specific functions
     &#34;&#34;&#34;
+
+    class RemoteSystem:
+        def __init__(self, hostname, username, password, port=None, transport=&#34;ntlm&#34;):
+            import winrm
+            ### FIX winrm ###
+            def fix_run_ps(self, script):
+                from base64 import b64encode
+                encoded_ps = b64encode(script.encode(&#39;utf_16_le&#39;)).decode(&#39;ascii&#39;)
+                rs = self.run_cmd(&#39;powershell -encodedcommand {0}&#39;.format(encoded_ps))
+                if len(rs.std_err):
+                    rs.std_err = self._clean_error_msg(rs.std_err.decode(&#39;utf-8&#39;))
+                return rs
+
+            winrm.Session.run_ps = fix_run_ps
+            ### END FIX winrm ###
+
+            if port is None:
+                port = 5986 if transport == &#39;ssl&#39; else 5985
+
+            self.session = winrm.Session(fr&#34;{hostname}:{port}&#34;, auth=(username, password), transport=transport)
+
+        def ps(self, script):
+            output = self.session.run_ps(script)
+            if output.std_err.startswith(&#34;#&lt; CLIXML\r\n&#34;):
+                output.std_err = output.std_err[len(&#34;#&lt; CLIXML\r\n&#34;):]
+
+            out = output.std_out.decode()
+            err = output.std_err
+            return out, err, output.status_code
+
+        def cmd(self, program, *args):
+            from commands.list9 import List
+            args = List.to_strings(args)
+            output = self.session.run_cmd(program, args)
+
+            out = output.std_out.decode()
+            err = output.std_err.decode()
+            return out, err, output.status_code
+
+
     @staticmethod
     def lock():
         &#34;&#34;&#34;Locking windows workstation, doesn&#39;t work with Windows 10
@@ -264,6 +304,46 @@ class Windows:
 <pre><code class="python">class Windows:
     &#34;&#34;&#34;Class to work with Windows-specific functions
     &#34;&#34;&#34;
+
+    class RemoteSystem:
+        def __init__(self, hostname, username, password, port=None, transport=&#34;ntlm&#34;):
+            import winrm
+            ### FIX winrm ###
+            def fix_run_ps(self, script):
+                from base64 import b64encode
+                encoded_ps = b64encode(script.encode(&#39;utf_16_le&#39;)).decode(&#39;ascii&#39;)
+                rs = self.run_cmd(&#39;powershell -encodedcommand {0}&#39;.format(encoded_ps))
+                if len(rs.std_err):
+                    rs.std_err = self._clean_error_msg(rs.std_err.decode(&#39;utf-8&#39;))
+                return rs
+
+            winrm.Session.run_ps = fix_run_ps
+            ### END FIX winrm ###
+
+            if port is None:
+                port = 5986 if transport == &#39;ssl&#39; else 5985
+
+            self.session = winrm.Session(fr&#34;{hostname}:{port}&#34;, auth=(username, password), transport=transport)
+
+        def ps(self, script):
+            output = self.session.run_ps(script)
+            if output.std_err.startswith(&#34;#&lt; CLIXML\r\n&#34;):
+                output.std_err = output.std_err[len(&#34;#&lt; CLIXML\r\n&#34;):]
+
+            out = output.std_out.decode()
+            err = output.std_err
+            return out, err, output.status_code
+
+        def cmd(self, program, *args):
+            from commands.list9 import List
+            args = List.to_strings(args)
+            output = self.session.run_cmd(program, args)
+
+            out = output.std_out.decode()
+            err = output.std_err.decode()
+            return out, err, output.status_code
+
+
     @staticmethod
     def lock():
         &#34;&#34;&#34;Locking windows workstation, doesn&#39;t work with Windows 10
@@ -477,6 +557,10 @@ class Windows:
 </details>
 <h3>Class variables</h3>
 <dl>
+<dt id="commands.windows9.Windows.RemoteSystem"><code class="name">var <span class="ident">RemoteSystem</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
 <dt id="commands.windows9.Windows.winreg_imported"><code class="name">var <span class="ident">winreg_imported</span></code></dt>
 <dd>
 <section class="desc"></section>
@@ -768,6 +852,7 @@ def user_exists(self, username):
 <li>
 <h4><code><a title="commands.windows9.Windows" href="#commands.windows9.Windows">Windows</a></code></h4>
 <ul class="">
+<li><code><a title="commands.windows9.Windows.RemoteSystem" href="#commands.windows9.Windows.RemoteSystem">RemoteSystem</a></code></li>
 <li><code><a title="commands.windows9.Windows.create_user" href="#commands.windows9.Windows.create_user">create_user</a></code></li>
 <li><code><a title="commands.windows9.Windows.dump_auditpol" href="#commands.windows9.Windows.dump_auditpol">dump_auditpol</a></code></li>
 <li><code><a title="commands.windows9.Windows.fix_unicode_encode_error" href="#commands.windows9.Windows.fix_unicode_encode_error">fix_unicode_encode_error</a></code></li>
