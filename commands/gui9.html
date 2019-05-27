@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with gui
 &#34;&#34;&#34;
-__version__ = &#34;0.4.0&#34;
+__version__ = &#34;0.4.1&#34;
 
 
 class Gui:  # pylint: disable=too-few-public-methods
@@ -73,11 +73,15 @@ class Gui:  # pylint: disable=too-few-public-methods
             if OS.windows_version &gt;= 10:
                 from win10toast import ToastNotifier
                 toaster = ToastNotifier()
-                toaster.show_toast(title, message, icon_path=None, duration=5, threaded=True)
+
+                from .threading9 import MyThread
+                t = MyThread(toaster.show_toast, args=(title, message), kwargs={&#34;icon_path&#34;:None, &#34;duration&#34;:5, &#34;threaded&#34;:False}, daemon=True)
+                t.start()
+
             else:
-                raise NotImplementedError()
+                raise NotImplementedError(&#34;Windows below 10 not supported yet&#34;)
         else:
-            raise NotImplementedError()</code></pre>
+            raise NotImplementedError(&#34;OS not in [&#39;Windows&#39;, &#39;macOS&#39;] not supported yet&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -140,11 +144,15 @@ class Gui:  # pylint: disable=too-few-public-methods
             if OS.windows_version &gt;= 10:
                 from win10toast import ToastNotifier
                 toaster = ToastNotifier()
-                toaster.show_toast(title, message, icon_path=None, duration=5, threaded=True)
+
+                from .threading9 import MyThread
+                t = MyThread(toaster.show_toast, args=(title, message), kwargs={&#34;icon_path&#34;:None, &#34;duration&#34;:5, &#34;threaded&#34;:False}, daemon=True)
+                t.start()
+
             else:
-                raise NotImplementedError()
+                raise NotImplementedError(&#34;Windows below 10 not supported yet&#34;)
         else:
-            raise NotImplementedError()</code></pre>
+            raise NotImplementedError(&#34;OS not in [&#39;Windows&#39;, &#39;macOS&#39;] not supported yet&#34;)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -165,11 +173,15 @@ def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=Non
         if OS.windows_version &gt;= 10:
             from win10toast import ToastNotifier
             toaster = ToastNotifier()
-            toaster.show_toast(title, message, icon_path=None, duration=5, threaded=True)
+
+            from .threading9 import MyThread
+            t = MyThread(toaster.show_toast, args=(title, message), kwargs={&#34;icon_path&#34;:None, &#34;duration&#34;:5, &#34;threaded&#34;:False}, daemon=True)
+            t.start()
+
         else:
-            raise NotImplementedError()
+            raise NotImplementedError(&#34;Windows below 10 not supported yet&#34;)
     else:
-        raise NotImplementedError()</code></pre>
+        raise NotImplementedError(&#34;OS not in [&#39;Windows&#39;, &#39;macOS&#39;] not supported yet&#34;)</code></pre>
 </details>
 </dd>
 <dt id="commands.gui9.Gui.warning"><code class="name flex">
