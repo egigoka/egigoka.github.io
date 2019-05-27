@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with gui
 &#34;&#34;&#34;
-__version__ = &#34;0.4.1&#34;
+__version__ = &#34;0.4.2&#34;
 
 
 class Gui:  # pylint: disable=too-few-public-methods
@@ -75,7 +75,7 @@ class Gui:  # pylint: disable=too-few-public-methods
                 toaster = ToastNotifier()
 
                 from .threading9 import MyThread
-                t = MyThread(toaster.show_toast, args=(title, message), kwargs={&#34;icon_path&#34;:None, &#34;duration&#34;:5, &#34;threaded&#34;:False}, daemon=True)
+                t = MyThread(toaster.show_toast, args=(title, message), kwargs={&#34;icon_path&#34;:None, &#34;threaded&#34;:False}, daemon=True)
                 t.start()
 
             else:
@@ -146,7 +146,7 @@ class Gui:  # pylint: disable=too-few-public-methods
                 toaster = ToastNotifier()
 
                 from .threading9 import MyThread
-                t = MyThread(toaster.show_toast, args=(title, message), kwargs={&#34;icon_path&#34;:None, &#34;duration&#34;:5, &#34;threaded&#34;:False}, daemon=True)
+                t = MyThread(toaster.show_toast, args=(title, message), kwargs={&#34;icon_path&#34;:None, &#34;threaded&#34;:False}, daemon=True)
                 t.start()
 
             else:
@@ -175,7 +175,7 @@ def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=Non
             toaster = ToastNotifier()
 
             from .threading9 import MyThread
-            t = MyThread(toaster.show_toast, args=(title, message), kwargs={&#34;icon_path&#34;:None, &#34;duration&#34;:5, &#34;threaded&#34;:False}, daemon=True)
+            t = MyThread(toaster.show_toast, args=(title, message), kwargs={&#34;icon_path&#34;:None, &#34;threaded&#34;:False}, daemon=True)
             t.start()
 
         else:
