@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;1.3.0&#34;
+__version__ = &#34;1.3.1&#34;
 
 from .dict9 import imdict
 
@@ -35,10 +35,12 @@ from .dict9 import imdict
 class MyThread:
     _imdict = imdict({})
 
-    def __init__(self, thread_id, func, name=None, args=(), kwargs=_imdict, daemon=False, quiet=True):
+    def __init__(self, func, thread_id=None, name=None, args=(), kwargs=_imdict, daemon=False, quiet=True):
         import threading
         if name is None:
             name = f&#34;Thread {func.__name__}.{thread_id}&#34;
+        if thread_id is None:
+            thread_id = 0
         self.thread = threading.Thread()
         self.thread.daemon = daemon
         self.thread_id = thread_id
@@ -173,7 +175,7 @@ class Threading:
 <dl>
 <dt id="commands.threading9.MyThread"><code class="flex name class">
 <span>class <span class="ident">MyThread</span></span>
-<span>(</span><span>thread_id, func, name=None, args=(), kwargs={}, daemon=False, quiet=True)</span>
+<span>(</span><span>func, thread_id=None, name=None, args=(), kwargs={}, daemon=False, quiet=True)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
@@ -182,10 +184,12 @@ class Threading:
 <pre><code class="python">class MyThread:
     _imdict = imdict({})
 
-    def __init__(self, thread_id, func, name=None, args=(), kwargs=_imdict, daemon=False, quiet=True):
+    def __init__(self, func, thread_id=None, name=None, args=(), kwargs=_imdict, daemon=False, quiet=True):
         import threading
         if name is None:
             name = f&#34;Thread {func.__name__}.{thread_id}&#34;
+        if thread_id is None:
+            thread_id = 0
         self.thread = threading.Thread()
         self.thread.daemon = daemon
         self.thread_id = thread_id
