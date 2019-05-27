@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with gui
 &#34;&#34;&#34;
-__version__ = &#34;0.4.2&#34;
+__version__ = &#34;0.4.3&#34;
 
 
 class Gui:  # pylint: disable=too-few-public-methods
@@ -70,16 +70,60 @@ class Gui:  # pylint: disable=too-few-public-methods
             from .macos9 import macOS
             macOS.notification(cls, message, title=title, subtitle=subtitle, sound=sound)
         elif OS.windows:
-            if OS.windows_version &gt;= 10:
-                from win10toast import ToastNotifier
-                toaster = ToastNotifier()
+            # https://gist.github.com/wontoncc/1808234
+            class WindowsBalloonTip:
+                def __init__(self, title, msg):
+                    import os
+                    import sys
+                    import time
+                    import win32api
+                    import win32gui
+                    import win32con
 
-                from .threading9 import MyThread
-                t = MyThread(toaster.show_toast, args=(title, message), kwargs={&#34;icon_path&#34;:None, &#34;threaded&#34;:False}, daemon=True)
-                t.start()
+                    message_map = {
+                        win32con.WM_DESTROY: self.OnDestroy,
+                    }
+                    # Register the Window class.
+                    wc = win32gui.WNDCLASS()
+                    hinst = wc.hInstance = win32api.GetModuleHandle(None)
+                    wc.lpszClassName = &#34;PythonTaskbar&#34;
+                    wc.lpfnWndProc = message_map  # could also specify a wndproc.
+                    classAtom = win32gui.RegisterClass(wc)
+                    # Create the Window.
+                    style = win32con.WS_OVERLAPPED | win32con.WS_SYSMENU
+                    self.hwnd = win32gui.CreateWindow(classAtom, &#34;Taskbar&#34;, style,
+                                             0, 0, win32con.CW_USEDEFAULT, win32con.CW_USEDEFAULT,
+                                             0, 0, hinst, None)
+                    win32gui.UpdateWindow(self.hwnd)
+                    iconPathName = os.path.abspath(os.path.join(sys.path[0], &#34;balloontip.ico&#34;))
+                    icon_flags = win32con.LR_LOADFROMFILE | win32con.LR_DEFAULTSIZE
+                    try:
+                        hicon = win32gui.LoadImage(hinst, iconPathName,
+                                          win32con.IMAGE_ICON, 0, 0, icon_flags)
+                    except:
+                        hicon = win32gui.LoadIcon(0, win32con.IDI_APPLICATION)
+                    flags = win32gui.NIF_ICON | win32gui.NIF_MESSAGE | win32gui.NIF_TIP
+                    nid = (self.hwnd, 0, flags, win32con.WM_USER + 20, hicon, &#34;tooltip&#34;)
+                    win32gui.Shell_NotifyIcon(win32gui.NIM_ADD, nid)
+                    win32gui.Shell_NotifyIcon(win32gui.NIM_MODIFY,
+                                     (self.hwnd, 0, win32gui.NIF_INFO, win32con.WM_USER + 20,
+                                      hicon, &#34;Balloon  tooltip&#34;, title, 200, msg))
+                    # self.show_balloon(title, msg)
+                    time.sleep(10)
+                    win32gui.DestroyWindow(self.hwnd)
 
-            else:
-                raise NotImplementedError(&#34;Windows below 10 not supported yet&#34;)
+                def OnDestroy(self, hwnd, msg, wparam, lparam):
+                    import win32api
+                    import win32gui
+                    nid = (self.hwnd, 0)
+                    win32gui.Shell_NotifyIcon(win32gui.NIM_DELETE, nid)
+                    win32api.PostQuitMessage(0)  # Terminate the app.
+
+            def notification(title, message):
+                WindowsBalloonTip(title=title, msg=message)
+
+            from .threading9 import MyThread
+            MyThread(notification, args=(title, message), daemon=True)
         else:
             raise NotImplementedError(&#34;OS not in [&#39;Windows&#39;, &#39;macOS&#39;] not supported yet&#34;)</code></pre>
 </details>
@@ -141,16 +185,60 @@ class Gui:  # pylint: disable=too-few-public-methods
             from .macos9 import macOS
             macOS.notification(cls, message, title=title, subtitle=subtitle, sound=sound)
         elif OS.windows:
-            if OS.windows_version &gt;= 10:
-                from win10toast import ToastNotifier
-                toaster = ToastNotifier()
+            # https://gist.github.com/wontoncc/1808234
+            class WindowsBalloonTip:
+                def __init__(self, title, msg):
+                    import os
+                    import sys
+                    import time
+                    import win32api
+                    import win32gui
+                    import win32con
 
-                from .threading9 import MyThread
-                t = MyThread(toaster.show_toast, args=(title, message), kwargs={&#34;icon_path&#34;:None, &#34;threaded&#34;:False}, daemon=True)
-                t.start()
+                    message_map = {
+                        win32con.WM_DESTROY: self.OnDestroy,
+                    }
+                    # Register the Window class.
+                    wc = win32gui.WNDCLASS()
+                    hinst = wc.hInstance = win32api.GetModuleHandle(None)
+                    wc.lpszClassName = &#34;PythonTaskbar&#34;
+                    wc.lpfnWndProc = message_map  # could also specify a wndproc.
+                    classAtom = win32gui.RegisterClass(wc)
+                    # Create the Window.
+                    style = win32con.WS_OVERLAPPED | win32con.WS_SYSMENU
+                    self.hwnd = win32gui.CreateWindow(classAtom, &#34;Taskbar&#34;, style,
+                                             0, 0, win32con.CW_USEDEFAULT, win32con.CW_USEDEFAULT,
+                                             0, 0, hinst, None)
+                    win32gui.UpdateWindow(self.hwnd)
+                    iconPathName = os.path.abspath(os.path.join(sys.path[0], &#34;balloontip.ico&#34;))
+                    icon_flags = win32con.LR_LOADFROMFILE | win32con.LR_DEFAULTSIZE
+                    try:
+                        hicon = win32gui.LoadImage(hinst, iconPathName,
+                                          win32con.IMAGE_ICON, 0, 0, icon_flags)
+                    except:
+                        hicon = win32gui.LoadIcon(0, win32con.IDI_APPLICATION)
+                    flags = win32gui.NIF_ICON | win32gui.NIF_MESSAGE | win32gui.NIF_TIP
+                    nid = (self.hwnd, 0, flags, win32con.WM_USER + 20, hicon, &#34;tooltip&#34;)
+                    win32gui.Shell_NotifyIcon(win32gui.NIM_ADD, nid)
+                    win32gui.Shell_NotifyIcon(win32gui.NIM_MODIFY,
+                                     (self.hwnd, 0, win32gui.NIF_INFO, win32con.WM_USER + 20,
+                                      hicon, &#34;Balloon  tooltip&#34;, title, 200, msg))
+                    # self.show_balloon(title, msg)
+                    time.sleep(10)
+                    win32gui.DestroyWindow(self.hwnd)
 
-            else:
-                raise NotImplementedError(&#34;Windows below 10 not supported yet&#34;)
+                def OnDestroy(self, hwnd, msg, wparam, lparam):
+                    import win32api
+                    import win32gui
+                    nid = (self.hwnd, 0)
+                    win32gui.Shell_NotifyIcon(win32gui.NIM_DELETE, nid)
+                    win32api.PostQuitMessage(0)  # Terminate the app.
+
+            def notification(title, message):
+                WindowsBalloonTip(title=title, msg=message)
+
+            from .threading9 import MyThread
+            MyThread(notification, args=(title, message), daemon=True)
         else:
             raise NotImplementedError(&#34;OS not in [&#39;Windows&#39;, &#39;macOS&#39;] not supported yet&#34;)</code></pre>
 </details>
@@ -170,16 +258,60 @@ def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=Non
         from .macos9 import macOS
         macOS.notification(cls, message, title=title, subtitle=subtitle, sound=sound)
     elif OS.windows:
-        if OS.windows_version &gt;= 10:
-            from win10toast import ToastNotifier
-            toaster = ToastNotifier()
+        # https://gist.github.com/wontoncc/1808234
+        class WindowsBalloonTip:
+            def __init__(self, title, msg):
+                import os
+                import sys
+                import time
+                import win32api
+                import win32gui
+                import win32con
 
-            from .threading9 import MyThread
-            t = MyThread(toaster.show_toast, args=(title, message), kwargs={&#34;icon_path&#34;:None, &#34;threaded&#34;:False}, daemon=True)
-            t.start()
+                message_map = {
+                    win32con.WM_DESTROY: self.OnDestroy,
+                }
+                # Register the Window class.
+                wc = win32gui.WNDCLASS()
+                hinst = wc.hInstance = win32api.GetModuleHandle(None)
+                wc.lpszClassName = &#34;PythonTaskbar&#34;
+                wc.lpfnWndProc = message_map  # could also specify a wndproc.
+                classAtom = win32gui.RegisterClass(wc)
+                # Create the Window.
+                style = win32con.WS_OVERLAPPED | win32con.WS_SYSMENU
+                self.hwnd = win32gui.CreateWindow(classAtom, &#34;Taskbar&#34;, style,
+                                         0, 0, win32con.CW_USEDEFAULT, win32con.CW_USEDEFAULT,
+                                         0, 0, hinst, None)
+                win32gui.UpdateWindow(self.hwnd)
+                iconPathName = os.path.abspath(os.path.join(sys.path[0], &#34;balloontip.ico&#34;))
+                icon_flags = win32con.LR_LOADFROMFILE | win32con.LR_DEFAULTSIZE
+                try:
+                    hicon = win32gui.LoadImage(hinst, iconPathName,
+                                      win32con.IMAGE_ICON, 0, 0, icon_flags)
+                except:
+                    hicon = win32gui.LoadIcon(0, win32con.IDI_APPLICATION)
+                flags = win32gui.NIF_ICON | win32gui.NIF_MESSAGE | win32gui.NIF_TIP
+                nid = (self.hwnd, 0, flags, win32con.WM_USER + 20, hicon, &#34;tooltip&#34;)
+                win32gui.Shell_NotifyIcon(win32gui.NIM_ADD, nid)
+                win32gui.Shell_NotifyIcon(win32gui.NIM_MODIFY,
+                                 (self.hwnd, 0, win32gui.NIF_INFO, win32con.WM_USER + 20,
+                                  hicon, &#34;Balloon  tooltip&#34;, title, 200, msg))
+                # self.show_balloon(title, msg)
+                time.sleep(10)
+                win32gui.DestroyWindow(self.hwnd)
 
-        else:
-            raise NotImplementedError(&#34;Windows below 10 not supported yet&#34;)
+            def OnDestroy(self, hwnd, msg, wparam, lparam):
+                import win32api
+                import win32gui
+                nid = (self.hwnd, 0)
+                win32gui.Shell_NotifyIcon(win32gui.NIM_DELETE, nid)
+                win32api.PostQuitMessage(0)  # Terminate the app.
+
+        def notification(title, message):
+            WindowsBalloonTip(title=title, msg=message)
+
+        from .threading9 import MyThread
+        MyThread(notification, args=(title, message), daemon=True)
     else:
         raise NotImplementedError(&#34;OS not in [&#39;Windows&#39;, &#39;macOS&#39;] not supported yet&#34;)</code></pre>
 </details>
