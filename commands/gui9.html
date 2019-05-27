@@ -123,7 +123,8 @@ class Gui:  # pylint: disable=too-few-public-methods
                 WindowsBalloonTip(title=title, msg=message)
 
             from .threading9 import MyThread
-            MyThread(notification, args=(title, message), daemon=True)
+            t = MyThread(notification, args=(title, message), daemon=True)
+            t.start()
         else:
             raise NotImplementedError(&#34;OS not in [&#39;Windows&#39;, &#39;macOS&#39;] not supported yet&#34;)</code></pre>
 </details>
@@ -238,7 +239,8 @@ class Gui:  # pylint: disable=too-few-public-methods
                 WindowsBalloonTip(title=title, msg=message)
 
             from .threading9 import MyThread
-            MyThread(notification, args=(title, message), daemon=True)
+            t = MyThread(notification, args=(title, message), daemon=True)
+            t.start()
         else:
             raise NotImplementedError(&#34;OS not in [&#39;Windows&#39;, &#39;macOS&#39;] not supported yet&#34;)</code></pre>
 </details>
@@ -311,7 +313,8 @@ def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=Non
             WindowsBalloonTip(title=title, msg=message)
 
         from .threading9 import MyThread
-        MyThread(notification, args=(title, message), daemon=True)
+        t = MyThread(notification, args=(title, message), daemon=True)
+        t.start()
     else:
         raise NotImplementedError(&#34;OS not in [&#39;Windows&#39;, &#39;macOS&#39;] not supported yet&#34;)</code></pre>
 </details>
