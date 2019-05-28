@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with lists
 &#34;&#34;&#34;
-__version__ = &#34;0.5.0&#34;
+__version__ = &#34;0.6.0&#34;
 
 
 class List:
@@ -94,7 +94,15 @@ class List:
     def most_common(list, count):
         import collections
         c = collections.Counter(list)
-        return c.most_common(count)</code></pre>
+        return c.most_common(count)
+
+    @staticmethod
+    def shuffle(list):
+        import random
+        import copy
+        copy_list = copy.deepcopy(list)
+        random.shuffle(copy_list)
+        return copy_list</code></pre>
 </details>
 </section>
 <section>
@@ -178,7 +186,15 @@ class List:
     def most_common(list, count):
         import collections
         c = collections.Counter(list)
-        return c.most_common(count)</code></pre>
+        return c.most_common(count)
+
+    @staticmethod
+    def shuffle(list):
+        import random
+        import copy
+        copy_list = copy.deepcopy(list)
+        random.shuffle(copy_list)
+        return copy_list</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -251,6 +267,22 @@ def remove_duplicates(source_list, preserve_order=True):
 <pre><code class="python">@staticmethod
 def replace_string(list, old_string, new_string):
     return [str(string).replace(old_string, new_string) for string in list]</code></pre>
+</details>
+</dd>
+<dt id="commands.list9.List.shuffle"><code class="name flex">
+<span>def <span class="ident">shuffle</span></span>(<span>list)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def shuffle(list):
+    import random
+    import copy
+    copy_list = copy.deepcopy(list)
+    random.shuffle(copy_list)
+    return copy_list</code></pre>
 </details>
 </dd>
 <dt id="commands.list9.List.split_every"><code class="name flex">
@@ -334,6 +366,7 @@ def wildcard_search(list_input, regexp):
 <li><code><a title="commands.list9.List.most_common" href="#commands.list9.List.most_common">most_common</a></code></li>
 <li><code><a title="commands.list9.List.remove_duplicates" href="#commands.list9.List.remove_duplicates">remove_duplicates</a></code></li>
 <li><code><a title="commands.list9.List.replace_string" href="#commands.list9.List.replace_string">replace_string</a></code></li>
+<li><code><a title="commands.list9.List.shuffle" href="#commands.list9.List.shuffle">shuffle</a></code></li>
 <li><code><a title="commands.list9.List.split_every" href="#commands.list9.List.split_every">split_every</a></code></li>
 <li><code><a title="commands.list9.List.to_strings" href="#commands.list9.List.to_strings">to_strings</a></code></li>
 <li><code><a title="commands.list9.List.wildcard_search" href="#commands.list9.List.wildcard_search">wildcard_search</a></code></li>

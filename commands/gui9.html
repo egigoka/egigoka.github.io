@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with gui
 &#34;&#34;&#34;
-__version__ = &#34;0.4.3&#34;
+__version__ = &#34;0.4.6&#34;
 
 
 class Gui:  # pylint: disable=too-few-public-methods
@@ -86,8 +86,11 @@ class Gui:  # pylint: disable=too-few-public-methods
                     # Register the Window class.
                     wc = win32gui.WNDCLASS()
                     hinst = wc.hInstance = win32api.GetModuleHandle(None)
-                    wc.lpszClassName = &#34;PythonTaskbar&#34;
+                    # fucc
+                    from .random9 import Random
+                    wc.lpszClassName = &#34;PythonTaskbar&#34; + Random.string(100)
                     wc.lpfnWndProc = message_map  # could also specify a wndproc.
+
                     classAtom = win32gui.RegisterClass(wc)
                     # Create the Window.
                     style = win32con.WS_OVERLAPPED | win32con.WS_SYSMENU
@@ -108,8 +111,7 @@ class Gui:  # pylint: disable=too-few-public-methods
                     win32gui.Shell_NotifyIcon(win32gui.NIM_MODIFY,
                                      (self.hwnd, 0, win32gui.NIF_INFO, win32con.WM_USER + 20,
                                       hicon, &#34;Balloon  tooltip&#34;, title, 200, msg))
-                    # self.show_balloon(title, msg)
-                    time.sleep(10)
+                    time.sleep(60)
                     win32gui.DestroyWindow(self.hwnd)
 
                 def OnDestroy(self, hwnd, msg, wparam, lparam):
@@ -120,7 +122,16 @@ class Gui:  # pylint: disable=too-few-public-methods
                     win32api.PostQuitMessage(0)  # Terminate the app.
 
             def notification(title, message):
-                WindowsBalloonTip(title=title, msg=message)
+                import pywintypes
+                cnt = 0
+                while cnt &lt; 10:
+                    cnt += 1
+                    try:
+                        WindowsBalloonTip(title=title, msg=message)
+                        return
+                    except pywintypes.error as err:
+                        print(err)
+                        pass
 
             from .threading9 import MyThread
             t = MyThread(notification, args=(title, message), daemon=True)
@@ -202,8 +213,11 @@ class Gui:  # pylint: disable=too-few-public-methods
                     # Register the Window class.
                     wc = win32gui.WNDCLASS()
                     hinst = wc.hInstance = win32api.GetModuleHandle(None)
-                    wc.lpszClassName = &#34;PythonTaskbar&#34;
+                    # fucc
+                    from .random9 import Random
+                    wc.lpszClassName = &#34;PythonTaskbar&#34; + Random.string(100)
                     wc.lpfnWndProc = message_map  # could also specify a wndproc.
+
                     classAtom = win32gui.RegisterClass(wc)
                     # Create the Window.
                     style = win32con.WS_OVERLAPPED | win32con.WS_SYSMENU
@@ -224,8 +238,7 @@ class Gui:  # pylint: disable=too-few-public-methods
                     win32gui.Shell_NotifyIcon(win32gui.NIM_MODIFY,
                                      (self.hwnd, 0, win32gui.NIF_INFO, win32con.WM_USER + 20,
                                       hicon, &#34;Balloon  tooltip&#34;, title, 200, msg))
-                    # self.show_balloon(title, msg)
-                    time.sleep(10)
+                    time.sleep(60)
                     win32gui.DestroyWindow(self.hwnd)
 
                 def OnDestroy(self, hwnd, msg, wparam, lparam):
@@ -236,7 +249,16 @@ class Gui:  # pylint: disable=too-few-public-methods
                     win32api.PostQuitMessage(0)  # Terminate the app.
 
             def notification(title, message):
-                WindowsBalloonTip(title=title, msg=message)
+                import pywintypes
+                cnt = 0
+                while cnt &lt; 10:
+                    cnt += 1
+                    try:
+                        WindowsBalloonTip(title=title, msg=message)
+                        return
+                    except pywintypes.error as err:
+                        print(err)
+                        pass
 
             from .threading9 import MyThread
             t = MyThread(notification, args=(title, message), daemon=True)
@@ -276,8 +298,11 @@ def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=Non
                 # Register the Window class.
                 wc = win32gui.WNDCLASS()
                 hinst = wc.hInstance = win32api.GetModuleHandle(None)
-                wc.lpszClassName = &#34;PythonTaskbar&#34;
+                # fucc
+                from .random9 import Random
+                wc.lpszClassName = &#34;PythonTaskbar&#34; + Random.string(100)
                 wc.lpfnWndProc = message_map  # could also specify a wndproc.
+
                 classAtom = win32gui.RegisterClass(wc)
                 # Create the Window.
                 style = win32con.WS_OVERLAPPED | win32con.WS_SYSMENU
@@ -298,8 +323,7 @@ def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=Non
                 win32gui.Shell_NotifyIcon(win32gui.NIM_MODIFY,
                                  (self.hwnd, 0, win32gui.NIF_INFO, win32con.WM_USER + 20,
                                   hicon, &#34;Balloon  tooltip&#34;, title, 200, msg))
-                # self.show_balloon(title, msg)
-                time.sleep(10)
+                time.sleep(60)
                 win32gui.DestroyWindow(self.hwnd)
 
             def OnDestroy(self, hwnd, msg, wparam, lparam):
@@ -310,7 +334,16 @@ def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=Non
                 win32api.PostQuitMessage(0)  # Terminate the app.
 
         def notification(title, message):
-            WindowsBalloonTip(title=title, msg=message)
+            import pywintypes
+            cnt = 0
+            while cnt &lt; 10:
+                cnt += 1
+                try:
+                    WindowsBalloonTip(title=title, msg=message)
+                    return
+                except pywintypes.error as err:
+                    print(err)
+                    pass
 
         from .threading9 import MyThread
         t = MyThread(notification, args=(title, message), daemon=True)
