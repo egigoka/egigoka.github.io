@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions to work with network
 &#34;&#34;&#34;
-__version__ = &#34;0.5.4&#34;
+__version__ = &#34;0.5.5&#34;
 
 
 class Network:
@@ -113,7 +113,7 @@ class Network:
             except UnboundLocalError:
                 backup_ping_output = &#34;&#34;
             ping_output = &#34;&#34;
-        uplink = ping_output.lower().count(&#34;time&#34;) &gt;= count
+        uplink = ping_output.lower().count(&#34;time=&#34;) &gt;= count
 
         if logfile or (not quiet):
             import termcolor
@@ -455,7 +455,7 @@ class Network:
             except UnboundLocalError:
                 backup_ping_output = &#34;&#34;
             ping_output = &#34;&#34;
-        uplink = ping_output.lower().count(&#34;time&#34;) &gt;= count
+        uplink = ping_output.lower().count(&#34;time=&#34;) &gt;= count
 
         if logfile or (not quiet):
             import termcolor
@@ -1048,7 +1048,7 @@ def ping(cls,
         except UnboundLocalError:
             backup_ping_output = &#34;&#34;
         ping_output = &#34;&#34;
-    uplink = ping_output.lower().count(&#34;time&#34;) &gt;= count
+    uplink = ping_output.lower().count(&#34;time=&#34;) &gt;= count
 
     if logfile or (not quiet):
         import termcolor
