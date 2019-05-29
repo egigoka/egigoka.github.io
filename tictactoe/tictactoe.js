@@ -1,4 +1,4 @@
 
-function test(){
-document.write("test")
+function helloWorld(){
+document.write("Hello World!");
 }
