@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.6.1" />
+<meta name="generator" content="pdoc 0.6.2" />
 <title>commands.print9 API documentation</title>
 <meta name="description" content="Internal module with functions for print to console." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -27,18 +27,27 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions for print to console.
 &#34;&#34;&#34;
-__version__ = &#34;0.9.6&#34;
+__version__ = &#34;0.10.1&#34;
 
 
 class Print:
     &#34;&#34;&#34;Class with functions for print to console.
     &#34;&#34;&#34;
 
-    def __call__(self, *args, **kwargs):
-        print(*args, **kwargs)
+    def __init__(self):
+        from threading import Lock
+        self.s_print_lock = Lock()
+        self.colorama_inited = False
 
-    @staticmethod
-    def debug(*strings, raw=False):
+    def __call__(self, *args, **kwargs):
+        self.multithread_safe(*args, **kwargs)
+
+    def multithread_safe(self, *args, **kwargs):
+        &#34;&#34;&#34;Thread safe print function&#34;&#34;&#34;
+        with self.s_print_lock:
+            print(*args, **kwargs)
+
+    def debug(self, *strings, raw=False):
         &#34;&#34;&#34;More notable print, used only for debugging
         &lt;br&gt;`param strings` strings, prints separately
         &lt;br&gt;`param raw` print representation of raw strings
@@ -46,18 +55,17 @@ class Print:
         &#34;&#34;&#34;
         from .console9 import Console
         line = &#34;-&#34; * Console.width()
-        print(&#34;&lt;&lt;&lt;Debug sheet:&gt;&gt;&gt;&#34;)
+        self.multithread_safe(&#34;&lt;&lt;&lt;Debug sheet:&gt;&gt;&gt;&#34;)
         for str_ in strings:
-            print(line, end=&#34;&#34;)
+            self.multithread_safe(line, end=&#34;&#34;)
             if raw:
-                print(repr(str_))
+                self.multithread_safe(repr(str_))
             else:
-                print(str_)
-            print(line)
-        print(&#34;&lt;&lt;&lt;End of debug sheet&gt;&gt;&gt;&#34;)
+                self.multithread_safe(str_)
+            self.multithread_safe(line)
+        self.multithread_safe(&#34;&lt;&lt;&lt;End of debug sheet&gt;&gt;&gt;&#34;)
 
-    @staticmethod
-    def rewrite(*strings, sep=&#34; &#34;, fit=True):
+    def rewrite(self,*strings, sep=&#34; &#34;, fit=True):
         &#34;&#34;&#34;Print rewritable string. note, that you need to rewrite string to remove previous characters
         &lt;br&gt;`param strings` strings, work as builtin print()
         &lt;br&gt;`param sep` sep as builtin print(sep)
@@ -68,14 +76,12 @@ class Print:
         line = &#34; &#34; * Console.width()
         if OS.windows:  # windows add symbol to end of string :(
             line = line[:-1]
-        print(line, end=&#34;\r&#34;)
+        self.multithread_safe(line, end=&#34;\r&#34;)
         if fit:
             strings = Console.fit(*strings, sep=sep)
-        print(*strings, sep=sep, end=&#34;\r&#34;)
+        self.multithread_safe(*strings, sep=sep, end=&#34;\r&#34;)
 
-
-    @staticmethod
-    def prettify(object_, indent=4, quiet=False):
+    def prettify(self, object_, indent=4, quiet=False):
         &#34;&#34;&#34;Pretty print of list, dicts, tuples
         &lt;br&gt;`param object_` list|dict|tuple
         &lt;br&gt;`param indent` int, indent to new nested level
@@ -84,14 +90,12 @@ class Print:
         &#34;&#34;&#34;
         import pprint
         pretty_printer = pprint.PrettyPrinter(indent=indent)
+        pretty_string = pretty_printer.pformat(object=object_)
         if not quiet:
-            pretty_printer.pprint(object_)
-        return pretty_printer.pformat(object=object_)
+            self.multithread_safe(pretty_string)
+        return pretty_string
 
-    colorama_inited = False
-
-    @classmethod
-    def colored(cls, *strings, attributes=None, end=&#34;\n&#34;, sep=&#34; &#34;):
+    def colored(self, *strings, attributes=None, end=&#34;\n&#34;, sep=&#34; &#34;):
         &#34;&#34;&#34;Wrapper for termcolor.cprint, added some smartness &lt;br&gt;`3
         Usage` Print.colored(&#34;text1&#34;, &#34;text2&#34;, &#34;red&#34;) or cls.colored(&#34;text&#34;, &#34;text2&#34;, &#34;red&#34;, &#34;on_white&#34;).
         You can pick colors from termcolor.COLORS, highlights from termcolor.HIGHLIGHTS.
@@ -106,10 +110,10 @@ class Print:
         termcolor.COLORS[&#34;gray&#34;] = termcolor.COLORS[&#34;black&#34;] = 30
         termcolor.HIGHLIGHTS[&#34;on_gray&#34;] = termcolor.HIGHLIGHTS[&#34;on_black&#34;] = 40
         from .os9 import OS
-        if OS.windows and not cls.colorama_inited:
+        if OS.windows and not self.colorama_inited:
             import colorama
             colorama.init()
-            cls.colorama_inited = True
+            self.colorama_inited = True
         # check for colors in input
         highlight = None
         color = None
@@ -136,8 +140,9 @@ class Print:
             string += str(strings[-1])  # последняя без сепаратора
         else:  # if there only one object
             string = strings[0]
-        # run termcolor
-        termcolor.cprint(string, color=color, on_color=highlight, attrs=attributes, end=end)
+
+        colored_string = termcolor.colored(string, color=color, on_color=highlight, attrs=attributes)
+        self.multithread_safe(colored_string, end=end)
 
         with suppress(KeyError):  # for work with multithreading
             termcolor.COLORS.pop(&#34;gray&#34;)
@@ -173,7 +178,7 @@ Print = Print()</code></pre>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.2</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>
