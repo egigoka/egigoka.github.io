@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with commandline interfaces
 &#34;&#34;&#34;
-__version__ = &#34;0.0.9&#34;
+__version__ = &#34;0.1.0&#34;
 
 
 class CLI:
@@ -49,17 +49,56 @@ class CLI:
                 return True
             if string.lower() == &#34;n&#34;:
                 return False
+            return
 
         if answer:
             output = check_answer(answer)
             if output is not None:
                 return output
         while True:
-            inputtt = input(str(question) + &#34; (y/n)?&#34;)
-            inputtt = inputtt.strip(&#34; &#34;)
-            output = check_answer(inputtt)
+            input_str = input(f&#34;{question} (y/n)? default [{answer}]&#34;)
+            input_str = input_str.strip(&#34; &#34;)
+            output = check_answer(input_str)
             if output is not None:
                 return output
+
+    @staticmethod
+    def get_ints(question, count_of_ints, answer=None):
+        &#34;&#34;&#34;Obtain answer with integers from user in commandline.
+        &lt;br&gt;`param question` string with question to user
+        &lt;br&gt;`param count_of_ints` int of ints must be in answer
+        &lt;br&gt;`param answer` predefined string with answer
+        &lt;br&gt;`return` integer or list of integers
+        &#34;&#34;&#34;
+
+        def check_answer(input, count_of_ints):  # pylint: disable=inconsistent-return-statements
+            &#34;&#34;&#34;Check input from user or argument &#34;answer&#34;
+            &lt;br&gt;`param input` input string
+            &lt;br&gt;`param count_of_ints` int of ints must be in answer
+            &lt;br&gt;`return` True|False|None
+            &#34;&#34;&#34;
+            from .str9 import Str
+            ints = Str.get_integers(input, float_support=False)
+            if len(ints) == count_of_ints:
+                if count_of_ints == 1:
+                    return ints[0]
+                return ints
+            return
+
+        if answer:
+            output = check_answer(answer, count_of_ints)
+            if output is not None:
+                return output
+        while True:
+            input_str = input(f&#34;{question} (answer {count_of_ints} integer_s)?&#34;)
+            input_str = input_str.strip(&#34; &#34;)
+            output = check_answer(input_str, count_of_ints)
+            if output is not None:
+                return output
+
+    @classmethod
+    def get_int(cls, question, answer=None):
+        return cls.get_ints(question=question, count_of_ints=1, answer=answer)
 
     wait_update_pos = 0
 
@@ -135,17 +174,56 @@ class CLI:
                 return True
             if string.lower() == &#34;n&#34;:
                 return False
+            return
 
         if answer:
             output = check_answer(answer)
             if output is not None:
                 return output
         while True:
-            inputtt = input(str(question) + &#34; (y/n)?&#34;)
-            inputtt = inputtt.strip(&#34; &#34;)
-            output = check_answer(inputtt)
+            input_str = input(f&#34;{question} (y/n)? default [{answer}]&#34;)
+            input_str = input_str.strip(&#34; &#34;)
+            output = check_answer(input_str)
             if output is not None:
                 return output
+
+    @staticmethod
+    def get_ints(question, count_of_ints, answer=None):
+        &#34;&#34;&#34;Obtain answer with integers from user in commandline.
+        &lt;br&gt;`param question` string with question to user
+        &lt;br&gt;`param count_of_ints` int of ints must be in answer
+        &lt;br&gt;`param answer` predefined string with answer
+        &lt;br&gt;`return` integer or list of integers
+        &#34;&#34;&#34;
+
+        def check_answer(input, count_of_ints):  # pylint: disable=inconsistent-return-statements
+            &#34;&#34;&#34;Check input from user or argument &#34;answer&#34;
+            &lt;br&gt;`param input` input string
+            &lt;br&gt;`param count_of_ints` int of ints must be in answer
+            &lt;br&gt;`return` True|False|None
+            &#34;&#34;&#34;
+            from .str9 import Str
+            ints = Str.get_integers(input, float_support=False)
+            if len(ints) == count_of_ints:
+                if count_of_ints == 1:
+                    return ints[0]
+                return ints
+            return
+
+        if answer:
+            output = check_answer(answer, count_of_ints)
+            if output is not None:
+                return output
+        while True:
+            input_str = input(f&#34;{question} (answer {count_of_ints} integer_s)?&#34;)
+            input_str = input_str.strip(&#34; &#34;)
+            output = check_answer(input_str, count_of_ints)
+            if output is not None:
+                return output
+
+    @classmethod
+    def get_int(cls, question, answer=None):
+        return cls.get_ints(question=question, count_of_ints=1, answer=answer)
 
     wait_update_pos = 0
 
@@ -193,6 +271,64 @@ class CLI:
 </dl>
 <h3>Static methods</h3>
 <dl>
+<dt id="commands.cli9.CLI.get_int"><code class="name flex">
+<span>def <span class="ident">get_int</span></span>(<span>question, answer=None)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def get_int(cls, question, answer=None):
+    return cls.get_ints(question=question, count_of_ints=1, answer=answer)</code></pre>
+</details>
+</dd>
+<dt id="commands.cli9.CLI.get_ints"><code class="name flex">
+<span>def <span class="ident">get_ints</span></span>(<span>question, count_of_ints, answer=None)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Obtain answer with integers from user in commandline.
+<br><code>param question</code> string with question to user
+<br><code>param count_of_ints</code> int of ints must be in answer
+<br><code>param answer</code> predefined string with answer
+<br><code>return</code> integer or list of integers</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def get_ints(question, count_of_ints, answer=None):
+    &#34;&#34;&#34;Obtain answer with integers from user in commandline.
+    &lt;br&gt;`param question` string with question to user
+    &lt;br&gt;`param count_of_ints` int of ints must be in answer
+    &lt;br&gt;`param answer` predefined string with answer
+    &lt;br&gt;`return` integer or list of integers
+    &#34;&#34;&#34;
+
+    def check_answer(input, count_of_ints):  # pylint: disable=inconsistent-return-statements
+        &#34;&#34;&#34;Check input from user or argument &#34;answer&#34;
+        &lt;br&gt;`param input` input string
+        &lt;br&gt;`param count_of_ints` int of ints must be in answer
+        &lt;br&gt;`return` True|False|None
+        &#34;&#34;&#34;
+        from .str9 import Str
+        ints = Str.get_integers(input, float_support=False)
+        if len(ints) == count_of_ints:
+            if count_of_ints == 1:
+                return ints[0]
+            return ints
+        return
+
+    if answer:
+        output = check_answer(answer, count_of_ints)
+        if output is not None:
+            return output
+    while True:
+        input_str = input(f&#34;{question} (answer {count_of_ints} integer_s)?&#34;)
+        input_str = input_str.strip(&#34; &#34;)
+        output = check_answer(input_str, count_of_ints)
+        if output is not None:
+            return output</code></pre>
+</details>
+</dd>
 <dt id="commands.cli9.CLI.get_y_n"><code class="name flex">
 <span>def <span class="ident">get_y_n</span></span>(<span>question, answer=None)</span>
 </code></dt>
@@ -219,15 +355,16 @@ def get_y_n(question, answer=None):
             return True
         if string.lower() == &#34;n&#34;:
             return False
+        return
 
     if answer:
         output = check_answer(answer)
         if output is not None:
             return output
     while True:
-        inputtt = input(str(question) + &#34; (y/n)?&#34;)
-        inputtt = inputtt.strip(&#34; &#34;)
-        output = check_answer(inputtt)
+        input_str = input(f&#34;{question} (y/n)? default [{answer}]&#34;)
+        input_str = input_str.strip(&#34; &#34;)
+        output = check_answer(input_str)
         if output is not None:
             return output</code></pre>
 </details>
@@ -310,7 +447,9 @@ def wait_update(cls, quiet=False):
 <ul>
 <li>
 <h4><code><a title="commands.cli9.CLI" href="#commands.cli9.CLI">CLI</a></code></h4>
-<ul class="">
+<ul class="two-column">
+<li><code><a title="commands.cli9.CLI.get_int" href="#commands.cli9.CLI.get_int">get_int</a></code></li>
+<li><code><a title="commands.cli9.CLI.get_ints" href="#commands.cli9.CLI.get_ints">get_ints</a></code></li>
 <li><code><a title="commands.cli9.CLI.get_y_n" href="#commands.cli9.CLI.get_y_n">get_y_n</a></code></li>
 <li><code><a title="commands.cli9.CLI.progressbar" href="#commands.cli9.CLI.progressbar">progressbar</a></code></li>
 <li><code><a title="commands.cli9.CLI.wait_update" href="#commands.cli9.CLI.wait_update">wait_update</a></code></li>
