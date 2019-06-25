@@ -27,14 +27,14 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module wrapper to cli wget
 &#34;&#34;&#34;
-__version__ = &#34;0.1.2&#34;
+__version__ = &#34;0.1.3&#34;
 
 
 class Wget:  # pylint: disable=too-few-public-methods
     &#34;&#34;&#34;Class wrapper to cli wget
     &#34;&#34;&#34;
-    @staticmethod
-    def download(url, output_filename, quiet=False, no_check_certificate=False):  # pylint: disable=inconsistent-return-statements
+    @classmethod
+    def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;):  # pylint: disable=inconsistent-return-statements
         &#34;&#34;&#34;Wrapper to wget cli
         &lt;br&gt;`param url` string, url to some file
         &lt;br&gt;`param output_filename` string, path to filename
@@ -53,12 +53,16 @@ class Wget:  # pylint: disable=too-few-public-methods
         if no_check_certificate:
             no_check_certificate_cli_arg = &#34;--no-check-certificate&#34;
 
-        command = f&#34;wget {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
+        command = f&#34;{wget_path} {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
         if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
             Dir.create(os.path.split(output_filename)[0])
         try:
             return Console.get_output(command, print_std=not quiet)
         except FileNotFoundError as exception:
+            if wget_path == &#34;wget&#34;:
+                from .path9 import Path
+                return cls.download(url=url, output_filename=output_filename, no_check_certificate=no_check_certificate,
+                                    wget_path=Path.combine(Path.commands(), &#34;wget&#34;))
             raise OSError(exception, &#34;install wget&#34;)
         # Another way to fix blocks by creating ~/.wgetrc file https://stackoverflow.com/a/34166756</code></pre>
 </details>
@@ -83,8 +87,8 @@ class Wget:  # pylint: disable=too-few-public-methods
 <pre><code class="python">class Wget:  # pylint: disable=too-few-public-methods
     &#34;&#34;&#34;Class wrapper to cli wget
     &#34;&#34;&#34;
-    @staticmethod
-    def download(url, output_filename, quiet=False, no_check_certificate=False):  # pylint: disable=inconsistent-return-statements
+    @classmethod
+    def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;):  # pylint: disable=inconsistent-return-statements
         &#34;&#34;&#34;Wrapper to wget cli
         &lt;br&gt;`param url` string, url to some file
         &lt;br&gt;`param output_filename` string, path to filename
@@ -103,18 +107,22 @@ class Wget:  # pylint: disable=too-few-public-methods
         if no_check_certificate:
             no_check_certificate_cli_arg = &#34;--no-check-certificate&#34;
 
-        command = f&#34;wget {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
+        command = f&#34;{wget_path} {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
         if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
             Dir.create(os.path.split(output_filename)[0])
         try:
             return Console.get_output(command, print_std=not quiet)
         except FileNotFoundError as exception:
+            if wget_path == &#34;wget&#34;:
+                from .path9 import Path
+                return cls.download(url=url, output_filename=output_filename, no_check_certificate=no_check_certificate,
+                                    wget_path=Path.combine(Path.commands(), &#34;wget&#34;))
             raise OSError(exception, &#34;install wget&#34;)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
 <dt id="commands.wget9.Wget.download"><code class="name flex">
-<span>def <span class="ident">download</span></span>(<span>url, output_filename, quiet=False, no_check_certificate=False)</span>
+<span>def <span class="ident">download</span></span>(<span>url, output_filename, quiet=False, no_check_certificate=False, wget_path='wget')</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Wrapper to wget cli
@@ -124,8 +132,8 @@ class Wget:  # pylint: disable=too-few-public-methods
 <br><code>return</code> output from wget if 'quiet' argument is True</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">@staticmethod
-def download(url, output_filename, quiet=False, no_check_certificate=False):  # pylint: disable=inconsistent-return-statements
+<pre><code class="python">@classmethod
+def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;):  # pylint: disable=inconsistent-return-statements
     &#34;&#34;&#34;Wrapper to wget cli
     &lt;br&gt;`param url` string, url to some file
     &lt;br&gt;`param output_filename` string, path to filename
@@ -144,12 +152,16 @@ def download(url, output_filename, quiet=False, no_check_certificate=False):  # 
     if no_check_certificate:
         no_check_certificate_cli_arg = &#34;--no-check-certificate&#34;
 
-    command = f&#34;wget {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
+    command = f&#34;{wget_path} {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
     if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
         Dir.create(os.path.split(output_filename)[0])
     try:
         return Console.get_output(command, print_std=not quiet)
     except FileNotFoundError as exception:
+        if wget_path == &#34;wget&#34;:
+            from .path9 import Path
+            return cls.download(url=url, output_filename=output_filename, no_check_certificate=no_check_certificate,
+                                wget_path=Path.combine(Path.commands(), &#34;wget&#34;))
         raise OSError(exception, &#34;install wget&#34;)</code></pre>
 </details>
 </dd>
