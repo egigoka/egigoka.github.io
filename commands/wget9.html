@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module wrapper to cli wget
 &#34;&#34;&#34;
-__version__ = &#34;0.1.3&#34;
+__version__ = &#34;0.1.5&#34;
 
 
 class Wget:  # pylint: disable=too-few-public-methods
@@ -41,23 +41,21 @@ class Wget:  # pylint: disable=too-few-public-methods
         &lt;br&gt;`param quiet` boolean, suppress print to console
         &lt;br&gt;`return` output from wget if &#39;quiet&#39; argument is True
         &#34;&#34;&#34;
-        arguments = &#39;--header=&#34;Accept: text/html&#34; &#39; + \
+        arguments = [&#39;--header=&#34;Accept: text/html&#34;&#39;,
                     &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; + \
-                    &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;
+                    &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;]
 
         from .console9 import Console
         from .dir9 import Dir
         import os
 
-        no_check_certificate_cli_arg = &#34;&#34;
+        commands = [wget_path, url, &#34;-O&#34;, output_filename] + arguments
         if no_check_certificate:
-            no_check_certificate_cli_arg = &#34;--no-check-certificate&#34;
-
-        command = f&#34;{wget_path} {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
+            commands.insert(1, &#34;--no-check-certificate&#34;)
         if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
             Dir.create(os.path.split(output_filename)[0])
         try:
-            return Console.get_output(command, print_std=not quiet)
+            return Console.get_output(commands, print_std=not quiet)
         except FileNotFoundError as exception:
             if wget_path == &#34;wget&#34;:
                 from .path9 import Path
@@ -95,23 +93,21 @@ class Wget:  # pylint: disable=too-few-public-methods
         &lt;br&gt;`param quiet` boolean, suppress print to console
         &lt;br&gt;`return` output from wget if &#39;quiet&#39; argument is True
         &#34;&#34;&#34;
-        arguments = &#39;--header=&#34;Accept: text/html&#34; &#39; + \
+        arguments = [&#39;--header=&#34;Accept: text/html&#34;&#39;,
                     &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; + \
-                    &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;
+                    &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;]
 
         from .console9 import Console
         from .dir9 import Dir
         import os
 
-        no_check_certificate_cli_arg = &#34;&#34;
+        commands = [wget_path, url, &#34;-O&#34;, output_filename] + arguments
         if no_check_certificate:
-            no_check_certificate_cli_arg = &#34;--no-check-certificate&#34;
-
-        command = f&#34;{wget_path} {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
+            commands.insert(1, &#34;--no-check-certificate&#34;)
         if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
             Dir.create(os.path.split(output_filename)[0])
         try:
-            return Console.get_output(command, print_std=not quiet)
+            return Console.get_output(commands, print_std=not quiet)
         except FileNotFoundError as exception:
             if wget_path == &#34;wget&#34;:
                 from .path9 import Path
@@ -140,23 +136,21 @@ def download(cls, url, output_filename, quiet=False, no_check_certificate=False,
     &lt;br&gt;`param quiet` boolean, suppress print to console
     &lt;br&gt;`return` output from wget if &#39;quiet&#39; argument is True
     &#34;&#34;&#34;
-    arguments = &#39;--header=&#34;Accept: text/html&#34; &#39; + \
+    arguments = [&#39;--header=&#34;Accept: text/html&#34;&#39;,
                 &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; + \
-                &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;
+                &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;]
 
     from .console9 import Console
     from .dir9 import Dir
     import os
 
-    no_check_certificate_cli_arg = &#34;&#34;
+    commands = [wget_path, url, &#34;-O&#34;, output_filename] + arguments
     if no_check_certificate:
-        no_check_certificate_cli_arg = &#34;--no-check-certificate&#34;
-
-    command = f&#34;{wget_path} {no_check_certificate_cli_arg} {url} -O {output_filename} {arguments}&#34;
+        commands.insert(1, &#34;--no-check-certificate&#34;)
     if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
         Dir.create(os.path.split(output_filename)[0])
     try:
-        return Console.get_output(command, print_std=not quiet)
+        return Console.get_output(commands, print_std=not quiet)
     except FileNotFoundError as exception:
         if wget_path == &#34;wget&#34;:
             from .path9 import Path
