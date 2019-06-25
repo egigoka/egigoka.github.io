@@ -64,7 +64,7 @@ class Wget:  # pylint: disable=too-few-public-methods
                 if OS.windows:
                     wget_exec_name += &#34;.exe&#34;
                 return cls.download(url=url, output_filename=output_filename, no_check_certificate=no_check_certificate,
-                                    wget_path=Path.combine(Path.commands(), wget_exec_name))
+                                    wget_path=Path.combine(Path.commands(), &#34;res&#34;, wget_exec_name))
             raise OSError(exception, &#34;install wget&#34;)
         # Another way to fix blocks by creating ~/.wgetrc file https://stackoverflow.com/a/34166756</code></pre>
 </details>
@@ -120,7 +120,7 @@ class Wget:  # pylint: disable=too-few-public-methods
                 if OS.windows:
                     wget_exec_name += &#34;.exe&#34;
                 return cls.download(url=url, output_filename=output_filename, no_check_certificate=no_check_certificate,
-                                    wget_path=Path.combine(Path.commands(), wget_exec_name))
+                                    wget_path=Path.combine(Path.commands(), &#34;res&#34;, wget_exec_name))
             raise OSError(exception, &#34;install wget&#34;)</code></pre>
 </details>
 <h3>Static methods</h3>
@@ -167,7 +167,7 @@ def download(cls, url, output_filename, quiet=False, no_check_certificate=False,
             if OS.windows:
                 wget_exec_name += &#34;.exe&#34;
             return cls.download(url=url, output_filename=output_filename, no_check_certificate=no_check_certificate,
-                                wget_path=Path.combine(Path.commands(), wget_exec_name))
+                                wget_path=Path.combine(Path.commands(), &#34;res&#34;, wget_exec_name))
         raise OSError(exception, &#34;install wget&#34;)</code></pre>
 </details>
 </dd>
