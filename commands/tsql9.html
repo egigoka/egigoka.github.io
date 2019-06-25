@@ -41,6 +41,11 @@ class TSQL:
         self.connect_to_sql_string = f&#39;DRIVER={self.sql_driver};SERVER={self.sql_server};UID={self.sql_sa_user};&#39; \
                                      f&#39;PWD={self.sql_sa_password};DATABASE={self.sql_database}&#39;
 
+    
+
+    def run(self, command, debug=False):
+        raise NotImplementedError
+
     def run_without_transaction(self, command, debug=False):
         import pyodbc
         from .print9 import Print
@@ -121,6 +126,11 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 
         self.connect_to_sql_string = f&#39;DRIVER={self.sql_driver};SERVER={self.sql_server};UID={self.sql_sa_user};&#39; \
                                      f&#39;PWD={self.sql_sa_password};DATABASE={self.sql_database}&#39;
+
+    
+
+    def run(self, command, debug=False):
+        raise NotImplementedError
 
     def run_without_transaction(self, command, debug=False):
         import pyodbc
@@ -220,6 +230,17 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
         self.run_without_transaction(command)</code></pre>
 </details>
 </dd>
+<dt id="commands.tsql9.TSQL.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, command, debug=False)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def run(self, command, debug=False):
+    raise NotImplementedError</code></pre>
+</details>
+</dd>
 <dt id="commands.tsql9.TSQL.run_without_transaction"><code class="name flex">
 <span>def <span class="ident">run_without_transaction</span></span>(<span>self, command, debug=False)</span>
 </code></dt>
@@ -275,6 +296,7 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 <ul class="">
 <li><code><a title="commands.tsql9.TSQL.backup_database_to_disk" href="#commands.tsql9.TSQL.backup_database_to_disk">backup_database_to_disk</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.drop_database" href="#commands.tsql9.TSQL.drop_database">drop_database</a></code></li>
+<li><code><a title="commands.tsql9.TSQL.run" href="#commands.tsql9.TSQL.run">run</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.run_without_transaction" href="#commands.tsql9.TSQL.run_without_transaction">run_without_transaction</a></code></li>
 </ul>
 </li>
