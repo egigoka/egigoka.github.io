@@ -122,8 +122,7 @@ class TSQL:
         command = &#34;&#34;
         if force:
             command += f&#34;&#34;&#34;USE master;
-ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-&#34;&#34;&#34;
+                               ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;&#34;&#34;&#34;
         command += f&#34;&#34;&#34;DROP DATABASE [{sql_database}]&#34;&#34;&#34;
         self.run_without_transaction(command)
 
@@ -141,7 +140,7 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
             File.wipe(backup_path)
 
         command = f&#34;&#34;&#34;BACKUP DATABASE [{sql_database}]
-        TO DISK = &#39;{backup_path}&#39;&#34;&#34;&#34;
+                          TO DISK = &#39;{backup_path}&#39;&#34;&#34;&#34;
         self.run_without_transaction(command)
 
         return backup_path
@@ -263,8 +262,7 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
         command = &#34;&#34;
         if force:
             command += f&#34;&#34;&#34;USE master;
-ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-&#34;&#34;&#34;
+                               ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;&#34;&#34;&#34;
         command += f&#34;&#34;&#34;DROP DATABASE [{sql_database}]&#34;&#34;&#34;
         self.run_without_transaction(command)
 
@@ -282,7 +280,7 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
             File.wipe(backup_path)
 
         command = f&#34;&#34;&#34;BACKUP DATABASE [{sql_database}]
-        TO DISK = &#39;{backup_path}&#39;&#34;&#34;&#34;
+                          TO DISK = &#39;{backup_path}&#39;&#34;&#34;&#34;
         self.run_without_transaction(command)
 
         return backup_path
@@ -317,7 +315,7 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
         File.wipe(backup_path)
 
     command = f&#34;&#34;&#34;BACKUP DATABASE [{sql_database}]
-    TO DISK = &#39;{backup_path}&#39;&#34;&#34;&#34;
+                      TO DISK = &#39;{backup_path}&#39;&#34;&#34;&#34;
     self.run_without_transaction(command)
 
     return backup_path</code></pre>
@@ -330,14 +328,13 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">    def drop_database(self, sql_database, force=False):
-        command = &#34;&#34;
-        if force:
-            command += f&#34;&#34;&#34;USE master;
-ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-&#34;&#34;&#34;
-        command += f&#34;&#34;&#34;DROP DATABASE [{sql_database}]&#34;&#34;&#34;
-        self.run_without_transaction(command)</code></pre>
+<pre><code class="python">def drop_database(self, sql_database, force=False):
+    command = &#34;&#34;
+    if force:
+        command += f&#34;&#34;&#34;USE master;
+                           ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;&#34;&#34;&#34;
+    command += f&#34;&#34;&#34;DROP DATABASE [{sql_database}]&#34;&#34;&#34;
+    self.run_without_transaction(command)</code></pre>
 </details>
 </dd>
 <dt id="commands.tsql9.TSQL.get_size"><code class="name flex">
