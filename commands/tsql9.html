@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with transact sql
 &#34;&#34;&#34;
-__version__ = &#34;0.4.1&#34;
+__version__ = &#34;0.5.0&#34;
 
 
 class TSQL:
@@ -124,6 +124,14 @@ class TSQL:
             command += f&#34;&#34;&#34;USE master;
                                ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;&#34;&#34;&#34;
         command += f&#34;&#34;&#34;DROP DATABASE [{sql_database}]&#34;&#34;&#34;
+        self.run_without_transaction(command)
+
+    def drop_table(self, sql_table, force=False):
+        command = &#34;&#34;
+        if force:
+            command += f&#34;&#34;&#34;USE master;
+                               ALTER DATABASE [{sql_table}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;&#34;&#34;&#34;
+        command += f&#34;&#34;&#34;DROP TABLE [{sql_table}]&#34;&#34;&#34;
         self.run_without_transaction(command)
 
     def backup_database_to_disk(self, sql_database):
@@ -275,6 +283,14 @@ class TSQL:
         command += f&#34;&#34;&#34;DROP DATABASE [{sql_database}]&#34;&#34;&#34;
         self.run_without_transaction(command)
 
+    def drop_table(self, sql_table, force=False):
+        command = &#34;&#34;
+        if force:
+            command += f&#34;&#34;&#34;USE master;
+                               ALTER DATABASE [{sql_table}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;&#34;&#34;&#34;
+        command += f&#34;&#34;&#34;DROP TABLE [{sql_table}]&#34;&#34;&#34;
+        self.run_without_transaction(command)
+
     def backup_database_to_disk(self, sql_database):
         from .path9 import Path
         from .file9 import File
@@ -352,6 +368,22 @@ class TSQL:
         command += f&#34;&#34;&#34;USE master;
                            ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;&#34;&#34;&#34;
     command += f&#34;&#34;&#34;DROP DATABASE [{sql_database}]&#34;&#34;&#34;
+    self.run_without_transaction(command)</code></pre>
+</details>
+</dd>
+<dt id="commands.tsql9.TSQL.drop_table"><code class="name flex">
+<span>def <span class="ident">drop_table</span></span>(<span>self, sql_table, force=False)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def drop_table(self, sql_table, force=False):
+    command = &#34;&#34;
+    if force:
+        command += f&#34;&#34;&#34;USE master;
+                           ALTER DATABASE [{sql_table}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;&#34;&#34;&#34;
+    command += f&#34;&#34;&#34;DROP TABLE [{sql_table}]&#34;&#34;&#34;
     self.run_without_transaction(command)</code></pre>
 </details>
 </dd>
@@ -511,6 +543,7 @@ class TSQL:
 <ul class="">
 <li><code><a title="commands.tsql9.TSQL.backup_database_to_disk" href="#commands.tsql9.TSQL.backup_database_to_disk">backup_database_to_disk</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.drop_database" href="#commands.tsql9.TSQL.drop_database">drop_database</a></code></li>
+<li><code><a title="commands.tsql9.TSQL.drop_table" href="#commands.tsql9.TSQL.drop_table">drop_table</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.get_file_sizes" href="#commands.tsql9.TSQL.get_file_sizes">get_file_sizes</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.get_used_space" href="#commands.tsql9.TSQL.get_used_space">get_used_space</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.query" href="#commands.tsql9.TSQL.query">query</a></code></li>
