@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with transact sql
 &#34;&#34;&#34;
-__version__ = &#34;0.3.0&#34;
+__version__ = &#34;0.3.1&#34;
 
 
 class TSQL:
@@ -147,8 +147,7 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
         return backup_path
 
     def get_size(self, debug=False):
-        query = fr&#39;&#39;&#39;use {self.sql_database}
-                     SELECT
+        query = fr&#39;&#39;&#39;SELECT
                         [size] * 8, 
                         [filename]
                      FROM sysfiles&#39;&#39;&#39;
@@ -289,8 +288,7 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
         return backup_path
 
     def get_size(self, debug=False):
-        query = fr&#39;&#39;&#39;use {self.sql_database}
-                     SELECT
+        query = fr&#39;&#39;&#39;SELECT
                         [size] * 8, 
                         [filename]
                      FROM sysfiles&#39;&#39;&#39;
@@ -350,8 +348,7 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def get_size(self, debug=False):
-    query = fr&#39;&#39;&#39;use {self.sql_database}
-                 SELECT
+    query = fr&#39;&#39;&#39;SELECT
                     [size] * 8, 
                     [filename]
                  FROM sysfiles&#39;&#39;&#39;
