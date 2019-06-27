@@ -56,6 +56,16 @@ class Network:
         return url_output
 
     @staticmethod
+    def get_protocol_of_url(url):
+        &#34;&#34;&#34;
+        &lt;br&gt;`param url` string, URL
+        &lt;br&gt;`return` string, URL domain
+        &#34;&#34;&#34;
+        from .str9 import Str
+        proto_prefix = &#34;://&#34;
+        return Str.substring(url, &#34;&#34;, proto_prefix, exception_message=&#34;The protocol of url not found&#34;) + proto_prefix
+
+    @staticmethod
     def dns_lookup(domain):
         &#34;&#34;&#34;Resolve IP from domain name with socket.gethostbyname
         &lt;br&gt;`param domain` string, domain name
@@ -396,6 +406,16 @@ class Network:
         else:
             url_output = url
         return url_output
+
+    @staticmethod
+    def get_protocol_of_url(url):
+        &#34;&#34;&#34;
+        &lt;br&gt;`param url` string, URL
+        &lt;br&gt;`return` string, URL domain
+        &#34;&#34;&#34;
+        from .str9 import Str
+        proto_prefix = &#34;://&#34;
+        return Str.substring(url, &#34;&#34;, proto_prefix, exception_message=&#34;The protocol of url not found&#34;) + proto_prefix
 
     @staticmethod
     def dns_lookup(domain):
@@ -987,6 +1007,25 @@ def get_netbios(ip):
     return socket.gethostname()</code></pre>
 </details>
 </dd>
+<dt id="commands.network9.Network.get_protocol_of_url"><code class="name flex">
+<span>def <span class="ident">get_protocol_of_url</span></span>(<span>url)</span>
+</code></dt>
+<dd>
+<section class="desc"><p><br><code>param url</code> string, URL
+<br><code>return</code> string, URL domain</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def get_protocol_of_url(url):
+    &#34;&#34;&#34;
+    &lt;br&gt;`param url` string, URL
+    &lt;br&gt;`return` string, URL domain
+    &#34;&#34;&#34;
+    from .str9 import Str
+    proto_prefix = &#34;://&#34;
+    return Str.substring(url, &#34;&#34;, proto_prefix, exception_message=&#34;The protocol of url not found&#34;) + proto_prefix</code></pre>
+</details>
+</dd>
 <dt id="commands.network9.Network.ping"><code class="name flex">
 <span>def <span class="ident">ping</span></span>(<span>domain='127.0.0.1', count=1, quiet=False, logfile=None, timeout=10000, return_ip=False)</span>
 </code></dt>
@@ -1113,6 +1152,7 @@ def ping(cls,
 <li><code><a title="commands.network9.Network.get_fqdn" href="#commands.network9.Network.get_fqdn">get_fqdn</a></code></li>
 <li><code><a title="commands.network9.Network.get_ip" href="#commands.network9.Network.get_ip">get_ip</a></code></li>
 <li><code><a title="commands.network9.Network.get_netbios" href="#commands.network9.Network.get_netbios">get_netbios</a></code></li>
+<li><code><a title="commands.network9.Network.get_protocol_of_url" href="#commands.network9.Network.get_protocol_of_url">get_protocol_of_url</a></code></li>
 <li><code><a title="commands.network9.Network.ping" href="#commands.network9.Network.ping">ping</a></code></li>
 </ul>
 </li>
