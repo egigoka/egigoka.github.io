@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with transact sql
 &#34;&#34;&#34;
-__version__ = &#34;0.3.1&#34;
+__version__ = &#34;0.3.3&#34;
 
 
 class TSQL:
@@ -146,9 +146,9 @@ class TSQL:
         return backup_path
 
     def get_size(self, debug=False):
-        query = fr&#39;&#39;&#39;SELECT
-                        [size] * 8, 
-                        [filename]
+        query = fr&#39;&#39;&#39;SELECT 
+                         CONVERT(bigint, [size])*8*1024, 
+                         [filename] 
                      FROM sysfiles&#39;&#39;&#39;
         return self.query(query, debug=debug)</code></pre>
 </details>
@@ -286,9 +286,9 @@ class TSQL:
         return backup_path
 
     def get_size(self, debug=False):
-        query = fr&#39;&#39;&#39;SELECT
-                        [size] * 8, 
-                        [filename]
+        query = fr&#39;&#39;&#39;SELECT 
+                         CONVERT(bigint, [size])*8*1024, 
+                         [filename] 
                      FROM sysfiles&#39;&#39;&#39;
         return self.query(query, debug=debug)</code></pre>
 </details>
@@ -345,9 +345,9 @@ class TSQL:
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def get_size(self, debug=False):
-    query = fr&#39;&#39;&#39;SELECT
-                    [size] * 8, 
-                    [filename]
+    query = fr&#39;&#39;&#39;SELECT 
+                     CONVERT(bigint, [size])*8*1024, 
+                     [filename] 
                  FROM sysfiles&#39;&#39;&#39;
     return self.query(query, debug=debug)</code></pre>
 </details>
