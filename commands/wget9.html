@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module wrapper to cli wget
 &#34;&#34;&#34;
-__version__ = &#34;0.2.13&#34;
+__version__ = &#34;0.2.14&#34;
 
 
 class Wget:  # pylint: disable=too-few-public-methods
@@ -45,7 +45,6 @@ class Wget:  # pylint: disable=too-few-public-methods
         from .network9 import Network
         from .console9 import Console
         from .dir9 import Dir
-        print(Network.get_domain_of_url(url))
         arguments = [
                     &#39;--header=&#34;Accept: text/html&#34;&#39;,
                     &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; + \
@@ -107,7 +106,6 @@ class Wget:  # pylint: disable=too-few-public-methods
         from .network9 import Network
         from .console9 import Console
         from .dir9 import Dir
-        print(Network.get_domain_of_url(url))
         arguments = [
                     &#39;--header=&#34;Accept: text/html&#34;&#39;,
                     &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; + \
@@ -160,7 +158,6 @@ def download(cls, url, output_filename, quiet=False, no_check_certificate=False,
     from .network9 import Network
     from .console9 import Console
     from .dir9 import Dir
-    print(Network.get_domain_of_url(url))
     arguments = [
                 &#39;--header=&#34;Accept: text/html&#34;&#39;,
                 &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; + \
