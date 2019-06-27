@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with transact sql
 &#34;&#34;&#34;
-__version__ = &#34;0.3.3&#34;
+__version__ = &#34;0.4.0&#34;
 
 
 class TSQL:
@@ -145,12 +145,21 @@ class TSQL:
 
         return backup_path
 
-    def get_size(self, debug=False):
+    def get_file_sizes(self, debug=False):
         query = fr&#39;&#39;&#39;SELECT 
                          CONVERT(bigint, [size])*8*1024, 
                          [filename] 
                      FROM sysfiles&#39;&#39;&#39;
-        return self.query(query, debug=debug)</code></pre>
+        return self.query(query, debug=debug)
+
+    def get_used_space(self, debug=False):
+        from .str9 import Str
+
+        query = &#34;EXEC sp_spaceused @oneresultset = 1&#34;
+        answer = self.query(query, debug=debug)
+        data = answer[0][4]
+        bytes = Str.get_integers(data)[0]
+        return bytes</code></pre>
 </details>
 </section>
 <section>
@@ -285,12 +294,21 @@ class TSQL:
 
         return backup_path
 
-    def get_size(self, debug=False):
+    def get_file_sizes(self, debug=False):
         query = fr&#39;&#39;&#39;SELECT 
                          CONVERT(bigint, [size])*8*1024, 
                          [filename] 
                      FROM sysfiles&#39;&#39;&#39;
-        return self.query(query, debug=debug)</code></pre>
+        return self.query(query, debug=debug)
+
+    def get_used_space(self, debug=False):
+        from .str9 import Str
+
+        query = &#34;EXEC sp_spaceused @oneresultset = 1&#34;
+        answer = self.query(query, debug=debug)
+        data = answer[0][4]
+        bytes = Str.get_integers(data)[0]
+        return bytes</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -337,19 +355,36 @@ class TSQL:
     self.run_without_transaction(command)</code></pre>
 </details>
 </dd>
-<dt id="commands.tsql9.TSQL.get_size"><code class="name flex">
-<span>def <span class="ident">get_size</span></span>(<span>self, debug=False)</span>
+<dt id="commands.tsql9.TSQL.get_file_sizes"><code class="name flex">
+<span>def <span class="ident">get_file_sizes</span></span>(<span>self, debug=False)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def get_size(self, debug=False):
+<pre><code class="python">def get_file_sizes(self, debug=False):
     query = fr&#39;&#39;&#39;SELECT 
                      CONVERT(bigint, [size])*8*1024, 
                      [filename] 
                  FROM sysfiles&#39;&#39;&#39;
     return self.query(query, debug=debug)</code></pre>
+</details>
+</dd>
+<dt id="commands.tsql9.TSQL.get_used_space"><code class="name flex">
+<span>def <span class="ident">get_used_space</span></span>(<span>self, debug=False)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def get_used_space(self, debug=False):
+    from .str9 import Str
+
+    query = &#34;EXEC sp_spaceused @oneresultset = 1&#34;
+    answer = self.query(query, debug=debug)
+    data = answer[0][4]
+    bytes = Str.get_integers(data)[0]
+    return bytes</code></pre>
 </details>
 </dd>
 <dt id="commands.tsql9.TSQL.query"><code class="name flex">
@@ -476,7 +511,8 @@ class TSQL:
 <ul class="">
 <li><code><a title="commands.tsql9.TSQL.backup_database_to_disk" href="#commands.tsql9.TSQL.backup_database_to_disk">backup_database_to_disk</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.drop_database" href="#commands.tsql9.TSQL.drop_database">drop_database</a></code></li>
-<li><code><a title="commands.tsql9.TSQL.get_size" href="#commands.tsql9.TSQL.get_size">get_size</a></code></li>
+<li><code><a title="commands.tsql9.TSQL.get_file_sizes" href="#commands.tsql9.TSQL.get_file_sizes">get_file_sizes</a></code></li>
+<li><code><a title="commands.tsql9.TSQL.get_used_space" href="#commands.tsql9.TSQL.get_used_space">get_used_space</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.query" href="#commands.tsql9.TSQL.query">query</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.run" href="#commands.tsql9.TSQL.run">run</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.run_without_transaction" href="#commands.tsql9.TSQL.run_without_transaction">run_without_transaction</a></code></li>
