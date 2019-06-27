@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions for creating some random values.
 &#34;&#34;&#34;
-__version__ = &#34;0.6.1&#34;
+__version__ = &#34;0.6.2&#34;
 
 
 class Random:
@@ -42,6 +42,12 @@ class Random:
         &lt;br&gt;`return` int|str, random from &#39;minimum&#39; to &#39;maximum&#39;
         &#34;&#34;&#34;
         import random
+
+        if maximum &lt; minimum:
+            temp = maximum
+            maximum = minimum
+            minimum = temp
+
         result = random.randrange(minimum, maximum + 1)
         if to_str:
             from .str9 import Str
@@ -166,6 +172,12 @@ class Random:
         &lt;br&gt;`return` int|str, random from &#39;minimum&#39; to &#39;maximum&#39;
         &#34;&#34;&#34;
         import random
+
+        if maximum &lt; minimum:
+            temp = maximum
+            maximum = minimum
+            minimum = temp
+
         result = random.randrange(minimum, maximum + 1)
         if to_str:
             from .str9 import Str
@@ -335,6 +347,12 @@ def integer(minimum, maximum, to_str=False):
     &lt;br&gt;`return` int|str, random from &#39;minimum&#39; to &#39;maximum&#39;
     &#34;&#34;&#34;
     import random
+
+    if maximum &lt; minimum:
+        temp = maximum
+        maximum = minimum
+        minimum = temp
+
     result = random.randrange(minimum, maximum + 1)
     if to_str:
         from .str9 import Str
