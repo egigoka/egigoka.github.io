@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with transact sql
 &#34;&#34;&#34;
-__version__ = &#34;0.2.0&#34;
+__version__ = &#34;0.3.0&#34;
 
 
 class TSQL:
@@ -144,7 +144,15 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
         TO DISK = &#39;{backup_path}&#39;&#34;&#34;&#34;
         self.run_without_transaction(command)
 
-        return backup_path</code></pre>
+        return backup_path
+
+    def get_size(self, debug=False):
+        query = fr&#39;&#39;&#39;use {self.sql_database}
+                     SELECT
+                        [size] * 8, 
+                        [filename]
+                     FROM sysfiles&#39;&#39;&#39;
+        return self.query(query, debug=debug)</code></pre>
 </details>
 </section>
 <section>
@@ -278,7 +286,15 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
         TO DISK = &#39;{backup_path}&#39;&#34;&#34;&#34;
         self.run_without_transaction(command)
 
-        return backup_path</code></pre>
+        return backup_path
+
+    def get_size(self, debug=False):
+        query = fr&#39;&#39;&#39;use {self.sql_database}
+                     SELECT
+                        [size] * 8, 
+                        [filename]
+                     FROM sysfiles&#39;&#39;&#39;
+        return self.query(query, debug=debug)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -324,6 +340,22 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 &#34;&#34;&#34;
         command += f&#34;&#34;&#34;DROP DATABASE [{sql_database}]&#34;&#34;&#34;
         self.run_without_transaction(command)</code></pre>
+</details>
+</dd>
+<dt id="commands.tsql9.TSQL.get_size"><code class="name flex">
+<span>def <span class="ident">get_size</span></span>(<span>self, debug=False)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def get_size(self, debug=False):
+    query = fr&#39;&#39;&#39;use {self.sql_database}
+                 SELECT
+                    [size] * 8, 
+                    [filename]
+                 FROM sysfiles&#39;&#39;&#39;
+    return self.query(query, debug=debug)</code></pre>
 </details>
 </dd>
 <dt id="commands.tsql9.TSQL.query"><code class="name flex">
@@ -450,6 +482,7 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 <ul class="">
 <li><code><a title="commands.tsql9.TSQL.backup_database_to_disk" href="#commands.tsql9.TSQL.backup_database_to_disk">backup_database_to_disk</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.drop_database" href="#commands.tsql9.TSQL.drop_database">drop_database</a></code></li>
+<li><code><a title="commands.tsql9.TSQL.get_size" href="#commands.tsql9.TSQL.get_size">get_size</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.query" href="#commands.tsql9.TSQL.query">query</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.run" href="#commands.tsql9.TSQL.run">run</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.run_without_transaction" href="#commands.tsql9.TSQL.run_without_transaction">run_without_transaction</a></code></li>
