@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with transact sql
 &#34;&#34;&#34;
-__version__ = &#34;0.1.0&#34;
+__version__ = &#34;0.2.0&#34;
 
 
 class TSQL:
@@ -53,8 +53,10 @@ class TSQL:
         if debug:
             Print(&#34;Successful connection to SQL&#34;)
             Print(f&#34;Run with transaction: &#39;{query}&#39;&#34;)
+
         cur.execute(query)
         con.commit()
+
         if debug:
             Print(f&#34;End &#39;{query}&#39;&#34;)
             Print(&#34;Try to close connection&#34;)
@@ -75,9 +77,11 @@ class TSQL:
         if debug:
             Print(&#34;Successful connection to SQL&#34;)
             Print(f&#34;Run without transaction: &#39;{query}&#39;&#34;)
+
         cur.execute(query)
         while cur.nextset():
             pass
+
         if debug:
             Print(f&#34;End &#39;{query}&#39;&#34;)
             Print(&#34;Try to close connection&#34;)
@@ -85,6 +89,34 @@ class TSQL:
         con.close()
         if debug:
             Print(&#34;Close connection done&#34;)
+
+    def query(self, query, debug=False):
+        import pyodbc
+        from .print9 import Print
+
+        if debug:
+            Print(&#39;SQL settings:&#34;&#39; + self.connect_to_sql_string + &#39;&#34;&#39;)
+            Print(&#34;Trying connect to SQL&#34;)
+        con = pyodbc.connect(self.connect_to_sql_string, autocommit=True)
+        cur = con.cursor()
+        if debug:
+            Print(&#34;Successful connection to SQL&#34;)
+            Print(f&#34;Run query: &#39;{query}&#39;&#34;)
+
+        out = []
+        cur.execute(query)
+        for row in cur.fetchall():
+            out.append(row)
+
+        if debug:
+            Print(f&#34;End &#39;{query}&#39;&#34;)
+            Print(&#34;Try to close connection&#34;)
+        cur.close()
+        con.close()
+        if debug:
+            Print(&#34;Close connection done&#34;)
+
+        return out
 
     def drop_database(self, sql_database, force=False):
         command = &#34;&#34;
@@ -155,8 +187,10 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
         if debug:
             Print(&#34;Successful connection to SQL&#34;)
             Print(f&#34;Run with transaction: &#39;{query}&#39;&#34;)
+
         cur.execute(query)
         con.commit()
+
         if debug:
             Print(f&#34;End &#39;{query}&#39;&#34;)
             Print(&#34;Try to close connection&#34;)
@@ -177,9 +211,11 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
         if debug:
             Print(&#34;Successful connection to SQL&#34;)
             Print(f&#34;Run without transaction: &#39;{query}&#39;&#34;)
+
         cur.execute(query)
         while cur.nextset():
             pass
+
         if debug:
             Print(f&#34;End &#39;{query}&#39;&#34;)
             Print(&#34;Try to close connection&#34;)
@@ -187,6 +223,34 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
         con.close()
         if debug:
             Print(&#34;Close connection done&#34;)
+
+    def query(self, query, debug=False):
+        import pyodbc
+        from .print9 import Print
+
+        if debug:
+            Print(&#39;SQL settings:&#34;&#39; + self.connect_to_sql_string + &#39;&#34;&#39;)
+            Print(&#34;Trying connect to SQL&#34;)
+        con = pyodbc.connect(self.connect_to_sql_string, autocommit=True)
+        cur = con.cursor()
+        if debug:
+            Print(&#34;Successful connection to SQL&#34;)
+            Print(f&#34;Run query: &#39;{query}&#39;&#34;)
+
+        out = []
+        cur.execute(query)
+        for row in cur.fetchall():
+            out.append(row)
+
+        if debug:
+            Print(f&#34;End &#39;{query}&#39;&#34;)
+            Print(&#34;Try to close connection&#34;)
+        cur.close()
+        con.close()
+        if debug:
+            Print(&#34;Close connection done&#34;)
+
+        return out
 
     def drop_database(self, sql_database, force=False):
         command = &#34;&#34;
@@ -262,6 +326,42 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
         self.run_without_transaction(command)</code></pre>
 </details>
 </dd>
+<dt id="commands.tsql9.TSQL.query"><code class="name flex">
+<span>def <span class="ident">query</span></span>(<span>self, query, debug=False)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def query(self, query, debug=False):
+    import pyodbc
+    from .print9 import Print
+
+    if debug:
+        Print(&#39;SQL settings:&#34;&#39; + self.connect_to_sql_string + &#39;&#34;&#39;)
+        Print(&#34;Trying connect to SQL&#34;)
+    con = pyodbc.connect(self.connect_to_sql_string, autocommit=True)
+    cur = con.cursor()
+    if debug:
+        Print(&#34;Successful connection to SQL&#34;)
+        Print(f&#34;Run query: &#39;{query}&#39;&#34;)
+
+    out = []
+    cur.execute(query)
+    for row in cur.fetchall():
+        out.append(row)
+
+    if debug:
+        Print(f&#34;End &#39;{query}&#39;&#34;)
+        Print(&#34;Try to close connection&#34;)
+    cur.close()
+    con.close()
+    if debug:
+        Print(&#34;Close connection done&#34;)
+
+    return out</code></pre>
+</details>
+</dd>
 <dt id="commands.tsql9.TSQL.run"><code class="name flex">
 <span>def <span class="ident">run</span></span>(<span>self, query, debug=False)</span>
 </code></dt>
@@ -281,8 +381,10 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
     if debug:
         Print(&#34;Successful connection to SQL&#34;)
         Print(f&#34;Run with transaction: &#39;{query}&#39;&#34;)
+
     cur.execute(query)
     con.commit()
+
     if debug:
         Print(f&#34;End &#39;{query}&#39;&#34;)
         Print(&#34;Try to close connection&#34;)
@@ -311,9 +413,11 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
     if debug:
         Print(&#34;Successful connection to SQL&#34;)
         Print(f&#34;Run without transaction: &#39;{query}&#39;&#34;)
+
     cur.execute(query)
     while cur.nextset():
         pass
+
     if debug:
         Print(f&#34;End &#39;{query}&#39;&#34;)
         Print(&#34;Try to close connection&#34;)
@@ -346,6 +450,7 @@ ALTER DATABASE [{sql_database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 <ul class="">
 <li><code><a title="commands.tsql9.TSQL.backup_database_to_disk" href="#commands.tsql9.TSQL.backup_database_to_disk">backup_database_to_disk</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.drop_database" href="#commands.tsql9.TSQL.drop_database">drop_database</a></code></li>
+<li><code><a title="commands.tsql9.TSQL.query" href="#commands.tsql9.TSQL.query">query</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.run" href="#commands.tsql9.TSQL.run">run</a></code></li>
 <li><code><a title="commands.tsql9.TSQL.run_without_transaction" href="#commands.tsql9.TSQL.run_without_transaction">run_without_transaction</a></code></li>
 </ul>
