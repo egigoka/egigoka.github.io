@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with JSON
 &#34;&#34;&#34;
-__version__ = &#34;2.7.2&#34;
+__version__ = &#34;2.8.0&#34;
 
 
 class Json:
@@ -55,6 +55,9 @@ class Json:
 
     def __len__(self):
         return self.string.__len__()
+
+    def items(self):
+        return self.string.items()
 
     def load(self, quiet=True):
         &#34;&#34;&#34;Loads json from file, defined in class init to class var &#34;string&#34;
@@ -197,6 +200,9 @@ class Json:
     def __len__(self):
         return self.string.__len__()
 
+    def items(self):
+        return self.string.items()
+
     def load(self, quiet=True):
         &#34;&#34;&#34;Loads json from file, defined in class init to class var &#34;string&#34;
         &lt;br&gt;`param quiet` boolean, suppress print to console
@@ -296,6 +302,17 @@ class Json:
 </details>
 <h3>Methods</h3>
 <dl>
+<dt id="commands.json9.Json.items"><code class="name flex">
+<span>def <span class="ident">items</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def items(self):
+    return self.string.items()</code></pre>
+</details>
+</dd>
 <dt id="commands.json9.Json.load"><code class="name flex">
 <span>def <span class="ident">load</span></span>(<span>self, quiet=True)</span>
 </code></dt>
@@ -355,6 +372,7 @@ class Json:
 <li>
 <h4><code><a title="commands.json9.Json" href="#commands.json9.Json">Json</a></code></h4>
 <ul class="">
+<li><code><a title="commands.json9.Json.items" href="#commands.json9.Json.items">items</a></code></li>
 <li><code><a title="commands.json9.Json.load" href="#commands.json9.Json.load">load</a></code></li>
 <li><code><a title="commands.json9.Json.save" href="#commands.json9.Json.save">save</a></code></li>
 </ul>
