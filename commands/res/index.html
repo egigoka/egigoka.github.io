@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.6.0" />
-<title>commands.int9 API documentation</title>
-<meta name="description" content="Internal module, import it like &#34;from commands.int8 import Int&#34;" />
+<title>commands.res API documentation</title>
+<meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,45 +17,9 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>commands.int9</code></h1>
+<h1 class="title">Namespace <code>commands.res</code></h1>
 </header>
 <section id="section-intro">
-<p>Internal module, import it like "from commands.int8 import Int"</p>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">#! python3
-# -*- coding: utf-8 -*-
-&#34;&#34;&#34;Internal module, import it like &#34;from commands.int8 import Int&#34;
-&#34;&#34;&#34;
-__version__ = &#34;0.0.5&#34;
-
-
-class Int:  # pylint: disable=too-few-public-methods
-    &#34;&#34;&#34;Methods to interact with integers
-    &#34;&#34;&#34;
-    @staticmethod
-    def from_to(start, end, to_str=False):
-        &#34;&#34;&#34;return list of integers, if argument
-        &#34;to_str&#34; activated, return list of strings with equal length
-        if &#34;list&#34; arg activated, list will be returned, otherwise, it will be iterable obj
-        &#34;&#34;&#34;
-        from .str9 import Str
-        from .os9 import OS
-        if OS.is_python3:
-            roots = range(start, end + 1)
-        else:
-            roots = xrange(start, end + 1)  # pylint: disable=undefined-variable
-        if to_str:
-            output = []
-            max_len = max(len(str(start)), len(str(end)))
-            for root in roots:
-                if root &lt; 0:
-                    output.append(&#34;-&#34; + Str.leftpad(-root, max_len - 1, 0))
-                else:
-                    output.append(Str.leftpad(root, max_len, 0))
-            return output
-        return roots</code></pre>
-</details>
 </section>
 <section>
 </section>
@@ -64,80 +28,6 @@ class Int:  # pylint: disable=too-few-public-methods
 <section>
 </section>
 <section>
-<h2 class="section-title" id="header-classes">Classes</h2>
-<dl>
-<dt id="commands.int9.Int"><code class="flex name class">
-<span>class <span class="ident">Int</span></span>
-<span>(</span><span>*args, **kwargs)</span>
-</code></dt>
-<dd>
-<section class="desc"><p>Methods to interact with integers</p></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">class Int:  # pylint: disable=too-few-public-methods
-    &#34;&#34;&#34;Methods to interact with integers
-    &#34;&#34;&#34;
-    @staticmethod
-    def from_to(start, end, to_str=False):
-        &#34;&#34;&#34;return list of integers, if argument
-        &#34;to_str&#34; activated, return list of strings with equal length
-        if &#34;list&#34; arg activated, list will be returned, otherwise, it will be iterable obj
-        &#34;&#34;&#34;
-        from .str9 import Str
-        from .os9 import OS
-        if OS.is_python3:
-            roots = range(start, end + 1)
-        else:
-            roots = xrange(start, end + 1)  # pylint: disable=undefined-variable
-        if to_str:
-            output = []
-            max_len = max(len(str(start)), len(str(end)))
-            for root in roots:
-                if root &lt; 0:
-                    output.append(&#34;-&#34; + Str.leftpad(-root, max_len - 1, 0))
-                else:
-                    output.append(Str.leftpad(root, max_len, 0))
-            return output
-        return roots</code></pre>
-</details>
-<h3>Static methods</h3>
-<dl>
-<dt id="commands.int9.Int.from_to"><code class="name flex">
-<span>def <span class="ident">from_to</span></span>(<span>start, end, to_str=False)</span>
-</code></dt>
-<dd>
-<section class="desc"><p>return list of integers, if argument
-"to_str" activated, return list of strings with equal length
-if "list" arg activated, list will be returned, otherwise, it will be iterable obj</p></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">@staticmethod
-def from_to(start, end, to_str=False):
-    &#34;&#34;&#34;return list of integers, if argument
-    &#34;to_str&#34; activated, return list of strings with equal length
-    if &#34;list&#34; arg activated, list will be returned, otherwise, it will be iterable obj
-    &#34;&#34;&#34;
-    from .str9 import Str
-    from .os9 import OS
-    if OS.is_python3:
-        roots = range(start, end + 1)
-    else:
-        roots = xrange(start, end + 1)  # pylint: disable=undefined-variable
-    if to_str:
-        output = []
-        max_len = max(len(str(start)), len(str(end)))
-        for root in roots:
-            if root &lt; 0:
-                output.append(&#34;-&#34; + Str.leftpad(-root, max_len - 1, 0))
-            else:
-                output.append(Str.leftpad(root, max_len, 0))
-        return output
-    return roots</code></pre>
-</details>
-</dd>
-</dl>
-</dd>
-</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -148,17 +38,7 @@ def from_to(start, end, to_str=False):
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="commands" href="index.html">commands</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-classes">Classes</a></h3>
-<ul>
-<li>
-<h4><code><a title="commands.int9.Int" href="#commands.int9.Int">Int</a></code></h4>
-<ul class="">
-<li><code><a title="commands.int9.Int.from_to" href="#commands.int9.Int.from_to">from_to</a></code></li>
-</ul>
-</li>
+<li><code><a title="commands" href="../index.html">commands</a></code></li>
 </ul>
 </li>
 </ul>

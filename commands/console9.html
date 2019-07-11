@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.6.1" />
+<meta name="generator" content="pdoc 0.6.0" />
 <title>commands.console9 API documentation</title>
 <meta name="description" content="Internal module to interact with terminal|console" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with terminal|console
 &#34;&#34;&#34;
-__version__ = &#34;0.9.0&#34;
+__version__ = &#34;0.10.0&#34;
 
 
 class Console:
@@ -223,7 +223,7 @@ class Console:
         return State.stdout, State.stderr, return_code, State.timeout_exception
 
     @staticmethod
-    def _get_output(*commands, print_std, decoding, pureshell, universal_newlines):
+    def _get_output(*commands, print_std, decoding, pureshell, universal_newlines, debug=False):
         import subprocess
         if decoding:
             out = &#34;&#34;
@@ -251,9 +251,10 @@ class Console:
                     if print_std:
                         print(line, end=&#39;&#39;)
         except FileNotFoundError as exception:
-            from .print9 import Print
-            Print.debug(&#34;commands&#34;, commands, &#34;pureshell&#34;, pureshell, &#34;print_std&#34;, print_std, &#34;decoding&#34;, decoding,
-                        &#34;universal_newlines&#34;, universal_newlines)
+            if debug:
+                from .print9 import Print
+                Print.debug(&#34;commands&#34;, commands, &#34;pureshell&#34;, pureshell, &#34;print_std&#34;, print_std, &#34;decoding&#34;, decoding,
+                            &#34;universal_newlines&#34;, universal_newlines)
             raise FileNotFoundError(exception)
         return out, err
 
@@ -262,7 +263,7 @@ class Console:
 
     @classmethod
     def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False,
-                   auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None):
+                   auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False):
         &#34;&#34;&#34;Return output of executing command.
         &lt;br&gt;`param commands` list[string if pureshell is True] with command and arguments
         &lt;br&gt;`param pureshell` boolean, if True, the specified command will be executed through the shell
@@ -270,6 +271,7 @@ class Console:
         &#39;py&#39; or &#39;python&#39; firs arg.)
         &lt;br&gt;`return` typle with strings stdout and stderr
         &#34;&#34;&#34;
+        import os
         from .os9 import OS
         if len(commands) == 1:
                 commands = commands[0]
@@ -283,12 +285,11 @@ class Console:
             raise IndexError(&#34;commands must not be empty&#34;)
 
         # disable buffering for python
-        if (&#34;py&#34; in commands or &#34;py&#34; in commands[0]) and print_std and auto_disable_py_buffering:
+        if (&#34;py&#34; in commands or &#34;py&#34; in os.path.split(commands[0])[1]) and print_std and auto_disable_py_buffering:
             if &#34;-u&#34; not in commands:
                 list_commands = list(commands)
                 list_commands.insert(1, &#34;-u&#34;)
                 commands = list_commands
-
         # set decoding and init
         if auto_decoding and not decoding and not universal_newlines:
             if OS.windows:
@@ -334,7 +335,7 @@ class Console:
                 raise TimeoutError(fr&#34;Timeout {timeout} reached while running {commands}&#34;)
         else:
             output = cls._get_output(*commands, print_std=print_std, decoding=decoding, pureshell=pureshell,
-                                     universal_newlines=universal_newlines)
+                                     universal_newlines=universal_newlines, debug=debug)
         out = output[0]
         err = output[1]
         if return_merged:
@@ -586,7 +587,7 @@ class Console:
         return State.stdout, State.stderr, return_code, State.timeout_exception
 
     @staticmethod
-    def _get_output(*commands, print_std, decoding, pureshell, universal_newlines):
+    def _get_output(*commands, print_std, decoding, pureshell, universal_newlines, debug=False):
         import subprocess
         if decoding:
             out = &#34;&#34;
@@ -614,9 +615,10 @@ class Console:
                     if print_std:
                         print(line, end=&#39;&#39;)
         except FileNotFoundError as exception:
-            from .print9 import Print
-            Print.debug(&#34;commands&#34;, commands, &#34;pureshell&#34;, pureshell, &#34;print_std&#34;, print_std, &#34;decoding&#34;, decoding,
-                        &#34;universal_newlines&#34;, universal_newlines)
+            if debug:
+                from .print9 import Print
+                Print.debug(&#34;commands&#34;, commands, &#34;pureshell&#34;, pureshell, &#34;print_std&#34;, print_std, &#34;decoding&#34;, decoding,
+                            &#34;universal_newlines&#34;, universal_newlines)
             raise FileNotFoundError(exception)
         return out, err
 
@@ -625,7 +627,7 @@ class Console:
 
     @classmethod
     def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False,
-                   auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None):
+                   auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False):
         &#34;&#34;&#34;Return output of executing command.
         &lt;br&gt;`param commands` list[string if pureshell is True] with command and arguments
         &lt;br&gt;`param pureshell` boolean, if True, the specified command will be executed through the shell
@@ -633,6 +635,7 @@ class Console:
         &#39;py&#39; or &#39;python&#39; firs arg.)
         &lt;br&gt;`return` typle with strings stdout and stderr
         &#34;&#34;&#34;
+        import os
         from .os9 import OS
         if len(commands) == 1:
                 commands = commands[0]
@@ -646,12 +649,11 @@ class Console:
             raise IndexError(&#34;commands must not be empty&#34;)
 
         # disable buffering for python
-        if (&#34;py&#34; in commands or &#34;py&#34; in commands[0]) and print_std and auto_disable_py_buffering:
+        if (&#34;py&#34; in commands or &#34;py&#34; in os.path.split(commands[0])[1]) and print_std and auto_disable_py_buffering:
             if &#34;-u&#34; not in commands:
                 list_commands = list(commands)
                 list_commands.insert(1, &#34;-u&#34;)
                 commands = list_commands
-
         # set decoding and init
         if auto_decoding and not decoding and not universal_newlines:
             if OS.windows:
@@ -697,7 +699,7 @@ class Console:
                 raise TimeoutError(fr&#34;Timeout {timeout} reached while running {commands}&#34;)
         else:
             output = cls._get_output(*commands, print_std=print_std, decoding=decoding, pureshell=pureshell,
-                                     universal_newlines=universal_newlines)
+                                     universal_newlines=universal_newlines, debug=debug)
         out = output[0]
         err = output[1]
         if return_merged:
@@ -873,7 +875,7 @@ def fit(cls, *strings, sep=&#34; &#34;):
 </details>
 </dd>
 <dt id="commands.console9.Console.get_output"><code class="name flex">
-<span>def <span class="ident">get_output</span></span>(<span>*commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False, auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None)</span>
+<span>def <span class="ident">get_output</span></span>(<span>*commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False, auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Return output of executing command.
@@ -886,7 +888,7 @@ def fit(cls, *strings, sep=&#34; &#34;):
 <summary>Source code</summary>
 <pre><code class="python">@classmethod
 def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False,
-               auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None):
+               auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False):
     &#34;&#34;&#34;Return output of executing command.
     &lt;br&gt;`param commands` list[string if pureshell is True] with command and arguments
     &lt;br&gt;`param pureshell` boolean, if True, the specified command will be executed through the shell
@@ -894,6 +896,7 @@ def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, 
     &#39;py&#39; or &#39;python&#39; firs arg.)
     &lt;br&gt;`return` typle with strings stdout and stderr
     &#34;&#34;&#34;
+    import os
     from .os9 import OS
     if len(commands) == 1:
             commands = commands[0]
@@ -907,12 +910,11 @@ def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, 
         raise IndexError(&#34;commands must not be empty&#34;)
 
     # disable buffering for python
-    if (&#34;py&#34; in commands or &#34;py&#34; in commands[0]) and print_std and auto_disable_py_buffering:
+    if (&#34;py&#34; in commands or &#34;py&#34; in os.path.split(commands[0])[1]) and print_std and auto_disable_py_buffering:
         if &#34;-u&#34; not in commands:
             list_commands = list(commands)
             list_commands.insert(1, &#34;-u&#34;)
             commands = list_commands
-
     # set decoding and init
     if auto_decoding and not decoding and not universal_newlines:
         if OS.windows:
@@ -958,7 +960,7 @@ def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, 
             raise TimeoutError(fr&#34;Timeout {timeout} reached while running {commands}&#34;)
     else:
         output = cls._get_output(*commands, print_std=print_std, decoding=decoding, pureshell=pureshell,
-                                 universal_newlines=universal_newlines)
+                                 universal_newlines=universal_newlines, debug=debug)
     out = output[0]
     err = output[1]
     if return_merged:
@@ -1049,7 +1051,7 @@ def width():
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.0</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>

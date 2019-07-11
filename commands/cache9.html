@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.6.0" />
-<title>commands.int9 API documentation</title>
-<meta name="description" content="Internal module, import it like &#34;from commands.int8 import Int&#34;" />
+<title>commands.cache9 API documentation</title>
+<meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,44 +17,65 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>commands.int9</code></h1>
+<h1 class="title">Module <code>commands.cache9</code></h1>
 </header>
 <section id="section-intro">
-<p>Internal module, import it like "from commands.int8 import Int"</p>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">#! python3
 # -*- coding: utf-8 -*-
-&#34;&#34;&#34;Internal module, import it like &#34;from commands.int8 import Int&#34;
-&#34;&#34;&#34;
-__version__ = &#34;0.0.5&#34;
+__version__ = &#34;0.1.1&#34;
+
+from .dict9 import imdict
 
 
-class Int:  # pylint: disable=too-few-public-methods
-    &#34;&#34;&#34;Methods to interact with integers
-    &#34;&#34;&#34;
-    @staticmethod
-    def from_to(start, end, to_str=False):
-        &#34;&#34;&#34;return list of integers, if argument
-        &#34;to_str&#34; activated, return list of strings with equal length
-        if &#34;list&#34; arg activated, list will be returned, otherwise, it will be iterable obj
-        &#34;&#34;&#34;
-        from .str9 import Str
-        from .os9 import OS
-        if OS.is_python3:
-            roots = range(start, end + 1)
-        else:
-            roots = xrange(start, end + 1)  # pylint: disable=undefined-variable
-        if to_str:
-            output = []
-            max_len = max(len(str(start)), len(str(end)))
-            for root in roots:
-                if root &lt; 0:
-                    output.append(&#34;-&#34; + Str.leftpad(-root, max_len - 1, 0))
-                else:
-                    output.append(Str.leftpad(root, max_len, 0))
-            return output
-        return roots</code></pre>
+class Cache:
+    def __init__(self, func, update_every, args=(), kwargs=imdict(), quiet=True, bench=None):
+        from .id9 import ID
+        from .bench9 import Bench
+
+        self.counter = ID()
+        self.update_every = update_every
+        self.bench = bench
+        if bench is None:
+            self.bench = Bench(&#34;cache updated in&#34;, quiet=quiet)
+        self.stored_output = None
+        self.func = func
+        self.args = args
+        self.kwargs = kwargs
+
+    def __call__(self):
+        if self.counter.get() % self.update_every == 0:
+            self.stored_output = self.func(*self.args, **self.kwargs)
+            self.bench.end()
+        return self.stored_output
+
+
+class CachedFunction:
+    def __init__(self, func, update_every, quiet=True):
+        from .id9 import ID
+        from .bench9 import Bench
+
+        self.func = func
+        self.update_every = update_every
+        self.quiet = quiet
+        self.caches = {}
+        self.counter = ID()
+        self.bench = Bench(&#34;cache updated in&#34;, quiet=quiet)
+
+    def return_value(self, *args, **kwargs):
+        try:
+            return self.caches[f&#34;{args}{kwargs}&#34;]()
+        except KeyError:
+            self.caches[f&#34;{args}{kwargs}&#34;] = Cache(func=self.func, update_every=self.update_every,
+                                                   args=args, kwargs=kwargs, quiet=self.quiet, bench=self.bench)
+            return self.return_value(*args, **kwargs)
+
+    def __call__(self, *args, **kwargs):
+        if self.counter.get() % self.update_every == 0:  # flush caches
+            self.caches = {}
+
+        return self.return_value(*args, **kwargs)</code></pre>
 </details>
 </section>
 <section>
@@ -66,73 +87,86 @@ class Int:  # pylint: disable=too-few-public-methods
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="commands.int9.Int"><code class="flex name class">
-<span>class <span class="ident">Int</span></span>
-<span>(</span><span>*args, **kwargs)</span>
+<dt id="commands.cache9.Cache"><code class="flex name class">
+<span>class <span class="ident">Cache</span></span>
+<span>(</span><span>func, update_every, args=(), kwargs={}, quiet=True, bench=None)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Methods to interact with integers</p></section>
+<section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">class Int:  # pylint: disable=too-few-public-methods
-    &#34;&#34;&#34;Methods to interact with integers
-    &#34;&#34;&#34;
-    @staticmethod
-    def from_to(start, end, to_str=False):
-        &#34;&#34;&#34;return list of integers, if argument
-        &#34;to_str&#34; activated, return list of strings with equal length
-        if &#34;list&#34; arg activated, list will be returned, otherwise, it will be iterable obj
-        &#34;&#34;&#34;
-        from .str9 import Str
-        from .os9 import OS
-        if OS.is_python3:
-            roots = range(start, end + 1)
-        else:
-            roots = xrange(start, end + 1)  # pylint: disable=undefined-variable
-        if to_str:
-            output = []
-            max_len = max(len(str(start)), len(str(end)))
-            for root in roots:
-                if root &lt; 0:
-                    output.append(&#34;-&#34; + Str.leftpad(-root, max_len - 1, 0))
-                else:
-                    output.append(Str.leftpad(root, max_len, 0))
-            return output
-        return roots</code></pre>
+<pre><code class="python">class Cache:
+    def __init__(self, func, update_every, args=(), kwargs=imdict(), quiet=True, bench=None):
+        from .id9 import ID
+        from .bench9 import Bench
+
+        self.counter = ID()
+        self.update_every = update_every
+        self.bench = bench
+        if bench is None:
+            self.bench = Bench(&#34;cache updated in&#34;, quiet=quiet)
+        self.stored_output = None
+        self.func = func
+        self.args = args
+        self.kwargs = kwargs
+
+    def __call__(self):
+        if self.counter.get() % self.update_every == 0:
+            self.stored_output = self.func(*self.args, **self.kwargs)
+            self.bench.end()
+        return self.stored_output</code></pre>
 </details>
-<h3>Static methods</h3>
-<dl>
-<dt id="commands.int9.Int.from_to"><code class="name flex">
-<span>def <span class="ident">from_to</span></span>(<span>start, end, to_str=False)</span>
+</dd>
+<dt id="commands.cache9.CachedFunction"><code class="flex name class">
+<span>class <span class="ident">CachedFunction</span></span>
+<span>(</span><span>func, update_every, quiet=True)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>return list of integers, if argument
-"to_str" activated, return list of strings with equal length
-if "list" arg activated, list will be returned, otherwise, it will be iterable obj</p></section>
+<section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">@staticmethod
-def from_to(start, end, to_str=False):
-    &#34;&#34;&#34;return list of integers, if argument
-    &#34;to_str&#34; activated, return list of strings with equal length
-    if &#34;list&#34; arg activated, list will be returned, otherwise, it will be iterable obj
-    &#34;&#34;&#34;
-    from .str9 import Str
-    from .os9 import OS
-    if OS.is_python3:
-        roots = range(start, end + 1)
-    else:
-        roots = xrange(start, end + 1)  # pylint: disable=undefined-variable
-    if to_str:
-        output = []
-        max_len = max(len(str(start)), len(str(end)))
-        for root in roots:
-            if root &lt; 0:
-                output.append(&#34;-&#34; + Str.leftpad(-root, max_len - 1, 0))
-            else:
-                output.append(Str.leftpad(root, max_len, 0))
-        return output
-    return roots</code></pre>
+<pre><code class="python">class CachedFunction:
+    def __init__(self, func, update_every, quiet=True):
+        from .id9 import ID
+        from .bench9 import Bench
+
+        self.func = func
+        self.update_every = update_every
+        self.quiet = quiet
+        self.caches = {}
+        self.counter = ID()
+        self.bench = Bench(&#34;cache updated in&#34;, quiet=quiet)
+
+    def return_value(self, *args, **kwargs):
+        try:
+            return self.caches[f&#34;{args}{kwargs}&#34;]()
+        except KeyError:
+            self.caches[f&#34;{args}{kwargs}&#34;] = Cache(func=self.func, update_every=self.update_every,
+                                                   args=args, kwargs=kwargs, quiet=self.quiet, bench=self.bench)
+            return self.return_value(*args, **kwargs)
+
+    def __call__(self, *args, **kwargs):
+        if self.counter.get() % self.update_every == 0:  # flush caches
+            self.caches = {}
+
+        return self.return_value(*args, **kwargs)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="commands.cache9.CachedFunction.return_value"><code class="name flex">
+<span>def <span class="ident">return_value</span></span>(<span>self, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def return_value(self, *args, **kwargs):
+    try:
+        return self.caches[f&#34;{args}{kwargs}&#34;]()
+    except KeyError:
+        self.caches[f&#34;{args}{kwargs}&#34;] = Cache(func=self.func, update_every=self.update_every,
+                                               args=args, kwargs=kwargs, quiet=self.quiet, bench=self.bench)
+        return self.return_value(*args, **kwargs)</code></pre>
 </details>
 </dd>
 </dl>
@@ -154,9 +188,12 @@ def from_to(start, end, to_str=False):
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="commands.int9.Int" href="#commands.int9.Int">Int</a></code></h4>
+<h4><code><a title="commands.cache9.Cache" href="#commands.cache9.Cache">Cache</a></code></h4>
+</li>
+<li>
+<h4><code><a title="commands.cache9.CachedFunction" href="#commands.cache9.CachedFunction">CachedFunction</a></code></h4>
 <ul class="">
-<li><code><a title="commands.int9.Int.from_to" href="#commands.int9.Int.from_to">from_to</a></code></li>
+<li><code><a title="commands.cache9.CachedFunction.return_value" href="#commands.cache9.CachedFunction.return_value">return_value</a></code></li>
 </ul>
 </li>
 </ul>

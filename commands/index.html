@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.6.1" />
+<meta name="generator" content="pdoc 0.6.0" />
 <title>commands API documentation</title>
 <meta name="description" content="This is kinda tiny framework? Idk.
 I learn Python by creating this.
@@ -43,7 +43,6 @@ from .print9 import Print
 from .console9 import Console
 from .ssh9 import Ssh
 from .file9 import File
-from .locations9 import Locations
 from .dir9 import Dir
 from .path9 import Path
 from .time9 import Time
@@ -65,6 +64,9 @@ from .base64_9 import Base64
 from .funcs9 import dirify
 from .zip9 import Zip, Unzip
 from .id9 import ID
+from .git9 import Git
+from .tsql9 import TSQL
+from .cache9 import Cache, CachedFunction
 from .threading9 import MyThread, Threading
 from .resources9 import Resources
 from .const9 import backslash, newline, newline2, ruble
@@ -85,6 +87,10 @@ from ._version import __version__</code></pre>
 <dt><code class="name"><a title="commands.bench9" href="bench9.html">commands.bench9</a></code></dt>
 <dd>
 <section class="desc"><p>Internal module with Bench factory function</p></section>
+</dd>
+<dt><code class="name"><a title="commands.cache9" href="cache9.html">commands.cache9</a></code></dt>
+<dd>
+<section class="desc"></section>
 </dd>
 <dt><code class="name"><a title="commands.cli9" href="cli9.html">commands.cli9</a></code></dt>
 <dd>
@@ -118,6 +124,10 @@ from ._version import __version__</code></pre>
 <dd>
 <section class="desc"><p>Internal module to simplify work with git</p></section>
 </dd>
+<dt><code class="name"><a title="commands.giv9" href="giv9.html">commands.giv9</a></code></dt>
+<dd>
+<section class="desc"><p>Global Interpreter Variables</p></section>
+</dd>
 <dt><code class="name"><a title="commands.gui9" href="gui9.html">commands.gui9</a></code></dt>
 <dd>
 <section class="desc"><p>Internal module to interact with gui</p></section>
@@ -141,10 +151,6 @@ from ._version import __version__</code></pre>
 <dt><code class="name"><a title="commands.list9" href="list9.html">commands.list9</a></code></dt>
 <dd>
 <section class="desc"><p>Internal module to work with lists</p></section>
-</dd>
-<dt><code class="name"><a title="commands.locations9" href="locations9.html">commands.locations9</a></code></dt>
-<dd>
-<section class="desc"><p>Internal module with some predefined paths</p></section>
 </dd>
 <dt><code class="name"><a title="commands.log9" href="log9.html">commands.log9</a></code></dt>
 <dd>
@@ -186,6 +192,10 @@ from ._version import __version__</code></pre>
 <dd>
 <section class="desc"><p>Internal module with functions for creating some random values.</p></section>
 </dd>
+<dt><code class="name"><a title="commands.res" href="res/index.html">commands.res</a></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
 <dt><code class="name"><a title="commands.resources9" href="resources9.html">commands.resources9</a></code></dt>
 <dd>
 <section class="desc"></section>
@@ -209,6 +219,10 @@ from ._version import __version__</code></pre>
 <dt><code class="name"><a title="commands.tkinter9" href="tkinter9.html">commands.tkinter9</a></code></dt>
 <dd>
 <section class="desc"><p>Internal module to simplify work with tkinter</p></section>
+</dd>
+<dt><code class="name"><a title="commands.tsql9" href="tsql9.html">commands.tsql9</a></code></dt>
+<dd>
+<section class="desc"><p>Internal module to interact with transact sql</p></section>
 </dd>
 <dt><code class="name"><a title="commands.wget9" href="wget9.html">commands.wget9</a></code></dt>
 <dd>
@@ -242,6 +256,7 @@ from ._version import __version__</code></pre>
 <li><code><a title="commands.base64_9" href="base64_9.html">commands.base64_9</a></code></li>
 <li><code><a title="commands.bash9" href="bash9.html">commands.bash9</a></code></li>
 <li><code><a title="commands.bench9" href="bench9.html">commands.bench9</a></code></li>
+<li><code><a title="commands.cache9" href="cache9.html">commands.cache9</a></code></li>
 <li><code><a title="commands.cli9" href="cli9.html">commands.cli9</a></code></li>
 <li><code><a title="commands.console9" href="console9.html">commands.console9</a></code></li>
 <li><code><a title="commands.const9" href="const9.html">commands.const9</a></code></li>
@@ -250,13 +265,13 @@ from ._version import __version__</code></pre>
 <li><code><a title="commands.file9" href="file9.html">commands.file9</a></code></li>
 <li><code><a title="commands.funcs9" href="funcs9.html">commands.funcs9</a></code></li>
 <li><code><a title="commands.git9" href="git9.html">commands.git9</a></code></li>
+<li><code><a title="commands.giv9" href="giv9.html">commands.giv9</a></code></li>
 <li><code><a title="commands.gui9" href="gui9.html">commands.gui9</a></code></li>
 <li><code><a title="commands.id9" href="id9.html">commands.id9</a></code></li>
 <li><code><a title="commands.int9" href="int9.html">commands.int9</a></code></li>
 <li><code><a title="commands.json9" href="json9.html">commands.json9</a></code></li>
 <li><code><a title="commands.learning9" href="learning9.html">commands.learning9</a></code></li>
 <li><code><a title="commands.list9" href="list9.html">commands.list9</a></code></li>
-<li><code><a title="commands.locations9" href="locations9.html">commands.locations9</a></code></li>
 <li><code><a title="commands.log9" href="log9.html">commands.log9</a></code></li>
 <li><code><a title="commands.macos9" href="macos9.html">commands.macos9</a></code></li>
 <li><code><a title="commands.mouse9" href="mouse9.html">commands.mouse9</a></code></li>
@@ -267,12 +282,14 @@ from ._version import __version__</code></pre>
 <li><code><a title="commands.print9" href="print9.html">commands.print9</a></code></li>
 <li><code><a title="commands.process9" href="process9.html">commands.process9</a></code></li>
 <li><code><a title="commands.random9" href="random9.html">commands.random9</a></code></li>
+<li><code><a title="commands.res" href="res/index.html">commands.res</a></code></li>
 <li><code><a title="commands.resources9" href="resources9.html">commands.resources9</a></code></li>
 <li><code><a title="commands.ssh9" href="ssh9.html">commands.ssh9</a></code></li>
 <li><code><a title="commands.str9" href="str9.html">commands.str9</a></code></li>
 <li><code><a title="commands.threading9" href="threading9.html">commands.threading9</a></code></li>
 <li><code><a title="commands.time9" href="time9.html">commands.time9</a></code></li>
 <li><code><a title="commands.tkinter9" href="tkinter9.html">commands.tkinter9</a></code></li>
+<li><code><a title="commands.tsql9" href="tsql9.html">commands.tsql9</a></code></li>
 <li><code><a title="commands.wget9" href="wget9.html">commands.wget9</a></code></li>
 <li><code><a title="commands.windows9" href="windows9.html">commands.windows9</a></code></li>
 <li><code><a title="commands.zip9" href="zip9.html">commands.zip9</a></code></li>
@@ -282,7 +299,7 @@ from ._version import __version__</code></pre>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.0</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>

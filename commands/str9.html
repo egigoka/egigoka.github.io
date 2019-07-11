@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.6.1" />
+<meta name="generator" content="pdoc 0.6.0" />
 <title>commands.str9 API documentation</title>
 <meta name="description" content="Internal module with functions for managing strings." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions for managing strings.
 &#34;&#34;&#34;
-__version__ = &#34;0.13.1&#34;
+__version__ = &#34;0.13.2&#34;
 
 
 class Str:
@@ -165,14 +165,14 @@ class Str:
         return string_output
 
     @classmethod
-    def rightpad(cls, string, leng, char=&#34;0&#34;):
+    def rightpad(cls, string, length, char=&#34;0&#34;):
         &#34;&#34;&#34;Adds symbols from char str to right side of output string to change input string len to &#39;length&#39;
         &lt;br&gt;`param string` string, input
         &lt;br&gt;`param length` int, len of output string
         &lt;br&gt;`param char` string, characters, added to right side of input string
         &lt;br&gt;`return` string, with added characters to side of input string
         &#34;&#34;&#34;
-        return cls.leftpad(string, leng, char=char, rightpad=True)
+        return cls.leftpad(string, length, char=char, rightpad=True)
 
     @staticmethod
     def substring(string, before, after=None, return_after_substring=False, safe=False, exception_message=None):
@@ -195,6 +195,8 @@ class Str:
             if not safe:
                 if isinstance(exception_message, str):
                     exception_message += &#39;. &#39;
+                elif exception_message is None:
+                    exception_message = &#34;&#34;
                 raise KeyError(f&#34;{exception_message}The line preceding ({before}) the search string was not found&#34;)
         if after:
             after = str(after)
@@ -211,6 +213,8 @@ class Str:
                 if not safe:
                     if isinstance(exception_message, str):
                         exception_message += &#39;. &#39;
+                    elif exception_message is None:
+                        exception_message = &#34;&#34;
                     raise KeyError(f&#34;{exception_message}The string ({after}) that followed the search string was not found&#34;)
         else:
             substring = string[startfrom:]
@@ -530,14 +534,14 @@ class Str:
         return string_output
 
     @classmethod
-    def rightpad(cls, string, leng, char=&#34;0&#34;):
+    def rightpad(cls, string, length, char=&#34;0&#34;):
         &#34;&#34;&#34;Adds symbols from char str to right side of output string to change input string len to &#39;length&#39;
         &lt;br&gt;`param string` string, input
         &lt;br&gt;`param length` int, len of output string
         &lt;br&gt;`param char` string, characters, added to right side of input string
         &lt;br&gt;`return` string, with added characters to side of input string
         &#34;&#34;&#34;
-        return cls.leftpad(string, leng, char=char, rightpad=True)
+        return cls.leftpad(string, length, char=char, rightpad=True)
 
     @staticmethod
     def substring(string, before, after=None, return_after_substring=False, safe=False, exception_message=None):
@@ -560,6 +564,8 @@ class Str:
             if not safe:
                 if isinstance(exception_message, str):
                     exception_message += &#39;. &#39;
+                elif exception_message is None:
+                    exception_message = &#34;&#34;
                 raise KeyError(f&#34;{exception_message}The line preceding ({before}) the search string was not found&#34;)
         if after:
             after = str(after)
@@ -576,6 +582,8 @@ class Str:
                 if not safe:
                     if isinstance(exception_message, str):
                         exception_message += &#39;. &#39;
+                    elif exception_message is None:
+                        exception_message = &#34;&#34;
                     raise KeyError(f&#34;{exception_message}The string ({after}) that followed the search string was not found&#34;)
         else:
             substring = string[startfrom:]
@@ -1123,7 +1131,7 @@ def remove_spaces(cls, string_):
 </details>
 </dd>
 <dt id="commands.str9.Str.rightpad"><code class="name flex">
-<span>def <span class="ident">rightpad</span></span>(<span>string, leng, char='0')</span>
+<span>def <span class="ident">rightpad</span></span>(<span>string, length, char='0')</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Adds symbols from char str to right side of output string to change input string len to 'length'
@@ -1134,14 +1142,14 @@ def remove_spaces(cls, string_):
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@classmethod
-def rightpad(cls, string, leng, char=&#34;0&#34;):
+def rightpad(cls, string, length, char=&#34;0&#34;):
     &#34;&#34;&#34;Adds symbols from char str to right side of output string to change input string len to &#39;length&#39;
     &lt;br&gt;`param string` string, input
     &lt;br&gt;`param length` int, len of output string
     &lt;br&gt;`param char` string, characters, added to right side of input string
     &lt;br&gt;`return` string, with added characters to side of input string
     &#34;&#34;&#34;
-    return cls.leftpad(string, leng, char=char, rightpad=True)</code></pre>
+    return cls.leftpad(string, length, char=char, rightpad=True)</code></pre>
 </details>
 </dd>
 <dt id="commands.str9.Str.split_every"><code class="name flex">
@@ -1212,6 +1220,8 @@ def substring(string, before, after=None, return_after_substring=False, safe=Fal
         if not safe:
             if isinstance(exception_message, str):
                 exception_message += &#39;. &#39;
+            elif exception_message is None:
+                exception_message = &#34;&#34;
             raise KeyError(f&#34;{exception_message}The line preceding ({before}) the search string was not found&#34;)
     if after:
         after = str(after)
@@ -1228,6 +1238,8 @@ def substring(string, before, after=None, return_after_substring=False, safe=Fal
             if not safe:
                 if isinstance(exception_message, str):
                     exception_message += &#39;. &#39;
+                elif exception_message is None:
+                    exception_message = &#34;&#34;
                 raise KeyError(f&#34;{exception_message}The string ({after}) that followed the search string was not found&#34;)
     else:
         substring = string[startfrom:]
@@ -1319,7 +1331,7 @@ def to_quotes_2(some_string):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.0</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>

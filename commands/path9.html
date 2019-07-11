@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.6.1" />
+<meta name="generator" content="pdoc 0.6.0" />
 <title>commands.path9 API documentation</title>
 <meta name="description" content="Internal module with funtions to work with path strings" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with funtions to work with path strings
 &#34;&#34;&#34;
-__version__ = &#34;2.4.0&#34;
+__version__ = &#34;2.6.0&#34;
 
 
 class Path:
@@ -97,9 +97,7 @@ class Path:
 
     @staticmethod
     def home():
-        &#34;&#34;&#34;
-        &lt;br&gt;`return` string, home directory of user
-        &#34;&#34;&#34;
+        &#34;&#34;&#34;&lt;br&gt;`return` string, home directory of user&#34;&#34;&#34;
         from .os9 import OS
         from .console9 import Console
         from .const9 import newline, newline2
@@ -159,7 +157,18 @@ class Path:
             return &#39;/tmp&#39;
         else:
             import tempfile
-            return tempfile.gettempdir()</code></pre>
+            return tempfile.gettempdir()
+
+    @staticmethod
+    def safe__file__(__file__):
+        if len(__file__) == 0:
+            return &#39;.&#39;
+        return __file__
+
+    @staticmethod
+    def temp_dir():
+        import tempfile
+        return tempfile.gettempdir()</code></pre>
 </details>
 </section>
 <section>
@@ -246,9 +255,7 @@ class Path:
 
     @staticmethod
     def home():
-        &#34;&#34;&#34;
-        &lt;br&gt;`return` string, home directory of user
-        &#34;&#34;&#34;
+        &#34;&#34;&#34;&lt;br&gt;`return` string, home directory of user&#34;&#34;&#34;
         from .os9 import OS
         from .console9 import Console
         from .const9 import newline, newline2
@@ -308,7 +315,18 @@ class Path:
             return &#39;/tmp&#39;
         else:
             import tempfile
-            return tempfile.gettempdir()</code></pre>
+            return tempfile.gettempdir()
+
+    @staticmethod
+    def safe__file__(__file__):
+        if len(__file__) == 0:
+            return &#39;.&#39;
+        return __file__
+
+    @staticmethod
+    def temp_dir():
+        import tempfile
+        return tempfile.gettempdir()</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -446,9 +464,7 @@ def get_parent(path):
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
 def home():
-    &#34;&#34;&#34;
-    &lt;br&gt;`return` string, home directory of user
-    &#34;&#34;&#34;
+    &#34;&#34;&#34;&lt;br&gt;`return` string, home directory of user&#34;&#34;&#34;
     from .os9 import OS
     from .console9 import Console
     from .const9 import newline, newline2
@@ -473,6 +489,20 @@ def home():
 def python():
     import sys
     return sys.executable</code></pre>
+</details>
+</dd>
+<dt id="commands.path9.Path.safe__file__"><code class="name flex">
+<span>def <span class="ident">safe__file__</span></span>(<span>__file__)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def safe__file__(__file__):
+    if len(__file__) == 0:
+        return &#39;.&#39;
+    return __file__</code></pre>
 </details>
 </dd>
 <dt id="commands.path9.Path.set_working"><code class="name flex">
@@ -516,6 +546,19 @@ def temp():
     else:
         import tempfile
         return tempfile.gettempdir()</code></pre>
+</details>
+</dd>
+<dt id="commands.path9.Path.temp_dir"><code class="name flex">
+<span>def <span class="ident">temp_dir</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def temp_dir():
+    import tempfile
+    return tempfile.gettempdir()</code></pre>
 </details>
 </dd>
 <dt id="commands.path9.Path.working"><code class="name flex">
@@ -562,8 +605,10 @@ def working():
 <li><code><a title="commands.path9.Path.get_parent" href="#commands.path9.Path.get_parent">get_parent</a></code></li>
 <li><code><a title="commands.path9.Path.home" href="#commands.path9.Path.home">home</a></code></li>
 <li><code><a title="commands.path9.Path.python" href="#commands.path9.Path.python">python</a></code></li>
+<li><code><a title="commands.path9.Path.safe__file__" href="#commands.path9.Path.safe__file__">safe__file__</a></code></li>
 <li><code><a title="commands.path9.Path.set_working" href="#commands.path9.Path.set_working">set_working</a></code></li>
 <li><code><a title="commands.path9.Path.temp" href="#commands.path9.Path.temp">temp</a></code></li>
+<li><code><a title="commands.path9.Path.temp_dir" href="#commands.path9.Path.temp_dir">temp_dir</a></code></li>
 <li><code><a title="commands.path9.Path.working" href="#commands.path9.Path.working">working</a></code></li>
 </ul>
 </li>
@@ -573,7 +618,7 @@ def working():
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.0</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.6.1" />
+<meta name="generator" content="pdoc 0.6.0" />
 <title>commands.json9 API documentation</title>
 <meta name="description" content="Internal module to work with JSON" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with JSON
 &#34;&#34;&#34;
-__version__ = &#34;2.6.0&#34;
+__version__ = &#34;2.6.2&#34;
 
 
 class Json:
@@ -101,7 +101,10 @@ class Json:
         # try:
         File.wipe(filename)
         settings_json_text_io = open(filename, &#34;w&#34;, encoding=&#34;utf8&#34;)
-        json_string = Dict.all_keys_lambda(json_string, str)  # make sure that all keys is strings
+        try:
+            json_string = Dict.all_keys_lambda(json_string, str)  # make sure that all keys is strings
+        except TypeError:
+            json_string = str(json_string)
         json.dump(json_string, settings_json_text_io, ensure_ascii=self.ensure_ascii)
         settings_json_text_io.close()
         if not quiet:
@@ -118,7 +121,7 @@ class Json:
             raise IOError(&#34;error while saving JSON, try to repair script at path &#34; +
                           Path.full(sys.argv[0]))
 
-    def _load_from_file(self, filename, quiet=False, debug=False):
+    def _load_from_file(self, file_path, quiet=False, debug=False):
         &#34;&#34;&#34;
         &lt;br&gt;`param filename` path of file, from load JSON
         &lt;br&gt;`param quiet` suppress print to console
@@ -127,25 +130,25 @@ class Json:
         &#34;&#34;&#34;
         import json
         import os
-        # try:
-        if not os.path.isfile(filename):
+        if not os.path.isfile(file_path):
             from .file9 import File
-            File.create(filename)
+            File.create(file_path)
             clean_json = {}
-            self._save_to_file(filename, clean_json)
-        settings_json_text_io = open(filename, encoding=&#34;utf8&#34;)
-        json_string_in_memory = json.load(settings_json_text_io)
-        settings_json_text_io.close()
+            self._save_to_file(file_path, clean_json)
+        with open(file_path, encoding=&#34;utf8&#34;) as file_handle:
+            try:
+                json_string_in_memory = json.load(file_handle)
+            except json.decoder.JSONDecodeError as e:
+                from .file9 import File
+                if File.read(file_path) == &#34;&#34;:
+                    json_string_in_memory = {}
+                else:
+                    raise e
         if not quiet:
             print(&#34;JSON successfully loaded&#34;)
         if debug:
             print(json_string_in_memory)
-        return json_string_in_memory
-        # except:
-        #     import sys
-        #     from .path import Path
-        #     raise IOError(&#34;error while loading JSON, try to repair script at path &#34; +
-        #                   Path.full(sys.argv[0]))</code></pre>
+        return json_string_in_memory</code></pre>
 </details>
 </section>
 <section>
@@ -236,7 +239,10 @@ class Json:
         # try:
         File.wipe(filename)
         settings_json_text_io = open(filename, &#34;w&#34;, encoding=&#34;utf8&#34;)
-        json_string = Dict.all_keys_lambda(json_string, str)  # make sure that all keys is strings
+        try:
+            json_string = Dict.all_keys_lambda(json_string, str)  # make sure that all keys is strings
+        except TypeError:
+            json_string = str(json_string)
         json.dump(json_string, settings_json_text_io, ensure_ascii=self.ensure_ascii)
         settings_json_text_io.close()
         if not quiet:
@@ -253,7 +259,7 @@ class Json:
             raise IOError(&#34;error while saving JSON, try to repair script at path &#34; +
                           Path.full(sys.argv[0]))
 
-    def _load_from_file(self, filename, quiet=False, debug=False):
+    def _load_from_file(self, file_path, quiet=False, debug=False):
         &#34;&#34;&#34;
         &lt;br&gt;`param filename` path of file, from load JSON
         &lt;br&gt;`param quiet` suppress print to console
@@ -262,15 +268,20 @@ class Json:
         &#34;&#34;&#34;
         import json
         import os
-        # try:
-        if not os.path.isfile(filename):
+        if not os.path.isfile(file_path):
             from .file9 import File
-            File.create(filename)
+            File.create(file_path)
             clean_json = {}
-            self._save_to_file(filename, clean_json)
-        settings_json_text_io = open(filename, encoding=&#34;utf8&#34;)
-        json_string_in_memory = json.load(settings_json_text_io)
-        settings_json_text_io.close()
+            self._save_to_file(file_path, clean_json)
+        with open(file_path, encoding=&#34;utf8&#34;) as file_handle:
+            try:
+                json_string_in_memory = json.load(file_handle)
+            except json.decoder.JSONDecodeError as e:
+                from .file9 import File
+                if File.read(file_path) == &#34;&#34;:
+                    json_string_in_memory = {}
+                else:
+                    raise e
         if not quiet:
             print(&#34;JSON successfully loaded&#34;)
         if debug:
@@ -348,7 +359,7 @@ class Json:
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.0</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>

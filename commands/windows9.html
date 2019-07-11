@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.6.1" />
+<meta name="generator" content="pdoc 0.6.0" />
 <title>commands.windows9 API documentation</title>
 <meta name="description" content="Internal module to work with Windows-specific functions" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with Windows-specific functions
 &#34;&#34;&#34;
-__version__ = &#34;0.5.0&#34;
+__version__ = &#34;0.5.1&#34;
 
 class Windows:
     &#34;&#34;&#34;Class to work with Windows-specific functions
@@ -112,6 +112,7 @@ class Windows:
         &#34;&#34;&#34;
         from .path9 import Path
         from .file9 import File
+        from .print9 import Print
         lockfile = Path.combine(Path.commands(), &#34;.windows_codepage_lock&#34;)
         if File.exist(lockfile):
             return cls.get_cmd_code_page()
@@ -120,11 +121,12 @@ class Windows:
             if previous_codepage != 65001:
                 code_page = cls.set_cmd_code_page(65001)
             import os
-            command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ&#39;, end=&#39;\r&#39;)&#34;&#39;&#39;&#39;
-            print(&#34;йЙ&#34;, end=&#34;\r&#34;)
-            print(&#34;  &#34;, end=&#34;\r&#34;)
+            with Print.s_print_lock:
+                command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ&#39;, end=&#39;\r&#39;)&#34;&#39;&#39;&#39;
+            Print(&#34;йЙ&#34;, end=&#34;\r&#34;)
+            Print(&#34;  &#34;, end=&#34;\r&#34;)
             os.system(command)
-            print(&#34;  &#34;, end=&#34;\r&#34;)
+            Print(&#34;  &#34;, end=&#34;\r&#34;)
             return cls.get_cmd_code_page()
         except Exception as e:
             if int(previous_codepage) &gt;= 0:
@@ -132,7 +134,7 @@ class Windows:
                     cls.set_cmd_code_page(previous_codepage)
                 else:
                     cls.set_cmd_code_page(437)
-                print(&#34;  &#34;, end=&#34;\r&#34;)
+                Print(&#34;  &#34;, end=&#34;\r&#34;)
                 from .os9 import OS
                 OS.cyrillic_support = False
                 File.create(lockfile)
@@ -384,6 +386,7 @@ class Windows:
         &#34;&#34;&#34;
         from .path9 import Path
         from .file9 import File
+        from .print9 import Print
         lockfile = Path.combine(Path.commands(), &#34;.windows_codepage_lock&#34;)
         if File.exist(lockfile):
             return cls.get_cmd_code_page()
@@ -392,11 +395,12 @@ class Windows:
             if previous_codepage != 65001:
                 code_page = cls.set_cmd_code_page(65001)
             import os
-            command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ&#39;, end=&#39;\r&#39;)&#34;&#39;&#39;&#39;
-            print(&#34;йЙ&#34;, end=&#34;\r&#34;)
-            print(&#34;  &#34;, end=&#34;\r&#34;)
+            with Print.s_print_lock:
+                command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ&#39;, end=&#39;\r&#39;)&#34;&#39;&#39;&#39;
+            Print(&#34;йЙ&#34;, end=&#34;\r&#34;)
+            Print(&#34;  &#34;, end=&#34;\r&#34;)
             os.system(command)
-            print(&#34;  &#34;, end=&#34;\r&#34;)
+            Print(&#34;  &#34;, end=&#34;\r&#34;)
             return cls.get_cmd_code_page()
         except Exception as e:
             if int(previous_codepage) &gt;= 0:
@@ -404,7 +408,7 @@ class Windows:
                     cls.set_cmd_code_page(previous_codepage)
                 else:
                     cls.set_cmd_code_page(437)
-                print(&#34;  &#34;, end=&#34;\r&#34;)
+                Print(&#34;  &#34;, end=&#34;\r&#34;)
                 from .os9 import OS
                 OS.cyrillic_support = False
                 File.create(lockfile)
@@ -609,6 +613,7 @@ def fix_unicode_encode_error(cls, safe=False):
     &#34;&#34;&#34;
     from .path9 import Path
     from .file9 import File
+    from .print9 import Print
     lockfile = Path.combine(Path.commands(), &#34;.windows_codepage_lock&#34;)
     if File.exist(lockfile):
         return cls.get_cmd_code_page()
@@ -617,11 +622,12 @@ def fix_unicode_encode_error(cls, safe=False):
         if previous_codepage != 65001:
             code_page = cls.set_cmd_code_page(65001)
         import os
-        command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ&#39;, end=&#39;\r&#39;)&#34;&#39;&#39;&#39;
-        print(&#34;йЙ&#34;, end=&#34;\r&#34;)
-        print(&#34;  &#34;, end=&#34;\r&#34;)
+        with Print.s_print_lock:
+            command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ&#39;, end=&#39;\r&#39;)&#34;&#39;&#39;&#39;
+        Print(&#34;йЙ&#34;, end=&#34;\r&#34;)
+        Print(&#34;  &#34;, end=&#34;\r&#34;)
         os.system(command)
-        print(&#34;  &#34;, end=&#34;\r&#34;)
+        Print(&#34;  &#34;, end=&#34;\r&#34;)
         return cls.get_cmd_code_page()
     except Exception as e:
         if int(previous_codepage) &gt;= 0:
@@ -629,7 +635,7 @@ def fix_unicode_encode_error(cls, safe=False):
                 cls.set_cmd_code_page(previous_codepage)
             else:
                 cls.set_cmd_code_page(437)
-            print(&#34;  &#34;, end=&#34;\r&#34;)
+            Print(&#34;  &#34;, end=&#34;\r&#34;)
             from .os9 import OS
             OS.cyrillic_support = False
             File.create(lockfile)
@@ -873,7 +879,7 @@ def user_exists(self, username):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.0</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>
