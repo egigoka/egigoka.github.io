@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with JSON
 &#34;&#34;&#34;
-__version__ = &#34;2.6.2&#34;
+__version__ = &#34;2.7.0&#34;
 
 
 class Json:
@@ -52,6 +52,9 @@ class Json:
     def __setitem__(self, key, value):
         self.save(quiet=self.quiet, debug=self.debug)
         return self.string.__setitem__(key, value)
+
+    def __sizeof__(self):
+        return self.string.__sizeof__()
 
     def load(self, quiet=True):
         &#34;&#34;&#34;Loads json from file, defined in class init to class var &#34;string&#34;
@@ -190,6 +193,9 @@ class Json:
     def __setitem__(self, key, value):
         self.save(quiet=self.quiet, debug=self.debug)
         return self.string.__setitem__(key, value)
+
+    def __sizeof__(self):
+        return self.string.__sizeof__()
 
     def load(self, quiet=True):
         &#34;&#34;&#34;Loads json from file, defined in class init to class var &#34;string&#34;
