@@ -27,72 +27,50 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Global Interpreter Variables
 &#34;&#34;&#34;
-__version__ = &#34;2.3.1&#34;
+__version__ = &#34;0.0.3&#34;
 
 
-class OS:
+class GIV:
     &#34;&#34;&#34;Global Interpreter Variables implementation
     &#34;&#34;&#34;
-    def get(self, var_name):
-        pass
 
-    def set(self, var_name):
-        pass</code></pre>
-</details>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
-<h2 class="section-title" id="header-classes">Classes</h2>
-<dl>
-<dt id="commands.giv9.OS"><code class="flex name class">
-<span>class <span class="ident">OS</span></span>
-<span>(</span><span>*args, **kwargs)</span>
-</code></dt>
-<dd>
-<section class="desc"><p>Global Interpreter Variables implementation</p></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">class OS:
-    &#34;&#34;&#34;Global Interpreter Variables implementation
-    &#34;&#34;&#34;
-    def get(self, var_name):
-        pass
+    json = None
 
-    def set(self, var_name):
-        pass</code></pre>
+    @classmethod
+    def init(cls):
+        if cls.json is None:
+            from .path9 import Path
+            from .json9 import Json
+
+            json_path = Path.combine(Path.temp(), &#34;commands_GIV.json&#34;)
+            cls.json = Json(json_path, debug=False, quiet=True)
+
+    @classmethod
+    def __getitem__(cls, item):
+        cls.init()
+        return cls.json.__getitem__(item)
+
+    @classmethod
+    def __setitem__(cls, key, value):
+        cls.init()
+        return cls.json.__setitem__(key, value)
+
+    @classmethod
+    def clean(cls):
+        cls.init()
+        cls.json.string = {}
+        cls.json.save()
+
+GIV = GIV()</code></pre>
 </details>
-<h3>Methods</h3>
-<dl>
-<dt id="commands.giv9.OS.get"><code class="name flex">
-<span>def <span class="ident">get</span></span>(<span>self, var_name)</span>
-</code></dt>
-<dd>
-<section class="desc"></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">def get(self, var_name):
-    pass</code></pre>
-</details>
-</dd>
-<dt id="commands.giv9.OS.set"><code class="name flex">
-<span>def <span class="ident">set</span></span>(<span>self, var_name)</span>
-</code></dt>
-<dd>
-<section class="desc"></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">def set(self, var_name):
-    pass</code></pre>
-</details>
-</dd>
-</dl>
-</dd>
-</dl>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
 </section>
 </article>
 <nav id="sidebar">
@@ -104,17 +82,6 @@ class OS:
 <li><h3>Super-module</h3>
 <ul>
 <li><code><a title="commands" href="index.html">commands</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-classes">Classes</a></h3>
-<ul>
-<li>
-<h4><code><a title="commands.giv9.OS" href="#commands.giv9.OS">OS</a></code></h4>
-<ul class="">
-<li><code><a title="commands.giv9.OS.get" href="#commands.giv9.OS.get">get</a></code></li>
-<li><code><a title="commands.giv9.OS.set" href="#commands.giv9.OS.set">set</a></code></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>

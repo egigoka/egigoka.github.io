@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with funtions to work with path strings
 &#34;&#34;&#34;
-__version__ = &#34;2.6.0&#34;
+__version__ = &#34;2.5.9&#34;
 
 
 class Path:
@@ -163,12 +163,7 @@ class Path:
     def safe__file__(__file__):
         if len(__file__) == 0:
             return &#39;.&#39;
-        return __file__
-
-    @staticmethod
-    def temp_dir():
-        import tempfile
-        return tempfile.gettempdir()</code></pre>
+        return __file__</code></pre>
 </details>
 </section>
 <section>
@@ -321,12 +316,7 @@ class Path:
     def safe__file__(__file__):
         if len(__file__) == 0:
             return &#39;.&#39;
-        return __file__
-
-    @staticmethod
-    def temp_dir():
-        import tempfile
-        return tempfile.gettempdir()</code></pre>
+        return __file__</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -548,19 +538,6 @@ def temp():
         return tempfile.gettempdir()</code></pre>
 </details>
 </dd>
-<dt id="commands.path9.Path.temp_dir"><code class="name flex">
-<span>def <span class="ident">temp_dir</span></span>(<span>)</span>
-</code></dt>
-<dd>
-<section class="desc"></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">@staticmethod
-def temp_dir():
-    import tempfile
-    return tempfile.gettempdir()</code></pre>
-</details>
-</dd>
 <dt id="commands.path9.Path.working"><code class="name flex">
 <span>def <span class="ident">working</span></span>(<span>)</span>
 </code></dt>
@@ -608,7 +585,6 @@ def working():
 <li><code><a title="commands.path9.Path.safe__file__" href="#commands.path9.Path.safe__file__">safe__file__</a></code></li>
 <li><code><a title="commands.path9.Path.set_working" href="#commands.path9.Path.set_working">set_working</a></code></li>
 <li><code><a title="commands.path9.Path.temp" href="#commands.path9.Path.temp">temp</a></code></li>
-<li><code><a title="commands.path9.Path.temp_dir" href="#commands.path9.Path.temp_dir">temp_dir</a></code></li>
 <li><code><a title="commands.path9.Path.working" href="#commands.path9.Path.working">working</a></code></li>
 </ul>
 </li>
