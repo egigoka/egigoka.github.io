@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.6.0" />
+<meta name="generator" content="pdoc 0.6.2" />
 <title>commands.tsql9 API documentation</title>
 <meta name="description" content="Internal module to interact with transact sql" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with transact sql
 &#34;&#34;&#34;
-__version__ = &#34;0.5.0&#34;
+__version__ = &#34;0.5.2&#34;
 
 
 class TSQL:
@@ -48,13 +48,22 @@ class TSQL:
         if debug:
             Print(&#39;SQL settings:&#34;&#39; + self.connect_to_sql_string + &#39;&#34;&#39;)
             Print(&#34;Trying connect to SQL&#34;)
-        con = pyodbc.connect(self.connect_to_sql_string)
+        try:
+            con = pyodbc.connect(self.connect_to_sql_string)
+        except pyodbc.InterfaceError:
+            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+            raise
         cur = con.cursor()
         if debug:
             Print(&#34;Successful connection to SQL&#34;)
             Print(f&#34;Run with transaction: &#39;{query}&#39;&#34;)
 
-        cur.execute(query)
+        try:
+            cur.execute(query)
+        except pyodbc.ProgrammingError:
+            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+            print(f&#34;query:{query}&#34;)
+            raise
         con.commit()
 
         if debug:
@@ -78,7 +87,12 @@ class TSQL:
             Print(&#34;Successful connection to SQL&#34;)
             Print(f&#34;Run without transaction: &#39;{query}&#39;&#34;)
 
-        cur.execute(query)
+        try:
+            cur.execute(query)
+        except pyodbc.ProgrammingError:
+            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+            print(f&#34;query:{query}&#34;)
+            raise
         while cur.nextset():
             pass
 
@@ -104,7 +118,12 @@ class TSQL:
             Print(f&#34;Run query: &#39;{query}&#39;&#34;)
 
         out = []
-        cur.execute(query)
+        try:
+            cur.execute(query)
+        except pyodbc.ProgrammingError:
+            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+            print(f&#34;query:{query}&#34;)
+            raise
         for row in cur.fetchall():
             out.append(row)
 
@@ -205,13 +224,22 @@ class TSQL:
         if debug:
             Print(&#39;SQL settings:&#34;&#39; + self.connect_to_sql_string + &#39;&#34;&#39;)
             Print(&#34;Trying connect to SQL&#34;)
-        con = pyodbc.connect(self.connect_to_sql_string)
+        try:
+            con = pyodbc.connect(self.connect_to_sql_string)
+        except pyodbc.InterfaceError:
+            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+            raise
         cur = con.cursor()
         if debug:
             Print(&#34;Successful connection to SQL&#34;)
             Print(f&#34;Run with transaction: &#39;{query}&#39;&#34;)
 
-        cur.execute(query)
+        try:
+            cur.execute(query)
+        except pyodbc.ProgrammingError:
+            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+            print(f&#34;query:{query}&#34;)
+            raise
         con.commit()
 
         if debug:
@@ -235,7 +263,12 @@ class TSQL:
             Print(&#34;Successful connection to SQL&#34;)
             Print(f&#34;Run without transaction: &#39;{query}&#39;&#34;)
 
-        cur.execute(query)
+        try:
+            cur.execute(query)
+        except pyodbc.ProgrammingError:
+            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+            print(f&#34;query:{query}&#34;)
+            raise
         while cur.nextset():
             pass
 
@@ -261,7 +294,12 @@ class TSQL:
             Print(f&#34;Run query: &#39;{query}&#39;&#34;)
 
         out = []
-        cur.execute(query)
+        try:
+            cur.execute(query)
+        except pyodbc.ProgrammingError:
+            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+            print(f&#34;query:{query}&#34;)
+            raise
         for row in cur.fetchall():
             out.append(row)
 
@@ -440,7 +478,12 @@ class TSQL:
         Print(f&#34;Run query: &#39;{query}&#39;&#34;)
 
     out = []
-    cur.execute(query)
+    try:
+        cur.execute(query)
+    except pyodbc.ProgrammingError:
+        print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+        print(f&#34;query:{query}&#34;)
+        raise
     for row in cur.fetchall():
         out.append(row)
 
@@ -469,13 +512,22 @@ class TSQL:
     if debug:
         Print(&#39;SQL settings:&#34;&#39; + self.connect_to_sql_string + &#39;&#34;&#39;)
         Print(&#34;Trying connect to SQL&#34;)
-    con = pyodbc.connect(self.connect_to_sql_string)
+    try:
+        con = pyodbc.connect(self.connect_to_sql_string)
+    except pyodbc.InterfaceError:
+        print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+        raise
     cur = con.cursor()
     if debug:
         Print(&#34;Successful connection to SQL&#34;)
         Print(f&#34;Run with transaction: &#39;{query}&#39;&#34;)
 
-    cur.execute(query)
+    try:
+        cur.execute(query)
+    except pyodbc.ProgrammingError:
+        print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+        print(f&#34;query:{query}&#34;)
+        raise
     con.commit()
 
     if debug:
@@ -507,7 +559,12 @@ class TSQL:
         Print(&#34;Successful connection to SQL&#34;)
         Print(f&#34;Run without transaction: &#39;{query}&#39;&#34;)
 
-    cur.execute(query)
+    try:
+        cur.execute(query)
+    except pyodbc.ProgrammingError:
+        print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+        print(f&#34;query:{query}&#34;)
+        raise
     while cur.nextset():
         pass
 
@@ -557,7 +614,7 @@ class TSQL:
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.0</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.2</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>
