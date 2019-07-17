@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with transact sql
 &#34;&#34;&#34;
-__version__ = &#34;0.6.3&#34;
+__version__ = &#34;0.6.4&#34;
 
 
 class TSQL:
@@ -50,9 +50,9 @@ class TSQL:
             Print(&#34;Trying connect to SQL&#34;)
         try:
             con = pyodbc.connect(self.connect_to_sql_string)
-        except pyodbc.InterfaceError:
-            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-            raise
+        except pyodbc.InterfaceError as e:
+            from .const9 import newline
+            raise pyodbc.ProgrammingError(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}{newline}query:{query}{newline}{e}&#34;)
         cur = con.cursor()
         if debug:
             Print(&#34;Successful connection to SQL&#34;)
@@ -60,10 +60,9 @@ class TSQL:
 
         try:
             cur.execute(query)
-        except pyodbc.ProgrammingError:
-            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-            print(f&#34;query:{query}&#34;)
-            raise
+        except pyodbc.ProgrammingError as e:
+            from .const9 import newline
+            raise pyodbc.ProgrammingError(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}{newline}query:{query}{newline}{e}&#34;)
         con.commit()
 
         if debug:
@@ -89,10 +88,9 @@ class TSQL:
 
         try:
             cur.execute(query)
-        except pyodbc.ProgrammingError:
-            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-            print(f&#34;query:{query}&#34;)
-            raise
+        except pyodbc.ProgrammingError as e:
+            from .const9 import newline
+            raise pyodbc.ProgrammingError(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}{newline}query:{query}{newline}{e}&#34;)
         while cur.nextset():
             pass
 
@@ -126,10 +124,9 @@ class TSQL:
 
         try:
             cur.execute(query)
-        except pyodbc.ProgrammingError:
-            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-            print(f&#34;query:{query}&#34;)
-            raise
+        except pyodbc.ProgrammingError as e:
+            from .const9 import newline
+            raise pyodbc.ProgrammingError(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}{newline}query:{query}{newline}{e}&#34;)
 
         out.append(get_rows(cur))
         while cur.nextset():
@@ -236,9 +233,9 @@ class TSQL:
             Print(&#34;Trying connect to SQL&#34;)
         try:
             con = pyodbc.connect(self.connect_to_sql_string)
-        except pyodbc.InterfaceError:
-            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-            raise
+        except pyodbc.InterfaceError as e:
+            from .const9 import newline
+            raise pyodbc.ProgrammingError(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}{newline}query:{query}{newline}{e}&#34;)
         cur = con.cursor()
         if debug:
             Print(&#34;Successful connection to SQL&#34;)
@@ -246,10 +243,9 @@ class TSQL:
 
         try:
             cur.execute(query)
-        except pyodbc.ProgrammingError:
-            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-            print(f&#34;query:{query}&#34;)
-            raise
+        except pyodbc.ProgrammingError as e:
+            from .const9 import newline
+            raise pyodbc.ProgrammingError(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}{newline}query:{query}{newline}{e}&#34;)
         con.commit()
 
         if debug:
@@ -275,10 +271,9 @@ class TSQL:
 
         try:
             cur.execute(query)
-        except pyodbc.ProgrammingError:
-            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-            print(f&#34;query:{query}&#34;)
-            raise
+        except pyodbc.ProgrammingError as e:
+            from .const9 import newline
+            raise pyodbc.ProgrammingError(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}{newline}query:{query}{newline}{e}&#34;)
         while cur.nextset():
             pass
 
@@ -312,10 +307,9 @@ class TSQL:
 
         try:
             cur.execute(query)
-        except pyodbc.ProgrammingError:
-            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-            print(f&#34;query:{query}&#34;)
-            raise
+        except pyodbc.ProgrammingError as e:
+            from .const9 import newline
+            raise pyodbc.ProgrammingError(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}{newline}query:{query}{newline}{e}&#34;)
 
         out.append(get_rows(cur))
         while cur.nextset():
@@ -506,10 +500,9 @@ class TSQL:
 
     try:
         cur.execute(query)
-    except pyodbc.ProgrammingError:
-        print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-        print(f&#34;query:{query}&#34;)
-        raise
+    except pyodbc.ProgrammingError as e:
+        from .const9 import newline
+        raise pyodbc.ProgrammingError(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}{newline}query:{query}{newline}{e}&#34;)
 
     out.append(get_rows(cur))
     while cur.nextset():
@@ -544,9 +537,9 @@ class TSQL:
         Print(&#34;Trying connect to SQL&#34;)
     try:
         con = pyodbc.connect(self.connect_to_sql_string)
-    except pyodbc.InterfaceError:
-        print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-        raise
+    except pyodbc.InterfaceError as e:
+        from .const9 import newline
+        raise pyodbc.ProgrammingError(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}{newline}query:{query}{newline}{e}&#34;)
     cur = con.cursor()
     if debug:
         Print(&#34;Successful connection to SQL&#34;)
@@ -554,10 +547,9 @@ class TSQL:
 
     try:
         cur.execute(query)
-    except pyodbc.ProgrammingError:
-        print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-        print(f&#34;query:{query}&#34;)
-        raise
+    except pyodbc.ProgrammingError as e:
+        from .const9 import newline
+        raise pyodbc.ProgrammingError(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}{newline}query:{query}{newline}{e}&#34;)
     con.commit()
 
     if debug:
@@ -591,10 +583,9 @@ class TSQL:
 
     try:
         cur.execute(query)
-    except pyodbc.ProgrammingError:
-        print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-        print(f&#34;query:{query}&#34;)
-        raise
+    except pyodbc.ProgrammingError as e:
+        from .const9 import newline
+        raise pyodbc.ProgrammingError(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}{newline}query:{query}{newline}{e}&#34;)
     while cur.nextset():
         pass
 
