@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with transact sql
 &#34;&#34;&#34;
-__version__ = &#34;0.6.1&#34;
+__version__ = &#34;0.6.3&#34;
 
 
 class TSQL:
@@ -117,24 +117,19 @@ class TSQL:
             Print(&#34;Successful connection to SQL&#34;)
             Print(f&#34;Run query: &#39;{query}&#39;&#34;)
 
-        # debug shit
-        from .id9 import ID
-        id = ID()
-        print(id.get())
-
         out = []
         def get_rows(cursor):
             output = []
-            try:
-                cursor.execute(query)
-            except pyodbc.ProgrammingError:
-                print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-                print(f&#34;query:{query}&#34;)
-                raise
             for row in cursor.fetchall():
-                print(id.get())
                 output.append(row)
             return output
+
+        try:
+            cur.execute(query)
+        except pyodbc.ProgrammingError:
+            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+            print(f&#34;query:{query}&#34;)
+            raise
 
         out.append(get_rows(cur))
         while cur.nextset():
@@ -197,9 +192,9 @@ class TSQL:
     def get_used_space(self, debug=False):
         from .str9 import Str
 
-        query = &#34;EXEC sp_spaceused @oneresultset = 1&#34;
+        query = &#34;EXEC sp_spaceused&#34;
         answer = self.query(query, debug=debug)
-        data = answer[0][4]
+        data = answer[1][0][1]
         bytes = Str.get_integers(data)[0] * 1024
         return bytes</code></pre>
 </details>
@@ -308,24 +303,19 @@ class TSQL:
             Print(&#34;Successful connection to SQL&#34;)
             Print(f&#34;Run query: &#39;{query}&#39;&#34;)
 
-        # debug shit
-        from .id9 import ID
-        id = ID()
-        print(id.get())
-
         out = []
         def get_rows(cursor):
             output = []
-            try:
-                cursor.execute(query)
-            except pyodbc.ProgrammingError:
-                print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-                print(f&#34;query:{query}&#34;)
-                raise
             for row in cursor.fetchall():
-                print(id.get())
                 output.append(row)
             return output
+
+        try:
+            cur.execute(query)
+        except pyodbc.ProgrammingError:
+            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+            print(f&#34;query:{query}&#34;)
+            raise
 
         out.append(get_rows(cur))
         while cur.nextset():
@@ -388,9 +378,9 @@ class TSQL:
     def get_used_space(self, debug=False):
         from .str9 import Str
 
-        query = &#34;EXEC sp_spaceused @oneresultset = 1&#34;
+        query = &#34;EXEC sp_spaceused&#34;
         answer = self.query(query, debug=debug)
-        data = answer[0][4]
+        data = answer[1][0][1]
         bytes = Str.get_integers(data)[0] * 1024
         return bytes</code></pre>
 </details>
@@ -480,9 +470,9 @@ class TSQL:
 <pre><code class="python">def get_used_space(self, debug=False):
     from .str9 import Str
 
-    query = &#34;EXEC sp_spaceused @oneresultset = 1&#34;
+    query = &#34;EXEC sp_spaceused&#34;
     answer = self.query(query, debug=debug)
-    data = answer[0][4]
+    data = answer[1][0][1]
     bytes = Str.get_integers(data)[0] * 1024
     return bytes</code></pre>
 </details>
@@ -507,24 +497,19 @@ class TSQL:
         Print(&#34;Successful connection to SQL&#34;)
         Print(f&#34;Run query: &#39;{query}&#39;&#34;)
 
-    # debug shit
-    from .id9 import ID
-    id = ID()
-    print(id.get())
-
     out = []
     def get_rows(cursor):
         output = []
-        try:
-            cursor.execute(query)
-        except pyodbc.ProgrammingError:
-            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-            print(f&#34;query:{query}&#34;)
-            raise
         for row in cursor.fetchall():
-            print(id.get())
             output.append(row)
         return output
+
+    try:
+        cur.execute(query)
+    except pyodbc.ProgrammingError:
+        print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+        print(f&#34;query:{query}&#34;)
+        raise
 
     out.append(get_rows(cur))
     while cur.nextset():
