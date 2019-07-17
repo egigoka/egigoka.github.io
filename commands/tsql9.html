@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with transact sql
 &#34;&#34;&#34;
-__version__ = &#34;0.5.2&#34;
+__version__ = &#34;0.6.0&#34;
 
 
 class TSQL:
@@ -118,14 +118,21 @@ class TSQL:
             Print(f&#34;Run query: &#39;{query}&#39;&#34;)
 
         out = []
-        try:
-            cur.execute(query)
-        except pyodbc.ProgrammingError:
-            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-            print(f&#34;query:{query}&#34;)
-            raise
-        for row in cur.fetchall():
-            out.append(row)
+        def get_rows(cursor):
+            output = []
+            try:
+                cursor.execute(query)
+            except pyodbc.ProgrammingError:
+                print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+                print(f&#34;query:{query}&#34;)
+                raise
+            for row in cursor.fetchall():
+                output.append(row)
+            return output
+
+        out.append(get_rows(cur))
+        while cur.nextset():
+            out.append(get_rows(cur))
 
         if debug:
             Print(f&#34;End &#39;{query}&#39;&#34;)
@@ -135,6 +142,8 @@ class TSQL:
         if debug:
             Print(&#34;Close connection done&#34;)
 
+        if len(out) == 1:
+            return out[0]
         return out
 
     def drop_database(self, sql_database, force=False):
@@ -294,14 +303,21 @@ class TSQL:
             Print(f&#34;Run query: &#39;{query}&#39;&#34;)
 
         out = []
-        try:
-            cur.execute(query)
-        except pyodbc.ProgrammingError:
-            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-            print(f&#34;query:{query}&#34;)
-            raise
-        for row in cur.fetchall():
-            out.append(row)
+        def get_rows(cursor):
+            output = []
+            try:
+                cursor.execute(query)
+            except pyodbc.ProgrammingError:
+                print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+                print(f&#34;query:{query}&#34;)
+                raise
+            for row in cursor.fetchall():
+                output.append(row)
+            return output
+
+        out.append(get_rows(cur))
+        while cur.nextset():
+            out.append(get_rows(cur))
 
         if debug:
             Print(f&#34;End &#39;{query}&#39;&#34;)
@@ -311,6 +327,8 @@ class TSQL:
         if debug:
             Print(&#34;Close connection done&#34;)
 
+        if len(out) == 1:
+            return out[0]
         return out
 
     def drop_database(self, sql_database, force=False):
@@ -478,14 +496,21 @@ class TSQL:
         Print(f&#34;Run query: &#39;{query}&#39;&#34;)
 
     out = []
-    try:
-        cur.execute(query)
-    except pyodbc.ProgrammingError:
-        print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
-        print(f&#34;query:{query}&#34;)
-        raise
-    for row in cur.fetchall():
-        out.append(row)
+    def get_rows(cursor):
+        output = []
+        try:
+            cursor.execute(query)
+        except pyodbc.ProgrammingError:
+            print(f&#34;self.connect_to_sql_string:&#39;{self.connect_to_sql_string}&#39;&#34;)
+            print(f&#34;query:{query}&#34;)
+            raise
+        for row in cursor.fetchall():
+            output.append(row)
+        return output
+
+    out.append(get_rows(cur))
+    while cur.nextset():
+        out.append(get_rows(cur))
 
     if debug:
         Print(f&#34;End &#39;{query}&#39;&#34;)
@@ -495,6 +520,8 @@ class TSQL:
     if debug:
         Print(&#34;Close connection done&#34;)
 
+    if len(out) == 1:
+        return out[0]
     return out</code></pre>
 </details>
 </dd>
