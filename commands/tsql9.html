@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with transact sql
 &#34;&#34;&#34;
-__version__ = &#34;0.6.4&#34;
+__version__ = &#34;0.6.5&#34;
 
 
 class TSQL:
@@ -69,6 +69,8 @@ class TSQL:
             Print(f&#34;End &#39;{query}&#39;&#34;)
             Print(&#34;Try to close connection&#34;)
         cur.close()
+
+        con.commit()
         con.close()
         if debug:
             Print(&#34;Close connection done&#34;)
@@ -252,6 +254,8 @@ class TSQL:
             Print(f&#34;End &#39;{query}&#39;&#34;)
             Print(&#34;Try to close connection&#34;)
         cur.close()
+
+        con.commit()
         con.close()
         if debug:
             Print(&#34;Close connection done&#34;)
@@ -556,6 +560,8 @@ class TSQL:
         Print(f&#34;End &#39;{query}&#39;&#34;)
         Print(&#34;Try to close connection&#34;)
     cur.close()
+
+    con.commit()
     con.close()
     if debug:
         Print(&#34;Close connection done&#34;)</code></pre>
