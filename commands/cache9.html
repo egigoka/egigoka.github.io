@@ -24,7 +24,7 @@
 <summary>Source code</summary>
 <pre><code class="python">#! python3
 # -*- coding: utf-8 -*-
-__version__ = &#34;0.1.1&#34;
+__version__ = &#34;0.1.2&#34;
 
 from .dict9 import imdict
 
@@ -39,16 +39,23 @@ class Cache:
         self.bench = bench
         if bench is None:
             self.bench = Bench(&#34;cache updated in&#34;, quiet=quiet)
-        self.stored_output = None
         self.func = func
         self.args = args
         self.kwargs = kwargs
 
+    def run(self):
+        self.stored_output = self.func(*self.args, **self.kwargs)
+        self.bench.end()
+
     def __call__(self):
         if self.counter.get() % self.update_every == 0:
-            self.stored_output = self.func(*self.args, **self.kwargs)
-            self.bench.end()
-        return self.stored_output
+            self.run()
+        try:
+            return self.stored_output
+        except AttributeError:
+            self.run()
+            return self.stored_output
+
 
 
 class CachedFunction:
@@ -105,17 +112,38 @@ class CachedFunction:
         self.bench = bench
         if bench is None:
             self.bench = Bench(&#34;cache updated in&#34;, quiet=quiet)
-        self.stored_output = None
         self.func = func
         self.args = args
         self.kwargs = kwargs
 
+    def run(self):
+        self.stored_output = self.func(*self.args, **self.kwargs)
+        self.bench.end()
+
     def __call__(self):
         if self.counter.get() % self.update_every == 0:
-            self.stored_output = self.func(*self.args, **self.kwargs)
-            self.bench.end()
-        return self.stored_output</code></pre>
+            self.run()
+        try:
+            return self.stored_output
+        except AttributeError:
+            self.run()
+            return self.stored_output</code></pre>
 </details>
+<h3>Methods</h3>
+<dl>
+<dt id="commands.cache9.Cache.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def run(self):
+    self.stored_output = self.func(*self.args, **self.kwargs)
+    self.bench.end()</code></pre>
+</details>
+</dd>
+</dl>
 </dd>
 <dt id="commands.cache9.CachedFunction"><code class="flex name class">
 <span>class <span class="ident">CachedFunction</span></span>
@@ -189,6 +217,9 @@ class CachedFunction:
 <ul>
 <li>
 <h4><code><a title="commands.cache9.Cache" href="#commands.cache9.Cache">Cache</a></code></h4>
+<ul class="">
+<li><code><a title="commands.cache9.Cache.run" href="#commands.cache9.Cache.run">run</a></code></li>
+</ul>
 </li>
 <li>
 <h4><code><a title="commands.cache9.CachedFunction" href="#commands.cache9.CachedFunction">CachedFunction</a></code></h4>
