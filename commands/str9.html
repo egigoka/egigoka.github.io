@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions for managing strings.
 &#34;&#34;&#34;
-__version__ = &#34;0.13.2&#34;
+__version__ = &#34;0.13.3&#34;
 
 
 class Str:
@@ -137,13 +137,11 @@ class Str:
             raise ValueError(&#34;type&#34;, type(string), &#34;isn&#39;t supported by Str.split_every&#34;)
         string = str(string)
         import re
-        output_lines = []
         char_exists = &#34;.&#34;
         char_can_be_exists = &#34;.?&#34;
         regexp = char_exists + char_can_be_exists*(chars-1)
-        for line in re.findall(regexp, string):  # todo can I just return this list?
-            output_lines += [line]
-        return output_lines
+        return re.findall(regexp, string, re.DOTALL)
+
 
     @staticmethod
     def leftpad(string, length, char=&#34;0&#34;, rightpad=False):
@@ -506,13 +504,11 @@ class Str:
             raise ValueError(&#34;type&#34;, type(string), &#34;isn&#39;t supported by Str.split_every&#34;)
         string = str(string)
         import re
-        output_lines = []
         char_exists = &#34;.&#34;
         char_can_be_exists = &#34;.?&#34;
         regexp = char_exists + char_can_be_exists*(chars-1)
-        for line in re.findall(regexp, string):  # todo can I just return this list?
-            output_lines += [line]
-        return output_lines
+        return re.findall(regexp, string, re.DOTALL)
+
 
     @staticmethod
     def leftpad(string, length, char=&#34;0&#34;, rightpad=False):
@@ -1176,13 +1172,10 @@ def split_every(string, chars):
         raise ValueError(&#34;type&#34;, type(string), &#34;isn&#39;t supported by Str.split_every&#34;)
     string = str(string)
     import re
-    output_lines = []
     char_exists = &#34;.&#34;
     char_can_be_exists = &#34;.?&#34;
     regexp = char_exists + char_can_be_exists*(chars-1)
-    for line in re.findall(regexp, string):  # todo can I just return this list?
-        output_lines += [line]
-    return output_lines</code></pre>
+    return re.findall(regexp, string, re.DOTALL)</code></pre>
 </details>
 </dd>
 <dt id="commands.str9.Str.substring"><code class="name flex">
