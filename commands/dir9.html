@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with directories
 &#34;&#34;&#34;
-__version__ = &#34;1.2.0&#34;
+__version__ = &#34;1.2.1&#34;
 
 
 class Dir:
@@ -70,10 +70,12 @@ class Dir:
         &lt;br&gt;`return` int count of files in directory
         &#34;&#34;&#34;
         import os
-        dir_contents = cls.list_of_files(path)
+        cnt = 0
+        for root, dirs, files in os.walk(path):
+            cnt += len(files)
         if not quiet:
-            print(os.path.split(path)[1], &#34;contain&#34;, len(dir_contents), &#34;files&#34;)
-        return len(dir_contents)
+            print(os.path.split(path)[1], &#34;contain&#34;, cnt, &#34;files&#34;)
+        return cnt
 
     @classmethod
     def batch_rename(cls, directory, previous_name_substring, new_name_substring, quiet=False):
@@ -312,10 +314,12 @@ class Dir:
         &lt;br&gt;`return` int count of files in directory
         &#34;&#34;&#34;
         import os
-        dir_contents = cls.list_of_files(path)
+        cnt = 0
+        for root, dirs, files in os.walk(path):
+            cnt += len(files)
         if not quiet:
-            print(os.path.split(path)[1], &#34;contain&#34;, len(dir_contents), &#34;files&#34;)
-        return len(dir_contents)
+            print(os.path.split(path)[1], &#34;contain&#34;, cnt, &#34;files&#34;)
+        return cnt
 
     @classmethod
     def batch_rename(cls, directory, previous_name_substring, new_name_substring, quiet=False):
@@ -847,10 +851,12 @@ def number_of_files(cls, path, quiet=True):
     &lt;br&gt;`return` int count of files in directory
     &#34;&#34;&#34;
     import os
-    dir_contents = cls.list_of_files(path)
+    cnt = 0
+    for root, dirs, files in os.walk(path):
+        cnt += len(files)
     if not quiet:
-        print(os.path.split(path)[1], &#34;contain&#34;, len(dir_contents), &#34;files&#34;)
-    return len(dir_contents)</code></pre>
+        print(os.path.split(path)[1], &#34;contain&#34;, cnt, &#34;files&#34;)
+    return cnt</code></pre>
 </details>
 </dd>
 </dl>
