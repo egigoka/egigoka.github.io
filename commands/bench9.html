@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with Bench factory function
 &#34;&#34;&#34;
-__version__ = &#34;0.5.1&#34;
+__version__ = &#34;0.5.2&#34;
 
 
 class Bench:
@@ -65,7 +65,7 @@ class Bench:
         self.time_end = datetime.datetime.now()
         return Time.delta(self.time_start, self.time_end)
 
-    def end(self, prefix_string=None, quiet_if_zero=False, start_immediately=False):
+    def end(self, prefix_string=None, quiet_if_zero=False, start_immediately=False, quiet=None):
         &#34;&#34;&#34;End benchmarking`
         return time difference between start and end of bencmarking, print string with prefix
         and time difference.
@@ -75,11 +75,13 @@ class Bench:
         &lt;br&gt;`param start_immediately` change start time of current Bench class to current time
         &lt;br&gt;`return` float, delta between start and end
         &#34;&#34;&#34;
+        if quiet is None:
+            quiet = self.quiet
         delta = self.get()
         self.start()
         if prefix_string:
             self.prefix = prefix_string
-        if not self.quiet:
+        if not quiet:
             # print(not quiet_if_zero, str(round(delta, cls.fraction_digits)),
             # (str(round(delta, cls.fraction_digits)) != &#34;0.0&#34;),
             # (not quiet_if_zero) and (str(round(delta, cls.fraction_digits)) != &#34;0.0&#34;))
@@ -150,7 +152,7 @@ class Bench:
         self.time_end = datetime.datetime.now()
         return Time.delta(self.time_start, self.time_end)
 
-    def end(self, prefix_string=None, quiet_if_zero=False, start_immediately=False):
+    def end(self, prefix_string=None, quiet_if_zero=False, start_immediately=False, quiet=None):
         &#34;&#34;&#34;End benchmarking`
         return time difference between start and end of bencmarking, print string with prefix
         and time difference.
@@ -160,11 +162,13 @@ class Bench:
         &lt;br&gt;`param start_immediately` change start time of current Bench class to current time
         &lt;br&gt;`return` float, delta between start and end
         &#34;&#34;&#34;
+        if quiet is None:
+            quiet = self.quiet
         delta = self.get()
         self.start()
         if prefix_string:
             self.prefix = prefix_string
-        if not self.quiet:
+        if not quiet:
             # print(not quiet_if_zero, str(round(delta, cls.fraction_digits)),
             # (str(round(delta, cls.fraction_digits)) != &#34;0.0&#34;),
             # (not quiet_if_zero) and (str(round(delta, cls.fraction_digits)) != &#34;0.0&#34;))
@@ -181,7 +185,7 @@ class Bench:
 <h3>Methods</h3>
 <dl>
 <dt id="commands.bench9.Bench.end"><code class="name flex">
-<span>def <span class="ident">end</span></span>(<span>self, prefix_string=None, quiet_if_zero=False, start_immediately=False)</span>
+<span>def <span class="ident">end</span></span>(<span>self, prefix_string=None, quiet_if_zero=False, start_immediately=False, quiet=None)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>End benchmarking<code>return time difference between start and end of bencmarking, print string with prefix
@@ -193,7 +197,7 @@ cls.fraction_digits
 &lt;br&gt;</code>return` float, delta between start and end</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def end(self, prefix_string=None, quiet_if_zero=False, start_immediately=False):
+<pre><code class="python">def end(self, prefix_string=None, quiet_if_zero=False, start_immediately=False, quiet=None):
     &#34;&#34;&#34;End benchmarking`
     return time difference between start and end of bencmarking, print string with prefix
     and time difference.
@@ -203,11 +207,13 @@ cls.fraction_digits
     &lt;br&gt;`param start_immediately` change start time of current Bench class to current time
     &lt;br&gt;`return` float, delta between start and end
     &#34;&#34;&#34;
+    if quiet is None:
+        quiet = self.quiet
     delta = self.get()
     self.start()
     if prefix_string:
         self.prefix = prefix_string
-    if not self.quiet:
+    if not quiet:
         # print(not quiet_if_zero, str(round(delta, cls.fraction_digits)),
         # (str(round(delta, cls.fraction_digits)) != &#34;0.0&#34;),
         # (not quiet_if_zero) and (str(round(delta, cls.fraction_digits)) != &#34;0.0&#34;))

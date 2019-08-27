@@ -64,7 +64,7 @@ class File:
             print(f&#34;File {filename} created&#34;)
 
     @classmethod
-    def delete(cls, path, quiet=False, no_sleep=False):
+    def delete(cls, path, quiet=True, no_sleep=False):
         &#34;&#34;&#34;
         &lt;br&gt;`param path` string with path to deleting file
         &lt;br&gt;`param quiet` boolean, suppress print to console
@@ -369,7 +369,7 @@ class File:
             print(f&#34;File {filename} created&#34;)
 
     @classmethod
-    def delete(cls, path, quiet=False, no_sleep=False):
+    def delete(cls, path, quiet=True, no_sleep=False):
         &#34;&#34;&#34;
         &lt;br&gt;`param path` string with path to deleting file
         &lt;br&gt;`param quiet` boolean, suppress print to console
@@ -741,7 +741,7 @@ def create(cls, filename, quiet=True):
 </details>
 </dd>
 <dt id="commands.file9.File.delete"><code class="name flex">
-<span>def <span class="ident">delete</span></span>(<span>path, quiet=False, no_sleep=False)</span>
+<span>def <span class="ident">delete</span></span>(<span>path, quiet=True, no_sleep=False)</span>
 </code></dt>
 <dd>
 <section class="desc"><p><br><code>param path</code> string with path to deleting file
@@ -752,7 +752,7 @@ deleted before next code run)
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@classmethod
-def delete(cls, path, quiet=False, no_sleep=False):
+def delete(cls, path, quiet=True, no_sleep=False):
     &#34;&#34;&#34;
     &lt;br&gt;`param path` string with path to deleting file
     &lt;br&gt;`param quiet` boolean, suppress print to console
