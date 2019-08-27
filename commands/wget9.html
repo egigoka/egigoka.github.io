@@ -27,14 +27,14 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module wrapper to cli wget
 &#34;&#34;&#34;
-__version__ = &#34;0.2.14&#34;
+__version__ = &#34;0.2.15&#34;
 
 
 class Wget:  # pylint: disable=too-few-public-methods
     &#34;&#34;&#34;Class wrapper to cli wget
     &#34;&#34;&#34;
     @classmethod
-    def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;):  # pylint: disable=inconsistent-return-statements
+    def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;, timeout=None):  # pylint: disable=inconsistent-return-statements
         &#34;&#34;&#34;Wrapper to wget cli
         &lt;br&gt;`param url` string, url to some file
         &lt;br&gt;`param output_filename` string, path to filename
@@ -59,7 +59,7 @@ class Wget:  # pylint: disable=too-few-public-methods
         if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
             Dir.create(os.path.split(output_filename)[0])
         try:
-            output = Console.get_output(commands, print_std=not quiet, auto_disable_py_buffering=False).strip(&#34; \r\n&#34;)
+            output = Console.get_output(commands, print_std=not quiet, auto_disable_py_buffering=False, timeout=timeout).strip(&#34; \r\n&#34;)
             return output
         except FileNotFoundError as exception:
             if wget_path == &#34;wget&#34;:
@@ -95,7 +95,7 @@ class Wget:  # pylint: disable=too-few-public-methods
     &#34;&#34;&#34;Class wrapper to cli wget
     &#34;&#34;&#34;
     @classmethod
-    def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;):  # pylint: disable=inconsistent-return-statements
+    def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;, timeout=None):  # pylint: disable=inconsistent-return-statements
         &#34;&#34;&#34;Wrapper to wget cli
         &lt;br&gt;`param url` string, url to some file
         &lt;br&gt;`param output_filename` string, path to filename
@@ -120,7 +120,7 @@ class Wget:  # pylint: disable=too-few-public-methods
         if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
             Dir.create(os.path.split(output_filename)[0])
         try:
-            output = Console.get_output(commands, print_std=not quiet, auto_disable_py_buffering=False).strip(&#34; \r\n&#34;)
+            output = Console.get_output(commands, print_std=not quiet, auto_disable_py_buffering=False, timeout=timeout).strip(&#34; \r\n&#34;)
             return output
         except FileNotFoundError as exception:
             if wget_path == &#34;wget&#34;:
@@ -136,7 +136,7 @@ class Wget:  # pylint: disable=too-few-public-methods
 <h3>Static methods</h3>
 <dl>
 <dt id="commands.wget9.Wget.download"><code class="name flex">
-<span>def <span class="ident">download</span></span>(<span>url, output_filename, quiet=False, no_check_certificate=False, wget_path='wget')</span>
+<span>def <span class="ident">download</span></span>(<span>url, output_filename, quiet=False, no_check_certificate=False, wget_path='wget', timeout=None)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Wrapper to wget cli
@@ -147,7 +147,7 @@ class Wget:  # pylint: disable=too-few-public-methods
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@classmethod
-def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;):  # pylint: disable=inconsistent-return-statements
+def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;, timeout=None):  # pylint: disable=inconsistent-return-statements
     &#34;&#34;&#34;Wrapper to wget cli
     &lt;br&gt;`param url` string, url to some file
     &lt;br&gt;`param output_filename` string, path to filename
@@ -172,7 +172,7 @@ def download(cls, url, output_filename, quiet=False, no_check_certificate=False,
     if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
         Dir.create(os.path.split(output_filename)[0])
     try:
-        output = Console.get_output(commands, print_std=not quiet, auto_disable_py_buffering=False).strip(&#34; \r\n&#34;)
+        output = Console.get_output(commands, print_std=not quiet, auto_disable_py_buffering=False, timeout=timeout).strip(&#34; \r\n&#34;)
         return output
     except FileNotFoundError as exception:
         if wget_path == &#34;wget&#34;:
