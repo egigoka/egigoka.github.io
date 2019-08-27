@@ -122,11 +122,11 @@ class Windows:
                 code_page = cls.set_cmd_code_page(65001)
             import os
             with Print.s_print_lock:
-                command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ&#39;, end=&#39;\r&#39;)&#34;&#39;&#39;&#39;
-            Print(&#34;йЙ&#34;, end=&#34;\r&#34;)
-            Print(&#34;  &#34;, end=&#34;\r&#34;)
+                command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ\r&#39;, end=&#39;&#39;)&#34;&#39;&#39;&#39;
+            Print(&#34;йЙ\r&#34;, end=&#34;&#34;)
+            Print(&#34;  \r&#34;, end=&#34;&#34;)
             os.system(command)
-            Print(&#34;  &#34;, end=&#34;\r&#34;)
+            Print(&#34;  \r&#34;, end=&#34;&#34;)
             return cls.get_cmd_code_page()
         except Exception as e:
             if int(previous_codepage) &gt;= 0:
@@ -134,7 +134,7 @@ class Windows:
                     cls.set_cmd_code_page(previous_codepage)
                 else:
                     cls.set_cmd_code_page(437)
-                Print(&#34;  &#34;, end=&#34;\r&#34;)
+                Print(&#34;  \r&#34;, end=&#34;&#34;)
                 from .os9 import OS
                 OS.cyrillic_support = False
                 File.create(lockfile)
@@ -396,11 +396,11 @@ class Windows:
                 code_page = cls.set_cmd_code_page(65001)
             import os
             with Print.s_print_lock:
-                command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ&#39;, end=&#39;\r&#39;)&#34;&#39;&#39;&#39;
-            Print(&#34;йЙ&#34;, end=&#34;\r&#34;)
-            Print(&#34;  &#34;, end=&#34;\r&#34;)
+                command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ\r&#39;, end=&#39;&#39;)&#34;&#39;&#39;&#39;
+            Print(&#34;йЙ\r&#34;, end=&#34;&#34;)
+            Print(&#34;  \r&#34;, end=&#34;&#34;)
             os.system(command)
-            Print(&#34;  &#34;, end=&#34;\r&#34;)
+            Print(&#34;  \r&#34;, end=&#34;&#34;)
             return cls.get_cmd_code_page()
         except Exception as e:
             if int(previous_codepage) &gt;= 0:
@@ -408,7 +408,7 @@ class Windows:
                     cls.set_cmd_code_page(previous_codepage)
                 else:
                     cls.set_cmd_code_page(437)
-                Print(&#34;  &#34;, end=&#34;\r&#34;)
+                Print(&#34;  \r&#34;, end=&#34;&#34;)
                 from .os9 import OS
                 OS.cyrillic_support = False
                 File.create(lockfile)
@@ -623,11 +623,11 @@ def fix_unicode_encode_error(cls, safe=False):
             code_page = cls.set_cmd_code_page(65001)
         import os
         with Print.s_print_lock:
-            command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ&#39;, end=&#39;\r&#39;)&#34;&#39;&#39;&#39;
-        Print(&#34;йЙ&#34;, end=&#34;\r&#34;)
-        Print(&#34;  &#34;, end=&#34;\r&#34;)
+            command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ\r&#39;, end=&#39;&#39;)&#34;&#39;&#39;&#39;
+        Print(&#34;йЙ\r&#34;, end=&#34;&#34;)
+        Print(&#34;  \r&#34;, end=&#34;&#34;)
         os.system(command)
-        Print(&#34;  &#34;, end=&#34;\r&#34;)
+        Print(&#34;  \r&#34;, end=&#34;&#34;)
         return cls.get_cmd_code_page()
     except Exception as e:
         if int(previous_codepage) &gt;= 0:
@@ -635,7 +635,7 @@ def fix_unicode_encode_error(cls, safe=False):
                 cls.set_cmd_code_page(previous_codepage)
             else:
                 cls.set_cmd_code_page(437)
-            Print(&#34;  &#34;, end=&#34;\r&#34;)
+            Print(&#34;  \r&#34;, end=&#34;&#34;)
             from .os9 import OS
             OS.cyrillic_support = False
             File.create(lockfile)
