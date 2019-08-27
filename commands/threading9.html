@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;1.3.3&#34;
+__version__ = &#34;1.3.4&#34;
 
 from .dict9 import imdict
 
@@ -150,7 +150,8 @@ class Threading:
                     from .print9 import Print
                     Print(&#34;alive:&#34;, alive)
         except (KeyboardInterrupt, SystemExit):
-                self.raise_exception()
+            self.raise_exception()
+            raise
 
     def cleanup(self):
         &#34;&#34;&#34;Just clean queue&#34;&#34;&#34;
@@ -412,7 +413,8 @@ class Threading:
                     from .print9 import Print
                     Print(&#34;alive:&#34;, alive)
         except (KeyboardInterrupt, SystemExit):
-                self.raise_exception()
+            self.raise_exception()
+            raise
 
     def cleanup(self):
         &#34;&#34;&#34;Just clean queue&#34;&#34;&#34;
@@ -526,7 +528,8 @@ class Threading:
                 from .print9 import Print
                 Print(&#34;alive:&#34;, alive)
     except (KeyboardInterrupt, SystemExit):
-            self.raise_exception()</code></pre>
+        self.raise_exception()
+        raise</code></pre>
 </details>
 </dd>
 </dl>
