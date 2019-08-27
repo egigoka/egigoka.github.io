@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with files
 &#34;&#34;&#34;
-__version__ = &#34;1.0.6&#34;
+__version__ = &#34;1.0.7&#34;
 # pylint: disable=c-extension-no-member
 
 
@@ -236,7 +236,7 @@ class File:
                     file.close()
                     return content
         elif mode in [&#34;b&#34;, &#34;rb&#34;]:
-            with open(path, &#34;rb&#34;, encoding=encoding) as file:
+            with open(path, &#34;rb&#34;) as file:
                 content = file.read()
                 file.close()
                 return content
@@ -541,7 +541,7 @@ class File:
                     file.close()
                     return content
         elif mode in [&#34;b&#34;, &#34;rb&#34;]:
-            with open(path, &#34;rb&#34;, encoding=encoding) as file:
+            with open(path, &#34;rb&#34;) as file:
                 content = file.read()
                 file.close()
                 return content
@@ -962,7 +962,7 @@ def read(path, encoding=&#34;utf-8&#34;, auto_detect_encoding=False, quiet=True,
                 file.close()
                 return content
     elif mode in [&#34;b&#34;, &#34;rb&#34;]:
-        with open(path, &#34;rb&#34;, encoding=encoding) as file:
+        with open(path, &#34;rb&#34;) as file:
             content = file.read()
             file.close()
             return content</code></pre>
