@@ -27,292 +27,202 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to check some environment properties
 &#34;&#34;&#34;
-import sys  # static module
-import platform  # static module
-__version__ = &#34;2.3.1&#34;
+__version__ = &#34;3.0.0&#34;
 
 
 class OS:  # pylint: disable=too-few-public-methods
     &#34;&#34;&#34;Class with some environment properties
     &#34;&#34;&#34;
-    sys_version_info = sys.version_info
-    is_python3 = sys.version_info &gt;= (3, 0)
-    python_version_major = sys.version_info.major # int of major python version
-    python_commandline_version = &#34;&#34;
-    if is_python3:
-        python_commandline_version = &#34;3&#34; # string of addable &#34;3&#34; to commandline apps if python is 3rd version
-
-    nt_family = False
-    unix_family = False
-
-    windows = False
-    macos = False
-    linux = False
-
-    windows_version = None  # only on Windows, integer of major version of Windows
-
-    display = None  # didn&#39;t work yet
-    cyrillic_support = None  # boolean variable of cyrrilic output support
-
-    sys_platfrom = sys.platform
-    if sys_platfrom == &#34;linux&#34; or sys_platfrom == &#34;linux2&#34;:
-        linux = True
-        name = &#34;linux&#34;
-    elif sys_platfrom == &#34;win32&#34; or sys_platfrom == &#34;cygwin&#34;:
-        windows = True
-        windows_version = sys.getwindowsversion().major
-        name = &#34;windows&#34;
-    elif sys_platfrom == &#34;darwin&#34;:
-        macos = True
-        name = &#34;macos&#34;
-    else:
-        name = &#34;unknown&#34;
-
-    architecture = platform.architecture()[0]
-
-    if platform.python_implementation == &#34;PyPy&#34;:
-        python_implementation = &#34;pypy&#34;
-    else:
-        python_implementation = &#34;cpython&#34;
-
-    if windows:
-        nt_family = True
-    elif macos or linux:
-        unix_family = True
-
-    try:
-        if linux:
-            from Xlib.display import Display
-        display = True
-    except ImportError:
-        display = False
-        print(&#34;Your system haven&#39;t display -_-&#34;)
-
-    @staticmethod
-    def running_in_repl():
+    @property
+    def is_python3(self):
         try:
-            sys.ps1  # pylint: disable = pointless-statement, no-member
-            sys.ps2  # pylint: disable = pointless-statement, no-member
-            return True
+            return self._is_python3
         except AttributeError:
-            return False
+            import sys
+            self._is_python3 = sys.version_info &gt;= (3, 0)
+            return self._is_python3
 
-    try:
-        #if windows:
-        #cyr_line = &#34;йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ&#34;
-        cyr_line = &#34;йЙ&#34;
-        if windows and sys.version_info &lt; (3, 6):
-            try:
-                import win_unicode_console  # pylint: disable=import-error
-                win_unicode_console.enable()
-            except:  # pylint: disable=bare-except
-                pass
-        for cyr_symbol in cyr_line:
-            print(cyr_symbol * 2 + &#34;\r&#34;, end=&#34;&#34;)
-        print(&#34;  \r&#34;, end=&#34;&#34;)
-        cyrillic_support = True
-    except (UnicodeEncodeError, PermissionError) as err:
-        cyrillic_support = False
-
-    </code></pre>
-</details>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
-<h2 class="section-title" id="header-classes">Classes</h2>
-<dl>
-<dt id="commands.os9.OS"><code class="flex name class">
-<span>class <span class="ident">OS</span></span>
-<span>(</span><span>*args, **kwargs)</span>
-</code></dt>
-<dd>
-<section class="desc"><p>Class with some environment properties</p></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">class OS:  # pylint: disable=too-few-public-methods
-    &#34;&#34;&#34;Class with some environment properties
-    &#34;&#34;&#34;
-    sys_version_info = sys.version_info
-    is_python3 = sys.version_info &gt;= (3, 0)
-    python_version_major = sys.version_info.major # int of major python version
-    python_commandline_version = &#34;&#34;
-    if is_python3:
-        python_commandline_version = &#34;3&#34; # string of addable &#34;3&#34; to commandline apps if python is 3rd version
-
-    nt_family = False
-    unix_family = False
-
-    windows = False
-    macos = False
-    linux = False
-
-    windows_version = None  # only on Windows, integer of major version of Windows
-
-    display = None  # didn&#39;t work yet
-    cyrillic_support = None  # boolean variable of cyrrilic output support
-
-    sys_platfrom = sys.platform
-    if sys_platfrom == &#34;linux&#34; or sys_platfrom == &#34;linux2&#34;:
-        linux = True
-        name = &#34;linux&#34;
-    elif sys_platfrom == &#34;win32&#34; or sys_platfrom == &#34;cygwin&#34;:
-        windows = True
-        windows_version = sys.getwindowsversion().major
-        name = &#34;windows&#34;
-    elif sys_platfrom == &#34;darwin&#34;:
-        macos = True
-        name = &#34;macos&#34;
-    else:
-        name = &#34;unknown&#34;
-
-    architecture = platform.architecture()[0]
-
-    if platform.python_implementation == &#34;PyPy&#34;:
-        python_implementation = &#34;pypy&#34;
-    else:
-        python_implementation = &#34;cpython&#34;
-
-    if windows:
-        nt_family = True
-    elif macos or linux:
-        unix_family = True
-
-    try:
-        if linux:
-            from Xlib.display import Display
-        display = True
-    except ImportError:
-        display = False
-        print(&#34;Your system haven&#39;t display -_-&#34;)
-
-    @staticmethod
-    def running_in_repl():
+    @property
+    def python_version_major(self):
         try:
-            sys.ps1  # pylint: disable = pointless-statement, no-member
-            sys.ps2  # pylint: disable = pointless-statement, no-member
-            return True
+            return self._python_version_major
         except AttributeError:
-            return False
+            import sys
+            self._python_version_major = sys.version_info.major
+            return self._python_version_major
 
-    try:
-        #if windows:
-        #cyr_line = &#34;йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ&#34;
-        cyr_line = &#34;йЙ&#34;
-        if windows and sys.version_info &lt; (3, 6):
+    @property
+    def python_commandline_version(self):
+        try:
+            return self._python_commandline_version
+        except AttributeError:
+            self._python_commandline_version =  &#34;&#34;
+            if self.is_python3:
+                self._python_commandline_version = &#34;3&#34;
+            return self._python_commandline_version
+
+    @property
+    def sys_platfrom(self):
+        try:
+            return self._sys_platfrom
+        except AttributeError:
+            import sys
+            self._sys_platfrom = sys.platform
+            return self._sys_platfrom
+
+    @property
+    def windows(self):
+        try:
+            return self._windows
+        except AttributeError:
+            self._windows = self.sys_platfrom == &#34;win32&#34; or self.sys_platfrom == &#34;cygwin&#34;
+            return self._windows
+
+    @property
+    def windows_version(self):
+        try:
+            return self._windows_version
+        except AttributeError:
+            import sys
+            self._windows_version = sys.getwindowsversion().major
+            return self._windows_version
+
+    @property
+    def linux(self):
+        try:
+            return self._linux
+        except AttributeError:
+            self._linux = self.sys_platfrom == &#34;linux&#34; or self.sys_platfrom == &#34;linux2&#34;
+            return self._linux
+
+    @property
+    def macos(self):
+        try:
+            return self._macos
+        except AttributeError:
+            self._macos = self.sys_platfrom == &#34;darwin&#34;
+            return self._macos
+
+    @property
+    def name(self):
+        try:
+            return self._name
+        except AttributeError:
+            if self.sys_platfrom == &#34;linux&#34; or self.sys_platfrom == &#34;linux2&#34;:
+                self._name = &#34;linux&#34;
+            elif self.sys_platfrom == &#34;win32&#34; or self.sys_platfrom == &#34;cygwin&#34;:
+                self._name = &#34;windows&#34;
+            elif self.sys_platfrom == &#34;darwin&#34;:
+                self._name = &#34;macos&#34;
+            else:
+                self._name = &#34;unknown&#34;
+            return self._name
+
+    @property
+    def architecture(self):
+        try:
+            return self._architecture
+        except AttributeError:
+            import platform
+            self._architecture = platform.architecture()[0]
+            return self._architecture
+
+    @property
+    def python_implementation(self):
+        try:
+            return self._python_implementation
+        except AttributeError:
+            import platform
+            if platform.python_implementation == &#34;PyPy&#34;:
+                self._python_implementation = &#34;pypy&#34;
+            else:
+                self._python_implementation = &#34;cpython&#34;
+            return self._python_implementation
+
+
+    @property
+    def nt_family(self):
+        try:
+            return self._nt_family
+        except AttributeError:
+            self._nt_family = self.windows
+            return self._nt_family
+
+
+    @property
+    def unix_family(self):
+        try:
+            return self._unix_family
+        except AttributeError:
+            self._unix_family = self.macos or self.linux
+            return self._unix_family
+
+
+    @property
+    def display(self):
+        try:
+            return self._display
+        except AttributeError:
             try:
-                import win_unicode_console  # pylint: disable=import-error
-                win_unicode_console.enable()
-            except:  # pylint: disable=bare-except
+                if self.linux:
+                    from Xlib.display import Display
+                self._display = True
+            except ImportError:
+                self._display = False
+            return self._display
+
+
+    @property
+    def running_in_repl(self):
+        try:
+            return self._running_in_repl
+        except AttributeError:
+            try:
+                import sys
+                sys.ps1  # pylint: disable = pointless-statement, no-member
+                sys.ps2  # pylint: disable = pointless-statement, no-member
+                self._running_in_repl = True
+            except AttributeError:
+                self._running_in_repl = False
+            return self._running_in_repl
+
+
+    @property
+    def cyrillic_support(self):
+        try:
+            return self._cyrillic_support
+        except AttributeError:
+            self._cyrillic_support = False
+            try:
+                # if windows:
+                # cyr_line = &#34;йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ&#34;
+                cyr_line = &#34;йЙ&#34;
+                import sys
+                if self.windows and sys.version_info &lt; (3, 6):
+                    try:
+                        import win_unicode_console  # pylint: disable=import-error
+                        win_unicode_console.enable()
+                    except:  # pylint: disable=bare-except
+                        pass
+                for cyr_symbol in cyr_line:
+                    print(cyr_symbol * 2 + &#34;\r&#34;, end=&#34;&#34;)
+                print(&#34;  \r&#34;, end=&#34;&#34;)
+                self._cyrillic_support = True
+            except (UnicodeEncodeError, PermissionError) as err:
                 pass
-        for cyr_symbol in cyr_line:
-            print(cyr_symbol * 2 + &#34;\r&#34;, end=&#34;&#34;)
-        print(&#34;  \r&#34;, end=&#34;&#34;)
-        cyrillic_support = True
-    except (UnicodeEncodeError, PermissionError) as err:
-        cyrillic_support = False</code></pre>
+            return self._cyrillic_support
+
+
+OS = OS()</code></pre>
 </details>
-<h3>Class variables</h3>
-<dl>
-<dt id="commands.os9.OS.architecture"><code class="name">var <span class="ident">architecture</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.cyr_line"><code class="name">var <span class="ident">cyr_line</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.cyr_symbol"><code class="name">var <span class="ident">cyr_symbol</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.cyrillic_support"><code class="name">var <span class="ident">cyrillic_support</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.display"><code class="name">var <span class="ident">display</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.is_python3"><code class="name">var <span class="ident">is_python3</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.linux"><code class="name">var <span class="ident">linux</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.macos"><code class="name">var <span class="ident">macos</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.name"><code class="name">var <span class="ident">name</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.nt_family"><code class="name">var <span class="ident">nt_family</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.python_commandline_version"><code class="name">var <span class="ident">python_commandline_version</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.python_implementation"><code class="name">var <span class="ident">python_implementation</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.python_version_major"><code class="name">var <span class="ident">python_version_major</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.sys_platfrom"><code class="name">var <span class="ident">sys_platfrom</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.sys_version_info"><code class="name">var <span class="ident">sys_version_info</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.unix_family"><code class="name">var <span class="ident">unix_family</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.windows"><code class="name">var <span class="ident">windows</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-<dt id="commands.os9.OS.windows_version"><code class="name">var <span class="ident">windows_version</span></code></dt>
-<dd>
-<section class="desc"></section>
-</dd>
-</dl>
-<h3>Static methods</h3>
-<dl>
-<dt id="commands.os9.OS.running_in_repl"><code class="name flex">
-<span>def <span class="ident">running_in_repl</span></span>(<span>)</span>
-</code></dt>
-<dd>
-<section class="desc"></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">@staticmethod
-def running_in_repl():
-    try:
-        sys.ps1  # pylint: disable = pointless-statement, no-member
-        sys.ps2  # pylint: disable = pointless-statement, no-member
-        return True
-    except AttributeError:
-        return False</code></pre>
-</details>
-</dd>
-</dl>
-</dd>
-</dl>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
 </section>
 </article>
 <nav id="sidebar">
@@ -324,34 +234,6 @@ def running_in_repl():
 <li><h3>Super-module</h3>
 <ul>
 <li><code><a title="commands" href="index.html">commands</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-classes">Classes</a></h3>
-<ul>
-<li>
-<h4><code><a title="commands.os9.OS" href="#commands.os9.OS">OS</a></code></h4>
-<ul class="">
-<li><code><a title="commands.os9.OS.architecture" href="#commands.os9.OS.architecture">architecture</a></code></li>
-<li><code><a title="commands.os9.OS.cyr_line" href="#commands.os9.OS.cyr_line">cyr_line</a></code></li>
-<li><code><a title="commands.os9.OS.cyr_symbol" href="#commands.os9.OS.cyr_symbol">cyr_symbol</a></code></li>
-<li><code><a title="commands.os9.OS.cyrillic_support" href="#commands.os9.OS.cyrillic_support">cyrillic_support</a></code></li>
-<li><code><a title="commands.os9.OS.display" href="#commands.os9.OS.display">display</a></code></li>
-<li><code><a title="commands.os9.OS.is_python3" href="#commands.os9.OS.is_python3">is_python3</a></code></li>
-<li><code><a title="commands.os9.OS.linux" href="#commands.os9.OS.linux">linux</a></code></li>
-<li><code><a title="commands.os9.OS.macos" href="#commands.os9.OS.macos">macos</a></code></li>
-<li><code><a title="commands.os9.OS.name" href="#commands.os9.OS.name">name</a></code></li>
-<li><code><a title="commands.os9.OS.nt_family" href="#commands.os9.OS.nt_family">nt_family</a></code></li>
-<li><code><a title="commands.os9.OS.python_commandline_version" href="#commands.os9.OS.python_commandline_version">python_commandline_version</a></code></li>
-<li><code><a title="commands.os9.OS.python_implementation" href="#commands.os9.OS.python_implementation">python_implementation</a></code></li>
-<li><code><a title="commands.os9.OS.python_version_major" href="#commands.os9.OS.python_version_major">python_version_major</a></code></li>
-<li><code><a title="commands.os9.OS.running_in_repl" href="#commands.os9.OS.running_in_repl">running_in_repl</a></code></li>
-<li><code><a title="commands.os9.OS.sys_platfrom" href="#commands.os9.OS.sys_platfrom">sys_platfrom</a></code></li>
-<li><code><a title="commands.os9.OS.sys_version_info" href="#commands.os9.OS.sys_version_info">sys_version_info</a></code></li>
-<li><code><a title="commands.os9.OS.unix_family" href="#commands.os9.OS.unix_family">unix_family</a></code></li>
-<li><code><a title="commands.os9.OS.windows" href="#commands.os9.OS.windows">windows</a></code></li>
-<li><code><a title="commands.os9.OS.windows_version" href="#commands.os9.OS.windows_version">windows_version</a></code></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
