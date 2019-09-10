@@ -28,7 +28,7 @@
 &#34;&#34;&#34;Internal module to work with zip archives
 &#34;&#34;&#34;
 # https://code.tutsplus.com/ru/tutorials/compressing-and-extracting-files-in-python--cms-26816
-__version__ = &#34;0.2.2&#34;
+__version__ = &#34;0.3.0&#34;
 
 
 class Zip:
@@ -80,13 +80,17 @@ class Unzip:
         &#39;&#39;&#39;https://thispointer.com/python-how-to-unzip-a-file-extract-single-multiple-or-all-files-from-a-zip-archive/
         input_zip : path to zip for extracting
         path_inside_zip : Full name of file to be extracted. It should one from the list of archived files names returned by ZipFile.namelist()
-        output_path : location where zip file need to be extracted, if not provided it will extract the file in current directory.&#39;&#39;&#39;
+        output_path : location where zip file need to be extracted, if not provided it will extract the file in current directory.
+        :return: None&#39;&#39;&#39;
         import zipfile
+        from .path9 import Path
+        from .file9 import File
 
         temp_zip = zipfile.ZipFile(input_zip)
-        temp_zip.extract(path_inside_zip, output_path)
+        temp_path = temp_zip.extract(path_inside_zip, Path.temp())
+        temp_zip.close()
 
-        temp_zip.close()</code></pre>
+        File.move(temp_path, output_path)</code></pre>
 </details>
 </section>
 <section>
@@ -121,13 +125,17 @@ class Unzip:
         &#39;&#39;&#39;https://thispointer.com/python-how-to-unzip-a-file-extract-single-multiple-or-all-files-from-a-zip-archive/
         input_zip : path to zip for extracting
         path_inside_zip : Full name of file to be extracted. It should one from the list of archived files names returned by ZipFile.namelist()
-        output_path : location where zip file need to be extracted, if not provided it will extract the file in current directory.&#39;&#39;&#39;
+        output_path : location where zip file need to be extracted, if not provided it will extract the file in current directory.
+        :return: None&#39;&#39;&#39;
         import zipfile
+        from .path9 import Path
+        from .file9 import File
 
         temp_zip = zipfile.ZipFile(input_zip)
-        temp_zip.extract(path_inside_zip, output_path)
+        temp_path = temp_zip.extract(path_inside_zip, Path.temp())
+        temp_zip.close()
 
-        temp_zip.close()</code></pre>
+        File.move(temp_path, output_path)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -155,7 +163,8 @@ def all(input_zip, output_dir):
 <section class="desc"><p><a href="https://thispointer.com/python-how-to-unzip-a-file-extract-single-multiple-or-all-files-from-a-zip-archive/">https://thispointer.com/python-how-to-unzip-a-file-extract-single-multiple-or-all-files-from-a-zip-archive/</a>
 input_zip : path to zip for extracting
 path_inside_zip : Full name of file to be extracted. It should one from the list of archived files names returned by ZipFile.namelist()
-output_path : location where zip file need to be extracted, if not provided it will extract the file in current directory.</p></section>
+output_path : location where zip file need to be extracted, if not provided it will extract the file in current directory.
+:return: None</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
@@ -163,13 +172,17 @@ def single(input_zip, path_inside_zip, output_path):
     &#39;&#39;&#39;https://thispointer.com/python-how-to-unzip-a-file-extract-single-multiple-or-all-files-from-a-zip-archive/
     input_zip : path to zip for extracting
     path_inside_zip : Full name of file to be extracted. It should one from the list of archived files names returned by ZipFile.namelist()
-    output_path : location where zip file need to be extracted, if not provided it will extract the file in current directory.&#39;&#39;&#39;
+    output_path : location where zip file need to be extracted, if not provided it will extract the file in current directory.
+    :return: None&#39;&#39;&#39;
     import zipfile
+    from .path9 import Path
+    from .file9 import File
 
     temp_zip = zipfile.ZipFile(input_zip)
-    temp_zip.extract(path_inside_zip, output_path)
+    temp_path = temp_zip.extract(path_inside_zip, Path.temp())
+    temp_zip.close()
 
-    temp_zip.close()</code></pre>
+    File.move(temp_path, output_path)</code></pre>
 </details>
 </dd>
 </dl>
