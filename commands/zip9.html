@@ -76,11 +76,15 @@ class Unzip:
         temp_zip.close()
 
     @staticmethod
-    def single(input_zip, output_dir, output_file):
+    def single(input_zip, path_inside_zip, output_path):
+        &#39;&#39;&#39;https://thispointer.com/python-how-to-unzip-a-file-extract-single-multiple-or-all-files-from-a-zip-archive/
+        input_zip : path to zip for extracting
+        path_inside_zip : Full name of file to be extracted. It should one from the list of archived files names returned by ZipFile.namelist()
+        output_path : location where zip file need to be extracted, if not provided it will extract the file in current directory.&#39;&#39;&#39;
         import zipfile
 
         temp_zip = zipfile.ZipFile(input_zip)
-        temp_zip.extract(output_dir, output_file)
+        temp_zip.extract(path_inside_zip, output_path)
 
         temp_zip.close()</code></pre>
 </details>
@@ -113,11 +117,15 @@ class Unzip:
         temp_zip.close()
 
     @staticmethod
-    def single(input_zip, output_dir, output_file):
+    def single(input_zip, path_inside_zip, output_path):
+        &#39;&#39;&#39;https://thispointer.com/python-how-to-unzip-a-file-extract-single-multiple-or-all-files-from-a-zip-archive/
+        input_zip : path to zip for extracting
+        path_inside_zip : Full name of file to be extracted. It should one from the list of archived files names returned by ZipFile.namelist()
+        output_path : location where zip file need to be extracted, if not provided it will extract the file in current directory.&#39;&#39;&#39;
         import zipfile
 
         temp_zip = zipfile.ZipFile(input_zip)
-        temp_zip.extract(output_dir, output_file)
+        temp_zip.extract(path_inside_zip, output_path)
 
         temp_zip.close()</code></pre>
 </details>
@@ -141,18 +149,25 @@ def all(input_zip, output_dir):
 </details>
 </dd>
 <dt id="commands.zip9.Unzip.single"><code class="name flex">
-<span>def <span class="ident">single</span></span>(<span>input_zip, output_dir, output_file)</span>
+<span>def <span class="ident">single</span></span>(<span>input_zip, path_inside_zip, output_path)</span>
 </code></dt>
 <dd>
-<section class="desc"></section>
+<section class="desc"><p><a href="https://thispointer.com/python-how-to-unzip-a-file-extract-single-multiple-or-all-files-from-a-zip-archive/">https://thispointer.com/python-how-to-unzip-a-file-extract-single-multiple-or-all-files-from-a-zip-archive/</a>
+input_zip : path to zip for extracting
+path_inside_zip : Full name of file to be extracted. It should one from the list of archived files names returned by ZipFile.namelist()
+output_path : location where zip file need to be extracted, if not provided it will extract the file in current directory.</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
-def single(input_zip, output_dir, output_file):
+def single(input_zip, path_inside_zip, output_path):
+    &#39;&#39;&#39;https://thispointer.com/python-how-to-unzip-a-file-extract-single-multiple-or-all-files-from-a-zip-archive/
+    input_zip : path to zip for extracting
+    path_inside_zip : Full name of file to be extracted. It should one from the list of archived files names returned by ZipFile.namelist()
+    output_path : location where zip file need to be extracted, if not provided it will extract the file in current directory.&#39;&#39;&#39;
     import zipfile
 
     temp_zip = zipfile.ZipFile(input_zip)
-    temp_zip.extract(output_dir, output_file)
+    temp_zip.extract(path_inside_zip, output_path)
 
     temp_zip.close()</code></pre>
 </details>
