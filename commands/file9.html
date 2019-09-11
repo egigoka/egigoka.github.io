@@ -200,33 +200,13 @@ class File:
         if mode==&#34;r&#34;:
             try:
                 if auto_detect_encoding:
-                    if not quiet:
-                        from .bench9 import Bench
-                        define_encoding_bench = Bench()
+                    from .bytes9 import Bytes
                     count_of_symbols = auto_detect_encoding
                     if auto_detect_encoding is True:  # you can define how much symbols use to define encoding
                         count_of_symbols = 10000
                     with open(path, &#34;rb&#34;) as rawfile:
                         slice_of_raw_data = rawfile.read(count_of_symbols)
-                    # check for utf-16-le
-                    fail_symbols = 0
-                    for cnt, sym in enumerate(slice_of_raw_data):
-                        if cnt % 2 != 0:
-                            if sym != 0:
-                                fail_symbols += 1
-                    utf_16_le = False
-                    if fail_symbols/(len(slice_of_raw_data)/2) &lt; 0.2:
-                        utf_16_le = True
-                    if utf_16_le:
-                        encoding = &#34;utf-16-le&#34;
-                        if not quiet:
-                            define_encoding_bench.end(f&#34;encoding defined by egigoka: [{encoding}] by [{count_of_symbols}] first symbols in&#34;)
-                    # end check for utf-16-le
-                    else:
-                        import chardet
-                        encoding = chardet.detect(slice_of_raw_data)[&#34;encoding&#34;]
-                        if not quiet:
-                            define_encoding_bench.end(f&#34;encoding defined by chardet: [{encoding}] by [{count_of_symbols}] first symbols in&#34;)
+                    encoding = Bytes.get_encoding(slice_of_raw_data)
                 with open(path, &#34;r&#34;, encoding=encoding) as file:
                     return file.read()
             except UnicodeDecodeError:
@@ -505,33 +485,13 @@ class File:
         if mode==&#34;r&#34;:
             try:
                 if auto_detect_encoding:
-                    if not quiet:
-                        from .bench9 import Bench
-                        define_encoding_bench = Bench()
+                    from .bytes9 import Bytes
                     count_of_symbols = auto_detect_encoding
                     if auto_detect_encoding is True:  # you can define how much symbols use to define encoding
                         count_of_symbols = 10000
                     with open(path, &#34;rb&#34;) as rawfile:
                         slice_of_raw_data = rawfile.read(count_of_symbols)
-                    # check for utf-16-le
-                    fail_symbols = 0
-                    for cnt, sym in enumerate(slice_of_raw_data):
-                        if cnt % 2 != 0:
-                            if sym != 0:
-                                fail_symbols += 1
-                    utf_16_le = False
-                    if fail_symbols/(len(slice_of_raw_data)/2) &lt; 0.2:
-                        utf_16_le = True
-                    if utf_16_le:
-                        encoding = &#34;utf-16-le&#34;
-                        if not quiet:
-                            define_encoding_bench.end(f&#34;encoding defined by egigoka: [{encoding}] by [{count_of_symbols}] first symbols in&#34;)
-                    # end check for utf-16-le
-                    else:
-                        import chardet
-                        encoding = chardet.detect(slice_of_raw_data)[&#34;encoding&#34;]
-                        if not quiet:
-                            define_encoding_bench.end(f&#34;encoding defined by chardet: [{encoding}] by [{count_of_symbols}] first symbols in&#34;)
+                    encoding = Bytes.get_encoding(slice_of_raw_data)
                 with open(path, &#34;r&#34;, encoding=encoding) as file:
                     return file.read()
             except UnicodeDecodeError:
@@ -926,33 +886,13 @@ def read(path, encoding=&#34;utf-8&#34;, auto_detect_encoding=False, quiet=True,
     if mode==&#34;r&#34;:
         try:
             if auto_detect_encoding:
-                if not quiet:
-                    from .bench9 import Bench
-                    define_encoding_bench = Bench()
+                from .bytes9 import Bytes
                 count_of_symbols = auto_detect_encoding
                 if auto_detect_encoding is True:  # you can define how much symbols use to define encoding
                     count_of_symbols = 10000
                 with open(path, &#34;rb&#34;) as rawfile:
                     slice_of_raw_data = rawfile.read(count_of_symbols)
-                # check for utf-16-le
-                fail_symbols = 0
-                for cnt, sym in enumerate(slice_of_raw_data):
-                    if cnt % 2 != 0:
-                        if sym != 0:
-                            fail_symbols += 1
-                utf_16_le = False
-                if fail_symbols/(len(slice_of_raw_data)/2) &lt; 0.2:
-                    utf_16_le = True
-                if utf_16_le:
-                    encoding = &#34;utf-16-le&#34;
-                    if not quiet:
-                        define_encoding_bench.end(f&#34;encoding defined by egigoka: [{encoding}] by [{count_of_symbols}] first symbols in&#34;)
-                # end check for utf-16-le
-                else:
-                    import chardet
-                    encoding = chardet.detect(slice_of_raw_data)[&#34;encoding&#34;]
-                    if not quiet:
-                        define_encoding_bench.end(f&#34;encoding defined by chardet: [{encoding}] by [{count_of_symbols}] first symbols in&#34;)
+                encoding = Bytes.get_encoding(slice_of_raw_data)
             with open(path, &#34;r&#34;, encoding=encoding) as file:
                 return file.read()
         except UnicodeDecodeError:
