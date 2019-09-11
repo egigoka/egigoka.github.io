@@ -118,7 +118,10 @@ class Windows:
         from .print9 import Print
         lockfile = Path.combine(Path.commands(), &#34;.windows_codepage_lock&#34;)
         if File.exist(lockfile):
-            return cls.get_cmd_code_page()
+            cp = cls.get_cmd_code_page()
+            if not safe:
+                raise IOError(f&#34;Cannot use codepage 65001, continue using {cp}, you can set other by Windows.set_cmd_code_page&#34;)
+            return cp
         previous_codepage = cls.get_cmd_code_page()
         try:
             if previous_codepage != 65001:
@@ -127,9 +130,9 @@ class Windows:
             with Print.s_print_lock:
                 command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ\r&#39;, end=&#39;&#39;)&#34;&#39;&#39;&#39;
             Print(&#34;йЙ\r&#34;, end=&#34;&#34;)
-            #Print(&#34;  \r&#34;, end=&#34;&#34;)
+            Print(&#34;  \r&#34;, end=&#34;&#34;)
             os.system(command)
-            #Print(&#34;  \r&#34;, end=&#34;&#34;)
+            Print(&#34;  \r&#34;, end=&#34;&#34;)
             return cls.get_cmd_code_page()
         except Exception as e:
             if int(previous_codepage) &gt;= 0:
@@ -395,7 +398,10 @@ class Windows:
         from .print9 import Print
         lockfile = Path.combine(Path.commands(), &#34;.windows_codepage_lock&#34;)
         if File.exist(lockfile):
-            return cls.get_cmd_code_page()
+            cp = cls.get_cmd_code_page()
+            if not safe:
+                raise IOError(f&#34;Cannot use codepage 65001, continue using {cp}, you can set other by Windows.set_cmd_code_page&#34;)
+            return cp
         previous_codepage = cls.get_cmd_code_page()
         try:
             if previous_codepage != 65001:
@@ -404,9 +410,9 @@ class Windows:
             with Print.s_print_lock:
                 command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ\r&#39;, end=&#39;&#39;)&#34;&#39;&#39;&#39;
             Print(&#34;йЙ\r&#34;, end=&#34;&#34;)
-            #Print(&#34;  \r&#34;, end=&#34;&#34;)
+            Print(&#34;  \r&#34;, end=&#34;&#34;)
             os.system(command)
-            #Print(&#34;  \r&#34;, end=&#34;&#34;)
+            Print(&#34;  \r&#34;, end=&#34;&#34;)
             return cls.get_cmd_code_page()
         except Exception as e:
             if int(previous_codepage) &gt;= 0:
@@ -622,7 +628,10 @@ def fix_unicode_encode_error(cls, safe=False):
     from .print9 import Print
     lockfile = Path.combine(Path.commands(), &#34;.windows_codepage_lock&#34;)
     if File.exist(lockfile):
-        return cls.get_cmd_code_page()
+        cp = cls.get_cmd_code_page()
+        if not safe:
+            raise IOError(f&#34;Cannot use codepage 65001, continue using {cp}, you can set other by Windows.set_cmd_code_page&#34;)
+        return cp
     previous_codepage = cls.get_cmd_code_page()
     try:
         if previous_codepage != 65001:
@@ -631,9 +640,9 @@ def fix_unicode_encode_error(cls, safe=False):
         with Print.s_print_lock:
             command = r&#39;&#39;&#39;py -c &#34;print(&#39;йЙ\r&#39;, end=&#39;&#39;)&#34;&#39;&#39;&#39;
         Print(&#34;йЙ\r&#34;, end=&#34;&#34;)
-        #Print(&#34;  \r&#34;, end=&#34;&#34;)
+        Print(&#34;  \r&#34;, end=&#34;&#34;)
         os.system(command)
-        #Print(&#34;  \r&#34;, end=&#34;&#34;)
+        Print(&#34;  \r&#34;, end=&#34;&#34;)
         return cls.get_cmd_code_page()
     except Exception as e:
         if int(previous_codepage) &gt;= 0:
