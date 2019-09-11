@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with terminal|console
 &#34;&#34;&#34;
-__version__ = &#34;0.10.1&#34;
+__version__ = &#34;0.10.2&#34;
 
 
 class Console:
@@ -239,7 +239,10 @@ class Console:
 
                 for line in popen_object.stdout:
                     if decoding:
-                        line = line.decode(decoding)
+                        try:
+                            line = line.decode(decoding)
+                        except UnicodeDecodeError as e:
+                            raise UnicodeDecodeError(f&#34;{e}, line: &#39;{line}&#39;, decoding: &#39;{decoding}&#39;&#34;)
                     out += line
                     if print_std:
                         print(line, end=&#39;&#39;)
@@ -603,7 +606,10 @@ class Console:
 
                 for line in popen_object.stdout:
                     if decoding:
-                        line = line.decode(decoding)
+                        try:
+                            line = line.decode(decoding)
+                        except UnicodeDecodeError as e:
+                            raise UnicodeDecodeError(f&#34;{e}, line: &#39;{line}&#39;, decoding: &#39;{decoding}&#39;&#34;)
                     out += line
                     if print_std:
                         print(line, end=&#39;&#39;)
