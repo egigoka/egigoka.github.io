@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with Windows-specific functions
 &#34;&#34;&#34;
-__version__ = &#34;0.5.2&#34;
+__version__ = &#34;0.5.3&#34;
 
 class Windows:
     &#34;&#34;&#34;Class to work with Windows-specific functions
@@ -100,7 +100,8 @@ class Windows:
         if err:
             return &#34;Error getting current codepage&#34;
         try:
-            out = out.lower().strip()[len(&#34;active code page:&#34;):].strip()  # replace with Str.substring
+            from .str9 import Str
+            out = Str.substring(out, &#34;: &#34;, &#34;\r\n&#34;)
             return int(out)
         except KeyError:
             return &#34;Cannot get current codepage&#34;
@@ -374,7 +375,8 @@ class Windows:
         if err:
             return &#34;Error getting current codepage&#34;
         try:
-            out = out.lower().strip()[len(&#34;active code page:&#34;):].strip()  # replace with Str.substring
+            from .str9 import Str
+            out = Str.substring(out, &#34;: &#34;, &#34;\r\n&#34;)
             return int(out)
         except KeyError:
             return &#34;Cannot get current codepage&#34;
@@ -658,7 +660,8 @@ def get_cmd_code_page():
     if err:
         return &#34;Error getting current codepage&#34;
     try:
-        out = out.lower().strip()[len(&#34;active code page:&#34;):].strip()  # replace with Str.substring
+        from .str9 import Str
+        out = Str.substring(out, &#34;: &#34;, &#34;\r\n&#34;)
         return int(out)
     except KeyError:
         return &#34;Cannot get current codepage&#34;</code></pre>
