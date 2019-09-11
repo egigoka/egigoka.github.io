@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions for managing strings.
 &#34;&#34;&#34;
-__version__ = &#34;0.13.3&#34;
+__version__ = &#34;0.13.4&#34;
 
 
 class Str:
@@ -183,8 +183,10 @@ class Str:
         &lt;br&gt;`param exception_message` string, will be in exception that raised
         &lt;br&gt;`return` string, from string that between &#34;before&#34;, and &#34;after&#34; arguments
         &#34;&#34;&#34;
-        string = str(string)
-        before = str(before)
+        if isinstance(string, bytes):
+            string = string.decode()
+        if isinstance(before, bytes):
+            before = before.decode()
         startfrom = string.find(before)
         if startfrom != -1:
             startfrom = string.find(before) + len(before)
@@ -197,7 +199,8 @@ class Str:
                     exception_message = &#34;&#34;
                 raise KeyError(f&#34;{exception_message}The line preceding ({before}) the search string was not found&#34;)
         if after:
-            after = str(after)
+            if isinstance(after, bytes):
+                after = after.decode()
             end_at = string[startfrom:].find(after)
             if end_at != -1:
                 end_at += startfrom
@@ -550,8 +553,10 @@ class Str:
         &lt;br&gt;`param exception_message` string, will be in exception that raised
         &lt;br&gt;`return` string, from string that between &#34;before&#34;, and &#34;after&#34; arguments
         &#34;&#34;&#34;
-        string = str(string)
-        before = str(before)
+        if isinstance(string, bytes):
+            string = string.decode()
+        if isinstance(before, bytes):
+            before = before.decode()
         startfrom = string.find(before)
         if startfrom != -1:
             startfrom = string.find(before) + len(before)
@@ -564,7 +569,8 @@ class Str:
                     exception_message = &#34;&#34;
                 raise KeyError(f&#34;{exception_message}The line preceding ({before}) the search string was not found&#34;)
         if after:
-            after = str(after)
+            if isinstance(after, bytes):
+                after = after.decode()
             end_at = string[startfrom:].find(after)
             if end_at != -1:
                 end_at += startfrom
@@ -1203,8 +1209,10 @@ def substring(string, before, after=None, return_after_substring=False, safe=Fal
     &lt;br&gt;`param exception_message` string, will be in exception that raised
     &lt;br&gt;`return` string, from string that between &#34;before&#34;, and &#34;after&#34; arguments
     &#34;&#34;&#34;
-    string = str(string)
-    before = str(before)
+    if isinstance(string, bytes):
+        string = string.decode()
+    if isinstance(before, bytes):
+        before = before.decode()
     startfrom = string.find(before)
     if startfrom != -1:
         startfrom = string.find(before) + len(before)
@@ -1217,7 +1225,8 @@ def substring(string, before, after=None, return_after_substring=False, safe=Fal
                 exception_message = &#34;&#34;
             raise KeyError(f&#34;{exception_message}The line preceding ({before}) the search string was not found&#34;)
     if after:
-        after = str(after)
+        if isinstance(after, bytes):
+            after = after.decode()
         end_at = string[startfrom:].find(after)
         if end_at != -1:
             end_at += startfrom
