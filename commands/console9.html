@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with terminal|console
 &#34;&#34;&#34;
-__version__ = &#34;0.10.2&#34;
+__version__ = &#34;0.10.3&#34;
 
 
 class Console:
@@ -242,7 +242,8 @@ class Console:
                         try:
                             line = line.decode(decoding)
                         except UnicodeDecodeError as e:
-                            raise UnicodeDecodeError(f&#34;{e}, line: &#39;{line}&#39;, decoding: &#39;{decoding}&#39;&#34;)
+                            print(f&#34;line: &#39;{line}&#39;, decoding: &#39;{decoding}&#39;&#34;)
+                            raise
                     out += line
                     if print_std:
                         print(line, end=&#39;&#39;)
@@ -609,7 +610,8 @@ class Console:
                         try:
                             line = line.decode(decoding)
                         except UnicodeDecodeError as e:
-                            raise UnicodeDecodeError(f&#34;{e}, line: &#39;{line}&#39;, decoding: &#39;{decoding}&#39;&#34;)
+                            print(f&#34;line: &#39;{line}&#39;, decoding: &#39;{decoding}&#39;&#34;)
+                            raise
                     out += line
                     if print_std:
                         print(line, end=&#39;&#39;)
