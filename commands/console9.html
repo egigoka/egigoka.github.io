@@ -315,6 +315,10 @@ class Console:
             else:
                 universal_newlines = True
 
+        from .print9 import Print
+        Print.debug(&#34;OS.windows&#34;, OS.windows, &#34;OS.unix_family&#34;, OS.unix_family, &#34;decoding&#34;, decoding,
+                    &#34;cls.windows_utf8_fail&#34;, cls.windows_utf8_fail, &#34;cls.windows_utf8&#34;, cls.windows_utf8)
+
         if decoding and universal_newlines:
             raise TypeError(&#34;can&#39;t decode &#39;str&#39; to &#39;str&#39;, set universal_newlines to False for manually set decoding&#34;)
         if timeout and universal_newlines:
@@ -683,6 +687,10 @@ class Console:
             else:
                 universal_newlines = True
 
+        from .print9 import Print
+        Print.debug(&#34;OS.windows&#34;, OS.windows, &#34;OS.unix_family&#34;, OS.unix_family, &#34;decoding&#34;, decoding,
+                    &#34;cls.windows_utf8_fail&#34;, cls.windows_utf8_fail, &#34;cls.windows_utf8&#34;, cls.windows_utf8)
+
         if decoding and universal_newlines:
             raise TypeError(&#34;can&#39;t decode &#39;str&#39; to &#39;str&#39;, set universal_newlines to False for manually set decoding&#34;)
         if timeout and universal_newlines:
@@ -943,6 +951,10 @@ def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, 
             decoding = &#34;utf8&#34;
         else:
             universal_newlines = True
+
+    from .print9 import Print
+    Print.debug(&#34;OS.windows&#34;, OS.windows, &#34;OS.unix_family&#34;, OS.unix_family, &#34;decoding&#34;, decoding,
+                &#34;cls.windows_utf8_fail&#34;, cls.windows_utf8_fail, &#34;cls.windows_utf8&#34;, cls.windows_utf8)
 
     if decoding and universal_newlines:
         raise TypeError(&#34;can&#39;t decode &#39;str&#39; to &#39;str&#39;, set universal_newlines to False for manually set decoding&#34;)
