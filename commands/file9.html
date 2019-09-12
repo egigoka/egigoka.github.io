@@ -285,6 +285,15 @@ class File:
                 sha256.update(block)
         return sha256.hexdigest()
 
+    @staticmethod
+    def get_mime(path):
+        from .os9 import OS
+        if OS.windows:
+            from winmagic import magic
+        else:
+            import magic
+        return magic.from_file(path, mime=True)
+
     all_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp273&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp720&#39;, &#39;cp737&#39;,
                      &#39;cp775&#39;, &#39;cp850&#39;, &#39;cp852&#39;, &#39;cp855&#39;, &#39;cp856&#39;, &#39;cp857&#39;, &#39;cp858&#39;, &#39;cp860&#39;, &#39;cp861&#39;, &#39;cp862&#39;, &#39;cp863&#39;,
                      &#39;cp864&#39;, &#39;cp865&#39;, &#39;cp866&#39;, &#39;cp869&#39;, &#39;cp874&#39;, &#39;cp875&#39;, &#39;cp932&#39;, &#39;cp949&#39;, &#39;cp950&#39;, &#39;cp1006&#39;,
@@ -570,6 +579,15 @@ class File:
                 sha256.update(block)
         return sha256.hexdigest()
 
+    @staticmethod
+    def get_mime(path):
+        from .os9 import OS
+        if OS.windows:
+            from winmagic import magic
+        else:
+            import magic
+        return magic.from_file(path, mime=True)
+
     all_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp273&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp720&#39;, &#39;cp737&#39;,
                      &#39;cp775&#39;, &#39;cp850&#39;, &#39;cp852&#39;, &#39;cp855&#39;, &#39;cp856&#39;, &#39;cp857&#39;, &#39;cp858&#39;, &#39;cp860&#39;, &#39;cp861&#39;, &#39;cp862&#39;, &#39;cp863&#39;,
                      &#39;cp864&#39;, &#39;cp865&#39;, &#39;cp866&#39;, &#39;cp869&#39;, &#39;cp874&#39;, &#39;cp875&#39;, &#39;cp932&#39;, &#39;cp949&#39;, &#39;cp950&#39;, &#39;cp1006&#39;,
@@ -767,6 +785,23 @@ def get_extension(filepath):
     import os
     filename, file_extension = os.path.splitext(filepath)
     return file_extension</code></pre>
+</details>
+</dd>
+<dt id="commands.file9.File.get_mime"><code class="name flex">
+<span>def <span class="ident">get_mime</span></span>(<span>path)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def get_mime(path):
+    from .os9 import OS
+    if OS.windows:
+        from winmagic import magic
+    else:
+        import magic
+    return magic.from_file(path, mime=True)</code></pre>
 </details>
 </dd>
 <dt id="commands.file9.File.get_modification_time"><code class="name flex">
@@ -1026,6 +1061,7 @@ def write(filename, what_to_write, mode=&#34;a&#34;, quiet=True):
 <li><code><a title="commands.file9.File.delete" href="#commands.file9.File.delete">delete</a></code></li>
 <li><code><a title="commands.file9.File.exist" href="#commands.file9.File.exist">exist</a></code></li>
 <li><code><a title="commands.file9.File.get_extension" href="#commands.file9.File.get_extension">get_extension</a></code></li>
+<li><code><a title="commands.file9.File.get_mime" href="#commands.file9.File.get_mime">get_mime</a></code></li>
 <li><code><a title="commands.file9.File.get_modification_time" href="#commands.file9.File.get_modification_time">get_modification_time</a></code></li>
 <li><code><a title="commands.file9.File.get_size" href="#commands.file9.File.get_size">get_size</a></code></li>
 <li><code><a title="commands.file9.File.hide" href="#commands.file9.File.hide">hide</a></code></li>
