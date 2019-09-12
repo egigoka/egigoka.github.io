@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with terminal|console
 &#34;&#34;&#34;
-__version__ = &#34;0.10.4&#34;
+__version__ = &#34;0.10.5&#34;
 
 
 class Console:
@@ -225,7 +225,7 @@ class Console:
     @staticmethod
     def _get_output(*commands, print_std, decoding, pureshell, universal_newlines, debug=False):
         import subprocess
-        if decoding:
+        if decoding or universal_newlines:
             out = &#34;&#34;
             err = &#34;&#34;
         else:
@@ -314,8 +314,6 @@ class Console:
                 decoding = &#34;utf8&#34;
             else:
                 universal_newlines = True
-
-        from .print9 import Print
 
         if decoding and universal_newlines:
             raise TypeError(&#34;can&#39;t decode &#39;str&#39; to &#39;str&#39;, set universal_newlines to False for manually set decoding&#34;)
@@ -595,7 +593,7 @@ class Console:
     @staticmethod
     def _get_output(*commands, print_std, decoding, pureshell, universal_newlines, debug=False):
         import subprocess
-        if decoding:
+        if decoding or universal_newlines:
             out = &#34;&#34;
             err = &#34;&#34;
         else:
@@ -684,8 +682,6 @@ class Console:
                 decoding = &#34;utf8&#34;
             else:
                 universal_newlines = True
-
-        from .print9 import Print
 
         if decoding and universal_newlines:
             raise TypeError(&#34;can&#39;t decode &#39;str&#39; to &#39;str&#39;, set universal_newlines to False for manually set decoding&#34;)
@@ -947,8 +943,6 @@ def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, 
             decoding = &#34;utf8&#34;
         else:
             universal_newlines = True
-
-    from .print9 import Print
 
     if decoding and universal_newlines:
         raise TypeError(&#34;can&#39;t decode &#39;str&#39; to &#39;str&#39;, set universal_newlines to False for manually set decoding&#34;)
