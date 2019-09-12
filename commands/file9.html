@@ -292,7 +292,16 @@ class File:
             from winmagic import magic
         else:
             import magic
-        return magic.from_file(path, mime=True)
+        try:
+            return magic.from_file(path, mime=True)
+        except OSError:
+            from .console9 import Console
+            from .path9 import Path
+            out = Console.get_output(Path.combine(Path.commands(), &#34;res&#34;, &#34;file.exe&#34;), &#34;-i&#34;, path)
+            try:
+                return out.split(&#34;; &#34;)[1]
+            except IndexError:
+                return &#34;unknown&#34;
 
     all_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp273&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp720&#39;, &#39;cp737&#39;,
                      &#39;cp775&#39;, &#39;cp850&#39;, &#39;cp852&#39;, &#39;cp855&#39;, &#39;cp856&#39;, &#39;cp857&#39;, &#39;cp858&#39;, &#39;cp860&#39;, &#39;cp861&#39;, &#39;cp862&#39;, &#39;cp863&#39;,
@@ -586,7 +595,16 @@ class File:
             from winmagic import magic
         else:
             import magic
-        return magic.from_file(path, mime=True)
+        try:
+            return magic.from_file(path, mime=True)
+        except OSError:
+            from .console9 import Console
+            from .path9 import Path
+            out = Console.get_output(Path.combine(Path.commands(), &#34;res&#34;, &#34;file.exe&#34;), &#34;-i&#34;, path)
+            try:
+                return out.split(&#34;; &#34;)[1]
+            except IndexError:
+                return &#34;unknown&#34;
 
     all_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp273&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp720&#39;, &#39;cp737&#39;,
                      &#39;cp775&#39;, &#39;cp850&#39;, &#39;cp852&#39;, &#39;cp855&#39;, &#39;cp856&#39;, &#39;cp857&#39;, &#39;cp858&#39;, &#39;cp860&#39;, &#39;cp861&#39;, &#39;cp862&#39;, &#39;cp863&#39;,
@@ -801,7 +819,16 @@ def get_mime(path):
         from winmagic import magic
     else:
         import magic
-    return magic.from_file(path, mime=True)</code></pre>
+    try:
+        return magic.from_file(path, mime=True)
+    except OSError:
+        from .console9 import Console
+        from .path9 import Path
+        out = Console.get_output(Path.combine(Path.commands(), &#34;res&#34;, &#34;file.exe&#34;), &#34;-i&#34;, path)
+        try:
+            return out.split(&#34;; &#34;)[1]
+        except IndexError:
+            return &#34;unknown&#34;</code></pre>
 </details>
 </dd>
 <dt id="commands.file9.File.get_modification_time"><code class="name flex">
