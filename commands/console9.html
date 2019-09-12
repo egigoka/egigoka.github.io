@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with terminal|console
 &#34;&#34;&#34;
-__version__ = &#34;0.10.3&#34;
+__version__ = &#34;0.10.4&#34;
 
 
 class Console:
@@ -262,8 +262,8 @@ class Console:
             raise FileNotFoundError(exception)
         return out, err
 
-    windows_utf8 = False
-    windows_utf8_fail = False
+    windows_cp65001 = False
+    windows_cp65001_fail = False
 
     @classmethod
     def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False,
@@ -297,18 +297,18 @@ class Console:
         # set decoding and init
         if auto_decoding and not decoding and not universal_newlines:
             if OS.windows:
-                if cls.windows_utf8:
-                    decoding = &#34;utf_8&#34;
-                elif cls.windows_utf8_fail:
+                if cls.windows_cp65001:
+                    decoding = &#34;cp65001&#34;
+                elif cls.windows_cp65001_fail:
                     decoding = &#34;cp866&#34;
                 else:
                     from .windows9 import Windows
                     try:
                         win_cp = Windows.fix_unicode_encode_error(safe=False)
-                        cls.windows_utf8 = True
-                        decoding = &#34;utf_8&#34;
+                        cls.windows_cp65001 = True
+                        decoding = &#34;cp65001&#34;
                     except IOError:  # if cp65001 cannot be setted
-                        cls.windows_utf8_fail = True
+                        cls.windows_cp65001_fail = True
                         decoding = f&#34;cp{Windows.get_cmd_code_page()}&#34;
             elif OS.unix_family:
                 decoding = &#34;utf8&#34;
@@ -632,8 +632,8 @@ class Console:
             raise FileNotFoundError(exception)
         return out, err
 
-    windows_utf8 = False
-    windows_utf8_fail = False
+    windows_cp65001 = False
+    windows_cp65001_fail = False
 
     @classmethod
     def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False,
@@ -667,18 +667,18 @@ class Console:
         # set decoding and init
         if auto_decoding and not decoding and not universal_newlines:
             if OS.windows:
-                if cls.windows_utf8:
-                    decoding = &#34;utf_8&#34;
-                elif cls.windows_utf8_fail:
+                if cls.windows_cp65001:
+                    decoding = &#34;cp65001&#34;
+                elif cls.windows_cp65001_fail:
                     decoding = &#34;cp866&#34;
                 else:
                     from .windows9 import Windows
                     try:
                         win_cp = Windows.fix_unicode_encode_error(safe=False)
-                        cls.windows_utf8 = True
-                        decoding = &#34;utf_8&#34;
+                        cls.windows_cp65001 = True
+                        decoding = &#34;cp65001&#34;
                     except IOError:  # if cp65001 cannot be setted
-                        cls.windows_utf8_fail = True
+                        cls.windows_cp65001_fail = True
                         decoding = f&#34;cp{Windows.get_cmd_code_page()}&#34;
             elif OS.unix_family:
                 decoding = &#34;utf8&#34;
@@ -754,11 +754,11 @@ class Console:
 </details>
 <h3>Class variables</h3>
 <dl>
-<dt id="commands.console9.Console.windows_utf8"><code class="name">var <span class="ident">windows_utf8</span></code></dt>
+<dt id="commands.console9.Console.windows_cp65001"><code class="name">var <span class="ident">windows_cp65001</span></code></dt>
 <dd>
 <section class="desc"></section>
 </dd>
-<dt id="commands.console9.Console.windows_utf8_fail"><code class="name">var <span class="ident">windows_utf8_fail</span></code></dt>
+<dt id="commands.console9.Console.windows_cp65001_fail"><code class="name">var <span class="ident">windows_cp65001_fail</span></code></dt>
 <dd>
 <section class="desc"></section>
 </dd>
@@ -930,18 +930,18 @@ def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, 
     # set decoding and init
     if auto_decoding and not decoding and not universal_newlines:
         if OS.windows:
-            if cls.windows_utf8:
-                decoding = &#34;utf_8&#34;
-            elif cls.windows_utf8_fail:
+            if cls.windows_cp65001:
+                decoding = &#34;cp65001&#34;
+            elif cls.windows_cp65001_fail:
                 decoding = &#34;cp866&#34;
             else:
                 from .windows9 import Windows
                 try:
                     win_cp = Windows.fix_unicode_encode_error(safe=False)
-                    cls.windows_utf8 = True
-                    decoding = &#34;utf_8&#34;
+                    cls.windows_cp65001 = True
+                    decoding = &#34;cp65001&#34;
                 except IOError:  # if cp65001 cannot be setted
-                    cls.windows_utf8_fail = True
+                    cls.windows_cp65001_fail = True
                     decoding = f&#34;cp{Windows.get_cmd_code_page()}&#34;
         elif OS.unix_family:
             decoding = &#34;utf8&#34;
@@ -1048,15 +1048,15 @@ def width():
 <ul>
 <li>
 <h4><code><a title="commands.console9.Console" href="#commands.console9.Console">Console</a></code></h4>
-<ul class="two-column">
+<ul class="">
 <li><code><a title="commands.console9.Console.blink" href="#commands.console9.Console.blink">blink</a></code></li>
 <li><code><a title="commands.console9.Console.clean" href="#commands.console9.Console.clean">clean</a></code></li>
 <li><code><a title="commands.console9.Console.fit" href="#commands.console9.Console.fit">fit</a></code></li>
 <li><code><a title="commands.console9.Console.get_output" href="#commands.console9.Console.get_output">get_output</a></code></li>
 <li><code><a title="commands.console9.Console.height" href="#commands.console9.Console.height">height</a></code></li>
 <li><code><a title="commands.console9.Console.width" href="#commands.console9.Console.width">width</a></code></li>
-<li><code><a title="commands.console9.Console.windows_utf8" href="#commands.console9.Console.windows_utf8">windows_utf8</a></code></li>
-<li><code><a title="commands.console9.Console.windows_utf8_fail" href="#commands.console9.Console.windows_utf8_fail">windows_utf8_fail</a></code></li>
+<li><code><a title="commands.console9.Console.windows_cp65001" href="#commands.console9.Console.windows_cp65001">windows_cp65001</a></code></li>
+<li><code><a title="commands.console9.Console.windows_cp65001_fail" href="#commands.console9.Console.windows_cp65001_fail">windows_cp65001_fail</a></code></li>
 </ul>
 </li>
 </ul>
