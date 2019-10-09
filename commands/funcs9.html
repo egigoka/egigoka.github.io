@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with shit functions
 &#34;&#34;&#34;
-__version__ = &#34;3.1.3&#34;
+__version__ = &#34;3.1.4&#34;
 
 
 def dirify(_object, wildcard=&#34;*&#34;):
@@ -51,7 +51,9 @@ def dirify(_object, wildcard=&#34;*&#34;):
             except TypeError:
                 _type = type(_object.__getattribute__(_object, attr_str))
             except AttributeError:
-                _type = &#34;AttributeError&#34;
+                _type = &#34;AttributeError happened&#34;
+            except OSError:
+                _type = &#34;OSError happened&#34;
             _type = Str.substring(str(_type), &#34;&lt;class &#34;, &#34;&gt;&#34;, safe=True)
             print(Str.rightpad(attr_str, longest_name, &#34;—&#34;), _type, sep=&#34;&gt;&#34;)
 
@@ -100,7 +102,9 @@ def multiple(*types):
             except TypeError:
                 _type = type(_object.__getattribute__(_object, attr_str))
             except AttributeError:
-                _type = &#34;AttributeError&#34;
+                _type = &#34;AttributeError happened&#34;
+            except OSError:
+                _type = &#34;OSError happened&#34;
             _type = Str.substring(str(_type), &#34;&lt;class &#34;, &#34;&gt;&#34;, safe=True)
             print(Str.rightpad(attr_str, longest_name, &#34;—&#34;), _type, sep=&#34;&gt;&#34;)</code></pre>
 </details>
