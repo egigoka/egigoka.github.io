@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with shit functions
 &#34;&#34;&#34;
-__version__ = &#34;3.1.4&#34;
+__version__ = &#34;3.2.0&#34;
 
 
 def dirify(_object, wildcard=&#34;*&#34;):
@@ -40,22 +40,21 @@ def dirify(_object, wildcard=&#34;*&#34;):
     from .list9 import List
     from .str9 import Str
     longest_name = 0
-    for attr_str in List.wildcard_search(dir(_object), wildcard):
-        if &#34;__&#34; not in attr_str:
-            if len(attr_str) &gt; longest_name:
-                longest_name = len(attr_str)
-    for attr_str in List.wildcard_search(dir(_object), wildcard):
-        if &#34;__&#34; not in attr_str:
-            try:
-                _type = type(_object.__getattribute__(attr_str))
-            except TypeError:
-                _type = type(_object.__getattribute__(_object, attr_str))
-            except AttributeError:
-                _type = &#34;AttributeError happened&#34;
-            except OSError:
-                _type = &#34;OSError happened&#34;
-            _type = Str.substring(str(_type), &#34;&lt;class &#34;, &#34;&gt;&#34;, safe=True)
-            print(Str.rightpad(attr_str, longest_name, &#34;—&#34;), _type, sep=&#34;&gt;&#34;)
+    attrs = List.wildcard_search(dir(_object), wildcard)
+    for attr_str in attrs:
+        if len(attr_str) &gt; longest_name:
+            longest_name = len(attr_str)
+    for attr_str in attrs:
+        try:
+            _type = type(_object.__getattribute__(attr_str))
+        except TypeError:
+            _type = type(_object.__getattribute__(_object, attr_str))
+        except AttributeError:
+            _type = &#34;AttributeError happened&#34;
+        except OSError:
+            _type = &#34;OSError happened&#34;
+        _type = Str.substring(str(_type), &#34;&lt;class &#34;, &#34;&gt;&#34;, safe=True)
+        print(f&#34;{Str.rightpad(attr_str, longest_name, &#39;—&#39;)}&gt;{_type}&#34;)
 
 
 def multiple(*types):
@@ -91,22 +90,21 @@ def multiple(*types):
     from .list9 import List
     from .str9 import Str
     longest_name = 0
-    for attr_str in List.wildcard_search(dir(_object), wildcard):
-        if &#34;__&#34; not in attr_str:
-            if len(attr_str) &gt; longest_name:
-                longest_name = len(attr_str)
-    for attr_str in List.wildcard_search(dir(_object), wildcard):
-        if &#34;__&#34; not in attr_str:
-            try:
-                _type = type(_object.__getattribute__(attr_str))
-            except TypeError:
-                _type = type(_object.__getattribute__(_object, attr_str))
-            except AttributeError:
-                _type = &#34;AttributeError happened&#34;
-            except OSError:
-                _type = &#34;OSError happened&#34;
-            _type = Str.substring(str(_type), &#34;&lt;class &#34;, &#34;&gt;&#34;, safe=True)
-            print(Str.rightpad(attr_str, longest_name, &#34;—&#34;), _type, sep=&#34;&gt;&#34;)</code></pre>
+    attrs = List.wildcard_search(dir(_object), wildcard)
+    for attr_str in attrs:
+        if len(attr_str) &gt; longest_name:
+            longest_name = len(attr_str)
+    for attr_str in attrs:
+        try:
+            _type = type(_object.__getattribute__(attr_str))
+        except TypeError:
+            _type = type(_object.__getattribute__(_object, attr_str))
+        except AttributeError:
+            _type = &#34;AttributeError happened&#34;
+        except OSError:
+            _type = &#34;OSError happened&#34;
+        _type = Str.substring(str(_type), &#34;&lt;class &#34;, &#34;&gt;&#34;, safe=True)
+        print(f&#34;{Str.rightpad(attr_str, longest_name, &#39;—&#39;)}&gt;{_type}&#34;)</code></pre>
 </details>
 </dd>
 <dt id="commands.funcs9.multiple"><code class="name flex">
