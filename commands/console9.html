@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with terminal|console
 &#34;&#34;&#34;
-__version__ = &#34;0.10.5&#34;
+__version__ = &#34;0.10.6&#34;
 
 
 class Console:
@@ -366,7 +366,6 @@ class Console:
             # get longest line
             longest_string = 0
             for cnt, string in enumerate(strings):
-                print(cnt, string)
                 if len(string) &gt; len(strings[longest_string]):
                     longest_string = cnt
 
@@ -734,7 +733,6 @@ class Console:
             # get longest line
             longest_string = 0
             for cnt, string in enumerate(strings):
-                print(cnt, string)
                 if len(string) &gt; len(strings[longest_string]):
                     longest_string = cnt
 
@@ -867,7 +865,6 @@ def fit(cls, *strings, sep=&#34; &#34;):
         # get longest line
         longest_string = 0
         for cnt, string in enumerate(strings):
-            print(cnt, string)
             if len(string) &gt; len(strings[longest_string]):
                 longest_string = cnt
 
