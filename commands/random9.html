@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions for creating some random values.
 &#34;&#34;&#34;
-__version__ = &#34;0.6.2&#34;
+__version__ = &#34;0.7.0&#34;
 
 
 class Random:
@@ -140,7 +140,14 @@ class Random:
         import string
         symbols = cls.string(32, string.digits + &#34;abcdef&#34;)
         string = symbols[:8] + &#34;-&#34; + symbols[8:12] + &#34;-&#34; + symbols [12:16] + &#34;-&#34; + symbols[16:20] + &#34;-&#34; + symbols[20:]
-        return string</code></pre>
+        return string
+
+    @staticmethod
+    def shuffle(list_like_obj):
+        import random
+        _list = list(list_like_obj)
+        random.shuffle(_list)
+        return &#39;&#39;.join(_list)</code></pre>
 </details>
 </section>
 <section>
@@ -270,7 +277,14 @@ class Random:
         import string
         symbols = cls.string(32, string.digits + &#34;abcdef&#34;)
         string = symbols[:8] + &#34;-&#34; + symbols[8:12] + &#34;-&#34; + symbols [12:16] + &#34;-&#34; + symbols[16:20] + &#34;-&#34; + symbols[20:]
-        return string</code></pre>
+        return string
+
+    @staticmethod
+    def shuffle(list_like_obj):
+        import random
+        _list = list(list_like_obj)
+        random.shuffle(_list)
+        return &#39;&#39;.join(_list)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -382,6 +396,21 @@ def item(*objects, **kwargs):
         return random.choice(objects)</code></pre>
 </details>
 </dd>
+<dt id="commands.random9.Random.shuffle"><code class="name flex">
+<span>def <span class="ident">shuffle</span></span>(<span>list_like_obj)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def shuffle(list_like_obj):
+    import random
+    _list = list(list_like_obj)
+    random.shuffle(_list)
+    return &#39;&#39;.join(_list)</code></pre>
+</details>
+</dd>
 <dt id="commands.random9.Random.string"><code class="name flex">
 <span>def <span class="ident">string</span></span>(<span>length, string_of_symbols=None)</span>
 </code></dt>
@@ -473,6 +502,7 @@ def string_unicode(length):
 <li><code><a title="commands.random9.Random.guid" href="#commands.random9.Random.guid">guid</a></code></li>
 <li><code><a title="commands.random9.Random.integer" href="#commands.random9.Random.integer">integer</a></code></li>
 <li><code><a title="commands.random9.Random.item" href="#commands.random9.Random.item">item</a></code></li>
+<li><code><a title="commands.random9.Random.shuffle" href="#commands.random9.Random.shuffle">shuffle</a></code></li>
 <li><code><a title="commands.random9.Random.string" href="#commands.random9.Random.string">string</a></code></li>
 <li><code><a title="commands.random9.Random.string_unicode" href="#commands.random9.Random.string_unicode">string_unicode</a></code></li>
 </ul>
