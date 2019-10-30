@@ -28,7 +28,7 @@
 &#34;&#34;&#34;Internal module to work with zip archives
 &#34;&#34;&#34;
 # https://code.tutsplus.com/ru/tutorials/compressing-and-extracting-files-in-python--cms-26816
-__version__ = &#34;0.3.0&#34;
+__version__ = &#34;0.3.1&#34;
 
 
 class Zip:
@@ -36,22 +36,33 @@ class Zip:
     def file(input_file, output_zip, arcname=None, mode=&#34;w&#34;):
         import zipfile
         import os
+        from .file9 import File
 
-        if not os.path.isfile(input_file):
+        if not File.exist(input_file):
             raise IOError(input_file + &#34; is not file&#34;)
 
-        with zipfile.ZipFile(output_zip, mode=mode) as zip:
+        temp_file = output_zip+&#34;.tmp&#34;
+        File.delete(temp_file, quiet=True)
+
+        with zipfile.ZipFile(temp_file, mode=mode) as zip:
             zip.write(input_file, arcname=arcname, compress_type=zipfile.ZIP_DEFLATED)
+
+        File.move(temp_file, output_zip)
 
     @staticmethod
     def dir(input_dir, output_zip, quiet=True):
         import os
         import zipfile
+        from .file9 import File
+        from .dir9 import Dir
 
-        if not os.path.isdir(input_dir):
+        if not Dir.exist(input_dir):
             raise IOError(input_dir + &#34; is not dir&#34;)
 
-        temp_zip = zipfile.ZipFile(output_zip, &#39;w&#39;)
+        temp_file = output_zip + &#34;.tmp&#34;
+        File.delete(temp_file, quiet=True)
+
+        temp_zip = zipfile.ZipFile(temp_file, &#39;w&#39;)
         for root, dirs, files in os.walk(input_dir):
             for file in files:
                 file_path = os.path.join(root, file)
@@ -63,6 +74,7 @@ class Zip:
                     Print.rewrite(CLI.wait_update(quiet=True), file_path, &#34;zipped&#34;)
 
         temp_zip.close()
+        File.move(temp_file, output_zip)
 
 
 class Unzip:
@@ -200,22 +212,33 @@ def single(input_zip, path_inside_zip, output_path):
     def file(input_file, output_zip, arcname=None, mode=&#34;w&#34;):
         import zipfile
         import os
+        from .file9 import File
 
-        if not os.path.isfile(input_file):
+        if not File.exist(input_file):
             raise IOError(input_file + &#34; is not file&#34;)
 
-        with zipfile.ZipFile(output_zip, mode=mode) as zip:
+        temp_file = output_zip+&#34;.tmp&#34;
+        File.delete(temp_file, quiet=True)
+
+        with zipfile.ZipFile(temp_file, mode=mode) as zip:
             zip.write(input_file, arcname=arcname, compress_type=zipfile.ZIP_DEFLATED)
+
+        File.move(temp_file, output_zip)
 
     @staticmethod
     def dir(input_dir, output_zip, quiet=True):
         import os
         import zipfile
+        from .file9 import File
+        from .dir9 import Dir
 
-        if not os.path.isdir(input_dir):
+        if not Dir.exist(input_dir):
             raise IOError(input_dir + &#34; is not dir&#34;)
 
-        temp_zip = zipfile.ZipFile(output_zip, &#39;w&#39;)
+        temp_file = output_zip + &#34;.tmp&#34;
+        File.delete(temp_file, quiet=True)
+
+        temp_zip = zipfile.ZipFile(temp_file, &#39;w&#39;)
         for root, dirs, files in os.walk(input_dir):
             for file in files:
                 file_path = os.path.join(root, file)
@@ -226,7 +249,8 @@ def single(input_zip, path_inside_zip, output_path):
                     from .cli9 import CLI
                     Print.rewrite(CLI.wait_update(quiet=True), file_path, &#34;zipped&#34;)
 
-        temp_zip.close()</code></pre>
+        temp_zip.close()
+        File.move(temp_file, output_zip)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -241,11 +265,16 @@ def single(input_zip, path_inside_zip, output_path):
 def dir(input_dir, output_zip, quiet=True):
     import os
     import zipfile
+    from .file9 import File
+    from .dir9 import Dir
 
-    if not os.path.isdir(input_dir):
+    if not Dir.exist(input_dir):
         raise IOError(input_dir + &#34; is not dir&#34;)
 
-    temp_zip = zipfile.ZipFile(output_zip, &#39;w&#39;)
+    temp_file = output_zip + &#34;.tmp&#34;
+    File.delete(temp_file, quiet=True)
+
+    temp_zip = zipfile.ZipFile(temp_file, &#39;w&#39;)
     for root, dirs, files in os.walk(input_dir):
         for file in files:
             file_path = os.path.join(root, file)
@@ -256,7 +285,8 @@ def dir(input_dir, output_zip, quiet=True):
                 from .cli9 import CLI
                 Print.rewrite(CLI.wait_update(quiet=True), file_path, &#34;zipped&#34;)
 
-    temp_zip.close()</code></pre>
+    temp_zip.close()
+    File.move(temp_file, output_zip)</code></pre>
 </details>
 </dd>
 <dt id="commands.zip9.Zip.file"><code class="name flex">
@@ -270,12 +300,18 @@ def dir(input_dir, output_zip, quiet=True):
 def file(input_file, output_zip, arcname=None, mode=&#34;w&#34;):
     import zipfile
     import os
+    from .file9 import File
 
-    if not os.path.isfile(input_file):
+    if not File.exist(input_file):
         raise IOError(input_file + &#34; is not file&#34;)
 
-    with zipfile.ZipFile(output_zip, mode=mode) as zip:
-        zip.write(input_file, arcname=arcname, compress_type=zipfile.ZIP_DEFLATED)</code></pre>
+    temp_file = output_zip+&#34;.tmp&#34;
+    File.delete(temp_file, quiet=True)
+
+    with zipfile.ZipFile(temp_file, mode=mode) as zip:
+        zip.write(input_file, arcname=arcname, compress_type=zipfile.ZIP_DEFLATED)
+
+    File.move(temp_file, output_zip)</code></pre>
 </details>
 </dd>
 </dl>
