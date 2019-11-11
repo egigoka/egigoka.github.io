@@ -28,7 +28,7 @@
 &#34;&#34;&#34;Internal module to work with zip archives
 &#34;&#34;&#34;
 # https://code.tutsplus.com/ru/tutorials/compressing-and-extracting-files-in-python--cms-26816
-__version__ = &#34;0.3.1&#34;
+__version__ = &#34;0.3.2&#34;
 
 
 class Zip:
@@ -41,13 +41,15 @@ class Zip:
         if not File.exist(input_file):
             raise IOError(input_file + &#34; is not file&#34;)
 
-        temp_file = output_zip+&#34;.tmp&#34;
-        File.delete(temp_file, quiet=True)
+        if not File.exist(output_zip) and &#34;w&#34; not in mode:
+            temp_file = output_zip+&#34;.tmp&#34;
+            File.delete(temp_file, quiet=True)
 
         with zipfile.ZipFile(temp_file, mode=mode) as zip:
             zip.write(input_file, arcname=arcname, compress_type=zipfile.ZIP_DEFLATED)
 
-        File.move(temp_file, output_zip)
+        if not File.exist(output_zip) and &#34;w&#34; not in mode:
+            File.move(temp_file, output_zip)
 
     @staticmethod
     def dir(input_dir, output_zip, quiet=True):
@@ -217,13 +219,15 @@ def single(input_zip, path_inside_zip, output_path):
         if not File.exist(input_file):
             raise IOError(input_file + &#34; is not file&#34;)
 
-        temp_file = output_zip+&#34;.tmp&#34;
-        File.delete(temp_file, quiet=True)
+        if not File.exist(output_zip) and &#34;w&#34; not in mode:
+            temp_file = output_zip+&#34;.tmp&#34;
+            File.delete(temp_file, quiet=True)
 
         with zipfile.ZipFile(temp_file, mode=mode) as zip:
             zip.write(input_file, arcname=arcname, compress_type=zipfile.ZIP_DEFLATED)
 
-        File.move(temp_file, output_zip)
+        if not File.exist(output_zip) and &#34;w&#34; not in mode:
+            File.move(temp_file, output_zip)
 
     @staticmethod
     def dir(input_dir, output_zip, quiet=True):
@@ -305,13 +309,15 @@ def file(input_file, output_zip, arcname=None, mode=&#34;w&#34;):
     if not File.exist(input_file):
         raise IOError(input_file + &#34; is not file&#34;)
 
-    temp_file = output_zip+&#34;.tmp&#34;
-    File.delete(temp_file, quiet=True)
+    if not File.exist(output_zip) and &#34;w&#34; not in mode:
+        temp_file = output_zip+&#34;.tmp&#34;
+        File.delete(temp_file, quiet=True)
 
     with zipfile.ZipFile(temp_file, mode=mode) as zip:
         zip.write(input_file, arcname=arcname, compress_type=zipfile.ZIP_DEFLATED)
 
-    File.move(temp_file, output_zip)</code></pre>
+    if not File.exist(output_zip) and &#34;w&#34; not in mode:
+        File.move(temp_file, output_zip)</code></pre>
 </details>
 </dd>
 </dl>
