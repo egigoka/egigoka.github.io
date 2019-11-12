@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with terminal|console
 &#34;&#34;&#34;
-__version__ = &#34;0.10.6&#34;
+__version__ = &#34;0.11.0&#34;
 
 
 class Console:
@@ -267,7 +267,8 @@ class Console:
 
     @classmethod
     def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False,
-                   auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False):
+                   auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False,
+                   create_cmd_subprocess=False):
         &#34;&#34;&#34;Return output of executing command.
         &lt;br&gt;`param commands` list[string if pureshell is True] with command and arguments
         &lt;br&gt;`param pureshell` boolean, if True, the specified command will be executed through the shell
@@ -321,18 +322,16 @@ class Console:
             raise NotImplementedError(&#34;asyncio.subprocess doesn&#39;t support &#39;universal_newlines&#39;, disable &#39;auto_decoding&#39;&#34;
                                       &#34; or set &#39;decoding&#39;&#34;)
 
+        if (timeout and pureshell and OS.windows) or create_cmd_subprocess:
+            commands_old = commands
+            commands = list()
+            commands.append(&#34;cmd&#34;)
+            # commands.append(&#34;/U&#34;)  # only cmd applications output in utf16,
+            #                          other applications output in default encoding D:
+            commands.append(&#34;/C&#34;)
+            commands.append(&#34; &#34;.join(commands_old))
+
         if timeout:
-            if pureshell:
-                if OS.windows:
-                    from .const9 import backslash
-                    commands_old = commands
-                    commands = []
-                    commands.append(&#34;cmd&#34;)
-                    # commands.append(&#34;/U&#34;)  # only cmd applications output in utf16,
-                    #                          other applications output in default encoding D:
-                    commands.append(&#34;/C&#34;)
-                    commands.append(&#34; &#34;.join(commands_old))
-            from .print9 import Print
             output = cls._get_output_with_timeout(*commands, print_std=print_std, decoding=decoding,
                                                   timeout=timeout)
             if output[3]:
@@ -634,7 +633,8 @@ class Console:
 
     @classmethod
     def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False,
-                   auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False):
+                   auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False,
+                   create_cmd_subprocess=False):
         &#34;&#34;&#34;Return output of executing command.
         &lt;br&gt;`param commands` list[string if pureshell is True] with command and arguments
         &lt;br&gt;`param pureshell` boolean, if True, the specified command will be executed through the shell
@@ -688,18 +688,16 @@ class Console:
             raise NotImplementedError(&#34;asyncio.subprocess doesn&#39;t support &#39;universal_newlines&#39;, disable &#39;auto_decoding&#39;&#34;
                                       &#34; or set &#39;decoding&#39;&#34;)
 
+        if (timeout and pureshell and OS.windows) or create_cmd_subprocess:
+            commands_old = commands
+            commands = list()
+            commands.append(&#34;cmd&#34;)
+            # commands.append(&#34;/U&#34;)  # only cmd applications output in utf16,
+            #                          other applications output in default encoding D:
+            commands.append(&#34;/C&#34;)
+            commands.append(&#34; &#34;.join(commands_old))
+
         if timeout:
-            if pureshell:
-                if OS.windows:
-                    from .const9 import backslash
-                    commands_old = commands
-                    commands = []
-                    commands.append(&#34;cmd&#34;)
-                    # commands.append(&#34;/U&#34;)  # only cmd applications output in utf16,
-                    #                          other applications output in default encoding D:
-                    commands.append(&#34;/C&#34;)
-                    commands.append(&#34; &#34;.join(commands_old))
-            from .print9 import Print
             output = cls._get_output_with_timeout(*commands, print_std=print_std, decoding=decoding,
                                                   timeout=timeout)
             if output[3]:
@@ -880,7 +878,7 @@ def fit(cls, *strings, sep=&#34; &#34;):
 </details>
 </dd>
 <dt id="commands.console9.Console.get_output"><code class="name flex">
-<span>def <span class="ident">get_output</span></span>(<span>*commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False, auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False)</span>
+<span>def <span class="ident">get_output</span></span>(<span>*commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False, auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False, create_cmd_subprocess=False)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Return output of executing command.
@@ -893,7 +891,8 @@ def fit(cls, *strings, sep=&#34; &#34;):
 <summary>Source code</summary>
 <pre><code class="python">@classmethod
 def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, universal_newlines=False,
-               auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False):
+               auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False,
+               create_cmd_subprocess=False):
     &#34;&#34;&#34;Return output of executing command.
     &lt;br&gt;`param commands` list[string if pureshell is True] with command and arguments
     &lt;br&gt;`param pureshell` boolean, if True, the specified command will be executed through the shell
@@ -947,18 +946,16 @@ def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, 
         raise NotImplementedError(&#34;asyncio.subprocess doesn&#39;t support &#39;universal_newlines&#39;, disable &#39;auto_decoding&#39;&#34;
                                   &#34; or set &#39;decoding&#39;&#34;)
 
+    if (timeout and pureshell and OS.windows) or create_cmd_subprocess:
+        commands_old = commands
+        commands = list()
+        commands.append(&#34;cmd&#34;)
+        # commands.append(&#34;/U&#34;)  # only cmd applications output in utf16,
+        #                          other applications output in default encoding D:
+        commands.append(&#34;/C&#34;)
+        commands.append(&#34; &#34;.join(commands_old))
+
     if timeout:
-        if pureshell:
-            if OS.windows:
-                from .const9 import backslash
-                commands_old = commands
-                commands = []
-                commands.append(&#34;cmd&#34;)
-                # commands.append(&#34;/U&#34;)  # only cmd applications output in utf16,
-                #                          other applications output in default encoding D:
-                commands.append(&#34;/C&#34;)
-                commands.append(&#34; &#34;.join(commands_old))
-        from .print9 import Print
         output = cls._get_output_with_timeout(*commands, print_std=print_std, decoding=decoding,
                                               timeout=timeout)
         if output[3]:

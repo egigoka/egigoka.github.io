@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with Windows-specific functions
 &#34;&#34;&#34;
-__version__ = &#34;0.7.1&#34;
+__version__ = &#34;0.7.2&#34;
 
 class Windows:
     &#34;&#34;&#34;Class to work with Windows-specific functions
@@ -322,7 +322,7 @@ class Windows:
             cls.set_powershell_execution_policy(&#34;RemoteSigned&#34;)
 
         File.write(temp_ps1_file, ps1_script)
-        out, err = Console.get_output(fr&#39;powershell .\&#34;{temp_ps1_file}&#34;&#39;, return_merged=False)
+        out, err = Console.get_output(fr&#39;powershell .\&#34;{temp_ps1_file}&#34;&#39;, return_merged=False, create_cmd_subprocess=True)
         File.delete(temp_ps1_file)
 
         if old_policy != &#34;RemoteSigned&#34;:
@@ -644,7 +644,7 @@ class Windows:
             cls.set_powershell_execution_policy(&#34;RemoteSigned&#34;)
 
         File.write(temp_ps1_file, ps1_script)
-        out, err = Console.get_output(fr&#39;powershell .\&#34;{temp_ps1_file}&#34;&#39;, return_merged=False)
+        out, err = Console.get_output(fr&#39;powershell .\&#34;{temp_ps1_file}&#34;&#39;, return_merged=False, create_cmd_subprocess=True)
         File.delete(temp_ps1_file)
 
         if old_policy != &#34;RemoteSigned&#34;:
@@ -869,7 +869,7 @@ def run_powershell(cls, ps1_script):
         cls.set_powershell_execution_policy(&#34;RemoteSigned&#34;)
 
     File.write(temp_ps1_file, ps1_script)
-    out, err = Console.get_output(fr&#39;powershell .\&#34;{temp_ps1_file}&#34;&#39;, return_merged=False)
+    out, err = Console.get_output(fr&#39;powershell .\&#34;{temp_ps1_file}&#34;&#39;, return_merged=False, create_cmd_subprocess=True)
     File.delete(temp_ps1_file)
 
     if old_policy != &#34;RemoteSigned&#34;:
