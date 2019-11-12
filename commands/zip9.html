@@ -35,7 +35,6 @@ class Zip:
     @staticmethod
     def file(input_file, output_zip, arcname=None, mode=&#34;w&#34;):
         import zipfile
-        import os
         from .file9 import File
 
         if not File.exist(input_file):
@@ -216,7 +215,6 @@ def single(input_zip, path_inside_zip, output_path):
     @staticmethod
     def file(input_file, output_zip, arcname=None, mode=&#34;w&#34;):
         import zipfile
-        import os
         from .file9 import File
 
         if not File.exist(input_file):
@@ -309,7 +307,6 @@ def dir(input_dir, output_zip, quiet=True):
 <pre><code class="python">@staticmethod
 def file(input_file, output_zip, arcname=None, mode=&#34;w&#34;):
     import zipfile
-    import os
     from .file9 import File
 
     if not File.exist(input_file):

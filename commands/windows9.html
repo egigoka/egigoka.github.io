@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with Windows-specific functions
 &#34;&#34;&#34;
-__version__ = &#34;0.6.2&#34;
+__version__ = &#34;0.7.1&#34;
 
 class Windows:
     &#34;&#34;&#34;Class to work with Windows-specific functions
@@ -289,7 +289,49 @@ class Windows:
         winreg.CloseKey(key)
         # For some strange reason, calling SendMessage from the current process
         # doesn&#39;t propagate environment changes at all.
-        return Console.get_output(Path.python(), &#34;-c&#34;, &#34;import win32api, win32con; assert win32api.SendMessage(win32con.HWND_BROADCAST, win32con.WM_SETTINGCHANGE, 0, &#39;Environment&#39;)&#34;)</code></pre>
+        return Console.get_output(Path.python(), &#34;-c&#34;, &#34;import win32api, win32con; assert win32api.SendMessage(win32con.HWND_BROADCAST, win32con.WM_SETTINGCHANGE, 0, &#39;Environment&#39;)&#34;)
+
+    @staticmethod
+    def get_powershell_execution_policy():
+        from .console9 import Console
+        psfix_command = f&#39;&#39;&#39;powershell -command &#34;&amp; {{&amp;&#39;Get-ExecutionPolicy&#39;}}&#34;&#39;&#39;&#39;
+        out, err = Console.get_output(psfix_command, return_merged=False)
+        if err:
+            raise OSError(err)
+        return out.strip()
+
+    @staticmethod
+    def set_powershell_execution_policy(policy_name):
+        from .console9 import Console
+        psfix_command = f&#39;&#39;&#39;powershell -command &#34;&amp; {{&amp;&#39;Set-ExecutionPolicy&#39; {policy_name}}}&#34;&#39;&#39;&#39;  # &#34;Set-ExecutionPolicy {policy_name}&#34;
+        out, err = Console.get_output(psfix_command, return_merged=False)
+        if err:
+            raise OSError(err)
+        return out
+
+    @classmethod
+    def run_powershell(cls, ps1_script):
+        from .random9 import Random
+        from .file9 import File
+        from .console9 import Console
+
+        temp_ps1_file = Random.string(10)+&#34;.ps1&#34;
+
+        old_policy = cls.get_powershell_execution_policy()
+        if old_policy != &#34;RemoteSigned&#34;:
+            cls.set_powershell_execution_policy(&#34;RemoteSigned&#34;)
+
+        File.write(temp_ps1_file, ps1_script)
+        out, err = Console.get_output(fr&#39;powershell .\&#34;{temp_ps1_file}&#34;&#39;, return_merged=False)
+        File.delete(temp_ps1_file)
+
+        if old_policy != &#34;RemoteSigned&#34;:
+            cls.set_powershell_execution_policy(old_policy)
+
+        if err:
+            raise OSError(err)
+
+        return out</code></pre>
 </details>
 </section>
 <section>
@@ -569,7 +611,49 @@ class Windows:
         winreg.CloseKey(key)
         # For some strange reason, calling SendMessage from the current process
         # doesn&#39;t propagate environment changes at all.
-        return Console.get_output(Path.python(), &#34;-c&#34;, &#34;import win32api, win32con; assert win32api.SendMessage(win32con.HWND_BROADCAST, win32con.WM_SETTINGCHANGE, 0, &#39;Environment&#39;)&#34;)</code></pre>
+        return Console.get_output(Path.python(), &#34;-c&#34;, &#34;import win32api, win32con; assert win32api.SendMessage(win32con.HWND_BROADCAST, win32con.WM_SETTINGCHANGE, 0, &#39;Environment&#39;)&#34;)
+
+    @staticmethod
+    def get_powershell_execution_policy():
+        from .console9 import Console
+        psfix_command = f&#39;&#39;&#39;powershell -command &#34;&amp; {{&amp;&#39;Get-ExecutionPolicy&#39;}}&#34;&#39;&#39;&#39;
+        out, err = Console.get_output(psfix_command, return_merged=False)
+        if err:
+            raise OSError(err)
+        return out.strip()
+
+    @staticmethod
+    def set_powershell_execution_policy(policy_name):
+        from .console9 import Console
+        psfix_command = f&#39;&#39;&#39;powershell -command &#34;&amp; {{&amp;&#39;Set-ExecutionPolicy&#39; {policy_name}}}&#34;&#39;&#39;&#39;  # &#34;Set-ExecutionPolicy {policy_name}&#34;
+        out, err = Console.get_output(psfix_command, return_merged=False)
+        if err:
+            raise OSError(err)
+        return out
+
+    @classmethod
+    def run_powershell(cls, ps1_script):
+        from .random9 import Random
+        from .file9 import File
+        from .console9 import Console
+
+        temp_ps1_file = Random.string(10)+&#34;.ps1&#34;
+
+        old_policy = cls.get_powershell_execution_policy()
+        if old_policy != &#34;RemoteSigned&#34;:
+            cls.set_powershell_execution_policy(&#34;RemoteSigned&#34;)
+
+        File.write(temp_ps1_file, ps1_script)
+        out, err = Console.get_output(fr&#39;powershell .\&#34;{temp_ps1_file}&#34;&#39;, return_merged=False)
+        File.delete(temp_ps1_file)
+
+        if old_policy != &#34;RemoteSigned&#34;:
+            cls.set_powershell_execution_policy(old_policy)
+
+        if err:
+            raise OSError(err)
+
+        return out</code></pre>
 </details>
 <h3>Class variables</h3>
 <dl>
@@ -682,6 +766,23 @@ def get_cmd_code_page(debug=False):
         return &#34;Cannot get current codepage&#34;</code></pre>
 </details>
 </dd>
+<dt id="commands.windows9.Windows.get_powershell_execution_policy"><code class="name flex">
+<span>def <span class="ident">get_powershell_execution_policy</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def get_powershell_execution_policy():
+    from .console9 import Console
+    psfix_command = f&#39;&#39;&#39;powershell -command &#34;&amp; {{&amp;&#39;Get-ExecutionPolicy&#39;}}&#34;&#39;&#39;&#39;
+    out, err = Console.get_output(psfix_command, return_merged=False)
+    if err:
+        raise OSError(err)
+    return out.strip()</code></pre>
+</details>
+</dd>
 <dt id="commands.windows9.Windows.getenv"><code class="name flex">
 <span>def <span class="ident">getenv</span></span>(<span>name, scope='user')</span>
 </code></dt>
@@ -748,6 +849,38 @@ def lock():
         raise OSError(&#34;Locking work only on Windows &lt; 10&#34;)</code></pre>
 </details>
 </dd>
+<dt id="commands.windows9.Windows.run_powershell"><code class="name flex">
+<span>def <span class="ident">run_powershell</span></span>(<span>ps1_script)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@classmethod
+def run_powershell(cls, ps1_script):
+    from .random9 import Random
+    from .file9 import File
+    from .console9 import Console
+
+    temp_ps1_file = Random.string(10)+&#34;.ps1&#34;
+
+    old_policy = cls.get_powershell_execution_policy()
+    if old_policy != &#34;RemoteSigned&#34;:
+        cls.set_powershell_execution_policy(&#34;RemoteSigned&#34;)
+
+    File.write(temp_ps1_file, ps1_script)
+    out, err = Console.get_output(fr&#39;powershell .\&#34;{temp_ps1_file}&#34;&#39;, return_merged=False)
+    File.delete(temp_ps1_file)
+
+    if old_policy != &#34;RemoteSigned&#34;:
+        cls.set_powershell_execution_policy(old_policy)
+
+    if err:
+        raise OSError(err)
+
+    return out</code></pre>
+</details>
+</dd>
 <dt id="commands.windows9.Windows.set_cmd_code_page"><code class="name flex">
 <span>def <span class="ident">set_cmd_code_page</span></span>(<span>code_page)</span>
 </code></dt>
@@ -763,6 +896,23 @@ def set_cmd_code_page(cls, code_page):
     os.system(&#34;set PYTHONIOENCODING = utf - 8&#34;)
     cls.get_cmd_code_page()  # it&#39;s fucking magick, don&#39;t touch
     return code_page</code></pre>
+</details>
+</dd>
+<dt id="commands.windows9.Windows.set_powershell_execution_policy"><code class="name flex">
+<span>def <span class="ident">set_powershell_execution_policy</span></span>(<span>policy_name)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def set_powershell_execution_policy(policy_name):
+    from .console9 import Console
+    psfix_command = f&#39;&#39;&#39;powershell -command &#34;&amp; {{&amp;&#39;Set-ExecutionPolicy&#39; {policy_name}}}&#34;&#39;&#39;&#39;  # &#34;Set-ExecutionPolicy {policy_name}&#34;
+    out, err = Console.get_output(psfix_command, return_merged=False)
+    if err:
+        raise OSError(err)
+    return out</code></pre>
 </details>
 </dd>
 <dt id="commands.windows9.Windows.setenv"><code class="name flex">
@@ -881,11 +1031,14 @@ def user_exists(self, username):
 <li><code><a title="commands.windows9.Windows.dump_auditpol" href="#commands.windows9.Windows.dump_auditpol">dump_auditpol</a></code></li>
 <li><code><a title="commands.windows9.Windows.fix_unicode_encode_error" href="#commands.windows9.Windows.fix_unicode_encode_error">fix_unicode_encode_error</a></code></li>
 <li><code><a title="commands.windows9.Windows.get_cmd_code_page" href="#commands.windows9.Windows.get_cmd_code_page">get_cmd_code_page</a></code></li>
+<li><code><a title="commands.windows9.Windows.get_powershell_execution_policy" href="#commands.windows9.Windows.get_powershell_execution_policy">get_powershell_execution_policy</a></code></li>
 <li><code><a title="commands.windows9.Windows.getenv" href="#commands.windows9.Windows.getenv">getenv</a></code></li>
 <li><code><a title="commands.windows9.Windows.import_winreg" href="#commands.windows9.Windows.import_winreg">import_winreg</a></code></li>
 <li><code><a title="commands.windows9.Windows.lock" href="#commands.windows9.Windows.lock">lock</a></code></li>
 <li><code><a title="commands.windows9.Windows.remove_user" href="#commands.windows9.Windows.remove_user">remove_user</a></code></li>
+<li><code><a title="commands.windows9.Windows.run_powershell" href="#commands.windows9.Windows.run_powershell">run_powershell</a></code></li>
 <li><code><a title="commands.windows9.Windows.set_cmd_code_page" href="#commands.windows9.Windows.set_cmd_code_page">set_cmd_code_page</a></code></li>
+<li><code><a title="commands.windows9.Windows.set_powershell_execution_policy" href="#commands.windows9.Windows.set_powershell_execution_policy">set_powershell_execution_policy</a></code></li>
 <li><code><a title="commands.windows9.Windows.setenv" href="#commands.windows9.Windows.setenv">setenv</a></code></li>
 <li><code><a title="commands.windows9.Windows.user_exists" href="#commands.windows9.Windows.user_exists">user_exists</a></code></li>
 <li><code><a title="commands.windows9.Windows.winreg_imported" href="#commands.windows9.Windows.winreg_imported">winreg_imported</a></code></li>
