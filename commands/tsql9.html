@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with transact sql
 &#34;&#34;&#34;
-__version__ = &#34;0.6.5&#34;
+__version__ = &#34;0.6.6&#34;
 
 
 class TSQL:
@@ -42,7 +42,11 @@ class TSQL:
                                      f&#39;PWD={self.sql_sa_password};DATABASE={self.sql_database}&#39;
 
     def run(self, query, debug=False):
-        import pyodbc
+        try:
+            import pyodbc
+        except ImportError:
+            print(&#34;please, install pyodbc&#34;)
+            raise
         from .print9 import Print
 
         if debug:
@@ -76,7 +80,11 @@ class TSQL:
             Print(&#34;Close connection done&#34;)
 
     def run_without_transaction(self, query, debug=False):
-        import pyodbc
+        try:
+            import pyodbc
+        except ImportError:
+            print(&#34;please, install pyodbc&#34;)
+            raise
         from .print9 import Print
 
         if debug:
@@ -105,7 +113,11 @@ class TSQL:
             Print(&#34;Close connection done&#34;)
 
     def query(self, query, debug=False):
-        import pyodbc
+        try:
+            import pyodbc
+        except ImportError:
+            print(&#34;please, install pyodbc&#34;)
+            raise
         from .print9 import Print
 
         if debug:
@@ -227,7 +239,11 @@ class TSQL:
                                      f&#39;PWD={self.sql_sa_password};DATABASE={self.sql_database}&#39;
 
     def run(self, query, debug=False):
-        import pyodbc
+        try:
+            import pyodbc
+        except ImportError:
+            print(&#34;please, install pyodbc&#34;)
+            raise
         from .print9 import Print
 
         if debug:
@@ -261,7 +277,11 @@ class TSQL:
             Print(&#34;Close connection done&#34;)
 
     def run_without_transaction(self, query, debug=False):
-        import pyodbc
+        try:
+            import pyodbc
+        except ImportError:
+            print(&#34;please, install pyodbc&#34;)
+            raise
         from .print9 import Print
 
         if debug:
@@ -290,7 +310,11 @@ class TSQL:
             Print(&#34;Close connection done&#34;)
 
     def query(self, query, debug=False):
-        import pyodbc
+        try:
+            import pyodbc
+        except ImportError:
+            print(&#34;please, install pyodbc&#34;)
+            raise
         from .print9 import Print
 
         if debug:
@@ -483,7 +507,11 @@ class TSQL:
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def query(self, query, debug=False):
-    import pyodbc
+    try:
+        import pyodbc
+    except ImportError:
+        print(&#34;please, install pyodbc&#34;)
+        raise
     from .print9 import Print
 
     if debug:
@@ -533,7 +561,11 @@ class TSQL:
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def run(self, query, debug=False):
-    import pyodbc
+    try:
+        import pyodbc
+    except ImportError:
+        print(&#34;please, install pyodbc&#34;)
+        raise
     from .print9 import Print
 
     if debug:
@@ -575,7 +607,11 @@ class TSQL:
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def run_without_transaction(self, query, debug=False):
-    import pyodbc
+    try:
+        import pyodbc
+    except ImportError:
+        print(&#34;please, install pyodbc&#34;)
+        raise
     from .print9 import Print
 
     if debug:
