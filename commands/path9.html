@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.6.0" />
 <title>commands.path9 API documentation</title>
-<meta name="description" content="Internal module with funtions to work with path strings" />
+<meta name="description" content="Internal module with functions to work with path strings" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -20,14 +20,14 @@
 <h1 class="title">Module <code>commands.path9</code></h1>
 </header>
 <section id="section-intro">
-<p>Internal module with funtions to work with path strings</p>
+<p>Internal module with functions to work with path strings</p>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">#! python3
 # -*- coding: utf-8 -*-
-&#34;&#34;&#34;Internal module with funtions to work with path strings
+&#34;&#34;&#34;Internal module with functions to work with path strings
 &#34;&#34;&#34;
-__version__ = &#34;2.5.9&#34;
+__version__ = &#34;2.5.10&#34;
 
 
 class Path:
@@ -161,9 +161,8 @@ class Path:
 
     @staticmethod
     def safe__file__(__file__):
-        if len(__file__) == 0:
-            return &#39;.&#39;
-        return __file__</code></pre>
+        import os
+        return os.path.realpath(__file__)</code></pre>
 </details>
 </section>
 <section>
@@ -314,9 +313,8 @@ class Path:
 
     @staticmethod
     def safe__file__(__file__):
-        if len(__file__) == 0:
-            return &#39;.&#39;
-        return __file__</code></pre>
+        import os
+        return os.path.realpath(__file__)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -490,9 +488,8 @@ def python():
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
 def safe__file__(__file__):
-    if len(__file__) == 0:
-        return &#39;.&#39;
-    return __file__</code></pre>
+    import os
+    return os.path.realpath(__file__)</code></pre>
 </details>
 </dd>
 <dt id="commands.path9.Path.set_working"><code class="name flex">
