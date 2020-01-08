@@ -28,7 +28,7 @@
 &#34;&#34;&#34;Internal module to work with zip and tar.lzma archives
 &#34;&#34;&#34;
 # https://code.tutsplus.com/ru/tutorials/compressing-and-extracting-files-in-python--cms-26816
-__version__ = &#34;0.4.0&#34;
+__version__ = &#34;0.4.1&#34;
 
 
 class UniversalArchive:
@@ -49,7 +49,8 @@ class UniversalArchive:
         if self.archive_type == Archive.MODE_ZIPDEFLATED:
             import zipfile
             additional_args[&#34;compress_type&#34;] = zipfile.ZIP_DEFLATED
-
+        elif self.archive_type == Archive.MODE_TARLZMA:
+            self._real_archive_object.write = self._real_archive_object.add
         return self._real_archive_object.write(input_file, arcname=arcname, **additional_args)
 
     def extract(self, *args, **kwargs):
@@ -394,7 +395,8 @@ def single(archive_path, path_inside_archive, output_path, archive_type=Archive.
         if self.archive_type == Archive.MODE_ZIPDEFLATED:
             import zipfile
             additional_args[&#34;compress_type&#34;] = zipfile.ZIP_DEFLATED
-
+        elif self.archive_type == Archive.MODE_TARLZMA:
+            self._real_archive_object.write = self._real_archive_object.add
         return self._real_archive_object.write(input_file, arcname=arcname, **additional_args)
 
     def extract(self, *args, **kwargs):
@@ -453,7 +455,8 @@ def single(archive_path, path_inside_archive, output_path, archive_type=Archive.
     if self.archive_type == Archive.MODE_ZIPDEFLATED:
         import zipfile
         additional_args[&#34;compress_type&#34;] = zipfile.ZIP_DEFLATED
-
+    elif self.archive_type == Archive.MODE_TARLZMA:
+        self._real_archive_object.write = self._real_archive_object.add
     return self._real_archive_object.write(input_file, arcname=arcname, **additional_args)</code></pre>
 </details>
 </dd>
