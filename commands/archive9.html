@@ -111,7 +111,7 @@ class Archive:
                     from .cli9 import CLI
                     Print.rewrite(CLI.wait_update(quiet=True), file_path, &#34;archived&#34;)
 
-        temp_file.close()
+        archive.close()
         File.move(temp_file, archive_file)
 
 
@@ -205,7 +205,7 @@ class Unarchive:
                     from .cli9 import CLI
                     Print.rewrite(CLI.wait_update(quiet=True), file_path, &#34;archived&#34;)
 
-        temp_file.close()
+        archive.close()
         File.move(temp_file, archive_file)</code></pre>
 </details>
 <h3>Class variables</h3>
@@ -250,7 +250,7 @@ def dir(input_dir, archive_file, quiet=True, archive_type=MODE_ZIPDEFLATED):
                 from .cli9 import CLI
                 Print.rewrite(CLI.wait_update(quiet=True), file_path, &#34;archived&#34;)
 
-    temp_file.close()
+    archive.close()
     File.move(temp_file, archive_file)</code></pre>
 </details>
 </dd>
