@@ -373,6 +373,29 @@ class Str:
         return string
 
 
+    @staticmethod
+    def rreplace(string: str, old: str, new: str, occurrence: int):
+        &#39;&#39;&#39;Right replace. Replacing
+        :param string: str, string, where to replace
+        :param old: str, substring to replace
+        :param new: str, substring to insert
+        :param occurrence: int, count of replcacement from right
+        :return: str, string with replaced substrings
+        &#39;&#39;&#39;
+        # https://stackoverflow.com/a/2556252/6519078
+        if not isinstance(string, str):
+            string = str(string)
+        if not isinstance(old, str):
+            old = str(old)
+        if not isinstance(new, str):
+            new = str(new)
+        if not isinstance(occurrence, int):
+            occurrence = int(occurrence)
+
+        _list = string.rsplit(old, occurrence)
+        return new.join(_list)
+
+
     python_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp737&#39;, &#39;cp775&#39;, &#39;cp850&#39;,
                         &#39;cp852&#39;, &#39;cp855&#39;, &#39;cp856&#39;, &#39;cp857&#39;, &#39;cp860&#39;, &#39;cp861&#39;, &#39;cp862&#39;, &#39;cp863&#39;, &#39;cp864&#39;, &#39;cp865&#39;,
                         &#39;cp866&#39;, &#39;cp869&#39;, &#39;cp874&#39;, &#39;cp875&#39;, &#39;cp932&#39;, &#39;cp949&#39;, &#39;cp950&#39;, &#39;cp1006&#39;, &#39;cp1026&#39;, &#39;cp1140&#39;,
@@ -744,6 +767,29 @@ class Str:
         symbols = strhashhex.zfill(32)[-32:]  # adds zeros if needed and cut unneded symbols
         string = symbols[:8] + &#34;-&#34; + symbols[8:12] + &#34;-&#34; + symbols[12:16] + &#34;-&#34; + symbols[16:20] + &#34;-&#34; + symbols[20:]
         return string
+
+
+    @staticmethod
+    def rreplace(string: str, old: str, new: str, occurrence: int):
+        &#39;&#39;&#39;Right replace. Replacing
+        :param string: str, string, where to replace
+        :param old: str, substring to replace
+        :param new: str, substring to insert
+        :param occurrence: int, count of replcacement from right
+        :return: str, string with replaced substrings
+        &#39;&#39;&#39;
+        # https://stackoverflow.com/a/2556252/6519078
+        if not isinstance(string, str):
+            string = str(string)
+        if not isinstance(old, str):
+            old = str(old)
+        if not isinstance(new, str):
+            new = str(new)
+        if not isinstance(occurrence, int):
+            occurrence = int(occurrence)
+
+        _list = string.rsplit(old, occurrence)
+        return new.join(_list)
 
 
     python_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp737&#39;, &#39;cp775&#39;, &#39;cp850&#39;,
@@ -1160,6 +1206,41 @@ def rightpad(cls, string, length, char=&#34;0&#34;):
     return cls.leftpad(string, length, char=char, rightpad=True)</code></pre>
 </details>
 </dd>
+<dt id="commands.str9.Str.rreplace"><code class="name flex">
+<span>def <span class="ident">rreplace</span></span>(<span>string, old, new, occurrence)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Right replace. Replacing
+:param string: str, string, where to replace
+:param old: str, substring to replace
+:param new: str, substring to insert
+:param occurrence: int, count of replcacement from right
+:return: str, string with replaced substrings</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def rreplace(string: str, old: str, new: str, occurrence: int):
+    &#39;&#39;&#39;Right replace. Replacing
+    :param string: str, string, where to replace
+    :param old: str, substring to replace
+    :param new: str, substring to insert
+    :param occurrence: int, count of replcacement from right
+    :return: str, string with replaced substrings
+    &#39;&#39;&#39;
+    # https://stackoverflow.com/a/2556252/6519078
+    if not isinstance(string, str):
+        string = str(string)
+    if not isinstance(old, str):
+        old = str(old)
+    if not isinstance(new, str):
+        new = str(new)
+    if not isinstance(occurrence, int):
+        occurrence = int(occurrence)
+
+    _list = string.rsplit(old, occurrence)
+    return new.join(_list)</code></pre>
+</details>
+</dd>
 <dt id="commands.str9.Str.split_every"><code class="name flex">
 <span>def <span class="ident">split_every</span></span>(<span>string, chars)</span>
 </code></dt>
@@ -1329,6 +1410,7 @@ def to_quotes_2(some_string):
 <li><code><a title="commands.str9.Str.python_encodings" href="#commands.str9.Str.python_encodings">python_encodings</a></code></li>
 <li><code><a title="commands.str9.Str.remove_spaces" href="#commands.str9.Str.remove_spaces">remove_spaces</a></code></li>
 <li><code><a title="commands.str9.Str.rightpad" href="#commands.str9.Str.rightpad">rightpad</a></code></li>
+<li><code><a title="commands.str9.Str.rreplace" href="#commands.str9.Str.rreplace">rreplace</a></code></li>
 <li><code><a title="commands.str9.Str.seeds" href="#commands.str9.Str.seeds">seeds</a></code></li>
 <li><code><a title="commands.str9.Str.split_every" href="#commands.str9.Str.split_every">split_every</a></code></li>
 <li><code><a title="commands.str9.Str.substring" href="#commands.str9.Str.substring">substring</a></code></li>
