@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with JSON
 &#34;&#34;&#34;
-__version__ = &#34;2.10.0&#34;
+__version__ = &#34;3.0.1&#34;
 
 
 class Json:
@@ -45,15 +45,6 @@ class Json:
             self.string = {}
             self._save_to_file(self.filename, self.string, quiet=quiet)
 
-    def __getitem__(self, item):
-        self.load()
-        return self.string.__getitem__(item)
-
-    def __setitem__(self, key, value):
-        output = self.string.__setitem__(key, value)
-        self.save(quiet=self.quiet, debug=self.debug)
-        return output
-
     def __len__(self):
         return self.string.__len__()
 
@@ -68,9 +59,6 @@ class Json:
         return output
 
     __print__ = __repr__
-
-    def items(self):
-        return self.string.items()
 
     def load(self, quiet=True):
         &#34;&#34;&#34;Loads json from file, defined in class init to class var &#34;string&#34;
@@ -171,7 +159,44 @@ class Json:
             print(&#34;JSON successfully loaded&#34;)
         if debug:
             print(json_string_in_memory)
-        return json_string_in_memory</code></pre>
+        return json_string_in_memory
+
+
+class JsonDict(Json):
+    def __init__(self, filename, quiet=True, ensure_ascii=False, debug=False):
+        Json.__init__(self=self, filename=filename, quiet=quiet, ensure_ascii=ensure_ascii, debug=debug)
+        if not isinstance(self.string, dict):
+            raise TypeError(f&#34;Json file {filename} is not containing dict&#34;)
+
+    def __getitem__(self, item):
+        self.load()
+        return self.string.__getitem__(item)
+
+    def __setitem__(self, key, value):
+        output = self.string.__setitem__(key, value)
+        self.save(quiet=self.quiet, debug=self.debug)
+        return output
+
+    def items(self):
+        return self.string.items()
+
+
+class JsonList(Json):
+    __getitem__ = JsonDict.__getitem__
+    __setitem__ = JsonDict.__setitem__
+
+    def __init__(self, filename, quiet=True, ensure_ascii=False, debug=False):
+        Json.__init__(self=self, filename=filename, quiet=quiet, ensure_ascii=ensure_ascii, debug=debug)
+        if self.string == {}:
+            self.string = []
+            self.save()
+        if not isinstance(self.string, list):
+            raise TypeError(f&#34;Json file {filename} is not containing list&#34;)
+
+    def append(self, object):
+        self.load()
+        self.string.append(object)
+        self.save()</code></pre>
 </details>
 </section>
 <section>
@@ -206,15 +231,6 @@ class Json:
             self.string = {}
             self._save_to_file(self.filename, self.string, quiet=quiet)
 
-    def __getitem__(self, item):
-        self.load()
-        return self.string.__getitem__(item)
-
-    def __setitem__(self, key, value):
-        output = self.string.__setitem__(key, value)
-        self.save(quiet=self.quiet, debug=self.debug)
-        return output
-
     def __len__(self):
         return self.string.__len__()
 
@@ -229,9 +245,6 @@ class Json:
         return output
 
     __print__ = __repr__
-
-    def items(self):
-        return self.string.items()
 
     def load(self, quiet=True):
         &#34;&#34;&#34;Loads json from file, defined in class init to class var &#34;string&#34;
@@ -334,19 +347,13 @@ class Json:
             print(json_string_in_memory)
         return json_string_in_memory</code></pre>
 </details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="commands.json9.JsonDict" href="#commands.json9.JsonDict">JsonDict</a></li>
+<li><a title="commands.json9.JsonList" href="#commands.json9.JsonList">JsonList</a></li>
+</ul>
 <h3>Methods</h3>
 <dl>
-<dt id="commands.json9.Json.items"><code class="name flex">
-<span>def <span class="ident">items</span></span>(<span>self)</span>
-</code></dt>
-<dd>
-<section class="desc"></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">def items(self):
-    return self.string.items()</code></pre>
-</details>
-</dd>
 <dt id="commands.json9.Json.load"><code class="name flex">
 <span>def <span class="ident">load</span></span>(<span>self, quiet=True)</span>
 </code></dt>
@@ -400,6 +407,115 @@ class Json:
 </dd>
 </dl>
 </dd>
+<dt id="commands.json9.JsonDict"><code class="flex name class">
+<span>class <span class="ident">JsonDict</span></span>
+<span>(</span><span>filename, quiet=True, ensure_ascii=False, debug=False)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Class to work with JSON</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">class JsonDict(Json):
+    def __init__(self, filename, quiet=True, ensure_ascii=False, debug=False):
+        Json.__init__(self=self, filename=filename, quiet=quiet, ensure_ascii=ensure_ascii, debug=debug)
+        if not isinstance(self.string, dict):
+            raise TypeError(f&#34;Json file {filename} is not containing dict&#34;)
+
+    def __getitem__(self, item):
+        self.load()
+        return self.string.__getitem__(item)
+
+    def __setitem__(self, key, value):
+        output = self.string.__setitem__(key, value)
+        self.save(quiet=self.quiet, debug=self.debug)
+        return output
+
+    def items(self):
+        return self.string.items()</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="commands.json9.Json" href="#commands.json9.Json">Json</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="commands.json9.JsonDict.items"><code class="name flex">
+<span>def <span class="ident">items</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def items(self):
+    return self.string.items()</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="commands.json9.Json" href="#commands.json9.Json">Json</a></b></code>:
+<ul class="hlist">
+<li><code><a title="commands.json9.Json.load" href="#commands.json9.Json.load">load</a></code></li>
+<li><code><a title="commands.json9.Json.save" href="#commands.json9.Json.save">save</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="commands.json9.JsonList"><code class="flex name class">
+<span>class <span class="ident">JsonList</span></span>
+<span>(</span><span>filename, quiet=True, ensure_ascii=False, debug=False)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Class to work with JSON</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">class JsonList(Json):
+    __getitem__ = JsonDict.__getitem__
+    __setitem__ = JsonDict.__setitem__
+
+    def __init__(self, filename, quiet=True, ensure_ascii=False, debug=False):
+        Json.__init__(self=self, filename=filename, quiet=quiet, ensure_ascii=ensure_ascii, debug=debug)
+        if self.string == {}:
+            self.string = []
+            self.save()
+        if not isinstance(self.string, list):
+            raise TypeError(f&#34;Json file {filename} is not containing list&#34;)
+
+    def append(self, object):
+        self.load()
+        self.string.append(object)
+        self.save()</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="commands.json9.Json" href="#commands.json9.Json">Json</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="commands.json9.JsonList.append"><code class="name flex">
+<span>def <span class="ident">append</span></span>(<span>self, object)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def append(self, object):
+    self.load()
+    self.string.append(object)
+    self.save()</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="commands.json9.Json" href="#commands.json9.Json">Json</a></b></code>:
+<ul class="hlist">
+<li><code><a title="commands.json9.Json.load" href="#commands.json9.Json.load">load</a></code></li>
+<li><code><a title="commands.json9.Json.save" href="#commands.json9.Json.save">save</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
 </dl>
 </section>
 </article>
@@ -419,10 +535,21 @@ class Json:
 <li>
 <h4><code><a title="commands.json9.Json" href="#commands.json9.Json">Json</a></code></h4>
 <ul class="">
-<li><code><a title="commands.json9.Json.items" href="#commands.json9.Json.items">items</a></code></li>
 <li><code><a title="commands.json9.Json.load" href="#commands.json9.Json.load">load</a></code></li>
 <li><code><a title="commands.json9.Json.pop" href="#commands.json9.Json.pop">pop</a></code></li>
 <li><code><a title="commands.json9.Json.save" href="#commands.json9.Json.save">save</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="commands.json9.JsonDict" href="#commands.json9.JsonDict">JsonDict</a></code></h4>
+<ul class="">
+<li><code><a title="commands.json9.JsonDict.items" href="#commands.json9.JsonDict.items">items</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="commands.json9.JsonList" href="#commands.json9.JsonList">JsonList</a></code></h4>
+<ul class="">
+<li><code><a title="commands.json9.JsonList.append" href="#commands.json9.JsonList.append">append</a></code></li>
 </ul>
 </li>
 </ul>

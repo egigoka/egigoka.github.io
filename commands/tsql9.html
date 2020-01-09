@@ -77,7 +77,7 @@ class TSQL:
         con.commit()
         con.close()
         if debug:
-            Print(&#34;Close connection done&#34;)
+            Print(&#34;Close connection finished&#34;)
 
     def run_without_transaction(self, query, debug=False):
         try:
@@ -110,7 +110,7 @@ class TSQL:
         cur.close()
         con.close()
         if debug:
-            Print(&#34;Close connection done&#34;)
+            Print(&#34;Close connection finished&#34;)
 
     def query(self, query, debug=False):
         try:
@@ -152,7 +152,7 @@ class TSQL:
         cur.close()
         con.close()
         if debug:
-            Print(&#34;Close connection done&#34;)
+            Print(&#34;Close connection finished&#34;)
 
         if len(out) == 1:
             return out[0]
@@ -274,7 +274,7 @@ class TSQL:
         con.commit()
         con.close()
         if debug:
-            Print(&#34;Close connection done&#34;)
+            Print(&#34;Close connection finished&#34;)
 
     def run_without_transaction(self, query, debug=False):
         try:
@@ -307,7 +307,7 @@ class TSQL:
         cur.close()
         con.close()
         if debug:
-            Print(&#34;Close connection done&#34;)
+            Print(&#34;Close connection finished&#34;)
 
     def query(self, query, debug=False):
         try:
@@ -349,7 +349,7 @@ class TSQL:
         cur.close()
         con.close()
         if debug:
-            Print(&#34;Close connection done&#34;)
+            Print(&#34;Close connection finished&#34;)
 
         if len(out) == 1:
             return out[0]
@@ -546,7 +546,7 @@ class TSQL:
     cur.close()
     con.close()
     if debug:
-        Print(&#34;Close connection done&#34;)
+        Print(&#34;Close connection finished&#34;)
 
     if len(out) == 1:
         return out[0]
@@ -596,7 +596,7 @@ class TSQL:
     con.commit()
     con.close()
     if debug:
-        Print(&#34;Close connection done&#34;)</code></pre>
+        Print(&#34;Close connection finished&#34;)</code></pre>
 </details>
 </dd>
 <dt id="commands.tsql9.TSQL.run_without_transaction"><code class="name flex">
@@ -637,7 +637,7 @@ class TSQL:
     cur.close()
     con.close()
     if debug:
-        Print(&#34;Close connection done&#34;)</code></pre>
+        Print(&#34;Close connection finished&#34;)</code></pre>
 </details>
 </dd>
 </dl>
