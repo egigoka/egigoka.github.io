@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with directories
 &#34;&#34;&#34;
-__version__ = &#34;1.3.0&#34;
+__version__ = &#34;1.3.1&#34;
 
 
 class Dir:
@@ -70,6 +70,9 @@ class Dir:
         &lt;br&gt;`return` int count of files in directory
         &#34;&#34;&#34;
         import os
+        from .dir9 import Dir
+        if not Dir.exist(path):
+            raise FileNotFoundError(f&#34;Directory &#39;{path}&#39; not found&#34;)
         cnt = 0
         for root, dirs, files in os.walk(path):
             cnt += len(files)
@@ -319,6 +322,9 @@ class Dir:
         &lt;br&gt;`return` int count of files in directory
         &#34;&#34;&#34;
         import os
+        from .dir9 import Dir
+        if not Dir.exist(path):
+            raise FileNotFoundError(f&#34;Directory &#39;{path}&#39; not found&#34;)
         cnt = 0
         for root, dirs, files in os.walk(path):
             cnt += len(files)
@@ -874,6 +880,9 @@ def number_of_files(cls, path, quiet=True):
     &lt;br&gt;`return` int count of files in directory
     &#34;&#34;&#34;
     import os
+    from .dir9 import Dir
+    if not Dir.exist(path):
+        raise FileNotFoundError(f&#34;Directory &#39;{path}&#39; not found&#34;)
     cnt = 0
     for root, dirs, files in os.walk(path):
         cnt += len(files)
