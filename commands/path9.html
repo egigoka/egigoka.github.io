@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions to work with path strings
 &#34;&#34;&#34;
-__version__ = &#34;2.5.11&#34;
+__version__ = &#34;2.6.0&#34;
 
 
 class Path:
@@ -43,12 +43,20 @@ class Path:
         return os.path.abspath(path)
 
     @staticmethod
-    def commands():
+    def get_real_path(__file__):
+        &#34;&#34;&#34;Used for store some settings(?)
+        &lt;br&gt;`return` string, path of input filepath
+        &#34;&#34;&#34;
+        import os
+        return os.path.realpath(__file__)
+
+    @classmethod
+    def commands(cls):
         &#34;&#34;&#34;Used for store some settings(?)
         &lt;br&gt;`return` string, path of this module
         &#34;&#34;&#34;
         import os
-        return os.path.dirname(os.path.realpath(__file__))
+        return os.path.dirname(cls.get_real_path(__file__))
 
     @staticmethod
     def working():
@@ -195,12 +203,20 @@ class Path:
         return os.path.abspath(path)
 
     @staticmethod
-    def commands():
+    def get_real_path(__file__):
+        &#34;&#34;&#34;Used for store some settings(?)
+        &lt;br&gt;`return` string, path of input filepath
+        &#34;&#34;&#34;
+        import os
+        return os.path.realpath(__file__)
+
+    @classmethod
+    def commands(cls):
         &#34;&#34;&#34;Used for store some settings(?)
         &lt;br&gt;`return` string, path of this module
         &#34;&#34;&#34;
         import os
-        return os.path.dirname(os.path.realpath(__file__))
+        return os.path.dirname(cls.get_real_path(__file__))
 
     @staticmethod
     def working():
@@ -397,13 +413,13 @@ def combine(cls, path_first_path, *paths, debug=False):  # todo add support for 
 <br><code>return</code> string, path of this module</p></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">@staticmethod
-def commands():
+<pre><code class="python">@classmethod
+def commands(cls):
     &#34;&#34;&#34;Used for store some settings(?)
     &lt;br&gt;`return` string, path of this module
     &#34;&#34;&#34;
     import os
-    return os.path.dirname(os.path.realpath(__file__))</code></pre>
+    return os.path.dirname(cls.get_real_path(__file__))</code></pre>
 </details>
 </dd>
 <dt id="commands.path9.Path.full"><code class="name flex">
@@ -441,6 +457,23 @@ def get_parent(path):
     &#34;&#34;&#34;
     import os
     return os.path.split(path)[0]</code></pre>
+</details>
+</dd>
+<dt id="commands.path9.Path.get_real_path"><code class="name flex">
+<span>def <span class="ident">get_real_path</span></span>(<span>__file__)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Used for store some settings(?)
+<br><code>return</code> string, path of input filepath</p></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def get_real_path(__file__):
+    &#34;&#34;&#34;Used for store some settings(?)
+    &lt;br&gt;`return` string, path of input filepath
+    &#34;&#34;&#34;
+    import os
+    return os.path.realpath(__file__)</code></pre>
 </details>
 </dd>
 <dt id="commands.path9.Path.home"><code class="name flex">
@@ -577,6 +610,7 @@ def working():
 <li><code><a title="commands.path9.Path.commands" href="#commands.path9.Path.commands">commands</a></code></li>
 <li><code><a title="commands.path9.Path.full" href="#commands.path9.Path.full">full</a></code></li>
 <li><code><a title="commands.path9.Path.get_parent" href="#commands.path9.Path.get_parent">get_parent</a></code></li>
+<li><code><a title="commands.path9.Path.get_real_path" href="#commands.path9.Path.get_real_path">get_real_path</a></code></li>
 <li><code><a title="commands.path9.Path.home" href="#commands.path9.Path.home">home</a></code></li>
 <li><code><a title="commands.path9.Path.python" href="#commands.path9.Path.python">python</a></code></li>
 <li><code><a title="commands.path9.Path.safe__file__" href="#commands.path9.Path.safe__file__">safe__file__</a></code></li>
