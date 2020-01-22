@@ -55,7 +55,7 @@ class Str:
         &lt;br&gt;`param string` string, with some integers or floats inside
         &lt;br&gt;`param float_support` boolean, enable float support
         &lt;br&gt;`param debug` boolean, debug print enable
-        &lt;br&gt;`return` list of integers or floats
+        &lt;br&gt;`return` list_ of integers or floats
         &#34;&#34;&#34;
         string = cls.remove_spaces(string)
         integer_found = False
@@ -104,7 +104,7 @@ class Str:
         &#34;&#34;&#34;
         &lt;br&gt;`param string` string, with some newlines
         &lt;br&gt;`param quiet` boolean suppress print to console
-        &lt;br&gt;`return` list of strings
+        &lt;br&gt;`return` list_ of strings
         &#34;&#34;&#34;
         from .const9 import newline, newline2
         if isinstance(string, str):  # if input is string
@@ -119,7 +119,7 @@ class Str:
         &#34;&#34;&#34;
         &lt;br&gt;`param string` string, with some newlines
         &lt;br&gt;`param quiet` boolean suppress print to console
-        &lt;br&gt;`return` list of strings
+        &lt;br&gt;`return` list_ of strings
         &#34;&#34;&#34;
         return cls.newlines_to_strings(string=string)
 
@@ -128,7 +128,7 @@ class Str:
         &#34;&#34;&#34;Split line every N chars
         &lt;br&gt;`param string` string, input
         &lt;br&gt;`param chars` int, count of chars, that split line
-        &lt;br&gt;`return` list of substring of &#39;chars&#39; length
+        &lt;br&gt;`return` list_ of substring of &#39;chars&#39; length
         &#34;&#34;&#34;
         chars = int(chars)
         if chars &lt;= 0:
@@ -178,7 +178,7 @@ class Str:
         &lt;br&gt;`param string` string
         &lt;br&gt;`param before` string, that before output string
         &lt;br&gt;`param after` string, that after output string
-        &lt;br&gt;`param return_after_substring` boolean, if True, return list of substring and part after substring
+        &lt;br&gt;`param return_after_substring` boolean, if True, return list_ of substring and part after substring
         &lt;br&gt;`param safe` boolean, suppress exceptions if something not found
         &lt;br&gt;`param exception_message` string, will be in exception that raised
         &lt;br&gt;`return` string, from string that between &#34;before&#34;, and &#34;after&#34; arguments
@@ -312,7 +312,7 @@ class Str:
     def get_words(string_):
         &#34;&#34;&#34;
         &lt;br&gt;`param string_` string, with spaces to split it
-        &lt;br&gt;`return` list of substrings, splitted by space|multiple space
+        &lt;br&gt;`return` list_ of substrings, splitted by space|multiple space
         &#34;&#34;&#34;
         removed_spaces = &#39; &#39;.join(string_.split())  # at least, it&#39;s fast https://stackoverflow.com/questions/2077897/
         # substitute-multiple-whitespace-with-single-whitespace-in-python
@@ -451,7 +451,7 @@ class Str:
         &lt;br&gt;`param string` string, with some integers or floats inside
         &lt;br&gt;`param float_support` boolean, enable float support
         &lt;br&gt;`param debug` boolean, debug print enable
-        &lt;br&gt;`return` list of integers or floats
+        &lt;br&gt;`return` list_ of integers or floats
         &#34;&#34;&#34;
         string = cls.remove_spaces(string)
         integer_found = False
@@ -500,7 +500,7 @@ class Str:
         &#34;&#34;&#34;
         &lt;br&gt;`param string` string, with some newlines
         &lt;br&gt;`param quiet` boolean suppress print to console
-        &lt;br&gt;`return` list of strings
+        &lt;br&gt;`return` list_ of strings
         &#34;&#34;&#34;
         from .const9 import newline, newline2
         if isinstance(string, str):  # if input is string
@@ -515,7 +515,7 @@ class Str:
         &#34;&#34;&#34;
         &lt;br&gt;`param string` string, with some newlines
         &lt;br&gt;`param quiet` boolean suppress print to console
-        &lt;br&gt;`return` list of strings
+        &lt;br&gt;`return` list_ of strings
         &#34;&#34;&#34;
         return cls.newlines_to_strings(string=string)
 
@@ -524,7 +524,7 @@ class Str:
         &#34;&#34;&#34;Split line every N chars
         &lt;br&gt;`param string` string, input
         &lt;br&gt;`param chars` int, count of chars, that split line
-        &lt;br&gt;`return` list of substring of &#39;chars&#39; length
+        &lt;br&gt;`return` list_ of substring of &#39;chars&#39; length
         &#34;&#34;&#34;
         chars = int(chars)
         if chars &lt;= 0:
@@ -574,7 +574,7 @@ class Str:
         &lt;br&gt;`param string` string
         &lt;br&gt;`param before` string, that before output string
         &lt;br&gt;`param after` string, that after output string
-        &lt;br&gt;`param return_after_substring` boolean, if True, return list of substring and part after substring
+        &lt;br&gt;`param return_after_substring` boolean, if True, return list_ of substring and part after substring
         &lt;br&gt;`param safe` boolean, suppress exceptions if something not found
         &lt;br&gt;`param exception_message` string, will be in exception that raised
         &lt;br&gt;`return` string, from string that between &#34;before&#34;, and &#34;after&#34; arguments
@@ -708,7 +708,7 @@ class Str:
     def get_words(string_):
         &#34;&#34;&#34;
         &lt;br&gt;`param string_` string, with spaces to split it
-        &lt;br&gt;`return` list of substrings, splitted by space|multiple space
+        &lt;br&gt;`return` list_ of substrings, splitted by space|multiple space
         &#34;&#34;&#34;
         removed_spaces = &#39; &#39;.join(string_.split())  # at least, it&#39;s fast https://stackoverflow.com/questions/2077897/
         # substitute-multiple-whitespace-with-single-whitespace-in-python
@@ -889,7 +889,7 @@ def encrypt(string, password):
 <section class="desc"><p><br><code>param string</code> string, with some integers or floats inside
 <br><code>param float_support</code> boolean, enable float support
 <br><code>param debug</code> boolean, debug print enable
-<br><code>return</code> list of integers or floats</p></section>
+<br><code>return</code> list_ of integers or floats</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@classmethod
@@ -898,7 +898,7 @@ def get_integers(cls, string, float_support=True, debug=False):
     &lt;br&gt;`param string` string, with some integers or floats inside
     &lt;br&gt;`param float_support` boolean, enable float support
     &lt;br&gt;`param debug` boolean, debug print enable
-    &lt;br&gt;`return` list of integers or floats
+    &lt;br&gt;`return` list_ of integers or floats
     &#34;&#34;&#34;
     string = cls.remove_spaces(string)
     integer_found = False
@@ -948,14 +948,14 @@ def get_integers(cls, string, float_support=True, debug=False):
 </code></dt>
 <dd>
 <section class="desc"><p><br><code>param string_</code> string, with spaces to split it
-<br><code>return</code> list of substrings, splitted by space|multiple space</p></section>
+<br><code>return</code> list_ of substrings, splitted by space|multiple space</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
 def get_words(string_):
     &#34;&#34;&#34;
     &lt;br&gt;`param string_` string, with spaces to split it
-    &lt;br&gt;`return` list of substrings, splitted by space|multiple space
+    &lt;br&gt;`return` list_ of substrings, splitted by space|multiple space
     &#34;&#34;&#34;
     removed_spaces = &#39; &#39;.join(string_.split())  # at least, it&#39;s fast https://stackoverflow.com/questions/2077897/
     # substitute-multiple-whitespace-with-single-whitespace-in-python
@@ -1125,7 +1125,7 @@ def leftpad(string, length, char=&#34;0&#34;, rightpad=False):
 <dd>
 <section class="desc"><p><br><code>param string</code> string, with some newlines
 <br><code>param quiet</code> boolean suppress print to console
-<br><code>return</code> list of strings</p></section>
+<br><code>return</code> list_ of strings</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
@@ -1133,7 +1133,7 @@ def newlines_to_strings(string):
     &#34;&#34;&#34;
     &lt;br&gt;`param string` string, with some newlines
     &lt;br&gt;`param quiet` boolean suppress print to console
-    &lt;br&gt;`return` list of strings
+    &lt;br&gt;`return` list_ of strings
     &#34;&#34;&#34;
     from .const9 import newline, newline2
     if isinstance(string, str):  # if input is string
@@ -1150,7 +1150,7 @@ def newlines_to_strings(string):
 <dd>
 <section class="desc"><p><br><code>param string</code> string, with some newlines
 <br><code>param quiet</code> boolean suppress print to console
-<br><code>return</code> list of strings</p></section>
+<br><code>return</code> list_ of strings</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@classmethod
@@ -1158,7 +1158,7 @@ def nl(cls, string):  # pylint: disable=invalid-name
     &#34;&#34;&#34;
     &lt;br&gt;`param string` string, with some newlines
     &lt;br&gt;`param quiet` boolean suppress print to console
-    &lt;br&gt;`return` list of strings
+    &lt;br&gt;`return` list_ of strings
     &#34;&#34;&#34;
     return cls.newlines_to_strings(string=string)</code></pre>
 </details>
@@ -1248,7 +1248,7 @@ def rreplace(string: str, old: str, new: str, occurrence: int):
 <section class="desc"><p>Split line every N chars
 <br><code>param string</code> string, input
 <br><code>param chars</code> int, count of chars, that split line
-<br><code>return</code> list of substring of 'chars' length</p></section>
+<br><code>return</code> list_ of substring of 'chars' length</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
@@ -1256,7 +1256,7 @@ def split_every(string, chars):
     &#34;&#34;&#34;Split line every N chars
     &lt;br&gt;`param string` string, input
     &lt;br&gt;`param chars` int, count of chars, that split line
-    &lt;br&gt;`return` list of substring of &#39;chars&#39; length
+    &lt;br&gt;`return` list_ of substring of &#39;chars&#39; length
     &#34;&#34;&#34;
     chars = int(chars)
     if chars &lt;= 0:
@@ -1279,7 +1279,7 @@ def split_every(string, chars):
 <br><code>param string</code> string
 <br><code>param before</code> string, that before output string
 <br><code>param after</code> string, that after output string
-<br><code>param return_after_substring</code> boolean, if True, return list of substring and part after substring
+<br><code>param return_after_substring</code> boolean, if True, return list_ of substring and part after substring
 <br><code>param safe</code> boolean, suppress exceptions if something not found
 <br><code>param exception_message</code> string, will be in exception that raised
 <br><code>return</code> string, from string that between "before", and "after" arguments</p></section>
@@ -1291,7 +1291,7 @@ def substring(string, before, after=None, return_after_substring=False, safe=Fal
     &lt;br&gt;`param string` string
     &lt;br&gt;`param before` string, that before output string
     &lt;br&gt;`param after` string, that after output string
-    &lt;br&gt;`param return_after_substring` boolean, if True, return list of substring and part after substring
+    &lt;br&gt;`param return_after_substring` boolean, if True, return list_ of substring and part after substring
     &lt;br&gt;`param safe` boolean, suppress exceptions if something not found
     &lt;br&gt;`param exception_message` string, will be in exception that raised
     &lt;br&gt;`return` string, from string that between &#34;before&#34;, and &#34;after&#34; arguments

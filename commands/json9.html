@@ -93,7 +93,7 @@ class Json:
     def _save_to_file(self, filename, json_string, quiet=True, debug=False):
         &#34;&#34;&#34;
         &lt;br&gt;`param filename` path of file, where JSON will be saved
-        &lt;br&gt;`param json_string` list or dict to save in file
+        &lt;br&gt;`param json_string` list_ or dict to save in file
         &lt;br&gt;`param quiet` boolean, suppress print to console
         &lt;br&gt;`param debug` boolean, needed for debugging
         &lt;br&gt;`return`
@@ -191,7 +191,7 @@ class JsonList(Json):
             self.string = []
             self.save()
         if not isinstance(self.string, list):
-            raise TypeError(f&#34;Json file {filename} is not containing list&#34;)
+            raise TypeError(f&#34;Json file {filename} is not containing list_&#34;)
 
     def append(self, object):
         self.load()
@@ -284,7 +284,7 @@ class JsonList(Json):
     def _save_to_file(self, filename, json_string, quiet=True, debug=False):
         &#34;&#34;&#34;
         &lt;br&gt;`param filename` path of file, where JSON will be saved
-        &lt;br&gt;`param json_string` list or dict to save in file
+        &lt;br&gt;`param json_string` list_ or dict to save in file
         &lt;br&gt;`param quiet` boolean, suppress print to console
         &lt;br&gt;`param debug` boolean, needed for debugging
         &lt;br&gt;`return`
@@ -484,7 +484,7 @@ class JsonList(Json):
             self.string = []
             self.save()
         if not isinstance(self.string, list):
-            raise TypeError(f&#34;Json file {filename} is not containing list&#34;)
+            raise TypeError(f&#34;Json file {filename} is not containing list_&#34;)
 
     def append(self, object):
         self.load()

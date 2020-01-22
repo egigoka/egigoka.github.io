@@ -37,7 +37,7 @@ class Pip:
     def main(list_of_args):
         &#34;&#34;&#34;
         It&#39;s alias of pip.main function, it needed, because pip10 remove public API
-        &lt;br&gt;`param list_of_args` must be list, same arguments as pip
+        &lt;br&gt;`param list_of_args` must be list_, same arguments as pip
         &lt;br&gt;`return` same as alias
         &#34;&#34;&#34;
         try:
@@ -96,7 +96,7 @@ class Pip:
         &#34;&#34;&#34;
         from .str9 import Str
         from .console9 import Console
-        packages = Str.nl(Console.get_output(&#34;pip list&#34;))
+        packages = Str.nl(Console.get_output(&#34;pip list_&#34;))
         packages_names = []
         for package in packages[3:]:
             if (&#34;Package&#34; not in package) and (&#34;---&#34; not in package) and package != &#34;&#34;:
@@ -110,7 +110,7 @@ class Pip:
     @classmethod
     def _update_list_of_modules(cls):
         &#34;&#34;&#34;
-        Internal method. Updates internal list of modules.
+        Internal method. Updates internal list_ of modules.
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
         import pkgutil
@@ -146,7 +146,7 @@ Pip._update_list_of_modules()  # pylint: disable=protected-access</code></pre>
     def main(list_of_args):
         &#34;&#34;&#34;
         It&#39;s alias of pip.main function, it needed, because pip10 remove public API
-        &lt;br&gt;`param list_of_args` must be list, same arguments as pip
+        &lt;br&gt;`param list_of_args` must be list_, same arguments as pip
         &lt;br&gt;`return` same as alias
         &#34;&#34;&#34;
         try:
@@ -205,7 +205,7 @@ Pip._update_list_of_modules()  # pylint: disable=protected-access</code></pre>
         &#34;&#34;&#34;
         from .str9 import Str
         from .console9 import Console
-        packages = Str.nl(Console.get_output(&#34;pip list&#34;))
+        packages = Str.nl(Console.get_output(&#34;pip list_&#34;))
         packages_names = []
         for package in packages[3:]:
             if (&#34;Package&#34; not in package) and (&#34;---&#34; not in package) and package != &#34;&#34;:
@@ -219,7 +219,7 @@ Pip._update_list_of_modules()  # pylint: disable=protected-access</code></pre>
     @classmethod
     def _update_list_of_modules(cls):
         &#34;&#34;&#34;
-        Internal method. Updates internal list of modules.
+        Internal method. Updates internal list_ of modules.
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
         import pkgutil
@@ -295,7 +295,7 @@ def install(cls, *module_names, upgrade=False, uninstall=False):
 </code></dt>
 <dd>
 <section class="desc"><p>It's alias of pip.main function, it needed, because pip10 remove public API
-<br><code>param list_of_args</code> must be list, same arguments as pip
+<br><code>param list_of_args</code> must be list_, same arguments as pip
 <br><code>return</code> same as alias</p></section>
 <details class="source">
 <summary>Source code</summary>
@@ -303,7 +303,7 @@ def install(cls, *module_names, upgrade=False, uninstall=False):
 def main(list_of_args):
     &#34;&#34;&#34;
     It&#39;s alias of pip.main function, it needed, because pip10 remove public API
-    &lt;br&gt;`param list_of_args` must be list, same arguments as pip
+    &lt;br&gt;`param list_of_args` must be list_, same arguments as pip
     &lt;br&gt;`return` same as alias
     &#34;&#34;&#34;
     try:
@@ -348,7 +348,7 @@ def update_all_packages(cls):
     &#34;&#34;&#34;
     from .str9 import Str
     from .console9 import Console
-    packages = Str.nl(Console.get_output(&#34;pip list&#34;))
+    packages = Str.nl(Console.get_output(&#34;pip list_&#34;))
     packages_names = []
     for package in packages[3:]:
         if (&#34;Package&#34; not in package) and (&#34;---&#34; not in package) and package != &#34;&#34;:
