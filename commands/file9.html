@@ -213,12 +213,10 @@ class File:
                 import codecs
                 with codecs.open(path, encoding=&#39;cp1251&#39;, errors=&#39;replace&#39;) as file:
                     content = file.read()
-                    file.close()
                     return content
         elif mode in [&#34;b&#34;, &#34;rb&#34;]:
             with open(path, &#34;rb&#34;) as file:
                 content = file.read()
-                file.close()
                 return content
 
     @staticmethod
@@ -241,7 +239,7 @@ class File:
                     what_to_write = str(what_to_write)
                 file.write(what_to_write)
         if not quiet:
-            print(f&#34;Writed to file {filename}&#34;)
+            print(f&#34;Written to file {filename}&#34;)
 
     @staticmethod
     def exist(filename):
@@ -516,12 +514,10 @@ class File:
                 import codecs
                 with codecs.open(path, encoding=&#39;cp1251&#39;, errors=&#39;replace&#39;) as file:
                     content = file.read()
-                    file.close()
                     return content
         elif mode in [&#34;b&#34;, &#34;rb&#34;]:
             with open(path, &#34;rb&#34;) as file:
                 content = file.read()
-                file.close()
                 return content
 
     @staticmethod
@@ -544,7 +540,7 @@ class File:
                     what_to_write = str(what_to_write)
                 file.write(what_to_write)
         if not quiet:
-            print(f&#34;Writed to file {filename}&#34;)
+            print(f&#34;Written to file {filename}&#34;)
 
     @staticmethod
     def exist(filename):
@@ -961,12 +957,10 @@ def read(path, encoding=&#34;utf-8&#34;, auto_detect_encoding=False, quiet=True,
             import codecs
             with codecs.open(path, encoding=&#39;cp1251&#39;, errors=&#39;replace&#39;) as file:
                 content = file.read()
-                file.close()
                 return content
     elif mode in [&#34;b&#34;, &#34;rb&#34;]:
         with open(path, &#34;rb&#34;) as file:
             content = file.read()
-            file.close()
             return content</code></pre>
 </details>
 </dd>
@@ -1057,7 +1051,7 @@ def write(filename, what_to_write, mode=&#34;a&#34;, quiet=True):
                 what_to_write = str(what_to_write)
             file.write(what_to_write)
     if not quiet:
-        print(f&#34;Writed to file {filename}&#34;)</code></pre>
+        print(f&#34;Written to file {filename}&#34;)</code></pre>
 </details>
 </dd>
 </dl>
