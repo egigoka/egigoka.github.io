@@ -82,8 +82,8 @@ class Print:
         self.multithread_safe(*strings, sep=sep, end=&#34;\r&#34;)
 
     def prettify(self, object_, indent=4, quiet=False):
-        &#34;&#34;&#34;Pretty print of list_, dicts, tuples
-        &lt;br&gt;`param object_` list_|dict|tuple
+        &#34;&#34;&#34;Pretty print of list, dicts, tuples
+        &lt;br&gt;`param object_` list|dict|tuple
         &lt;br&gt;`param indent` int, indent to new nested level
         &lt;br&gt;`param quiet` boolean, suppress print to console
         &lt;br&gt;`return` string, from pprint.pformat
@@ -100,7 +100,7 @@ class Print:
         Usage` Print.colored(&#34;text1&#34;, &#34;text2&#34;, &#34;red&#34;) or cls.colored(&#34;text&#34;, &#34;text2&#34;, &#34;red&#34;, &#34;on_white&#34;).
         You can pick colors from termcolor.COLORS, highlights from termcolor.HIGHLIGHTS.
         &lt;br&gt;`param strings` strings, work as builtin print()
-        &lt;br&gt;`param attributes` list_ of attributes, going to tkinter.cprint(attrs) argument
+        &lt;br&gt;`param attributes` list of attributes, going to tkinter.cprint(attrs) argument
         &lt;br&gt;`param end` string, same end, as builtin print(end)
         &lt;br&gt;`param sep` string, same end, as builtin print(sep)
         &lt;br&gt;`return` None

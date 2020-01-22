@@ -263,7 +263,7 @@ class Console:
                    auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False,
                    create_cmd_subprocess=False):
         &#34;&#34;&#34;Return output of executing command.
-        &lt;br&gt;`param commands` list_[string if pureshell is True] with command and arguments
+        &lt;br&gt;`param commands` list[string if pureshell is True] with command and arguments
         &lt;br&gt;`param pureshell` boolean, if True, the specified command will be executed through the shell
         &lt;br&gt;`param print_std` boolean, if True, output from command will be printed immideately (also adds argument -u to
         &#39;py&#39; or &#39;python&#39; firs arg.)
@@ -620,7 +620,7 @@ class Console:
                    auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False,
                    create_cmd_subprocess=False):
         &#34;&#34;&#34;Return output of executing command.
-        &lt;br&gt;`param commands` list_[string if pureshell is True] with command and arguments
+        &lt;br&gt;`param commands` list[string if pureshell is True] with command and arguments
         &lt;br&gt;`param pureshell` boolean, if True, the specified command will be executed through the shell
         &lt;br&gt;`param print_std` boolean, if True, output from command will be printed immideately (also adds argument -u to
         &#39;py&#39; or &#39;python&#39; firs arg.)
@@ -864,7 +864,7 @@ def fit(cls, *strings, sep=&#34; &#34;):
 </code></dt>
 <dd>
 <section class="desc"><p>Return output of executing command.
-<br><code>param commands</code> list_[string if pureshell is True] with command and arguments
+<br><code>param commands</code> list[string if pureshell is True] with command and arguments
 <br><code>param pureshell</code> boolean, if True, the specified command will be executed through the shell
 <br><code>param print_std</code> boolean, if True, output from command will be printed immideately (also adds argument -u to
 'py' or 'python' firs arg.)
@@ -876,7 +876,7 @@ def get_output(cls, *commands, pureshell=False, print_std=False, decoding=None, 
                auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False,
                create_cmd_subprocess=False):
     &#34;&#34;&#34;Return output of executing command.
-    &lt;br&gt;`param commands` list_[string if pureshell is True] with command and arguments
+    &lt;br&gt;`param commands` list[string if pureshell is True] with command and arguments
     &lt;br&gt;`param pureshell` boolean, if True, the specified command will be executed through the shell
     &lt;br&gt;`param print_std` boolean, if True, output from command will be printed immideately (also adds argument -u to
     &#39;py&#39; or &#39;python&#39; firs arg.)

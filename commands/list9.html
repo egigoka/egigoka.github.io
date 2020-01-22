@@ -36,8 +36,8 @@ class List:
     @staticmethod
     def flatterize(input_list):
         &#34;&#34;&#34;Remove nesting from lists.
-        &lt;br&gt;`param input_list` list_
-        &lt;br&gt;`return` list_ with all contents of input list_ but without nesting
+        &lt;br&gt;`param input_list` list
+        &lt;br&gt;`return` list with all contents of input list but without nesting
         &#34;&#34;&#34;
         import copy
         if not isinstance(input_list, (list, tuple)):
@@ -54,10 +54,10 @@ class List:
 
     @staticmethod
     def split_every(list_input, count):
-        &#34;&#34;&#34;Split list_ to lists with N elements
-        &lt;br&gt;`param list_input` list_
+        &#34;&#34;&#34;Split list to lists with N elements
+        &lt;br&gt;`param list_input` list
         &lt;br&gt;`param count` int with N
-        &lt;br&gt;`return` list_ of lists
+        &lt;br&gt;`return` list of lists
         &#34;&#34;&#34;
         count = int(count)
         if count == 0:
@@ -70,10 +70,10 @@ class List:
 
     @staticmethod
     def wildcard_search(list_input, regexp):
-        &#34;&#34;&#34;Search list_ shell-like
-        &lt;br&gt;`param list_input` list_
+        &#34;&#34;&#34;Search list shell-like
+        &lt;br&gt;`param list_input` list
         &lt;br&gt;`param regexp` string with shell-like wildcards` ? for one character or * for multiple characters.
-        &lt;br&gt;`return` list_ of result of search
+        &lt;br&gt;`return` list of result of search
         &#34;&#34;&#34;
         import fnmatch
         return fnmatch.filter(list_input, regexp)
@@ -132,8 +132,8 @@ class List:
     @staticmethod
     def flatterize(input_list):
         &#34;&#34;&#34;Remove nesting from lists.
-        &lt;br&gt;`param input_list` list_
-        &lt;br&gt;`return` list_ with all contents of input list_ but without nesting
+        &lt;br&gt;`param input_list` list
+        &lt;br&gt;`return` list with all contents of input list but without nesting
         &#34;&#34;&#34;
         import copy
         if not isinstance(input_list, (list, tuple)):
@@ -150,10 +150,10 @@ class List:
 
     @staticmethod
     def split_every(list_input, count):
-        &#34;&#34;&#34;Split list_ to lists with N elements
-        &lt;br&gt;`param list_input` list_
+        &#34;&#34;&#34;Split list to lists with N elements
+        &lt;br&gt;`param list_input` list
         &lt;br&gt;`param count` int with N
-        &lt;br&gt;`return` list_ of lists
+        &lt;br&gt;`return` list of lists
         &#34;&#34;&#34;
         count = int(count)
         if count == 0:
@@ -166,10 +166,10 @@ class List:
 
     @staticmethod
     def wildcard_search(list_input, regexp):
-        &#34;&#34;&#34;Search list_ shell-like
-        &lt;br&gt;`param list_input` list_
+        &#34;&#34;&#34;Search list shell-like
+        &lt;br&gt;`param list_input` list
         &lt;br&gt;`param regexp` string with shell-like wildcards` ? for one character or * for multiple characters.
-        &lt;br&gt;`return` list_ of result of search
+        &lt;br&gt;`return` list of result of search
         &#34;&#34;&#34;
         import fnmatch
         return fnmatch.filter(list_input, regexp)
@@ -211,15 +211,15 @@ class List:
 </code></dt>
 <dd>
 <section class="desc"><p>Remove nesting from lists.
-<br><code>param input_list</code> list_
-<br><code>return</code> list_ with all contents of input list_ but without nesting</p></section>
+<br><code>param input_list</code> list
+<br><code>return</code> list with all contents of input list but without nesting</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
 def flatterize(input_list):
     &#34;&#34;&#34;Remove nesting from lists.
-    &lt;br&gt;`param input_list` list_
-    &lt;br&gt;`return` list_ with all contents of input list_ but without nesting
+    &lt;br&gt;`param input_list` list
+    &lt;br&gt;`return` list with all contents of input list but without nesting
     &#34;&#34;&#34;
     import copy
     if not isinstance(input_list, (list, tuple)):
@@ -297,18 +297,18 @@ def shuffle(list):
 <span>def <span class="ident">split_every</span></span>(<span>list_input, count)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Split list_ to lists with N elements
-<br><code>param list_input</code> list_
+<section class="desc"><p>Split list to lists with N elements
+<br><code>param list_input</code> list
 <br><code>param count</code> int with N
-<br><code>return</code> list_ of lists</p></section>
+<br><code>return</code> list of lists</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
 def split_every(list_input, count):
-    &#34;&#34;&#34;Split list_ to lists with N elements
-    &lt;br&gt;`param list_input` list_
+    &#34;&#34;&#34;Split list to lists with N elements
+    &lt;br&gt;`param list_input` list
     &lt;br&gt;`param count` int with N
-    &lt;br&gt;`return` list_ of lists
+    &lt;br&gt;`return` list of lists
     &#34;&#34;&#34;
     count = int(count)
     if count == 0:
@@ -336,18 +336,18 @@ def to_strings(list):
 <span>def <span class="ident">wildcard_search</span></span>(<span>list_input, regexp)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Search list_ shell-like
-<br><code>param list_input</code> list_
+<section class="desc"><p>Search list shell-like
+<br><code>param list_input</code> list
 <br><code>param regexp</code> string with shell-like wildcards<code>? for one character or * for multiple characters.
-&lt;br&gt;</code>return` list_ of result of search</p></section>
+&lt;br&gt;</code>return` list of result of search</p></section>
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">@staticmethod
 def wildcard_search(list_input, regexp):
-    &#34;&#34;&#34;Search list_ shell-like
-    &lt;br&gt;`param list_input` list_
+    &#34;&#34;&#34;Search list shell-like
+    &lt;br&gt;`param list_input` list
     &lt;br&gt;`param regexp` string with shell-like wildcards` ? for one character or * for multiple characters.
-    &lt;br&gt;`return` list_ of result of search
+    &lt;br&gt;`return` list of result of search
     &#34;&#34;&#34;
     import fnmatch
     return fnmatch.filter(list_input, regexp)</code></pre>
