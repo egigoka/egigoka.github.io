@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions to work with network
 &#34;&#34;&#34;
-__version__ = &#34;0.5.7&#34;
+__version__ = &#34;0.6.0&#34;
 
 
 class Network:
@@ -362,7 +362,19 @@ class Network:
             else:
                 raise LookupError(&#34;IP not found&#34;)
         else:
-            return ipgetter.get_external_ip()</code></pre>
+            return ipgetter.get_external_ip()
+
+    def check_internet_apple(self, timeout):
+        import requests
+        response = requests.get(&#34;http://captive.apple.com/hotspot-detect.html&#34;, timeout=timeout).content
+        good_response = b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;
+        return response == good_response
+
+    def check_internet_microsoft(self, timeout):
+        import requests
+        response = requests.get(&#34;http://www.msftncsi.com/ncsi.txt&#34;, timeout=timeout).content
+        good_response = b&#39;Microsoft NCSI&#39;
+        return response == good_response</code></pre>
 </details>
 </section>
 <section>
@@ -714,7 +726,19 @@ class Network:
             else:
                 raise LookupError(&#34;IP not found&#34;)
         else:
-            return ipgetter.get_external_ip()</code></pre>
+            return ipgetter.get_external_ip()
+
+    def check_internet_apple(self, timeout):
+        import requests
+        response = requests.get(&#34;http://captive.apple.com/hotspot-detect.html&#34;, timeout=timeout).content
+        good_response = b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;
+        return response == good_response
+
+    def check_internet_microsoft(self, timeout):
+        import requests
+        response = requests.get(&#34;http://www.msftncsi.com/ncsi.txt&#34;, timeout=timeout).content
+        good_response = b&#39;Microsoft NCSI&#39;
+        return response == good_response</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -1126,6 +1150,37 @@ def ping(cls,
 </details>
 </dd>
 </dl>
+<h3>Methods</h3>
+<dl>
+<dt id="commands.network9.Network.check_internet_apple"><code class="name flex">
+<span>def <span class="ident">check_internet_apple</span></span>(<span>self, timeout)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def check_internet_apple(self, timeout):
+    import requests
+    response = requests.get(&#34;http://captive.apple.com/hotspot-detect.html&#34;, timeout=timeout).content
+    good_response = b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;
+    return response == good_response</code></pre>
+</details>
+</dd>
+<dt id="commands.network9.Network.check_internet_microsoft"><code class="name flex">
+<span>def <span class="ident">check_internet_microsoft</span></span>(<span>self, timeout)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def check_internet_microsoft(self, timeout):
+    import requests
+    response = requests.get(&#34;http://www.msftncsi.com/ncsi.txt&#34;, timeout=timeout).content
+    good_response = b&#39;Microsoft NCSI&#39;
+    return response == good_response</code></pre>
+</details>
+</dd>
+</dl>
 </dd>
 </dl>
 </section>
@@ -1145,7 +1200,9 @@ def ping(cls,
 <ul>
 <li>
 <h4><code><a title="commands.network9.Network" href="#commands.network9.Network">Network</a></code></h4>
-<ul class="two-column">
+<ul class="">
+<li><code><a title="commands.network9.Network.check_internet_apple" href="#commands.network9.Network.check_internet_apple">check_internet_apple</a></code></li>
+<li><code><a title="commands.network9.Network.check_internet_microsoft" href="#commands.network9.Network.check_internet_microsoft">check_internet_microsoft</a></code></li>
 <li><code><a title="commands.network9.Network.dns_lookup" href="#commands.network9.Network.dns_lookup">dns_lookup</a></code></li>
 <li><code><a title="commands.network9.Network.download_file" href="#commands.network9.Network.download_file">download_file</a></code></li>
 <li><code><a title="commands.network9.Network.get_domain_of_url" href="#commands.network9.Network.get_domain_of_url">get_domain_of_url</a></code></li>
