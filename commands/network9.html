@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions to work with network
 &#34;&#34;&#34;
-__version__ = &#34;0.6.0&#34;
+__version__ = &#34;0.6.1&#34;
 
 
 class Network:
@@ -364,13 +364,15 @@ class Network:
         else:
             return ipgetter.get_external_ip()
 
-    def check_internet_apple(self, timeout):
+    @staticmethod
+    def check_internet_apple(timeout=10):
         import requests
         response = requests.get(&#34;http://captive.apple.com/hotspot-detect.html&#34;, timeout=timeout).content
         good_response = b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;
         return response == good_response
 
-    def check_internet_microsoft(self, timeout):
+    @staticmethod
+    def check_internet_microsoft(timeout=10):
         import requests
         response = requests.get(&#34;http://www.msftncsi.com/ncsi.txt&#34;, timeout=timeout).content
         good_response = b&#39;Microsoft NCSI&#39;
@@ -728,13 +730,15 @@ class Network:
         else:
             return ipgetter.get_external_ip()
 
-    def check_internet_apple(self, timeout):
+    @staticmethod
+    def check_internet_apple(timeout=10):
         import requests
         response = requests.get(&#34;http://captive.apple.com/hotspot-detect.html&#34;, timeout=timeout).content
         good_response = b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;
         return response == good_response
 
-    def check_internet_microsoft(self, timeout):
+    @staticmethod
+    def check_internet_microsoft(timeout=10):
         import requests
         response = requests.get(&#34;http://www.msftncsi.com/ncsi.txt&#34;, timeout=timeout).content
         good_response = b&#39;Microsoft NCSI&#39;
@@ -742,6 +746,36 @@ class Network:
 </details>
 <h3>Static methods</h3>
 <dl>
+<dt id="commands.network9.Network.check_internet_apple"><code class="name flex">
+<span>def <span class="ident">check_internet_apple</span></span>(<span>timeout=10)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def check_internet_apple(timeout=10):
+    import requests
+    response = requests.get(&#34;http://captive.apple.com/hotspot-detect.html&#34;, timeout=timeout).content
+    good_response = b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;
+    return response == good_response</code></pre>
+</details>
+</dd>
+<dt id="commands.network9.Network.check_internet_microsoft"><code class="name flex">
+<span>def <span class="ident">check_internet_microsoft</span></span>(<span>timeout=10)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def check_internet_microsoft(timeout=10):
+    import requests
+    response = requests.get(&#34;http://www.msftncsi.com/ncsi.txt&#34;, timeout=timeout).content
+    good_response = b&#39;Microsoft NCSI&#39;
+    return response == good_response</code></pre>
+</details>
+</dd>
 <dt id="commands.network9.Network.dns_lookup"><code class="name flex">
 <span>def <span class="ident">dns_lookup</span></span>(<span>domain)</span>
 </code></dt>
@@ -1147,37 +1181,6 @@ def ping(cls,
             ip = cls.dns_lookup(domain)  # pylint: disable=invalid-name
         return uplink, ip, ping_output
     return uplink</code></pre>
-</details>
-</dd>
-</dl>
-<h3>Methods</h3>
-<dl>
-<dt id="commands.network9.Network.check_internet_apple"><code class="name flex">
-<span>def <span class="ident">check_internet_apple</span></span>(<span>self, timeout)</span>
-</code></dt>
-<dd>
-<section class="desc"></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">def check_internet_apple(self, timeout):
-    import requests
-    response = requests.get(&#34;http://captive.apple.com/hotspot-detect.html&#34;, timeout=timeout).content
-    good_response = b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;
-    return response == good_response</code></pre>
-</details>
-</dd>
-<dt id="commands.network9.Network.check_internet_microsoft"><code class="name flex">
-<span>def <span class="ident">check_internet_microsoft</span></span>(<span>self, timeout)</span>
-</code></dt>
-<dd>
-<section class="desc"></section>
-<details class="source">
-<summary>Source code</summary>
-<pre><code class="python">def check_internet_microsoft(self, timeout):
-    import requests
-    response = requests.get(&#34;http://www.msftncsi.com/ncsi.txt&#34;, timeout=timeout).content
-    good_response = b&#39;Microsoft NCSI&#39;
-    return response == good_response</code></pre>
 </details>
 </dd>
 </dl>
