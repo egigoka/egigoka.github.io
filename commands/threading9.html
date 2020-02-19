@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;1.4.2&#34;
+__version__ = &#34;1.4.3&#34;
 
 from .dict9 import imdict
 
@@ -73,12 +73,16 @@ class MyThread:
             self.qprint(f&#34;Killed {self.thread.name}. running: {self.bench.end()}&#34;)
 
     def start(self, wait_for_keyboard_interrupt=False):
-        self.thread.run = self.run
-        self.thread.start()
-        if not self.quiet:
-            self.bench.start()
-        if wait_for_keyboard_interrupt:
-            self.wait_for_keyboard_interrupt()
+        try:
+            self.thread.run = self.run
+            self.thread.start()
+            if not self.quiet:
+                self.bench.start()
+            if wait_for_keyboard_interrupt:
+                self.wait_for_keyboard_interrupt()
+        except (KeyboardInterrupt, SystemExit):
+            self.raise_exception()
+            raise
 
     def wait_for_keyboard_interrupt(self, quiet=True):
         import time
@@ -90,6 +94,7 @@ class MyThread:
                     Print(self.thread.name)
         except (KeyboardInterrupt, SystemExit):
             self.raise_exception()
+            raise
 
     # https://www.geeksforgeeks.org/python-different-ways-to-kill-a-thread/
     def get_id(self):
@@ -255,12 +260,16 @@ class Threading:
             self.qprint(f&#34;Killed {self.thread.name}. running: {self.bench.end()}&#34;)
 
     def start(self, wait_for_keyboard_interrupt=False):
-        self.thread.run = self.run
-        self.thread.start()
-        if not self.quiet:
-            self.bench.start()
-        if wait_for_keyboard_interrupt:
-            self.wait_for_keyboard_interrupt()
+        try:
+            self.thread.run = self.run
+            self.thread.start()
+            if not self.quiet:
+                self.bench.start()
+            if wait_for_keyboard_interrupt:
+                self.wait_for_keyboard_interrupt()
+        except (KeyboardInterrupt, SystemExit):
+            self.raise_exception()
+            raise
 
     def wait_for_keyboard_interrupt(self, quiet=True):
         import time
@@ -272,6 +281,7 @@ class Threading:
                     Print(self.thread.name)
         except (KeyboardInterrupt, SystemExit):
             self.raise_exception()
+            raise
 
     # https://www.geeksforgeeks.org/python-different-ways-to-kill-a-thread/
     def get_id(self):
@@ -379,12 +389,16 @@ class Threading:
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def start(self, wait_for_keyboard_interrupt=False):
-    self.thread.run = self.run
-    self.thread.start()
-    if not self.quiet:
-        self.bench.start()
-    if wait_for_keyboard_interrupt:
-        self.wait_for_keyboard_interrupt()</code></pre>
+    try:
+        self.thread.run = self.run
+        self.thread.start()
+        if not self.quiet:
+            self.bench.start()
+        if wait_for_keyboard_interrupt:
+            self.wait_for_keyboard_interrupt()
+    except (KeyboardInterrupt, SystemExit):
+        self.raise_exception()
+        raise</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.wait_for_keyboard_interrupt"><code class="name flex">
@@ -403,7 +417,8 @@ class Threading:
                 from .print9 import Print
                 Print(self.thread.name)
     except (KeyboardInterrupt, SystemExit):
-        self.raise_exception()</code></pre>
+        self.raise_exception()
+        raise</code></pre>
 </details>
 </dd>
 </dl>
