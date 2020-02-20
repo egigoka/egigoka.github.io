@@ -27,12 +27,12 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;1.4.3&#34;
+__version__ = &#34;1.5.0&#34;
 
 from .dict9 import imdict
 
 
-class IsRunning():
+class IsRunning:
     pass
 
 
@@ -52,6 +52,7 @@ class MyThread:
         self.thread_id = thread_id
         self.thread.name = name
         self.result = IsRunning()
+        self.killed = False
         self.func = func
         self.args = args
         self.kwargs = kwargs
@@ -65,24 +66,22 @@ class MyThread:
             Print(*args, **kwargs)
 
     def run(self):
+        import sys
         self.qprint(&#34;Starting &#34; + self.thread.name)
         try:
+            sys.settrace(self.globaltrace)
             self.result = self.func(*self.args, **self.kwargs)
             self.qprint(f&#34;Finished {self.thread.name}. running: {self.bench.end()}&#34;)
         except SystemExit:
             self.qprint(f&#34;Killed {self.thread.name}. running: {self.bench.end()}&#34;)
 
     def start(self, wait_for_keyboard_interrupt=False):
-        try:
-            self.thread.run = self.run
-            self.thread.start()
-            if not self.quiet:
-                self.bench.start()
-            if wait_for_keyboard_interrupt:
-                self.wait_for_keyboard_interrupt()
-        except (KeyboardInterrupt, SystemExit):
-            self.raise_exception()
-            raise
+        self.thread.run = self.run
+        self.thread.start()
+        if not self.quiet:
+            self.bench.start()
+        if wait_for_keyboard_interrupt:
+            self.wait_for_keyboard_interrupt()
 
     def wait_for_keyboard_interrupt(self, quiet=True):
         import time
@@ -96,27 +95,26 @@ class MyThread:
             self.raise_exception()
             raise
 
-    # https://www.geeksforgeeks.org/python-different-ways-to-kill-a-thread/
-    def get_id(self):
-        import threading
-        # returns id of the respective thread
-        if hasattr(self.thread, &#39;_thread_id&#39;):
-            return self.thread._thread_id
-        for id, thread in threading._active.items():
-            if thread is self.thread:
-                return id
-        self.qprint(&#34;Thread ID not found&#34;)
-
-    def raise_exception(self):
-        import ctypes
-        thread_id = self.get_id()
-        res = ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, ctypes.py_object(SystemExit))
-        if res &gt; 1:
-            ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, 0)
-            raise RuntimeError(&#39;Thread Exception raise failure&#39;)
-
     def is_running(self):
         return self.thread.is_alive()
+
+    # https://www.geeksforgeeks.org/python-different-ways-to-kill-a-thread/
+    def globaltrace(self, frame, event, arg):
+        if event == &#39;call&#39;:
+            return self.localtrace
+        else:
+            return None
+
+    def localtrace(self, frame, event, arg):
+        if self.killed:
+            if event == &#39;line&#39;:
+                raise SystemExit()
+        return self.localtrace
+
+    def kill(self):
+        self.killed = True
+
+    raise_exception = kill
 
 
 class Threading:
@@ -211,7 +209,7 @@ class Threading:
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">class IsRunning():
+<pre><code class="python">class IsRunning:
     pass</code></pre>
 </details>
 </dd>
@@ -239,6 +237,7 @@ class Threading:
         self.thread_id = thread_id
         self.thread.name = name
         self.result = IsRunning()
+        self.killed = False
         self.func = func
         self.args = args
         self.kwargs = kwargs
@@ -252,24 +251,22 @@ class Threading:
             Print(*args, **kwargs)
 
     def run(self):
+        import sys
         self.qprint(&#34;Starting &#34; + self.thread.name)
         try:
+            sys.settrace(self.globaltrace)
             self.result = self.func(*self.args, **self.kwargs)
             self.qprint(f&#34;Finished {self.thread.name}. running: {self.bench.end()}&#34;)
         except SystemExit:
             self.qprint(f&#34;Killed {self.thread.name}. running: {self.bench.end()}&#34;)
 
     def start(self, wait_for_keyboard_interrupt=False):
-        try:
-            self.thread.run = self.run
-            self.thread.start()
-            if not self.quiet:
-                self.bench.start()
-            if wait_for_keyboard_interrupt:
-                self.wait_for_keyboard_interrupt()
-        except (KeyboardInterrupt, SystemExit):
-            self.raise_exception()
-            raise
+        self.thread.run = self.run
+        self.thread.start()
+        if not self.quiet:
+            self.bench.start()
+        if wait_for_keyboard_interrupt:
+            self.wait_for_keyboard_interrupt()
 
     def wait_for_keyboard_interrupt(self, quiet=True):
         import time
@@ -283,46 +280,41 @@ class Threading:
             self.raise_exception()
             raise
 
-    # https://www.geeksforgeeks.org/python-different-ways-to-kill-a-thread/
-    def get_id(self):
-        import threading
-        # returns id of the respective thread
-        if hasattr(self.thread, &#39;_thread_id&#39;):
-            return self.thread._thread_id
-        for id, thread in threading._active.items():
-            if thread is self.thread:
-                return id
-        self.qprint(&#34;Thread ID not found&#34;)
-
-    def raise_exception(self):
-        import ctypes
-        thread_id = self.get_id()
-        res = ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, ctypes.py_object(SystemExit))
-        if res &gt; 1:
-            ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, 0)
-            raise RuntimeError(&#39;Thread Exception raise failure&#39;)
-
     def is_running(self):
-        return self.thread.is_alive()</code></pre>
+        return self.thread.is_alive()
+
+    # https://www.geeksforgeeks.org/python-different-ways-to-kill-a-thread/
+    def globaltrace(self, frame, event, arg):
+        if event == &#39;call&#39;:
+            return self.localtrace
+        else:
+            return None
+
+    def localtrace(self, frame, event, arg):
+        if self.killed:
+            if event == &#39;line&#39;:
+                raise SystemExit()
+        return self.localtrace
+
+    def kill(self):
+        self.killed = True
+
+    raise_exception = kill</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
-<dt id="commands.threading9.MyThread.get_id"><code class="name flex">
-<span>def <span class="ident">get_id</span></span>(<span>self)</span>
+<dt id="commands.threading9.MyThread.globaltrace"><code class="name flex">
+<span>def <span class="ident">globaltrace</span></span>(<span>self, frame, event, arg)</span>
 </code></dt>
 <dd>
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def get_id(self):
-    import threading
-    # returns id of the respective thread
-    if hasattr(self.thread, &#39;_thread_id&#39;):
-        return self.thread._thread_id
-    for id, thread in threading._active.items():
-        if thread is self.thread:
-            return id
-    self.qprint(&#34;Thread ID not found&#34;)</code></pre>
+<pre><code class="python">def globaltrace(self, frame, event, arg):
+    if event == &#39;call&#39;:
+        return self.localtrace
+    else:
+        return None</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.is_running"><code class="name flex">
@@ -334,6 +326,31 @@ class Threading:
 <summary>Source code</summary>
 <pre><code class="python">def is_running(self):
     return self.thread.is_alive()</code></pre>
+</details>
+</dd>
+<dt id="commands.threading9.MyThread.kill"><code class="name flex">
+<span>def <span class="ident">kill</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def kill(self):
+    self.killed = True</code></pre>
+</details>
+</dd>
+<dt id="commands.threading9.MyThread.localtrace"><code class="name flex">
+<span>def <span class="ident">localtrace</span></span>(<span>self, frame, event, arg)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">def localtrace(self, frame, event, arg):
+    if self.killed:
+        if event == &#39;line&#39;:
+            raise SystemExit()
+    return self.localtrace</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.qprint"><code class="name flex">
@@ -356,13 +373,8 @@ class Threading:
 <section class="desc"></section>
 <details class="source">
 <summary>Source code</summary>
-<pre><code class="python">def raise_exception(self):
-    import ctypes
-    thread_id = self.get_id()
-    res = ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, ctypes.py_object(SystemExit))
-    if res &gt; 1:
-        ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, 0)
-        raise RuntimeError(&#39;Thread Exception raise failure&#39;)</code></pre>
+<pre><code class="python">def kill(self):
+    self.killed = True</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.run"><code class="name flex">
@@ -373,8 +385,10 @@ class Threading:
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def run(self):
+    import sys
     self.qprint(&#34;Starting &#34; + self.thread.name)
     try:
+        sys.settrace(self.globaltrace)
         self.result = self.func(*self.args, **self.kwargs)
         self.qprint(f&#34;Finished {self.thread.name}. running: {self.bench.end()}&#34;)
     except SystemExit:
@@ -389,16 +403,12 @@ class Threading:
 <details class="source">
 <summary>Source code</summary>
 <pre><code class="python">def start(self, wait_for_keyboard_interrupt=False):
-    try:
-        self.thread.run = self.run
-        self.thread.start()
-        if not self.quiet:
-            self.bench.start()
-        if wait_for_keyboard_interrupt:
-            self.wait_for_keyboard_interrupt()
-    except (KeyboardInterrupt, SystemExit):
-        self.raise_exception()
-        raise</code></pre>
+    self.thread.run = self.run
+    self.thread.start()
+    if not self.quiet:
+        self.bench.start()
+    if wait_for_keyboard_interrupt:
+        self.wait_for_keyboard_interrupt()</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.MyThread.wait_for_keyboard_interrupt"><code class="name flex">
@@ -659,8 +669,10 @@ class Threading:
 <li>
 <h4><code><a title="commands.threading9.MyThread" href="#commands.threading9.MyThread">MyThread</a></code></h4>
 <ul class="">
-<li><code><a title="commands.threading9.MyThread.get_id" href="#commands.threading9.MyThread.get_id">get_id</a></code></li>
+<li><code><a title="commands.threading9.MyThread.globaltrace" href="#commands.threading9.MyThread.globaltrace">globaltrace</a></code></li>
 <li><code><a title="commands.threading9.MyThread.is_running" href="#commands.threading9.MyThread.is_running">is_running</a></code></li>
+<li><code><a title="commands.threading9.MyThread.kill" href="#commands.threading9.MyThread.kill">kill</a></code></li>
+<li><code><a title="commands.threading9.MyThread.localtrace" href="#commands.threading9.MyThread.localtrace">localtrace</a></code></li>
 <li><code><a title="commands.threading9.MyThread.qprint" href="#commands.threading9.MyThread.qprint">qprint</a></code></li>
 <li><code><a title="commands.threading9.MyThread.raise_exception" href="#commands.threading9.MyThread.raise_exception">raise_exception</a></code></li>
 <li><code><a title="commands.threading9.MyThread.run" href="#commands.threading9.MyThread.run">run</a></code></li>
