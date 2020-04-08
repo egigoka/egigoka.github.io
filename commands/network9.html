@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions to work with network
 &#34;&#34;&#34;
-__version__ = &#34;0.7.1&#34;
+__version__ = &#34;0.7.2&#34;
 
 
 class Network:
@@ -374,10 +374,11 @@ class Network:
                 from .print9 import Print
                 Print.debug(e)
             return False
-        if debug:
+        output = response == good_response
+        if debug and not output:
             from .print9 import Print
             Print.debug(response, good_response)
-        return response == good_response
+        return output
 
     @classmethod
     def check_internet_apple(cls, timeout=10, debug=False):
@@ -753,10 +754,11 @@ class Network:
                 from .print9 import Print
                 Print.debug(e)
             return False
-        if debug:
+        output = response == good_response
+        if debug and not output:
             from .print9 import Print
             Print.debug(response, good_response)
-        return response == good_response
+        return output
 
     @classmethod
     def check_internet_apple(cls, timeout=10, debug=False):
@@ -817,10 +819,11 @@ def check_response(endpoint, good_response, timeout=10, debug=False):
             from .print9 import Print
             Print.debug(e)
         return False
-    if debug:
+    output = response == good_response
+    if debug and not output:
         from .print9 import Print
         Print.debug(response, good_response)
-    return response == good_response</code></pre>
+    return output</code></pre>
 </details>
 </dd>
 <dt id="commands.network9.Network.dns_lookup"><code class="name flex">
