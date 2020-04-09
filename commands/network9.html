@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions to work with network
 &#34;&#34;&#34;
-__version__ = &#34;0.7.2&#34;
+__version__ = &#34;0.7.3&#34;
 
 
 class Network:
@@ -382,9 +382,13 @@ class Network:
 
     @classmethod
     def check_internet_apple(cls, timeout=10, debug=False):
+        if cls.check_response(&#34;http://captive.apple.com/hotspot-detect.html&#34;,
+                              b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;,
+                              timeout=timeout, debug=debug):
+            return True
         return cls.check_response(&#34;http://captive.apple.com/hotspot-detect.html&#34;,
-                                  b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;,
-                                  timeout=timeout, debug=debug)
+                                  b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;&#39;,
+                                  timeout=timeout, debug=debug)  # sometimes this page is without newline at end
 
     @classmethod
     def check_internet_microsoft(cls, timeout=10, debug=False):
@@ -762,9 +766,13 @@ class Network:
 
     @classmethod
     def check_internet_apple(cls, timeout=10, debug=False):
+        if cls.check_response(&#34;http://captive.apple.com/hotspot-detect.html&#34;,
+                              b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;,
+                              timeout=timeout, debug=debug):
+            return True
         return cls.check_response(&#34;http://captive.apple.com/hotspot-detect.html&#34;,
-                                  b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;,
-                                  timeout=timeout, debug=debug)
+                                  b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;&#39;,
+                                  timeout=timeout, debug=debug)  # sometimes this page is without newline at end
 
     @classmethod
     def check_internet_microsoft(cls, timeout=10, debug=False):
@@ -783,9 +791,13 @@ class Network:
 <summary>Source code</summary>
 <pre><code class="python">@classmethod
 def check_internet_apple(cls, timeout=10, debug=False):
+    if cls.check_response(&#34;http://captive.apple.com/hotspot-detect.html&#34;,
+                          b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;,
+                          timeout=timeout, debug=debug):
+        return True
     return cls.check_response(&#34;http://captive.apple.com/hotspot-detect.html&#34;,
-                              b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;,
-                              timeout=timeout, debug=debug)</code></pre>
+                              b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;&#39;,
+                              timeout=timeout, debug=debug)  # sometimes this page is without newline at end</code></pre>
 </details>
 </dd>
 <dt id="commands.network9.Network.check_internet_microsoft"><code class="name flex">
