@@ -27,7 +27,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with directories
 &#34;&#34;&#34;
-__version__ = &#34;1.3.2&#34;
+__version__ = &#34;1.4.0&#34;
 
 
 class Dir:
@@ -266,7 +266,13 @@ class Dir:
     @staticmethod
     def get_modification_time(path):
         from .file9 import File
-        return File.get_modification_time(path)</code></pre>
+        return File.get_modification_time(path)
+
+    @staticmethod
+    def get_free_space(path):
+        import shutil
+        total, used, free = shutil.disk_usage(path)
+        return free</code></pre>
 </details>
 </section>
 <section>
@@ -522,7 +528,13 @@ class Dir:
     @staticmethod
     def get_modification_time(path):
         from .file9 import File
-        return File.get_modification_time(path)</code></pre>
+        return File.get_modification_time(path)
+
+    @staticmethod
+    def get_free_space(path):
+        import shutil
+        total, used, free = shutil.disk_usage(path)
+        return free</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -756,6 +768,20 @@ def exist(filename):
     return os.path.isdir(filename)</code></pre>
 </details>
 </dd>
+<dt id="commands.dir9.Dir.get_free_space"><code class="name flex">
+<span>def <span class="ident">get_free_space</span></span>(<span>path)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>Source code</summary>
+<pre><code class="python">@staticmethod
+def get_free_space(path):
+    import shutil
+    total, used, free = shutil.disk_usage(path)
+    return free</code></pre>
+</details>
+</dd>
 <dt id="commands.dir9.Dir.get_modification_time"><code class="name flex">
 <span>def <span class="ident">get_modification_time</span></span>(<span>path)</span>
 </code></dt>
@@ -930,6 +956,7 @@ def number_of_files(cls, path, quiet=True):
 <li><code><a title="commands.dir9.Dir.create" href="#commands.dir9.Dir.create">create</a></code></li>
 <li><code><a title="commands.dir9.Dir.delete" href="#commands.dir9.Dir.delete">delete</a></code></li>
 <li><code><a title="commands.dir9.Dir.exist" href="#commands.dir9.Dir.exist">exist</a></code></li>
+<li><code><a title="commands.dir9.Dir.get_free_space" href="#commands.dir9.Dir.get_free_space">get_free_space</a></code></li>
 <li><code><a title="commands.dir9.Dir.get_modification_time" href="#commands.dir9.Dir.get_modification_time">get_modification_time</a></code></li>
 <li><code><a title="commands.dir9.Dir.get_size" href="#commands.dir9.Dir.get_size">get_size</a></code></li>
 <li><code><a title="commands.dir9.Dir.list_of_dirs" href="#commands.dir9.Dir.list_of_dirs">list_of_dirs</a></code></li>
