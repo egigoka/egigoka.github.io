@@ -52,7 +52,7 @@ class Print:
         with self.s_print_lock:
             print(*args, **kwargs)
 
-    def debug(self, *strings: str, raw: bool = False) -&gt; None:
+    def debug(self, *strings: Union[str, bytes], raw: bool = False) -&gt; None:
         &#34;&#34;&#34;More notable print, used only for debugging
         &lt;br&gt;`param strings` prints separately
         &lt;br&gt;`param raw` print representation of strings

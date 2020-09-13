@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with JSON
 &#34;&#34;&#34;
-__version__ = &#34;4.0.3&#34;
+__version__ = &#34;4.0.4&#34;
 
 
 class Json:
@@ -127,9 +127,9 @@ class JsonDict(Json):
         try:
             return self.string.__getitem__(item)
         except KeyError:
-            print(f&#34;{self=}&#34;)
-            print(f&#34;{self.string=}&#34;)
-            print(f&#34;{item=}&#34;)
+            print(f&#34;self={self}&#34;)
+            print(f&#34;self.string={self.string}&#34;)
+            print(f&#34;item={item}&#34;)
             raise
 
     def __setitem__(self, key, value):
@@ -383,9 +383,9 @@ class JsonList(Json):
         try:
             return self.string.__getitem__(item)
         except KeyError:
-            print(f&#34;{self=}&#34;)
-            print(f&#34;{self.string=}&#34;)
-            print(f&#34;{item=}&#34;)
+            print(f&#34;self={self}&#34;)
+            print(f&#34;self.string={self.string}&#34;)
+            print(f&#34;item={item}&#34;)
             raise
 
     def __setitem__(self, key, value):

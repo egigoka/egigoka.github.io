@@ -32,7 +32,7 @@
 &#34;&#34;&#34;Internal module to simplify work with git
 &#34;&#34;&#34;
 # pylint: disable=unused-wildcard-import, wildcard-import
-__version__ = &#34;2.1.0&#34;
+__version__ = &#34;2.2.0&#34;
 
 
 def get_name_of_repo():
@@ -50,16 +50,16 @@ class Git:
     &#34;&#34;&#34;Class to simplify work with git, wrapper for cli git
     &#34;&#34;&#34;
     @classmethod
-    def add(cls, what):
+    def add(cls, what, verbose=False):
         &#34;&#34;&#34;Adds files to next commit
         &lt;br&gt;`param what` string, adding files
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
         from .console9 import Console
-        Console.get_output(&#34;git&#34;, &#34;add&#34;, what)
+        Console.get_output(&#34;git&#34;, &#34;add&#34;, what, print_std=verbose)
 
     @classmethod
-    def commit(cls, message=None):
+    def commit(cls, message=None, verbose=False):
         &#34;&#34;&#34;Commit all added changes
         &lt;br&gt;`param message` string, message of commit
         &lt;br&gt;`return` None
@@ -71,10 +71,10 @@ class Git:
         if message:
             commands.append(&#34;-m&#34;)
             commands.append(Bash.argument_escape(message))
-        Console.get_output(commands)
+        Console.get_output(commands, print_std=verbose)
 
     @classmethod
-    def push(cls, path, upstream=False):
+    def push(cls, path, upstream=False, verbose=False):
         &#34;&#34;&#34;Push commits to &#39;path&#39; repo
         &lt;br&gt;`param path` string, path of repo
         &lt;br&gt;`param upstream` boolean, if True, adding argument &#39;-u&#39; to git
@@ -86,18 +86,18 @@ class Git:
         if upstream:
             commands.append(&#34;-u&#34;)
         commands.append(path)
-        Console.get_output(commands)
+        Console.get_output(commands, print_std=verbose)
 
     @classmethod
-    def update(cls, message, path=&#34;https://github.com/egigoka/&#34; + get_name_of_repo() + &#34;.git&#34;):
+    def update(cls, message, path=&#34;https://github.com/egigoka/&#34; + get_name_of_repo() + &#34;.git&#34;, verbose=False):
         &#34;&#34;&#34;Automatization to mine git upload
         &lt;br&gt;`param message` string, commit message
         &lt;br&gt;`param path` string, path to repo
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
-        cls.add(&#34;.&#34;)
-        cls.commit(message)
-        cls.push(path, upstream=True)</code></pre>
+        cls.add(&#34;.&#34;, verbose=verbose)
+        cls.commit(message, verbose=verbose)
+        cls.push(path, upstream=True, verbose=verbose)</code></pre>
 </details>
 </section>
 <section>
@@ -146,16 +146,16 @@ class Git:
     &#34;&#34;&#34;Class to simplify work with git, wrapper for cli git
     &#34;&#34;&#34;
     @classmethod
-    def add(cls, what):
+    def add(cls, what, verbose=False):
         &#34;&#34;&#34;Adds files to next commit
         &lt;br&gt;`param what` string, adding files
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
         from .console9 import Console
-        Console.get_output(&#34;git&#34;, &#34;add&#34;, what)
+        Console.get_output(&#34;git&#34;, &#34;add&#34;, what, print_std=verbose)
 
     @classmethod
-    def commit(cls, message=None):
+    def commit(cls, message=None, verbose=False):
         &#34;&#34;&#34;Commit all added changes
         &lt;br&gt;`param message` string, message of commit
         &lt;br&gt;`return` None
@@ -167,10 +167,10 @@ class Git:
         if message:
             commands.append(&#34;-m&#34;)
             commands.append(Bash.argument_escape(message))
-        Console.get_output(commands)
+        Console.get_output(commands, print_std=verbose)
 
     @classmethod
-    def push(cls, path, upstream=False):
+    def push(cls, path, upstream=False, verbose=False):
         &#34;&#34;&#34;Push commits to &#39;path&#39; repo
         &lt;br&gt;`param path` string, path of repo
         &lt;br&gt;`param upstream` boolean, if True, adding argument &#39;-u&#39; to git
@@ -182,23 +182,23 @@ class Git:
         if upstream:
             commands.append(&#34;-u&#34;)
         commands.append(path)
-        Console.get_output(commands)
+        Console.get_output(commands, print_std=verbose)
 
     @classmethod
-    def update(cls, message, path=&#34;https://github.com/egigoka/&#34; + get_name_of_repo() + &#34;.git&#34;):
+    def update(cls, message, path=&#34;https://github.com/egigoka/&#34; + get_name_of_repo() + &#34;.git&#34;, verbose=False):
         &#34;&#34;&#34;Automatization to mine git upload
         &lt;br&gt;`param message` string, commit message
         &lt;br&gt;`param path` string, path to repo
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
-        cls.add(&#34;.&#34;)
-        cls.commit(message)
-        cls.push(path, upstream=True)</code></pre>
+        cls.add(&#34;.&#34;, verbose=verbose)
+        cls.commit(message, verbose=verbose)
+        cls.push(path, upstream=True, verbose=verbose)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
 <dt id="commands.git9.Git.add"><code class="name flex">
-<span>def <span class="ident">add</span></span>(<span>what)</span>
+<span>def <span class="ident">add</span></span>(<span>what, verbose=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Adds files to next commit
@@ -209,17 +209,17 @@ class Git:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def add(cls, what):
+def add(cls, what, verbose=False):
     &#34;&#34;&#34;Adds files to next commit
     &lt;br&gt;`param what` string, adding files
     &lt;br&gt;`return` None
     &#34;&#34;&#34;
     from .console9 import Console
-    Console.get_output(&#34;git&#34;, &#34;add&#34;, what)</code></pre>
+    Console.get_output(&#34;git&#34;, &#34;add&#34;, what, print_std=verbose)</code></pre>
 </details>
 </dd>
 <dt id="commands.git9.Git.commit"><code class="name flex">
-<span>def <span class="ident">commit</span></span>(<span>message=None)</span>
+<span>def <span class="ident">commit</span></span>(<span>message=None, verbose=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Commit all added changes
@@ -230,7 +230,7 @@ def add(cls, what):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def commit(cls, message=None):
+def commit(cls, message=None, verbose=False):
     &#34;&#34;&#34;Commit all added changes
     &lt;br&gt;`param message` string, message of commit
     &lt;br&gt;`return` None
@@ -242,11 +242,11 @@ def commit(cls, message=None):
     if message:
         commands.append(&#34;-m&#34;)
         commands.append(Bash.argument_escape(message))
-    Console.get_output(commands)</code></pre>
+    Console.get_output(commands, print_std=verbose)</code></pre>
 </details>
 </dd>
 <dt id="commands.git9.Git.push"><code class="name flex">
-<span>def <span class="ident">push</span></span>(<span>path, upstream=False)</span>
+<span>def <span class="ident">push</span></span>(<span>path, upstream=False, verbose=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Push commits to 'path' repo
@@ -258,7 +258,7 @@ def commit(cls, message=None):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def push(cls, path, upstream=False):
+def push(cls, path, upstream=False, verbose=False):
     &#34;&#34;&#34;Push commits to &#39;path&#39; repo
     &lt;br&gt;`param path` string, path of repo
     &lt;br&gt;`param upstream` boolean, if True, adding argument &#39;-u&#39; to git
@@ -270,11 +270,11 @@ def push(cls, path, upstream=False):
     if upstream:
         commands.append(&#34;-u&#34;)
     commands.append(path)
-    Console.get_output(commands)</code></pre>
+    Console.get_output(commands, print_std=verbose)</code></pre>
 </details>
 </dd>
 <dt id="commands.git9.Git.update"><code class="name flex">
-<span>def <span class="ident">update</span></span>(<span>message, path='https://github.com/egigoka/commands.git')</span>
+<span>def <span class="ident">update</span></span>(<span>message, path='https://github.com/egigoka/commands.git', verbose=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Automatization to mine git upload
@@ -286,15 +286,15 @@ def push(cls, path, upstream=False):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def update(cls, message, path=&#34;https://github.com/egigoka/&#34; + get_name_of_repo() + &#34;.git&#34;):
+def update(cls, message, path=&#34;https://github.com/egigoka/&#34; + get_name_of_repo() + &#34;.git&#34;, verbose=False):
     &#34;&#34;&#34;Automatization to mine git upload
     &lt;br&gt;`param message` string, commit message
     &lt;br&gt;`param path` string, path to repo
     &lt;br&gt;`return` None
     &#34;&#34;&#34;
-    cls.add(&#34;.&#34;)
-    cls.commit(message)
-    cls.push(path, upstream=True)</code></pre>
+    cls.add(&#34;.&#34;, verbose=verbose)
+    cls.commit(message, verbose=verbose)
+    cls.push(path, upstream=True, verbose=verbose)</code></pre>
 </details>
 </dd>
 </dl>

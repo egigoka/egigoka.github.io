@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with ffmpeg
 &#34;&#34;&#34;
-__version__ = &#34;0.5.3&#34;
+__version__ = &#34;0.5.4&#34;
 
 
 class FFMpeg:
@@ -69,7 +69,7 @@ class FFMpeg:
         if debug:
             from .print9 import Print
             from .list9 import List
-            Print.colored(f&#34;{commands=}&#34;, &#34;red&#34;)
+            Print.colored(f&#34;commands={commands}&#34;, &#34;red&#34;)
             Print.colored(&#39;&#34; &#34;&#39;.join(List.to_strings(commands)), &#34;magenta&#34;)
 
         Console.get_output(commands, print_std=True, debug=debug)
@@ -167,7 +167,7 @@ class FFMpeg:
         if debug:
             from .print9 import Print
             from .list9 import List
-            Print.colored(f&#34;{commands=}&#34;, &#34;red&#34;)
+            Print.colored(f&#34;commands={commands}&#34;, &#34;red&#34;)
             Print.colored(&#39;&#34; &#34;&#39;.join(List.to_strings(commands)), &#34;magenta&#34;)
 
         Console.get_output(commands, print_std=True, debug=debug)
@@ -278,7 +278,7 @@ def add_something_to_mkv(input_file: str, additional_files: dict,
     if debug:
         from .print9 import Print
         from .list9 import List
-        Print.colored(f&#34;{commands=}&#34;, &#34;red&#34;)
+        Print.colored(f&#34;commands={commands}&#34;, &#34;red&#34;)
         Print.colored(&#39;&#34; &#34;&#39;.join(List.to_strings(commands)), &#34;magenta&#34;)
 
     Console.get_output(commands, print_std=True, debug=debug)</code></pre>
