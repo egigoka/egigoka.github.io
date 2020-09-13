@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with lists
 &#34;&#34;&#34;
-__version__ = &#34;0.7.0&#34;
+__version__ = &#34;0.8.0&#34;
 
 
 class List:
@@ -114,7 +114,15 @@ class List:
         import copy
         copy_list = copy.deepcopy(list)
         random.shuffle(copy_list)
-        return copy_list</code></pre>
+        return copy_list
+
+    @staticmethod
+    def remove_empty_strings(list_: list):
+        list_new = list_.copy()
+        for cnt, item in enumerate(list_new):
+            if item == &#34;&#34;:
+                list_new.pop(cnt)
+        return list_new</code></pre>
 </details>
 </section>
 <section>
@@ -215,7 +223,15 @@ class List:
         import copy
         copy_list = copy.deepcopy(list)
         random.shuffle(copy_list)
-        return copy_list</code></pre>
+        return copy_list
+
+    @staticmethod
+    def remove_empty_strings(list_: list):
+        list_new = list_.copy()
+        for cnt, item in enumerate(list_new):
+            if item == &#34;&#34;:
+                list_new.pop(cnt)
+        return list_new</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -296,6 +312,24 @@ def remove_duplicates(source_list, preserve_order=True):
         return list(OrderedDict((x, True) for x in source_list).keys())
     else:
         return list(set(source_list))</code></pre>
+</details>
+</dd>
+<dt id="commands.list9.List.remove_empty_strings"><code class="name flex">
+<span>def <span class="ident">remove_empty_strings</span></span>(<span>list_: list)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def remove_empty_strings(list_: list):
+    list_new = list_.copy()
+    for cnt, item in enumerate(list_new):
+        if item == &#34;&#34;:
+            list_new.pop(cnt)
+    return list_new</code></pre>
 </details>
 </dd>
 <dt id="commands.list9.List.replace_string"><code class="name flex">
@@ -421,6 +455,7 @@ def wildcard_search(list_input, regexp):
 <li><code><a title="commands.list9.List.flatterize" href="#commands.list9.List.flatterize">flatterize</a></code></li>
 <li><code><a title="commands.list9.List.most_common" href="#commands.list9.List.most_common">most_common</a></code></li>
 <li><code><a title="commands.list9.List.remove_duplicates" href="#commands.list9.List.remove_duplicates">remove_duplicates</a></code></li>
+<li><code><a title="commands.list9.List.remove_empty_strings" href="#commands.list9.List.remove_empty_strings">remove_empty_strings</a></code></li>
 <li><code><a title="commands.list9.List.replace_string" href="#commands.list9.List.replace_string">replace_string</a></code></li>
 <li><code><a title="commands.list9.List.shuffle" href="#commands.list9.List.shuffle">shuffle</a></code></li>
 <li><code><a title="commands.list9.List.split_every" href="#commands.list9.List.split_every">split_every</a></code></li>
