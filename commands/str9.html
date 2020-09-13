@@ -3,15 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.6.0" />
+<meta name="generator" content="pdoc 0.9.1" />
 <title>commands.str9 API documentation</title>
 <meta name="description" content="Internal module with functions for managing strings." />
-<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
-<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
-<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
 </head>
 <body>
 <main>
@@ -22,12 +24,14 @@
 <section id="section-intro">
 <p>Internal module with functions for managing strings.</p>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">#! python3
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions for managing strings.
 &#34;&#34;&#34;
-__version__ = &#34;0.13.7&#34;
+__version__ = &#34;0.14.1&#34;
 
 
 class Str:
@@ -199,7 +203,7 @@ class Str:
                     exception_message += &#39;. &#39;
                 elif exception_message is None:
                     exception_message = &#34;&#34;
-                raise KeyError(f&#34;{exception_message}The line preceding ({before}) the search string was not found&#34;)
+                raise KeyError(f&#39;{exception_message}The line preceding &#34;{before}&#34; the search string was not found&#39;)
         if after:
             if isinstance(after, bytes):
                 from .bytes9 import Bytes
@@ -219,7 +223,7 @@ class Str:
                         exception_message += &#39;. &#39;
                     elif exception_message is None:
                         exception_message = &#34;&#34;
-                    raise KeyError(f&#34;{exception_message}The string ({after}) that followed the search string was not found&#34;)
+                    raise KeyError(f&#39;{exception_message}The string &#34;{after}&#34; that followed the search string was not found&#39;)
         else:
             substring = string[startfrom:]
         if return_after_substring:
@@ -395,6 +399,15 @@ class Str:
         _list = string.rsplit(old, occurrence)
         return new.join(_list)
 
+    @staticmethod
+    def is_ascii(string):
+        try:
+            string.encode(&#39;ascii&#39;)
+        except UnicodeEncodeError:
+            return False
+        else:
+            return True
+
 
     python_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp737&#39;, &#39;cp775&#39;, &#39;cp850&#39;,
                         &#39;cp852&#39;, &#39;cp855&#39;, &#39;cp856&#39;, &#39;cp857&#39;, &#39;cp860&#39;, &#39;cp861&#39;, &#39;cp862&#39;, &#39;cp863&#39;, &#39;cp864&#39;, &#39;cp865&#39;,
@@ -420,12 +433,13 @@ class Str:
 <dl>
 <dt id="commands.str9.Str"><code class="flex name class">
 <span>class <span class="ident">Str</span></span>
-<span>(</span><span>*args, **kwargs)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Class with functions for managing strings.</p></section>
+<div class="desc"><p>Class with functions for managing strings.</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">class Str:
     &#34;&#34;&#34;Class with functions for managing strings.
     &#34;&#34;&#34;
@@ -595,7 +609,7 @@ class Str:
                     exception_message += &#39;. &#39;
                 elif exception_message is None:
                     exception_message = &#34;&#34;
-                raise KeyError(f&#34;{exception_message}The line preceding ({before}) the search string was not found&#34;)
+                raise KeyError(f&#39;{exception_message}The line preceding &#34;{before}&#34; the search string was not found&#39;)
         if after:
             if isinstance(after, bytes):
                 from .bytes9 import Bytes
@@ -615,7 +629,7 @@ class Str:
                         exception_message += &#39;. &#39;
                     elif exception_message is None:
                         exception_message = &#34;&#34;
-                    raise KeyError(f&#34;{exception_message}The string ({after}) that followed the search string was not found&#34;)
+                    raise KeyError(f&#39;{exception_message}The string &#34;{after}&#34; that followed the search string was not found&#39;)
         else:
             substring = string[startfrom:]
         if return_after_substring:
@@ -791,6 +805,15 @@ class Str:
         _list = string.rsplit(old, occurrence)
         return new.join(_list)
 
+    @staticmethod
+    def is_ascii(string):
+        try:
+            string.encode(&#39;ascii&#39;)
+        except UnicodeEncodeError:
+            return False
+        else:
+            return True
+
 
     python_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp737&#39;, &#39;cp775&#39;, &#39;cp850&#39;,
                         &#39;cp852&#39;, &#39;cp855&#39;, &#39;cp856&#39;, &#39;cp857&#39;, &#39;cp860&#39;, &#39;cp861&#39;, &#39;cp862&#39;, &#39;cp863&#39;, &#39;cp864&#39;, &#39;cp865&#39;,
@@ -808,11 +831,11 @@ class Str:
 <dl>
 <dt id="commands.str9.Str.python_encodings"><code class="name">var <span class="ident">python_encodings</span></code></dt>
 <dd>
-<section class="desc"></section>
+<div class="desc"></div>
 </dd>
 <dt id="commands.str9.Str.seeds"><code class="name">var <span class="ident">seeds</span></code></dt>
 <dd>
-<section class="desc"></section>
+<div class="desc"></div>
 </dd>
 </dl>
 <h3>Static methods</h3>
@@ -821,9 +844,11 @@ class Str:
 <span>def <span class="ident">decrypt</span></span>(<span>int_list, password)</span>
 </code></dt>
 <dd>
-<section class="desc"></section>
+<div class="desc"></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def decrypt(int_list, password):
     output_string = &#34;&#34;
@@ -838,12 +863,14 @@ def decrypt(int_list, password):
 <span>def <span class="ident">diff_simple</span></span>(<span>string_a, string_b)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Print all different symbols. Code not all mine, so it's not so good (or bad).
+<div class="desc"><p>Print all different symbols. Code not all mine, so it's not so good (or bad).
 <br><code>param string_a</code> string
 <br><code>param string_b</code> string
-<br><code>return</code> None</p></section>
+<br><code>return</code> None</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def diff_simple(string_a, string_b):
     &#34;&#34;&#34;Print all different symbols. Code not all mine, so it&#39;s not so good (or bad).
@@ -869,9 +896,11 @@ def diff_simple(string_a, string_b):
 <span>def <span class="ident">encrypt</span></span>(<span>string, password)</span>
 </code></dt>
 <dd>
-<section class="desc"></section>
+<div class="desc"></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def encrypt(string, password):
     int_list = []
@@ -886,12 +915,14 @@ def encrypt(string, password):
 <span>def <span class="ident">get_integers</span></span>(<span>string, float_support=True, debug=False)</span>
 </code></dt>
 <dd>
-<section class="desc"><p><br><code>param string</code> string, with some integers or floats inside
+<div class="desc"><p><br><code>param string</code> string, with some integers or floats inside
 <br><code>param float_support</code> boolean, enable float support
 <br><code>param debug</code> boolean, debug print enable
-<br><code>return</code> list of integers or floats</p></section>
+<br><code>return</code> list of integers or floats</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@classmethod
 def get_integers(cls, string, float_support=True, debug=False):
     &#34;&#34;&#34;
@@ -947,10 +978,12 @@ def get_integers(cls, string, float_support=True, debug=False):
 <span>def <span class="ident">get_words</span></span>(<span>string_)</span>
 </code></dt>
 <dd>
-<section class="desc"><p><br><code>param string_</code> string, with spaces to split it
-<br><code>return</code> list of substrings, splitted by space|multiple space</p></section>
+<div class="desc"><p><br><code>param string_</code> string, with spaces to split it
+<br><code>return</code> list of substrings, splitted by space|multiple space</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def get_words(string_):
     &#34;&#34;&#34;
@@ -969,9 +1002,11 @@ def get_words(string_):
 <span>def <span class="ident">guid_by_seed</span></span>(<span>seed, uniq_in_process=True)</span>
 </code></dt>
 <dd>
-<section class="desc"></section>
+<div class="desc"></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@classmethod
 def guid_by_seed(cls, seed, uniq_in_process=True):
     if seed in cls.seeds:
@@ -993,10 +1028,12 @@ def guid_by_seed(cls, seed, uniq_in_process=True):
 <span>def <span class="ident">guid_from_seed</span></span>(<span>seed)</span>
 </code></dt>
 <dd>
-<section class="desc"><p><br><code>param seed</code> string, seed to generate guid
-<br><code>return</code> string, guid-like</p></section>
+<div class="desc"><p><br><code>param seed</code> string, seed to generate guid
+<br><code>return</code> string, guid-like</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def guid_from_seed(seed):
     &#34;&#34;&#34;
@@ -1017,15 +1054,17 @@ def guid_from_seed(seed):
 <span>def <span class="ident">input_int</span></span>(<span>message='Input integer: ', minimum=None, maximum=None, default=None, debug=True)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Ask user to input integer.
+<div class="desc"><p>Ask user to input integer.
 <br><code>param message</code> string, message to user
 <br><code>param minimum</code> minimum value of returned integer
 <br><code>param maximum</code> maximum value of returned integer
 <br><code>param default</code> default value if user just press Enter
 <br><code>param debug</code> boolean, debug purposes
-<br><code>return</code> int, input from user</p></section>
+<br><code>return</code> int, input from user</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@classmethod
 def input_int(cls, message=&#34;Input integer: &#34;, minimum=None, maximum=None, default=None, debug=True):  # pylint: disable=too-many-arguments
     &#34;&#34;&#34;Ask user to input integer.
@@ -1072,11 +1111,13 @@ def input_int(cls, message=&#34;Input integer: &#34;, minimum=None, maximum=None
 <span>def <span class="ident">input_pass</span></span>(<span>string='Password:')</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Secure input password
+<div class="desc"><p>Secure input password
 <br><code>param string</code> string, with message to user, that asks password
-<br><code>return</code> string, that returned from getpass lib</p></section>
+<br><code>return</code> string, that returned from getpass lib</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def input_pass(string=&#34;Password:&#34;):
     &#34;&#34;&#34;Secure input password
@@ -1087,18 +1128,39 @@ def input_pass(string=&#34;Password:&#34;):
     return getpass.getpass(str(string))</code></pre>
 </details>
 </dd>
+<dt id="commands.str9.Str.is_ascii"><code class="name flex">
+<span>def <span class="ident">is_ascii</span></span>(<span>string)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def is_ascii(string):
+    try:
+        string.encode(&#39;ascii&#39;)
+    except UnicodeEncodeError:
+        return False
+    else:
+        return True</code></pre>
+</details>
+</dd>
 <dt id="commands.str9.Str.leftpad"><code class="name flex">
 <span>def <span class="ident">leftpad</span></span>(<span>string, length, char='0', rightpad=False)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Adds symbols from char str to left side of output string to change input string len to 'length'
+<div class="desc"><p>Adds symbols from char str to left side of output string to change input string len to 'length'
 <br><code>param string</code> string, input
 <br><code>param length</code> int, len of output string
 <br><code>param char</code> string, characters, added to left side of input string
 <br><code>param rightpad</code> boolean, if True, adds symbols to right side
-<br><code>return</code> string, with added characters to side of input string</p></section>
+<br><code>return</code> string, with added characters to side of input string</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def leftpad(string, length, char=&#34;0&#34;, rightpad=False):
     &#34;&#34;&#34;Adds symbols from char str to left side of output string to change input string len to &#39;length&#39;
@@ -1123,11 +1185,13 @@ def leftpad(string, length, char=&#34;0&#34;, rightpad=False):
 <span>def <span class="ident">newlines_to_strings</span></span>(<span>string)</span>
 </code></dt>
 <dd>
-<section class="desc"><p><br><code>param string</code> string, with some newlines
+<div class="desc"><p><br><code>param string</code> string, with some newlines
 <br><code>param quiet</code> boolean suppress print to console
-<br><code>return</code> list of strings</p></section>
+<br><code>return</code> list of strings</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def newlines_to_strings(string):
     &#34;&#34;&#34;
@@ -1148,11 +1212,13 @@ def newlines_to_strings(string):
 <span>def <span class="ident">nl</span></span>(<span>string)</span>
 </code></dt>
 <dd>
-<section class="desc"><p><br><code>param string</code> string, with some newlines
+<div class="desc"><p><br><code>param string</code> string, with some newlines
 <br><code>param quiet</code> boolean suppress print to console
-<br><code>return</code> list of strings</p></section>
+<br><code>return</code> list of strings</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@classmethod
 def nl(cls, string):  # pylint: disable=invalid-name
     &#34;&#34;&#34;
@@ -1167,11 +1233,13 @@ def nl(cls, string):  # pylint: disable=invalid-name
 <span>def <span class="ident">remove_spaces</span></span>(<span>string_)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Remove all duplicating spaces in string
+<div class="desc"><p>Remove all duplicating spaces in string
 <br><code>param string_</code> string, input
-<br><code>return</code> string, without duplicated spaces</p></section>
+<br><code>return</code> string, without duplicated spaces</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@classmethod
 def remove_spaces(cls, string_):
     &#34;&#34;&#34;Remove all duplicating spaces in string
@@ -1188,13 +1256,15 @@ def remove_spaces(cls, string_):
 <span>def <span class="ident">rightpad</span></span>(<span>string, length, char='0')</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Adds symbols from char str to right side of output string to change input string len to 'length'
+<div class="desc"><p>Adds symbols from char str to right side of output string to change input string len to 'length'
 <br><code>param string</code> string, input
 <br><code>param length</code> int, len of output string
 <br><code>param char</code> string, characters, added to right side of input string
-<br><code>return</code> string, with added characters to side of input string</p></section>
+<br><code>return</code> string, with added characters to side of input string</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@classmethod
 def rightpad(cls, string, length, char=&#34;0&#34;):
     &#34;&#34;&#34;Adds symbols from char str to right side of output string to change input string len to &#39;length&#39;
@@ -1207,17 +1277,19 @@ def rightpad(cls, string, length, char=&#34;0&#34;):
 </details>
 </dd>
 <dt id="commands.str9.Str.rreplace"><code class="name flex">
-<span>def <span class="ident">rreplace</span></span>(<span>string, old, new, occurrence)</span>
+<span>def <span class="ident">rreplace</span></span>(<span>string: str, old: str, new: str, occurrence: int)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Right replace. Replacing
+<div class="desc"><p>Right replace. Replacing
 :param string: str, string, where to replace
 :param old: str, substring to replace
 :param new: str, substring to insert
 :param occurrence: int, count of replcacement from right
-:return: str, string with replaced substrings</p></section>
+:return: str, string with replaced substrings</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def rreplace(string: str, old: str, new: str, occurrence: int):
     &#39;&#39;&#39;Right replace. Replacing
@@ -1245,12 +1317,14 @@ def rreplace(string: str, old: str, new: str, occurrence: int):
 <span>def <span class="ident">split_every</span></span>(<span>string, chars)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Split line every N chars
+<div class="desc"><p>Split line every N chars
 <br><code>param string</code> string, input
 <br><code>param chars</code> int, count of chars, that split line
-<br><code>return</code> list of substring of 'chars' length</p></section>
+<br><code>return</code> list of substring of 'chars' length</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def split_every(string, chars):
     &#34;&#34;&#34;Split line every N chars
@@ -1275,16 +1349,18 @@ def split_every(string, chars):
 <span>def <span class="ident">substring</span></span>(<span>string, before, after=None, return_after_substring=False, safe=False, exception_message=None)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Get substring from string that between "before", and "after" strings, not including those.
+<div class="desc"><p>Get substring from string that between "before", and "after" strings, not including those.
 <br><code>param string</code> string
 <br><code>param before</code> string, that before output string
 <br><code>param after</code> string, that after output string
 <br><code>param return_after_substring</code> boolean, if True, return list of substring and part after substring
 <br><code>param safe</code> boolean, suppress exceptions if something not found
 <br><code>param exception_message</code> string, will be in exception that raised
-<br><code>return</code> string, from string that between "before", and "after" arguments</p></section>
+<br><code>return</code> string, from string that between "before", and "after" arguments</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def substring(string, before, after=None, return_after_substring=False, safe=False, exception_message=None):
     &#34;&#34;&#34;Get substring from string that between &#34;before&#34;, and &#34;after&#34; strings, not including those.
@@ -1312,7 +1388,7 @@ def substring(string, before, after=None, return_after_substring=False, safe=Fal
                 exception_message += &#39;. &#39;
             elif exception_message is None:
                 exception_message = &#34;&#34;
-            raise KeyError(f&#34;{exception_message}The line preceding ({before}) the search string was not found&#34;)
+            raise KeyError(f&#39;{exception_message}The line preceding &#34;{before}&#34; the search string was not found&#39;)
     if after:
         if isinstance(after, bytes):
             from .bytes9 import Bytes
@@ -1332,7 +1408,7 @@ def substring(string, before, after=None, return_after_substring=False, safe=Fal
                     exception_message += &#39;. &#39;
                 elif exception_message is None:
                     exception_message = &#34;&#34;
-                raise KeyError(f&#34;{exception_message}The string ({after}) that followed the search string was not found&#34;)
+                raise KeyError(f&#39;{exception_message}The string &#34;{after}&#34; that followed the search string was not found&#39;)
     else:
         substring = string[startfrom:]
     if return_after_substring:
@@ -1344,10 +1420,12 @@ def substring(string, before, after=None, return_after_substring=False, safe=Fal
 <span>def <span class="ident">to_quotes</span></span>(<span>some_string)</span>
 </code></dt>
 <dd>
-<section class="desc"><p><br><code>param some_string</code> string
-<br><code>return</code> string, inside "" quotes</p></section>
+<div class="desc"><p><br><code>param some_string</code> string
+<br><code>return</code> string, inside "" quotes</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def to_quotes(some_string):
     &#34;&#34;&#34;
@@ -1361,10 +1439,12 @@ def to_quotes(some_string):
 <span>def <span class="ident">to_quotes_2</span></span>(<span>some_string)</span>
 </code></dt>
 <dd>
-<section class="desc"><p><br><code>param some_string</code> string
-<br><code>return</code> string, inside '' quotes</p></section>
+<div class="desc"><p><br><code>param some_string</code> string
+<br><code>return</code> string, inside '' quotes</p></div>
 <details class="source">
-<summary>Source code</summary>
+<summary>
+<span>Expand source code</span>
+</summary>
 <pre><code class="python">@staticmethod
 def to_quotes_2(some_string):
     &#34;&#34;&#34;
@@ -1404,6 +1484,7 @@ def to_quotes_2(some_string):
 <li><code><a title="commands.str9.Str.guid_from_seed" href="#commands.str9.Str.guid_from_seed">guid_from_seed</a></code></li>
 <li><code><a title="commands.str9.Str.input_int" href="#commands.str9.Str.input_int">input_int</a></code></li>
 <li><code><a title="commands.str9.Str.input_pass" href="#commands.str9.Str.input_pass">input_pass</a></code></li>
+<li><code><a title="commands.str9.Str.is_ascii" href="#commands.str9.Str.is_ascii">is_ascii</a></code></li>
 <li><code><a title="commands.str9.Str.leftpad" href="#commands.str9.Str.leftpad">leftpad</a></code></li>
 <li><code><a title="commands.str9.Str.newlines_to_strings" href="#commands.str9.Str.newlines_to_strings">newlines_to_strings</a></code></li>
 <li><code><a title="commands.str9.Str.nl" href="#commands.str9.Str.nl">nl</a></code></li>
@@ -1424,9 +1505,7 @@ def to_quotes_2(some_string):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.6.0</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
 </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad()</script>
 </body>
 </html>
