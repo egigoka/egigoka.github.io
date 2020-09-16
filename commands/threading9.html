@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;1.6.2&#34;
+__version__ = &#34;1.7.0&#34;
 
 from .dict9 import imdict
 
@@ -194,7 +194,16 @@ class Threading:
         for thread in self.threads:
             if thread.is_running():
                 cnt += 1
-        return cnt</code></pre>
+        return cnt
+
+
+class Lock:
+    def __call__(self, *args, **kwargs):
+        import threading
+        return threading.Lock()
+
+
+Lock = Lock()</code></pre>
 </details>
 </section>
 <section>
