@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with time
 &#34;&#34;&#34;
-__version__ = &#34;0.1.6&#34;
+__version__ = &#34;1.0.0&#34;
 
 
 class Time:
@@ -110,28 +110,32 @@ class Time:
         while benchmark.get() &lt; seconds:
             import time
             time.sleep(1/check_per_sec)
+
             secs_left_int = int(seconds - benchmark.get())
+
             if secs_left_int != secs_second_var:
                 secs_second_var = secs_left_int
-                Print.rewrite(&#34;Timer for &#34; + str(seconds) + &#34; seconds. &#34; + str(secs_left_int) + &#34; left&#34;)
+                string = &#34;Timer for &#34; + str(seconds) + &#34; seconds.&#34;
+                if seconds &gt; 1:
+                    string += &#34; &#34; + str(secs_left_int) + &#34; left&#34;
+                Print.rewrite(string)
+
         Print.rewrite(&#34;&#34;)
 
     @classmethod
-    def sleep(cls, seconds, quiet_small=False, check_per_sec=10):
+    def sleep(cls, seconds, verbose=False, check_per_sec=10):
         &#34;&#34;&#34;Function to idle. If &#39;seconds more, than 1, running Time._timer. Otherwise run time.sleep and print time
         left.
         &lt;br&gt;`param seconds` int|float, how long sleep
-        &lt;br&gt;`param quiet_small` boolean, suppress print for time len &lt;= 1 second
+        &lt;br&gt;`param verbose` boolean, print remaining time
         &lt;br&gt;`param check_per_sec` int|float, how often check time
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
         if seconds &lt; 0:
             raise ValueError(&#34;sleep time must be non-negative&#34;)
-        elif seconds &gt;= 1:
+        if verbose:
             cls._timer(seconds, check_per_sec)
         else:
-            if not quiet_small:
-                print(&#34;sleeping&#34;, seconds)
             import time
             time.sleep(seconds)
 
@@ -248,28 +252,32 @@ class Time:
         while benchmark.get() &lt; seconds:
             import time
             time.sleep(1/check_per_sec)
+
             secs_left_int = int(seconds - benchmark.get())
+
             if secs_left_int != secs_second_var:
                 secs_second_var = secs_left_int
-                Print.rewrite(&#34;Timer for &#34; + str(seconds) + &#34; seconds. &#34; + str(secs_left_int) + &#34; left&#34;)
+                string = &#34;Timer for &#34; + str(seconds) + &#34; seconds.&#34;
+                if seconds &gt; 1:
+                    string += &#34; &#34; + str(secs_left_int) + &#34; left&#34;
+                Print.rewrite(string)
+
         Print.rewrite(&#34;&#34;)
 
     @classmethod
-    def sleep(cls, seconds, quiet_small=False, check_per_sec=10):
+    def sleep(cls, seconds, verbose=False, check_per_sec=10):
         &#34;&#34;&#34;Function to idle. If &#39;seconds more, than 1, running Time._timer. Otherwise run time.sleep and print time
         left.
         &lt;br&gt;`param seconds` int|float, how long sleep
-        &lt;br&gt;`param quiet_small` boolean, suppress print for time len &lt;= 1 second
+        &lt;br&gt;`param verbose` boolean, print remaining time
         &lt;br&gt;`param check_per_sec` int|float, how often check time
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
         if seconds &lt; 0:
             raise ValueError(&#34;sleep time must be non-negative&#34;)
-        elif seconds &gt;= 1:
+        if verbose:
             cls._timer(seconds, check_per_sec)
         else:
-            if not quiet_small:
-                print(&#34;sleeping&#34;, seconds)
             import time
             time.sleep(seconds)
 
@@ -367,13 +375,13 @@ def dotted(cls, custom_time=None):
 </details>
 </dd>
 <dt id="commands.time9.Time.sleep"><code class="name flex">
-<span>def <span class="ident">sleep</span></span>(<span>seconds, quiet_small=False, check_per_sec=10)</span>
+<span>def <span class="ident">sleep</span></span>(<span>seconds, verbose=False, check_per_sec=10)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Function to idle. If 'seconds more, than 1, running Time._timer. Otherwise run time.sleep and print time
 left.
 <br><code>param seconds</code> int|float, how long sleep
-<br><code>param quiet_small</code> boolean, suppress print for time len &lt;= 1 second
+<br><code>param verbose</code> boolean, print remaining time
 <br><code>param check_per_sec</code> int|float, how often check time
 <br><code>return</code> None</p></div>
 <details class="source">
@@ -381,21 +389,19 @@ left.
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def sleep(cls, seconds, quiet_small=False, check_per_sec=10):
+def sleep(cls, seconds, verbose=False, check_per_sec=10):
     &#34;&#34;&#34;Function to idle. If &#39;seconds more, than 1, running Time._timer. Otherwise run time.sleep and print time
     left.
     &lt;br&gt;`param seconds` int|float, how long sleep
-    &lt;br&gt;`param quiet_small` boolean, suppress print for time len &lt;= 1 second
+    &lt;br&gt;`param verbose` boolean, print remaining time
     &lt;br&gt;`param check_per_sec` int|float, how often check time
     &lt;br&gt;`return` None
     &#34;&#34;&#34;
     if seconds &lt; 0:
         raise ValueError(&#34;sleep time must be non-negative&#34;)
-    elif seconds &gt;= 1:
+    if verbose:
         cls._timer(seconds, check_per_sec)
     else:
-        if not quiet_small:
-            print(&#34;sleeping&#34;, seconds)
         import time
         time.sleep(seconds)</code></pre>
 </details>
