@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions that works only in macOS
 &#34;&#34;&#34;
-__version__ = &#34;0.2.5&#34;
+__version__ = &#34;0.3.1&#34;
 
 
 class macOS:  # pylint: disable=invalid-name, too-few-public-methods
@@ -78,7 +78,7 @@ class macOS:  # pylint: disable=invalid-name, too-few-public-methods
         return global_sounds + local_sounds
 
     @classmethod
-    def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=None):
+    def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=None, debug=False):
         &#34;&#34;&#34;Create notification with AppleScript
         &lt;br&gt;`param message` string
         &lt;br&gt;`param title` string
@@ -106,7 +106,10 @@ class macOS:  # pylint: disable=invalid-name, too-few-public-methods
             commands += &#34; sound name &#34; + Str.to_quotes(cls.OSAScript.quotes_escape(sound))
         commands = cls.OSAScript.quotes_escape(commands)  # escaping quotes:
         commands = Str.to_quotes(commands)  # applescript to quotes
-        OS.system(&#34; &#34;.join([&#34;osascript&#34;, &#34;-e&#34;, *commands]))
+        command = &#34; &#34;.join([&#34;osascript&#34;, &#34;-e&#34;, commands])
+        if debug:
+            print(f&#34;{command=}&#34;)
+        OS.system(command)
 
     @staticmethod
     def symlink(real, symlink):
@@ -181,7 +184,7 @@ class macOS:  # pylint: disable=invalid-name, too-few-public-methods
         return global_sounds + local_sounds
 
     @classmethod
-    def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=None):
+    def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=None, debug=False):
         &#34;&#34;&#34;Create notification with AppleScript
         &lt;br&gt;`param message` string
         &lt;br&gt;`param title` string
@@ -209,7 +212,10 @@ class macOS:  # pylint: disable=invalid-name, too-few-public-methods
             commands += &#34; sound name &#34; + Str.to_quotes(cls.OSAScript.quotes_escape(sound))
         commands = cls.OSAScript.quotes_escape(commands)  # escaping quotes:
         commands = Str.to_quotes(commands)  # applescript to quotes
-        OS.system(&#34; &#34;.join([&#34;osascript&#34;, &#34;-e&#34;, *commands]))
+        command = &#34; &#34;.join([&#34;osascript&#34;, &#34;-e&#34;, commands])
+        if debug:
+            print(f&#34;{command=}&#34;)
+        OS.system(command)
 
     @staticmethod
     def symlink(real, symlink):
@@ -258,7 +264,7 @@ def get_list_of_sounds(cls, quiet=False):
 </details>
 </dd>
 <dt id="commands.macos9.macOS.notification"><code class="name flex">
-<span>def <span class="ident">notification</span></span>(<span>message, title='python3', subtitle=None, sound=None)</span>
+<span>def <span class="ident">notification</span></span>(<span>message, title='python3', subtitle=None, sound=None, debug=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create notification with AppleScript
@@ -273,7 +279,7 @@ def get_list_of_sounds(cls, quiet=False):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=None):
+def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=None, debug=False):
     &#34;&#34;&#34;Create notification with AppleScript
     &lt;br&gt;`param message` string
     &lt;br&gt;`param title` string
@@ -301,7 +307,10 @@ def notification(cls, message, title=&#34;python3&#34;, subtitle=None, sound=Non
         commands += &#34; sound name &#34; + Str.to_quotes(cls.OSAScript.quotes_escape(sound))
     commands = cls.OSAScript.quotes_escape(commands)  # escaping quotes:
     commands = Str.to_quotes(commands)  # applescript to quotes
-    OS.system(&#34; &#34;.join([&#34;osascript&#34;, &#34;-e&#34;, *commands]))</code></pre>
+    command = &#34; &#34;.join([&#34;osascript&#34;, &#34;-e&#34;, commands])
+    if debug:
+        print(f&#34;{command=}&#34;)
+    OS.system(command)</code></pre>
 </details>
 </dd>
 <dt id="commands.macos9.macOS.symlink"><code class="name flex">

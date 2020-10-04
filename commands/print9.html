@@ -32,7 +32,7 @@ from typing import Union
 
 &#34;&#34;&#34;Internal module with functions for print to console.
 &#34;&#34;&#34;
-__version__ = &#34;0.11.2&#34;
+__version__ = &#34;0.12.2&#34;
 
 
 class Print:
@@ -43,6 +43,7 @@ class Print:
         from threading import Lock
         self.s_print_lock = Lock()
         self.colorama_inited = False
+        self._color_output_enabled = None
 
     def __call__(self, *args, **kwargs) -&gt; None:
         self.multithread_safe(*args, **kwargs)
@@ -100,12 +101,20 @@ class Print:
             self.multithread_safe(pretty_string)
         return pretty_string
 
+    @property
+    def color_output_enabled(self):
+        if self._color_output_enabled is None:
+            from .os9 import OS
+            self._color_output_enabled = &#34;NO_COLOR&#34; not in OS.env.keys()
+        return self._color_output_enabled
+
     def colored(self, *strings: Union[str, int, list, dict], attributes: list = None, end: str = &#34;\n&#34;,
                 sep: str = &#34; &#34;, flush: bool = False) -&gt; None:
         &#34;&#34;&#34;Wrapper for termcolor.cprint, added some smartness
         &lt;br&gt;Usage` Print.colored(&#34;text1&#34;, &#34;text2&#34;, &#34;red&#34;) or Print.colored(&#34;text&#34;, &#34;text2&#34;, &#34;red&#34;, &#34;on_white&#34;)
         &lt;br&gt;even Print.colored(&#34;text&#34;, &#34;text2&#34;, &#34;on_white&#34;, &#34;red&#34;) now.
         You can pick colors from termcolor.COLORS, highlights from termcolor.HIGHLIGHTS.
+        When environment variable NO_COLOR present (regardless of its value), prevents the addition of ANSI color.
         &lt;br&gt;`param strings` work as builtin print(*strings)
         &lt;br&gt;`param attributes` going to termcolor.cprint(attrs) argument
         &lt;br&gt;`param end` same as builtin print(end)
@@ -117,7 +126,7 @@ class Print:
         termcolor.COLORS[&#34;gray&#34;] = termcolor.COLORS[&#34;black&#34;] = 30
         termcolor.HIGHLIGHTS[&#34;on_gray&#34;] = termcolor.HIGHLIGHTS[&#34;on_black&#34;] = 40
         from .os9 import OS
-        if OS.windows and not self.colorama_inited:
+        if OS.windows and not self.colorama_inited and self.color_output_enabled:
             import colorama
             colorama.init()
             self.colorama_inited = True
@@ -125,18 +134,21 @@ class Print:
         highlight = None
         color = None
         color_args = 0
-        if str(strings[-1]) in termcolor.HIGHLIGHTS:
-            highlight = strings[-1]
-            color_args += 1
-            if str(strings[-2]) in termcolor.COLORS:
-                color = strings[-2]
+        try:
+            if str(strings[-1]) in termcolor.HIGHLIGHTS:
+                highlight = strings[-1]
                 color_args += 1
-        elif str(strings[-1]) in termcolor.COLORS:
-            color = strings[-1]
-            color_args += 1
-            if str(strings[-2]) in termcolor.HIGHLIGHTS:
-                highlight = strings[-2]
+                if str(strings[-2]) in termcolor.COLORS:
+                    color = strings[-2]
+                    color_args += 1
+            elif str(strings[-1]) in termcolor.COLORS:
+                color = strings[-1]
                 color_args += 1
+                if str(strings[-2]) in termcolor.HIGHLIGHTS:
+                    highlight = strings[-2]
+                    color_args += 1
+        except KeyError:
+            pass
         # create single string to pass it into termcolor
         string = &#34;&#34;
         if color_args:
@@ -148,7 +160,10 @@ class Print:
         else:  # if there only one object
             string = strings[0]
 
-        colored_string = termcolor.colored(string, color=color, on_color=highlight, attrs=attributes)
+        if self.color_output_enabled:
+            colored_string = termcolor.colored(string, color=color, on_color=highlight, attrs=attributes)
+        else:
+            colored_string = string
         self.multithread_safe(colored_string, end=end, flush=flush)
 
         with suppress(KeyError):  # for work with multithreading
