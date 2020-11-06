@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with lists
 &#34;&#34;&#34;
-__version__ = &#34;0.8.0&#34;
+__version__ = &#34;0.9.0&#34;
 
 
 class List:
@@ -122,7 +122,44 @@ class List:
         for cnt, item in enumerate(list_new):
             if item == &#34;&#34;:
                 list_new.pop(cnt)
-        return list_new</code></pre>
+        return list_new
+
+    @staticmethod
+    def itemgetter_with_casting(item, *items, cast_to):
+        if not items:
+            def func(obj):
+                for type_to in cast_to:
+                    try:
+                        return type_to(obj[item])
+                    except:
+                        pass
+                return obj[item]
+        else:
+            def func(obj):
+                new_list = []
+                for i in items:
+                    for type_to in cast_to:
+                        try:
+                            new_list.append(type_to(obj[i]))
+                        except:
+                            pass
+                    new_list.append(i)
+                return tuple(new_list)
+        return func
+
+    @classmethod
+    def sort_by(cls, list_input: list, *sort_keys, cast_to=()) -&gt; list:
+        return sorted(list_input, key=cls.itemgetter_with_casting(*sort_keys, cast_to=cast_to))
+
+    @staticmethod
+    def enum_by(list_input: list, *enum_keys) -&gt; dict:
+        from operator import itemgetter
+        new_dict = {}
+        for value in list_input:
+            itemgetter_current = itemgetter(*enum_keys)
+            key = itemgetter_current(value)
+            new_dict[key] = value
+        return new_dict</code></pre>
 </details>
 </section>
 <section>
@@ -231,7 +268,44 @@ class List:
         for cnt, item in enumerate(list_new):
             if item == &#34;&#34;:
                 list_new.pop(cnt)
-        return list_new</code></pre>
+        return list_new
+
+    @staticmethod
+    def itemgetter_with_casting(item, *items, cast_to):
+        if not items:
+            def func(obj):
+                for type_to in cast_to:
+                    try:
+                        return type_to(obj[item])
+                    except:
+                        pass
+                return obj[item]
+        else:
+            def func(obj):
+                new_list = []
+                for i in items:
+                    for type_to in cast_to:
+                        try:
+                            new_list.append(type_to(obj[i]))
+                        except:
+                            pass
+                    new_list.append(i)
+                return tuple(new_list)
+        return func
+
+    @classmethod
+    def sort_by(cls, list_input: list, *sort_keys, cast_to=()) -&gt; list:
+        return sorted(list_input, key=cls.itemgetter_with_casting(*sort_keys, cast_to=cast_to))
+
+    @staticmethod
+    def enum_by(list_input: list, *enum_keys) -&gt; dict:
+        from operator import itemgetter
+        new_dict = {}
+        for value in list_input:
+            itemgetter_current = itemgetter(*enum_keys)
+            key = itemgetter_current(value)
+            new_dict[key] = value
+        return new_dict</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -247,6 +321,26 @@ class List:
 <pre><code class="python">@staticmethod
 def apply_lambda_to_all_elements(list, function):
     return [function(string) for string in list]</code></pre>
+</details>
+</dd>
+<dt id="commands.list9.List.enum_by"><code class="name flex">
+<span>def <span class="ident">enum_by</span></span>(<span>list_input: list, *enum_keys) ‑> dict</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def enum_by(list_input: list, *enum_keys) -&gt; dict:
+    from operator import itemgetter
+    new_dict = {}
+    for value in list_input:
+        itemgetter_current = itemgetter(*enum_keys)
+        key = itemgetter_current(value)
+        new_dict[key] = value
+    return new_dict</code></pre>
 </details>
 </dd>
 <dt id="commands.list9.List.flatterize"><code class="name flex">
@@ -278,6 +372,39 @@ def flatterize(input_list):
                 output_list.insert(cnt, item)
         cnt += 1
     return output_list</code></pre>
+</details>
+</dd>
+<dt id="commands.list9.List.itemgetter_with_casting"><code class="name flex">
+<span>def <span class="ident">itemgetter_with_casting</span></span>(<span>item, *items, cast_to)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def itemgetter_with_casting(item, *items, cast_to):
+    if not items:
+        def func(obj):
+            for type_to in cast_to:
+                try:
+                    return type_to(obj[item])
+                except:
+                    pass
+            return obj[item]
+    else:
+        def func(obj):
+            new_list = []
+            for i in items:
+                for type_to in cast_to:
+                    try:
+                        new_list.append(type_to(obj[i]))
+                    except:
+                        pass
+                new_list.append(i)
+            return tuple(new_list)
+    return func</code></pre>
 </details>
 </dd>
 <dt id="commands.list9.List.most_common"><code class="name flex">
@@ -362,6 +489,20 @@ def shuffle(list):
     copy_list = copy.deepcopy(list)
     random.shuffle(copy_list)
     return copy_list</code></pre>
+</details>
+</dd>
+<dt id="commands.list9.List.sort_by"><code class="name flex">
+<span>def <span class="ident">sort_by</span></span>(<span>list_input: list, *sort_keys, cast_to=()) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def sort_by(cls, list_input: list, *sort_keys, cast_to=()) -&gt; list:
+    return sorted(list_input, key=cls.itemgetter_with_casting(*sort_keys, cast_to=cast_to))</code></pre>
 </details>
 </dd>
 <dt id="commands.list9.List.split_every"><code class="name flex">
@@ -452,12 +593,15 @@ def wildcard_search(list_input, regexp):
 <h4><code><a title="commands.list9.List" href="#commands.list9.List">List</a></code></h4>
 <ul class="">
 <li><code><a title="commands.list9.List.apply_lambda_to_all_elements" href="#commands.list9.List.apply_lambda_to_all_elements">apply_lambda_to_all_elements</a></code></li>
+<li><code><a title="commands.list9.List.enum_by" href="#commands.list9.List.enum_by">enum_by</a></code></li>
 <li><code><a title="commands.list9.List.flatterize" href="#commands.list9.List.flatterize">flatterize</a></code></li>
+<li><code><a title="commands.list9.List.itemgetter_with_casting" href="#commands.list9.List.itemgetter_with_casting">itemgetter_with_casting</a></code></li>
 <li><code><a title="commands.list9.List.most_common" href="#commands.list9.List.most_common">most_common</a></code></li>
 <li><code><a title="commands.list9.List.remove_duplicates" href="#commands.list9.List.remove_duplicates">remove_duplicates</a></code></li>
 <li><code><a title="commands.list9.List.remove_empty_strings" href="#commands.list9.List.remove_empty_strings">remove_empty_strings</a></code></li>
 <li><code><a title="commands.list9.List.replace_string" href="#commands.list9.List.replace_string">replace_string</a></code></li>
 <li><code><a title="commands.list9.List.shuffle" href="#commands.list9.List.shuffle">shuffle</a></code></li>
+<li><code><a title="commands.list9.List.sort_by" href="#commands.list9.List.sort_by">sort_by</a></code></li>
 <li><code><a title="commands.list9.List.split_every" href="#commands.list9.List.split_every">split_every</a></code></li>
 <li><code><a title="commands.list9.List.to_strings" href="#commands.list9.List.to_strings">to_strings</a></code></li>
 <li><code><a title="commands.list9.List.wildcard_search" href="#commands.list9.List.wildcard_search">wildcard_search</a></code></li>
