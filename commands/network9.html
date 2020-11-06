@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions to work with network
 &#34;&#34;&#34;
-__version__ = &#34;0.7.8&#34;
+__version__ = &#34;0.8.0&#34;
 from typing import Union
 
 
@@ -409,7 +409,17 @@ class Network:
     def check_internet_microsoft(cls, timeout=10, debug=False):
         return cls.check_response(&#34;http://www.msftncsi.com/ncsi.txt&#34;,
                                   b&#39;Microsoft NCSI&#39;,
-                                  timeout=timeout, debug=debug)</code></pre>
+                                  timeout=timeout, debug=debug)
+
+    @staticmethod
+    def get(url, params=None, **kwargs):
+        import requests
+        return requests.get(url=url, params=params, **kwargs)
+
+    @staticmethod
+    def post(url, data=None, json=None, **kwargs):
+        import requests
+        return requests.post(url=url, data=data, json=json, **kwargs)</code></pre>
 </details>
 </section>
 <section>
@@ -804,7 +814,17 @@ class Network:
     def check_internet_microsoft(cls, timeout=10, debug=False):
         return cls.check_response(&#34;http://www.msftncsi.com/ncsi.txt&#34;,
                                   b&#39;Microsoft NCSI&#39;,
-                                  timeout=timeout, debug=debug)</code></pre>
+                                  timeout=timeout, debug=debug)
+
+    @staticmethod
+    def get(url, params=None, **kwargs):
+        import requests
+        return requests.get(url=url, params=params, **kwargs)
+
+    @staticmethod
+    def post(url, data=None, json=None, **kwargs):
+        import requests
+        return requests.post(url=url, data=data, json=json, **kwargs)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -924,6 +944,21 @@ def download_file(url, out=None, quiet=None):
     data = response.read()  # a `bytes` object
     File.write(out, data, mode=&#34;wb&#34;)
     return Path.full(out)</code></pre>
+</details>
+</dd>
+<dt id="commands.network9.Network.get"><code class="name flex">
+<span>def <span class="ident">get</span></span>(<span>url, params=None, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def get(url, params=None, **kwargs):
+    import requests
+    return requests.get(url=url, params=params, **kwargs)</code></pre>
 </details>
 </dd>
 <dt id="commands.network9.Network.get_domain_of_url"><code class="name flex">
@@ -1303,6 +1338,21 @@ def ping(cls,
     return uplink</code></pre>
 </details>
 </dd>
+<dt id="commands.network9.Network.post"><code class="name flex">
+<span>def <span class="ident">post</span></span>(<span>url, data=None, json=None, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def post(url, data=None, json=None, **kwargs):
+    import requests
+    return requests.post(url=url, data=data, json=json, **kwargs)</code></pre>
+</details>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -1329,12 +1379,14 @@ def ping(cls,
 <li><code><a title="commands.network9.Network.check_response" href="#commands.network9.Network.check_response">check_response</a></code></li>
 <li><code><a title="commands.network9.Network.dns_lookup" href="#commands.network9.Network.dns_lookup">dns_lookup</a></code></li>
 <li><code><a title="commands.network9.Network.download_file" href="#commands.network9.Network.download_file">download_file</a></code></li>
+<li><code><a title="commands.network9.Network.get" href="#commands.network9.Network.get">get</a></code></li>
 <li><code><a title="commands.network9.Network.get_domain_of_url" href="#commands.network9.Network.get_domain_of_url">get_domain_of_url</a></code></li>
 <li><code><a title="commands.network9.Network.get_fqdn" href="#commands.network9.Network.get_fqdn">get_fqdn</a></code></li>
 <li><code><a title="commands.network9.Network.get_ip" href="#commands.network9.Network.get_ip">get_ip</a></code></li>
 <li><code><a title="commands.network9.Network.get_netbios" href="#commands.network9.Network.get_netbios">get_netbios</a></code></li>
 <li><code><a title="commands.network9.Network.get_protocol_of_url" href="#commands.network9.Network.get_protocol_of_url">get_protocol_of_url</a></code></li>
 <li><code><a title="commands.network9.Network.ping" href="#commands.network9.Network.ping">ping</a></code></li>
+<li><code><a title="commands.network9.Network.post" href="#commands.network9.Network.post">post</a></code></li>
 </ul>
 </li>
 </ul>
