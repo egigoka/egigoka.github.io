@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with commandline interfaces
 &#34;&#34;&#34;
-__version__ = &#34;0.2.2&#34;
+__version__ = &#34;0.3.0&#34;
 
 
 class CLI:
@@ -70,7 +70,7 @@ class CLI:
                 return check_answer(default)
 
     @staticmethod
-    def get_ints(question, count_of_ints, answer=None):
+    def get_ints(question, count_of_ints):
         &#34;&#34;&#34;Obtain answer with integers from user in commandline.
         &lt;br&gt;`param question` string with question to user
         &lt;br&gt;`param count_of_ints` int of ints must be in answer
@@ -92,10 +92,6 @@ class CLI:
                 return ints
             return
 
-        if answer:
-            output = check_answer(answer, count_of_ints)
-            if output is not None:
-                return output
         while True:
             input_str = input(f&#34;{question} (answer {count_of_ints} integer_s)?&#34;)
             input_str = input_str.strip(&#34; &#34;)
@@ -104,8 +100,8 @@ class CLI:
                 return output
 
     @classmethod
-    def get_int(cls, question, answer=None):
-        return cls.get_ints(question=question, count_of_ints=1, answer=answer)
+    def get_int(cls, question):
+        return cls.get_ints(question=question, count_of_ints=1)
 
     wait_update_pos = 0
 
@@ -199,7 +195,7 @@ class CLI:
                 return check_answer(default)
 
     @staticmethod
-    def get_ints(question, count_of_ints, answer=None):
+    def get_ints(question, count_of_ints):
         &#34;&#34;&#34;Obtain answer with integers from user in commandline.
         &lt;br&gt;`param question` string with question to user
         &lt;br&gt;`param count_of_ints` int of ints must be in answer
@@ -221,10 +217,6 @@ class CLI:
                 return ints
             return
 
-        if answer:
-            output = check_answer(answer, count_of_ints)
-            if output is not None:
-                return output
         while True:
             input_str = input(f&#34;{question} (answer {count_of_ints} integer_s)?&#34;)
             input_str = input_str.strip(&#34; &#34;)
@@ -233,8 +225,8 @@ class CLI:
                 return output
 
     @classmethod
-    def get_int(cls, question, answer=None):
-        return cls.get_ints(question=question, count_of_ints=1, answer=answer)
+    def get_int(cls, question):
+        return cls.get_ints(question=question, count_of_ints=1)
 
     wait_update_pos = 0
 
@@ -283,7 +275,7 @@ class CLI:
 <h3>Static methods</h3>
 <dl>
 <dt id="commands.cli9.CLI.get_int"><code class="name flex">
-<span>def <span class="ident">get_int</span></span>(<span>question, answer=None)</span>
+<span>def <span class="ident">get_int</span></span>(<span>question)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -292,12 +284,12 @@ class CLI:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def get_int(cls, question, answer=None):
-    return cls.get_ints(question=question, count_of_ints=1, answer=answer)</code></pre>
+def get_int(cls, question):
+    return cls.get_ints(question=question, count_of_ints=1)</code></pre>
 </details>
 </dd>
 <dt id="commands.cli9.CLI.get_ints"><code class="name flex">
-<span>def <span class="ident">get_ints</span></span>(<span>question, count_of_ints, answer=None)</span>
+<span>def <span class="ident">get_ints</span></span>(<span>question, count_of_ints)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Obtain answer with integers from user in commandline.
@@ -310,7 +302,7 @@ def get_int(cls, question, answer=None):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
-def get_ints(question, count_of_ints, answer=None):
+def get_ints(question, count_of_ints):
     &#34;&#34;&#34;Obtain answer with integers from user in commandline.
     &lt;br&gt;`param question` string with question to user
     &lt;br&gt;`param count_of_ints` int of ints must be in answer
@@ -332,10 +324,6 @@ def get_ints(question, count_of_ints, answer=None):
             return ints
         return
 
-    if answer:
-        output = check_answer(answer, count_of_ints)
-        if output is not None:
-            return output
     while True:
         input_str = input(f&#34;{question} (answer {count_of_ints} integer_s)?&#34;)
         input_str = input_str.strip(&#34; &#34;)
