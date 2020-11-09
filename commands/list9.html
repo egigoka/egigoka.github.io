@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with lists
 &#34;&#34;&#34;
-__version__ = &#34;0.9.0&#34;
+__version__ = &#34;0.10.0&#34;
 
 
 class List:
@@ -152,12 +152,20 @@ class List:
         return sorted(list_input, key=cls.itemgetter_with_casting(*sort_keys, cast_to=cast_to))
 
     @staticmethod
-    def enum_by(list_input: list, *enum_keys) -&gt; dict:
+    def enum_by(list_input: list, *enum_keys, cast_to=()) -&gt; dict:
         from operator import itemgetter
         new_dict = {}
         for value in list_input:
             itemgetter_current = itemgetter(*enum_keys)
             key = itemgetter_current(value)
+
+            for type_to in cast_to:
+                try:
+                    value = type_to(value)
+                    break
+                except:
+                    pass
+
             new_dict[key] = value
         return new_dict</code></pre>
 </details>
@@ -298,12 +306,20 @@ class List:
         return sorted(list_input, key=cls.itemgetter_with_casting(*sort_keys, cast_to=cast_to))
 
     @staticmethod
-    def enum_by(list_input: list, *enum_keys) -&gt; dict:
+    def enum_by(list_input: list, *enum_keys, cast_to=()) -&gt; dict:
         from operator import itemgetter
         new_dict = {}
         for value in list_input:
             itemgetter_current = itemgetter(*enum_keys)
             key = itemgetter_current(value)
+
+            for type_to in cast_to:
+                try:
+                    value = type_to(value)
+                    break
+                except:
+                    pass
+
             new_dict[key] = value
         return new_dict</code></pre>
 </details>
@@ -324,7 +340,7 @@ def apply_lambda_to_all_elements(list, function):
 </details>
 </dd>
 <dt id="commands.list9.List.enum_by"><code class="name flex">
-<span>def <span class="ident">enum_by</span></span>(<span>list_input: list, *enum_keys) ‑> dict</span>
+<span>def <span class="ident">enum_by</span></span>(<span>list_input: list, *enum_keys, cast_to=()) ‑> dict</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -333,12 +349,20 @@ def apply_lambda_to_all_elements(list, function):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
-def enum_by(list_input: list, *enum_keys) -&gt; dict:
+def enum_by(list_input: list, *enum_keys, cast_to=()) -&gt; dict:
     from operator import itemgetter
     new_dict = {}
     for value in list_input:
         itemgetter_current = itemgetter(*enum_keys)
         key = itemgetter_current(value)
+
+        for type_to in cast_to:
+            try:
+                value = type_to(value)
+                break
+            except:
+                pass
+
         new_dict[key] = value
     return new_dict</code></pre>
 </details>
