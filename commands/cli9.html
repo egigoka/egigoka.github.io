@@ -77,25 +77,17 @@ class CLI:
         &lt;br&gt;`param answer` predefined string with answer
         &lt;br&gt;`return` integer or list of integers
         &#34;&#34;&#34;
-
-        def check_answer(input, count_of_ints):  # pylint: disable=inconsistent-return-statements
-            &#34;&#34;&#34;Check input from user or argument &#34;answer&#34;
-            &lt;br&gt;`param input` input string
-            &lt;br&gt;`param count_of_ints` int of ints must be in answer
-            &lt;br&gt;`return` True|False|None
-            &#34;&#34;&#34;
-            from .str9 import Str
-            ints = Str.get_integers(input, float_support=False)
-            if len(ints) == count_of_ints:
-                if count_of_ints == 1:
-                    return ints[0]
-                return ints
-            return
+        from .str9 import Str
 
         while True:
             input_str = input(f&#34;{question} (answer {count_of_ints} integer_s)?&#34;)
-            input_str = input_str.strip(&#34; &#34;)
-            output = check_answer(input_str, count_of_ints)
+            ints = Str.get_integers(input_str, float_support=False)
+            output = None
+            if len(ints) == count_of_ints:
+                if count_of_ints == 1:
+                    output = ints[0]
+                else:
+                    output = ints
             if output is not None:
                 return output
 
@@ -202,25 +194,17 @@ class CLI:
         &lt;br&gt;`param answer` predefined string with answer
         &lt;br&gt;`return` integer or list of integers
         &#34;&#34;&#34;
-
-        def check_answer(input, count_of_ints):  # pylint: disable=inconsistent-return-statements
-            &#34;&#34;&#34;Check input from user or argument &#34;answer&#34;
-            &lt;br&gt;`param input` input string
-            &lt;br&gt;`param count_of_ints` int of ints must be in answer
-            &lt;br&gt;`return` True|False|None
-            &#34;&#34;&#34;
-            from .str9 import Str
-            ints = Str.get_integers(input, float_support=False)
-            if len(ints) == count_of_ints:
-                if count_of_ints == 1:
-                    return ints[0]
-                return ints
-            return
+        from .str9 import Str
 
         while True:
             input_str = input(f&#34;{question} (answer {count_of_ints} integer_s)?&#34;)
-            input_str = input_str.strip(&#34; &#34;)
-            output = check_answer(input_str, count_of_ints)
+            ints = Str.get_integers(input_str, float_support=False)
+            output = None
+            if len(ints) == count_of_ints:
+                if count_of_ints == 1:
+                    output = ints[0]
+                else:
+                    output = ints
             if output is not None:
                 return output
 
@@ -309,25 +293,17 @@ def get_ints(question, count_of_ints):
     &lt;br&gt;`param answer` predefined string with answer
     &lt;br&gt;`return` integer or list of integers
     &#34;&#34;&#34;
-
-    def check_answer(input, count_of_ints):  # pylint: disable=inconsistent-return-statements
-        &#34;&#34;&#34;Check input from user or argument &#34;answer&#34;
-        &lt;br&gt;`param input` input string
-        &lt;br&gt;`param count_of_ints` int of ints must be in answer
-        &lt;br&gt;`return` True|False|None
-        &#34;&#34;&#34;
-        from .str9 import Str
-        ints = Str.get_integers(input, float_support=False)
-        if len(ints) == count_of_ints:
-            if count_of_ints == 1:
-                return ints[0]
-            return ints
-        return
+    from .str9 import Str
 
     while True:
         input_str = input(f&#34;{question} (answer {count_of_ints} integer_s)?&#34;)
-        input_str = input_str.strip(&#34; &#34;)
-        output = check_answer(input_str, count_of_ints)
+        ints = Str.get_integers(input_str, float_support=False)
+        output = None
+        if len(ints) == count_of_ints:
+            if count_of_ints == 1:
+                output = ints[0]
+            else:
+                output = ints
         if output is not None:
             return output</code></pre>
 </details>

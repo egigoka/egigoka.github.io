@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with JSON
 &#34;&#34;&#34;
-__version__ = &#34;4.0.4&#34;
+__version__ = &#34;4.1.0&#34;
 
 
 class Json:
@@ -138,6 +138,9 @@ class JsonDict(Json):
 
     def items(self):
         return self.string.items()
+
+    def values(self):
+        return self.string.values()
 
     def keys(self):
         return self.string.keys()
@@ -395,6 +398,9 @@ class JsonList(Json):
     def items(self):
         return self.string.items()
 
+    def values(self):
+        return self.string.values()
+
     def keys(self):
         return self.string.keys()</code></pre>
 </details>
@@ -428,6 +434,19 @@ class JsonList(Json):
 </summary>
 <pre><code class="python">def keys(self):
     return self.string.keys()</code></pre>
+</details>
+</dd>
+<dt id="commands.json9.JsonDict.values"><code class="name flex">
+<span>def <span class="ident">values</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def values(self):
+    return self.string.values()</code></pre>
 </details>
 </dd>
 </dl>
@@ -541,6 +560,7 @@ class JsonList(Json):
 <ul class="">
 <li><code><a title="commands.json9.JsonDict.items" href="#commands.json9.JsonDict.items">items</a></code></li>
 <li><code><a title="commands.json9.JsonDict.keys" href="#commands.json9.JsonDict.keys">keys</a></code></li>
+<li><code><a title="commands.json9.JsonDict.values" href="#commands.json9.JsonDict.values">values</a></code></li>
 </ul>
 </li>
 <li>
