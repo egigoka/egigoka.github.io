@@ -135,6 +135,8 @@ class List:
                         pass
                 return obj[item]
         else:
+            items = (item,) + items
+            
             def func(obj):
                 new_list = []
                 for i in items:
@@ -293,6 +295,8 @@ class List:
                         pass
                 return obj[item]
         else:
+            items = (item,) + items
+            
             def func(obj):
                 new_list = []
                 for i in items:
@@ -426,6 +430,8 @@ def itemgetter_with_casting(item, *items, cast_to):
                     pass
             return obj[item]
     else:
+        items = (item,) + items
+        
         def func(obj):
             new_list = []
             for i in items:
