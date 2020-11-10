@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with lists
 &#34;&#34;&#34;
-__version__ = &#34;0.10.1&#34;
+__version__ = &#34;0.10.2&#34;
 
 
 class List:
@@ -147,7 +147,7 @@ class List:
                         except:
                             pass
                     if not added:
-                        new_list.append(i)
+                        new_list.append(obj[i])
                 return tuple(new_list)
         return func
 
@@ -305,7 +305,7 @@ class List:
                         except:
                             pass
                     if not added:
-                        new_list.append(i)
+                        new_list.append(obj[i])
                 return tuple(new_list)
         return func
 
@@ -438,7 +438,7 @@ def itemgetter_with_casting(item, *items, cast_to):
                     except:
                         pass
                 if not added:
-                    new_list.append(i)
+                    new_list.append(obj[i])
             return tuple(new_list)
     return func</code></pre>
 </details>
