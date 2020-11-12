@@ -58,12 +58,12 @@ class CLI:
             return
 
         while True:
-            print_str = f&#34;{question} (y/n)?&#34;
+            print_str = f&#34;{question} (y/n)? &#34;
             if default:
                 print_str += &#34; default &#39;{default}&#39;&#34;
             try:
                 import thefuck.system
-                print(print_str, end=&#34; &#34;)
+                print(print_str, end=&#34;&#34;, flush=True)
                 input_str = thefuck.system.get_key()
                 print(input_str)
             except:
@@ -181,12 +181,12 @@ class CLI:
             return
 
         while True:
-            print_str = f&#34;{question} (y/n)?&#34;
+            print_str = f&#34;{question} (y/n)? &#34;
             if default:
                 print_str += &#34; default &#39;{default}&#39;&#34;
             try:
                 import thefuck.system
-                print(print_str, end=&#34; &#34;)
+                print(print_str, end=&#34;&#34;, flush=True)
                 input_str = thefuck.system.get_key()
                 print(input_str)
             except:
@@ -353,12 +353,12 @@ def get_y_n(question, default=None):
         return
 
     while True:
-        print_str = f&#34;{question} (y/n)?&#34;
+        print_str = f&#34;{question} (y/n)? &#34;
         if default:
             print_str += &#34; default &#39;{default}&#39;&#34;
         try:
             import thefuck.system
-            print(print_str, end=&#34; &#34;)
+            print(print_str, end=&#34;&#34;, flush=True)
             input_str = thefuck.system.get_key()
             print(input_str)
         except:
