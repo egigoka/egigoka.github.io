@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with commandline interfaces
 &#34;&#34;&#34;
-__version__ = &#34;0.4.0&#34;
+__version__ = &#34;0.4.1&#34;
 
 
 class CLI:
@@ -145,7 +145,7 @@ class CLI:
         lines = []
         while True:
             try:
-                lines.append(input(&#34;...&#34;))
+                lines.append(input())
             except EOFError:
                 break
         return &#34;\n&#34;.join(lines)</code></pre>
@@ -280,7 +280,7 @@ class CLI:
         lines = []
         while True:
             try:
-                lines.append(input(&#34;...&#34;))
+                lines.append(input())
             except EOFError:
                 break
         return &#34;\n&#34;.join(lines)</code></pre>
@@ -411,7 +411,7 @@ def multiline_input(question: str) -&gt; str:
     lines = []
     while True:
         try:
-            lines.append(input(&#34;...&#34;))
+            lines.append(input())
         except EOFError:
             break
     return &#34;\n&#34;.join(lines)</code></pre>
