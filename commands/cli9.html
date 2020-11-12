@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with commandline interfaces
 &#34;&#34;&#34;
-__version__ = &#34;0.3.5&#34;
+__version__ = &#34;0.4.0&#34;
 
 
 class CLI:
@@ -136,7 +136,19 @@ class CLI:
         &#34;&#34;&#34;
         raise NotImplementedError
         from .console9 import Console  # pylint: disable=unreachable
-        Console.width()</code></pre>
+        Console.width()
+
+    @staticmethod
+    def multiline_input(question: str) -&gt; str:
+        print(&#34;Enter|paste your content. Ctrl-D or Ctrl-Z (Windows) to save it.&#34;)
+        print(question)
+        lines = []
+        while True:
+            try:
+                lines.append(input(&#34;...&#34;))
+            except EOFError:
+                break
+        return &#34;\n&#34;.join(lines)</code></pre>
 </details>
 </section>
 <section>
@@ -259,7 +271,19 @@ class CLI:
         &#34;&#34;&#34;
         raise NotImplementedError
         from .console9 import Console  # pylint: disable=unreachable
-        Console.width()</code></pre>
+        Console.width()
+
+    @staticmethod
+    def multiline_input(question: str) -&gt; str:
+        print(&#34;Enter|paste your content. Ctrl-D or Ctrl-Z (Windows) to save it.&#34;)
+        print(question)
+        lines = []
+        while True:
+            try:
+                lines.append(input(&#34;...&#34;))
+            except EOFError:
+                break
+        return &#34;\n&#34;.join(lines)</code></pre>
 </details>
 <h3>Class variables</h3>
 <dl>
@@ -371,6 +395,28 @@ def get_y_n(question, default=None):
             return check_answer(default)</code></pre>
 </details>
 </dd>
+<dt id="commands.cli9.CLI.multiline_input"><code class="name flex">
+<span>def <span class="ident">multiline_input</span></span>(<span>question: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def multiline_input(question: str) -&gt; str:
+    print(&#34;Enter|paste your content. Ctrl-D or Ctrl-Z (Windows) to save it.&#34;)
+    print(question)
+    lines = []
+    while True:
+        try:
+            lines.append(input(&#34;...&#34;))
+        except EOFError:
+            break
+    return &#34;\n&#34;.join(lines)</code></pre>
+</details>
+</dd>
 <dt id="commands.cli9.CLI.progressbar"><code class="name flex">
 <span>def <span class="ident">progressbar</span></span>(<span>count, finish, width_of_output=None)</span>
 </code></dt>
@@ -457,6 +503,7 @@ def wait_update(cls, quiet=False):
 <li><code><a title="commands.cli9.CLI.get_int" href="#commands.cli9.CLI.get_int">get_int</a></code></li>
 <li><code><a title="commands.cli9.CLI.get_ints" href="#commands.cli9.CLI.get_ints">get_ints</a></code></li>
 <li><code><a title="commands.cli9.CLI.get_y_n" href="#commands.cli9.CLI.get_y_n">get_y_n</a></code></li>
+<li><code><a title="commands.cli9.CLI.multiline_input" href="#commands.cli9.CLI.multiline_input">multiline_input</a></code></li>
 <li><code><a title="commands.cli9.CLI.progressbar" href="#commands.cli9.CLI.progressbar">progressbar</a></code></li>
 <li><code><a title="commands.cli9.CLI.wait_update" href="#commands.cli9.CLI.wait_update">wait_update</a></code></li>
 <li><code><a title="commands.cli9.CLI.wait_update_pos" href="#commands.cli9.CLI.wait_update_pos">wait_update_pos</a></code></li>
