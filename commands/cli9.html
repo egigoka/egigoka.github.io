@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with commandline interfaces
 &#34;&#34;&#34;
-__version__ = &#34;0.3.3&#34;
+__version__ = &#34;0.3.4&#34;
 
 
 class CLI:
@@ -63,8 +63,9 @@ class CLI:
                 print_str += &#34; default &#39;{default}&#39;&#34;
             try:
                 import thefuck.system
-                print(print_str)
+                print(print_str, end=&#34; &#34;)
                 input_str = thefuck.system.get_key()
+                print(input_str)
             except:
                 input_str = input(print_str)
                 input_str = input_str.strip()
@@ -185,8 +186,9 @@ class CLI:
                 print_str += &#34; default &#39;{default}&#39;&#34;
             try:
                 import thefuck.system
-                print(print_str)
+                print(print_str, end=&#34; &#34;)
                 input_str = thefuck.system.get_key()
+                print(input_str)
             except:
                 input_str = input(print_str)
                 input_str = input_str.strip()
@@ -356,8 +358,9 @@ def get_y_n(question, default=None):
             print_str += &#34; default &#39;{default}&#39;&#34;
         try:
             import thefuck.system
-            print(print_str)
+            print(print_str, end=&#34; &#34;)
             input_str = thefuck.system.get_key()
+            print(input_str)
         except:
             input_str = input(print_str)
             input_str = input_str.strip()
