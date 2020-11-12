@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with commandline interfaces
 &#34;&#34;&#34;
-__version__ = &#34;0.3.0&#34;
+__version__ = &#34;0.3.2&#34;
 
 
 class CLI:
@@ -61,8 +61,12 @@ class CLI:
             print_str = f&#34;{question} (y/n)?&#34;
             if default:
                 print_str += &#34; default &#39;{default}&#39;&#34;
-            input_str = input(print_str)
-            input_str = input_str.strip()
+            try:
+                import thefuck.system
+                input_str = thefuck.system.get_key()
+            except:
+                input_str = input(print_str)
+                input_str = input_str.strip()
             output = check_answer(input_str)
             if output is not None:
                 return output
@@ -178,8 +182,12 @@ class CLI:
             print_str = f&#34;{question} (y/n)?&#34;
             if default:
                 print_str += &#34; default &#39;{default}&#39;&#34;
-            input_str = input(print_str)
-            input_str = input_str.strip()
+            try:
+                import thefuck.system
+                input_str = thefuck.system.get_key()
+            except:
+                input_str = input(print_str)
+                input_str = input_str.strip()
             output = check_answer(input_str)
             if output is not None:
                 return output
@@ -344,8 +352,12 @@ def get_y_n(question, default=None):
         print_str = f&#34;{question} (y/n)?&#34;
         if default:
             print_str += &#34; default &#39;{default}&#39;&#34;
-        input_str = input(print_str)
-        input_str = input_str.strip()
+        try:
+            import thefuck.system
+            input_str = thefuck.system.get_key()
+        except:
+            input_str = input(print_str)
+            input_str = input_str.strip()
         output = check_answer(input_str)
         if output is not None:
             return output
