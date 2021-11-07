@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Egigoka's shmol server</title>
+    <link rel="shortcut icon" href="favicon.ico"/>
+	<style>
+		pre.ex1 {
+			padding-left: 50px;
+		}
+		pre.filename{
+			font-weight: bold;
+		}
+		h1{
+			background-color: rgba(200, 255, 200, 0.7);
+		}
+	</style>
+</head>
+<body>
+<h1>Caddy:</h1>
+<pre class="filename">systemd .service:</pre>
+<pre class="ex1"><code>[Unit]
+Description=Caddy
+Documentation=https://caddyserver.com/docs/
+After=network.target
+
+[Service]
+User=caddy
+Group=caddy
+ExecStart=/usr/bin/caddy run --environ --config /etc/caddy/Caddyfile
+ExecReload=/usr/bin/caddy reload --config /etc/caddy/Caddyfile
+TimeoutStopSec=5s
+LimitNOFILE=1048576
+LimitNPROC=512
+PrivateTmp=true
+ProtectSystem=full
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+<pre class="filename">Caddyfile:</pre>
+<pre class="ex1"><code># atm alias to plex server
+egigoka.me {
+	reverse_proxy localhost:32400
+}
+
+# plex server
+plex.egigoka.me {
+	reverse_proxy localhost:32400
+}
+
+# duplicati
+duplicati.egigoka.me {
+	reverse_proxy localhost:8200
+}
+
+# qbittorrent
+torrents.egigoka.me {
+	reverse_proxy localhost:10000
+}
+
+# checking is caddy alive
+isup.egigoka.me {
+	respond "yep"
+}
+
+# nextcloud
+nextcloud.egigoka.me {
+	reverse_proxy localhost:56000
+}
+
+# static files in /etc/caddy/files under password
+files.egigoka.me {
+	basicauth {
+		egigoka PASSWORD_HASH_HERE
+	}
+	file_server browse {
+		root /etc/caddy/files
+	}
+}
+
+# cockpit
+cockpit.egigoka.me {
+	reverse_proxy localhost:9090
+}
+
+# bitwarden-rs
+bitwarden.egigoka.me {
+	encode gzip
+
+	# The negotiation endpoint is also proxied to Rocket
+	reverse_proxy /notifications/hub/negotiate 0.0.0.0:8525
+
+	# Notifications redirected to the websockets server
+	reverse_proxy /notifications/hub 0.0.0.0:3012
+
+	# Send all other traffic to the regular bitwarden_rs endpoint
+	reverse_proxy 0.0.0.0:8525
+}
+
+# syncthing
+syncthing.egigoka.me {
+	reverse_proxy localhost:8384
+}
+
+# syncthing mac
+syncthing-beyond.egigoka.me {
+	reverse_proxy 192.168.1.228:8384
+}
+
+### work
+
+#report orders today for bitrix24
+b-24-report-orders.egigoka.me {
+	reverse_proxy localhost:8000
+}
+
+kmkbluespice.egigoka.me {
+	reverse_proxy localhost:7854</code></p></pre>
+<h1>Plex Media Server:</h1>
+<a href="https://registry.hub.docker.com/r/plexinc/pms-docker">dockerhub</a>
+<pre class="filename">systemd .service:</pre>
+<pre class="ex1"><code>[Unit]
+Description=Plex Media Server Container
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker pull plexinc/pms-docker
+ExecStartPre=-/usr/bin/docker stop plex
+ExecStartPre=-/usr/bin/docker rm plex
+ExecStart=docker run \
+-a=stdin -a=stdout -a=stderr \
+--name plex \
+-p 32400:32400 \
+-e TZ="Asia/Yekaterinburg" \
+-e PLEX_CLAIM="claim-******************" \
+-v /mnt/btr/plex_home:/config \
+-v /mnt/btr/plex_home/transcoder_temp:/transcode \
+-v /mnt/btr:/data \
+plexinc/pms-docker
+
+[Install]
+WantedBy=multi-user.target</code></p></pre>
+
+
+
+</body>
+</html>
