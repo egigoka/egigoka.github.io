@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.1" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>commands.cli9 API documentation</title>
 <meta name="description" content="Internal module to work with commandline interfaces" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -31,12 +31,13 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with commandline interfaces
 &#34;&#34;&#34;
-__version__ = &#34;0.4.3&#34;
+__version__ = &#34;0.4.10&#34;
 
 
 class CLI:
     &#34;&#34;&#34;Class to work with commandline interfaces
     &#34;&#34;&#34;
+
     @staticmethod
     def get_y_n(question, default=None):
         &#34;&#34;&#34;Obtain answer yes or no from user in commandline.
@@ -44,32 +45,50 @@ class CLI:
         &lt;br&gt;`param answer` predefined string with answer, must be &#34;y&#34; or &#34;n&#34;
         &lt;br&gt;`return` boolean
         &#34;&#34;&#34;
-        def check_answer(string):  #pylint: disable=inconsistent-return-statements
+
+        def check_answer(string):  # pylint: disable=inconsistent-return-statements
             &#34;&#34;&#34;Check input from user or argument &#34;answer&#34;
             &lt;br&gt;`param string` input string, check answer for &#34;y&#34; or &#34;n&#34;, for other values return None
             &lt;br&gt;`return` True|False|None
             &#34;&#34;&#34;
+            from .keyboard9 import Keyboard
+            import thefuck.const
+
             if string is None:
                 return
-            if string.lower() == &#34;y&#34;:
+
+            if isinstance(string, thefuck.const._GenConst):
+                string_t = string._name
+                if string == thefuck.const.KEY_CTRL_C:
+                    raise KeyboardInterrupt
+            else:
+                string = string.lower()
+                string_t = Keyboard.translate_string(string)
+
+            if string != string_t:
+                print(&#34; &gt; &#34; + string_t, end=&#34;&#34;)
+                string = string_t
+
+            if string == &#34;y&#34;:
                 return True
-            if string.lower() == &#34;n&#34;:
+            if string == &#34;n&#34;:
                 return False
             return
 
         while True:
             print_str = f&#34;{question} (y/n)? &#34;
             if default:
-                print_str += &#34; default &#39;{default}&#39;&#34;
+                print_str += f&#34; default &#39;{default}&#39;&#34;
             try:
                 import thefuck.system
                 print(print_str, end=&#34;&#34;, flush=True)
                 input_str = thefuck.system.get_key()
-                print(input_str)
-            except:
+                print(input_str, end=&#34;&#34;)
+            except Exception:
                 input_str = input(print_str)
                 input_str = input_str.strip()
             output = check_answer(input_str)
+            print()
             if output is not None:
                 return output
             elif check_answer(default) is not None:
@@ -111,6 +130,7 @@ class CLI:
         &lt;br&gt;`return` string with &#39;stick&#39; in new position
         &#34;&#34;&#34;
         from .const9 import backslash
+        stick = None
         if cls.wait_update_pos == 0:
             stick = &#34;|&#34;
         elif cls.wait_update_pos == 1:
@@ -131,7 +151,7 @@ class CLI:
         &#34;&#34;&#34;Here must be realisation of progressbar
         &lt;br&gt;`param count` int|float current progress status value
         &lt;br&gt;`param finish` int|float finish progress value
-        &lt;br&gt;`param width_of_output` int width of progressbar, by default it&#39;s width of console
+        &lt;br&gt;`param width_of_output` int width of progressbar, by default its width of console
         &lt;br&gt;`return`
         &#34;&#34;&#34;
         raise NotImplementedError
@@ -149,7 +169,56 @@ class CLI:
             except EOFError:
                 print()
                 break
-        return &#34;\n&#34;.join(lines)</code></pre>
+        return &#34;\n&#34;.join(lines)
+
+    @staticmethod
+    def get_date(date_name: str, always_return_date: bool = False):
+        &#34;&#34;&#34;Gets date from user input.
+
+        :param date_name: string, name of date for user
+        :param always_return_date: bool, ask user a date until valid is entered
+        :return None if date is not entered and always_return_date is False
+        :return datetime.datetime if correct data is entered (time is 00:00:00)&#34;&#34;&#34;
+        from .time9 import Time
+        date = None
+        while date is None:
+            date_str = input(f&#34;Enter date of {date_name} like \&#34;{str(Time.datetime().day).zfill(2)}\&#34; &#34;
+                             f&#34;or with month \&#34;{str(Time.datetime().day).zfill(2)}&#34;
+                             f&#34;{str(Time.datetime().month).zfill(2)}\&#34; &#34;
+                             f&#34;or with year \&#34;{str(Time.datetime().day).zfill(2)}&#34;
+                             f&#34;{str(Time.datetime().month).zfill(2)}&#34;
+                             f&#34;{str(Time.datetime().year).zfill(4)}\&#34;: &#34;).strip()
+            if date_str:
+                date = Time.datetime()
+                try:
+                    day = int(date_str[:2])
+                except ValueError:
+                    day = date.day
+                try:
+                    month = int(date_str[2:4])
+                except ValueError:
+                    month = date.month
+                try:
+                    year = int(date_str[4:])
+                    if len(str(year)) == 2:
+                        year += 2000
+                except ValueError:
+                    year = date.year
+
+                try:
+                    date = date.replace(day=day, month=month, year=year, hour=0, minute=0, second=0, microsecond=0)
+                    break
+                except ValueError:
+                    print(&#34;Wrong date.&#34;)
+                    date = None
+            else:
+                if always_return_date:
+                    print(&#34;Please, enter date.&#34;)
+                    continue
+                else:
+                    break
+
+        return date</code></pre>
 </details>
 </section>
 <section>
@@ -173,6 +242,7 @@ class CLI:
 <pre><code class="python">class CLI:
     &#34;&#34;&#34;Class to work with commandline interfaces
     &#34;&#34;&#34;
+
     @staticmethod
     def get_y_n(question, default=None):
         &#34;&#34;&#34;Obtain answer yes or no from user in commandline.
@@ -180,32 +250,50 @@ class CLI:
         &lt;br&gt;`param answer` predefined string with answer, must be &#34;y&#34; or &#34;n&#34;
         &lt;br&gt;`return` boolean
         &#34;&#34;&#34;
-        def check_answer(string):  #pylint: disable=inconsistent-return-statements
+
+        def check_answer(string):  # pylint: disable=inconsistent-return-statements
             &#34;&#34;&#34;Check input from user or argument &#34;answer&#34;
             &lt;br&gt;`param string` input string, check answer for &#34;y&#34; or &#34;n&#34;, for other values return None
             &lt;br&gt;`return` True|False|None
             &#34;&#34;&#34;
+            from .keyboard9 import Keyboard
+            import thefuck.const
+
             if string is None:
                 return
-            if string.lower() == &#34;y&#34;:
+
+            if isinstance(string, thefuck.const._GenConst):
+                string_t = string._name
+                if string == thefuck.const.KEY_CTRL_C:
+                    raise KeyboardInterrupt
+            else:
+                string = string.lower()
+                string_t = Keyboard.translate_string(string)
+
+            if string != string_t:
+                print(&#34; &gt; &#34; + string_t, end=&#34;&#34;)
+                string = string_t
+
+            if string == &#34;y&#34;:
                 return True
-            if string.lower() == &#34;n&#34;:
+            if string == &#34;n&#34;:
                 return False
             return
 
         while True:
             print_str = f&#34;{question} (y/n)? &#34;
             if default:
-                print_str += &#34; default &#39;{default}&#39;&#34;
+                print_str += f&#34; default &#39;{default}&#39;&#34;
             try:
                 import thefuck.system
                 print(print_str, end=&#34;&#34;, flush=True)
                 input_str = thefuck.system.get_key()
-                print(input_str)
-            except:
+                print(input_str, end=&#34;&#34;)
+            except Exception:
                 input_str = input(print_str)
                 input_str = input_str.strip()
             output = check_answer(input_str)
+            print()
             if output is not None:
                 return output
             elif check_answer(default) is not None:
@@ -247,6 +335,7 @@ class CLI:
         &lt;br&gt;`return` string with &#39;stick&#39; in new position
         &#34;&#34;&#34;
         from .const9 import backslash
+        stick = None
         if cls.wait_update_pos == 0:
             stick = &#34;|&#34;
         elif cls.wait_update_pos == 1:
@@ -267,7 +356,7 @@ class CLI:
         &#34;&#34;&#34;Here must be realisation of progressbar
         &lt;br&gt;`param count` int|float current progress status value
         &lt;br&gt;`param finish` int|float finish progress value
-        &lt;br&gt;`param width_of_output` int width of progressbar, by default it&#39;s width of console
+        &lt;br&gt;`param width_of_output` int width of progressbar, by default its width of console
         &lt;br&gt;`return`
         &#34;&#34;&#34;
         raise NotImplementedError
@@ -285,7 +374,56 @@ class CLI:
             except EOFError:
                 print()
                 break
-        return &#34;\n&#34;.join(lines)</code></pre>
+        return &#34;\n&#34;.join(lines)
+
+    @staticmethod
+    def get_date(date_name: str, always_return_date: bool = False):
+        &#34;&#34;&#34;Gets date from user input.
+
+        :param date_name: string, name of date for user
+        :param always_return_date: bool, ask user a date until valid is entered
+        :return None if date is not entered and always_return_date is False
+        :return datetime.datetime if correct data is entered (time is 00:00:00)&#34;&#34;&#34;
+        from .time9 import Time
+        date = None
+        while date is None:
+            date_str = input(f&#34;Enter date of {date_name} like \&#34;{str(Time.datetime().day).zfill(2)}\&#34; &#34;
+                             f&#34;or with month \&#34;{str(Time.datetime().day).zfill(2)}&#34;
+                             f&#34;{str(Time.datetime().month).zfill(2)}\&#34; &#34;
+                             f&#34;or with year \&#34;{str(Time.datetime().day).zfill(2)}&#34;
+                             f&#34;{str(Time.datetime().month).zfill(2)}&#34;
+                             f&#34;{str(Time.datetime().year).zfill(4)}\&#34;: &#34;).strip()
+            if date_str:
+                date = Time.datetime()
+                try:
+                    day = int(date_str[:2])
+                except ValueError:
+                    day = date.day
+                try:
+                    month = int(date_str[2:4])
+                except ValueError:
+                    month = date.month
+                try:
+                    year = int(date_str[4:])
+                    if len(str(year)) == 2:
+                        year += 2000
+                except ValueError:
+                    year = date.year
+
+                try:
+                    date = date.replace(day=day, month=month, year=year, hour=0, minute=0, second=0, microsecond=0)
+                    break
+                except ValueError:
+                    print(&#34;Wrong date.&#34;)
+                    date = None
+            else:
+                if always_return_date:
+                    print(&#34;Please, enter date.&#34;)
+                    continue
+                else:
+                    break
+
+        return date</code></pre>
 </details>
 <h3>Class variables</h3>
 <dl>
@@ -296,6 +434,69 @@ class CLI:
 </dl>
 <h3>Static methods</h3>
 <dl>
+<dt id="commands.cli9.CLI.get_date"><code class="name flex">
+<span>def <span class="ident">get_date</span></span>(<span>date_name: str, always_return_date: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets date from user input.</p>
+<p>:param date_name: string, name of date for user
+:param always_return_date: bool, ask user a date until valid is entered
+:return None if date is not entered and always_return_date is False
+:return datetime.datetime if correct data is entered (time is 00:00:00)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def get_date(date_name: str, always_return_date: bool = False):
+    &#34;&#34;&#34;Gets date from user input.
+
+    :param date_name: string, name of date for user
+    :param always_return_date: bool, ask user a date until valid is entered
+    :return None if date is not entered and always_return_date is False
+    :return datetime.datetime if correct data is entered (time is 00:00:00)&#34;&#34;&#34;
+    from .time9 import Time
+    date = None
+    while date is None:
+        date_str = input(f&#34;Enter date of {date_name} like \&#34;{str(Time.datetime().day).zfill(2)}\&#34; &#34;
+                         f&#34;or with month \&#34;{str(Time.datetime().day).zfill(2)}&#34;
+                         f&#34;{str(Time.datetime().month).zfill(2)}\&#34; &#34;
+                         f&#34;or with year \&#34;{str(Time.datetime().day).zfill(2)}&#34;
+                         f&#34;{str(Time.datetime().month).zfill(2)}&#34;
+                         f&#34;{str(Time.datetime().year).zfill(4)}\&#34;: &#34;).strip()
+        if date_str:
+            date = Time.datetime()
+            try:
+                day = int(date_str[:2])
+            except ValueError:
+                day = date.day
+            try:
+                month = int(date_str[2:4])
+            except ValueError:
+                month = date.month
+            try:
+                year = int(date_str[4:])
+                if len(str(year)) == 2:
+                    year += 2000
+            except ValueError:
+                year = date.year
+
+            try:
+                date = date.replace(day=day, month=month, year=year, hour=0, minute=0, second=0, microsecond=0)
+                break
+            except ValueError:
+                print(&#34;Wrong date.&#34;)
+                date = None
+        else:
+            if always_return_date:
+                print(&#34;Please, enter date.&#34;)
+                continue
+            else:
+                break
+
+    return date</code></pre>
+</details>
+</dd>
 <dt id="commands.cli9.CLI.get_int"><code class="name flex">
 <span>def <span class="ident">get_int</span></span>(<span>question)</span>
 </code></dt>
@@ -365,32 +566,50 @@ def get_y_n(question, default=None):
     &lt;br&gt;`param answer` predefined string with answer, must be &#34;y&#34; or &#34;n&#34;
     &lt;br&gt;`return` boolean
     &#34;&#34;&#34;
-    def check_answer(string):  #pylint: disable=inconsistent-return-statements
+
+    def check_answer(string):  # pylint: disable=inconsistent-return-statements
         &#34;&#34;&#34;Check input from user or argument &#34;answer&#34;
         &lt;br&gt;`param string` input string, check answer for &#34;y&#34; or &#34;n&#34;, for other values return None
         &lt;br&gt;`return` True|False|None
         &#34;&#34;&#34;
+        from .keyboard9 import Keyboard
+        import thefuck.const
+
         if string is None:
             return
-        if string.lower() == &#34;y&#34;:
+
+        if isinstance(string, thefuck.const._GenConst):
+            string_t = string._name
+            if string == thefuck.const.KEY_CTRL_C:
+                raise KeyboardInterrupt
+        else:
+            string = string.lower()
+            string_t = Keyboard.translate_string(string)
+
+        if string != string_t:
+            print(&#34; &gt; &#34; + string_t, end=&#34;&#34;)
+            string = string_t
+
+        if string == &#34;y&#34;:
             return True
-        if string.lower() == &#34;n&#34;:
+        if string == &#34;n&#34;:
             return False
         return
 
     while True:
         print_str = f&#34;{question} (y/n)? &#34;
         if default:
-            print_str += &#34; default &#39;{default}&#39;&#34;
+            print_str += f&#34; default &#39;{default}&#39;&#34;
         try:
             import thefuck.system
             print(print_str, end=&#34;&#34;, flush=True)
             input_str = thefuck.system.get_key()
-            print(input_str)
-        except:
+            print(input_str, end=&#34;&#34;)
+        except Exception:
             input_str = input(print_str)
             input_str = input_str.strip()
         output = check_answer(input_str)
+        print()
         if output is not None:
             return output
         elif check_answer(default) is not None:
@@ -427,7 +646,7 @@ def multiline_input(question: str) -&gt; str:
 <div class="desc"><p>Here must be realisation of progressbar
 <br><code>param count</code> int|float current progress status value
 <br><code>param finish</code> int|float finish progress value
-<br><code>param width_of_output</code> int width of progressbar, by default it's width of console
+<br><code>param width_of_output</code> int width of progressbar, by default its width of console
 <br><code>return</code></p></div>
 <details class="source">
 <summary>
@@ -438,7 +657,7 @@ def progressbar(count, finish, width_of_output=None):
     &#34;&#34;&#34;Here must be realisation of progressbar
     &lt;br&gt;`param count` int|float current progress status value
     &lt;br&gt;`param finish` int|float finish progress value
-    &lt;br&gt;`param width_of_output` int width of progressbar, by default it&#39;s width of console
+    &lt;br&gt;`param width_of_output` int width of progressbar, by default its width of console
     &lt;br&gt;`return`
     &#34;&#34;&#34;
     raise NotImplementedError
@@ -466,6 +685,7 @@ def wait_update(cls, quiet=False):
     &lt;br&gt;`return` string with &#39;stick&#39; in new position
     &#34;&#34;&#34;
     from .const9 import backslash
+    stick = None
     if cls.wait_update_pos == 0:
         stick = &#34;|&#34;
     elif cls.wait_update_pos == 1:
@@ -503,6 +723,7 @@ def wait_update(cls, quiet=False):
 <li>
 <h4><code><a title="commands.cli9.CLI" href="#commands.cli9.CLI">CLI</a></code></h4>
 <ul class="two-column">
+<li><code><a title="commands.cli9.CLI.get_date" href="#commands.cli9.CLI.get_date">get_date</a></code></li>
 <li><code><a title="commands.cli9.CLI.get_int" href="#commands.cli9.CLI.get_int">get_int</a></code></li>
 <li><code><a title="commands.cli9.CLI.get_ints" href="#commands.cli9.CLI.get_ints">get_ints</a></code></li>
 <li><code><a title="commands.cli9.CLI.get_y_n" href="#commands.cli9.CLI.get_y_n">get_y_n</a></code></li>
@@ -518,7 +739,7 @@ def wait_update(cls, quiet=False):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

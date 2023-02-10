@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.1" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>commands.wget9 API documentation</title>
 <meta name="description" content="Internal module wrapper to cli wget" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -31,14 +31,15 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module wrapper to cli wget
 &#34;&#34;&#34;
-__version__ = &#34;0.2.15&#34;
+__version__ = &#34;0.3.1&#34;
 
 
 class Wget:  # pylint: disable=too-few-public-methods
     &#34;&#34;&#34;Class wrapper to cli wget
     &#34;&#34;&#34;
     @classmethod
-    def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;, timeout=None):  # pylint: disable=inconsistent-return-statements
+    def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;, timeout=None,
+                 debug=False):
         &#34;&#34;&#34;Wrapper to wget cli
         &lt;br&gt;`param url` string, url to some file
         &lt;br&gt;`param output_filename` string, path to filename
@@ -51,19 +52,23 @@ class Wget:  # pylint: disable=too-few-public-methods
         from .dir9 import Dir
         arguments = [
                     &#39;--header=&#34;Accept: text/html&#34;&#39;,
-                    &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; + \
+                    &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; +
                     &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;,
-                    #&#34;--no-verbose&#34;,
+                    #  &#34;--no-verbose&#34;,
                     f&#39;--base=&#34;{Network.get_protocol_of_url(url)+Network.get_domain_of_url(url)}&#34;&#39;
                     ]
         if no_check_certificate:
             arguments.insert(1, &#34;--no-check-certificate&#34;)
 
         commands = [wget_path, *arguments, url, &#34;-O&#34;, output_filename, &#34;--no-check-certificate&#34;]
+        if debug:
+            from .print9 import Print
+            Print.debug(commands)
         if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
             Dir.create(os.path.split(output_filename)[0])
         try:
-            output = Console.get_output(commands, print_std=not quiet, auto_disable_py_buffering=False, timeout=timeout).strip(&#34; \r\n&#34;)
+            output = Console.get_output(commands, print_std=not quiet, auto_disable_py_buffering=False,
+                                        timeout=timeout, debug=debug).strip(&#34; \r\n&#34;)
             return output
         except FileNotFoundError as exception:
             if wget_path == &#34;wget&#34;:
@@ -72,7 +77,8 @@ class Wget:  # pylint: disable=too-few-public-methods
                 wget_exec_name = &#34;wget&#34;
                 if OS.windows:
                     wget_exec_name += &#34;.exe&#34;
-                return cls.download(url=url, output_filename=output_filename, quiet=quiet, no_check_certificate=no_check_certificate,
+                return cls.download(url=url, output_filename=output_filename, quiet=quiet,
+                                    no_check_certificate=no_check_certificate,
                                     wget_path=Path.combine(Path.commands(), &#34;res&#34;, wget_exec_name))
             raise OSError(exception, &#34;install wget&#34;)
         # Another way to fix blocks by creating ~/.wgetrc file https://stackoverflow.com/a/34166756</code></pre>
@@ -100,7 +106,8 @@ class Wget:  # pylint: disable=too-few-public-methods
     &#34;&#34;&#34;Class wrapper to cli wget
     &#34;&#34;&#34;
     @classmethod
-    def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;, timeout=None):  # pylint: disable=inconsistent-return-statements
+    def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;, timeout=None,
+                 debug=False):
         &#34;&#34;&#34;Wrapper to wget cli
         &lt;br&gt;`param url` string, url to some file
         &lt;br&gt;`param output_filename` string, path to filename
@@ -113,19 +120,23 @@ class Wget:  # pylint: disable=too-few-public-methods
         from .dir9 import Dir
         arguments = [
                     &#39;--header=&#34;Accept: text/html&#34;&#39;,
-                    &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; + \
+                    &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; +
                     &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;,
-                    #&#34;--no-verbose&#34;,
+                    #  &#34;--no-verbose&#34;,
                     f&#39;--base=&#34;{Network.get_protocol_of_url(url)+Network.get_domain_of_url(url)}&#34;&#39;
                     ]
         if no_check_certificate:
             arguments.insert(1, &#34;--no-check-certificate&#34;)
 
         commands = [wget_path, *arguments, url, &#34;-O&#34;, output_filename, &#34;--no-check-certificate&#34;]
+        if debug:
+            from .print9 import Print
+            Print.debug(commands)
         if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
             Dir.create(os.path.split(output_filename)[0])
         try:
-            output = Console.get_output(commands, print_std=not quiet, auto_disable_py_buffering=False, timeout=timeout).strip(&#34; \r\n&#34;)
+            output = Console.get_output(commands, print_std=not quiet, auto_disable_py_buffering=False,
+                                        timeout=timeout, debug=debug).strip(&#34; \r\n&#34;)
             return output
         except FileNotFoundError as exception:
             if wget_path == &#34;wget&#34;:
@@ -134,14 +145,16 @@ class Wget:  # pylint: disable=too-few-public-methods
                 wget_exec_name = &#34;wget&#34;
                 if OS.windows:
                     wget_exec_name += &#34;.exe&#34;
-                return cls.download(url=url, output_filename=output_filename, quiet=quiet, no_check_certificate=no_check_certificate,
+                return cls.download(url=url, output_filename=output_filename, quiet=quiet,
+                                    no_check_certificate=no_check_certificate,
                                     wget_path=Path.combine(Path.commands(), &#34;res&#34;, wget_exec_name))
-            raise OSError(exception, &#34;install wget&#34;)</code></pre>
+            raise OSError(exception, &#34;install wget&#34;)
+        # Another way to fix blocks by creating ~/.wgetrc file https://stackoverflow.com/a/34166756</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
 <dt id="commands.wget9.Wget.download"><code class="name flex">
-<span>def <span class="ident">download</span></span>(<span>url, output_filename, quiet=False, no_check_certificate=False, wget_path='wget', timeout=None)</span>
+<span>def <span class="ident">download</span></span>(<span>url, output_filename, quiet=False, no_check_certificate=False, wget_path='wget', timeout=None, debug=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Wrapper to wget cli
@@ -154,7 +167,8 @@ class Wget:  # pylint: disable=too-few-public-methods
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;, timeout=None):  # pylint: disable=inconsistent-return-statements
+def download(cls, url, output_filename, quiet=False, no_check_certificate=False, wget_path=&#34;wget&#34;, timeout=None,
+             debug=False):
     &#34;&#34;&#34;Wrapper to wget cli
     &lt;br&gt;`param url` string, url to some file
     &lt;br&gt;`param output_filename` string, path to filename
@@ -167,19 +181,23 @@ def download(cls, url, output_filename, quiet=False, no_check_certificate=False,
     from .dir9 import Dir
     arguments = [
                 &#39;--header=&#34;Accept: text/html&#34;&#39;,
-                &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; + \
+                &#39;--user-agent=&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) &#39; +
                 &#39;AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3167.0 Safari/537.36&#34;&#39;,
-                #&#34;--no-verbose&#34;,
+                #  &#34;--no-verbose&#34;,
                 f&#39;--base=&#34;{Network.get_protocol_of_url(url)+Network.get_domain_of_url(url)}&#34;&#39;
                 ]
     if no_check_certificate:
         arguments.insert(1, &#34;--no-check-certificate&#34;)
 
     commands = [wget_path, *arguments, url, &#34;-O&#34;, output_filename, &#34;--no-check-certificate&#34;]
+    if debug:
+        from .print9 import Print
+        Print.debug(commands)
     if not Dir.exist(os.path.split(output_filename)[0]) and os.path.split(output_filename)[0]:
         Dir.create(os.path.split(output_filename)[0])
     try:
-        output = Console.get_output(commands, print_std=not quiet, auto_disable_py_buffering=False, timeout=timeout).strip(&#34; \r\n&#34;)
+        output = Console.get_output(commands, print_std=not quiet, auto_disable_py_buffering=False,
+                                    timeout=timeout, debug=debug).strip(&#34; \r\n&#34;)
         return output
     except FileNotFoundError as exception:
         if wget_path == &#34;wget&#34;:
@@ -188,9 +206,11 @@ def download(cls, url, output_filename, quiet=False, no_check_certificate=False,
             wget_exec_name = &#34;wget&#34;
             if OS.windows:
                 wget_exec_name += &#34;.exe&#34;
-            return cls.download(url=url, output_filename=output_filename, quiet=quiet, no_check_certificate=no_check_certificate,
+            return cls.download(url=url, output_filename=output_filename, quiet=quiet,
+                                no_check_certificate=no_check_certificate,
                                 wget_path=Path.combine(Path.commands(), &#34;res&#34;, wget_exec_name))
-        raise OSError(exception, &#34;install wget&#34;)</code></pre>
+        raise OSError(exception, &#34;install wget&#34;)
+    # Another way to fix blocks by creating ~/.wgetrc file https://stackoverflow.com/a/34166756</code></pre>
 </details>
 </dd>
 </dl>
@@ -223,7 +243,7 @@ def download(cls, url, output_filename, quiet=False, no_check_certificate=False,
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

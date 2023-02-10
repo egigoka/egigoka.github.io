@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.1" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>commands.time9 API documentation</title>
 <meta name="description" content="Internal module to work with time" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -31,14 +31,14 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with time
 &#34;&#34;&#34;
-__version__ = &#34;1.0.0&#34;
+__version__ = &#34;1.1.0&#34;
 
 
 class Time:
     &#34;&#34;&#34;Class to work with time
     &#34;&#34;&#34;
     @staticmethod
-    def _lp2(string, length=2):
+    def __lp2(string, length=2):
         &#34;&#34;&#34;Internal alias to Str.leftpad
         &#34;&#34;&#34;
         from .str9 import Str
@@ -51,6 +51,33 @@ class Time:
         &#34;&#34;&#34;
         import time
         return time.time()
+    
+    @staticmethod
+    def datetime(year=None, month=None, day=None, hour=None, minute=None, second=None, microsecond=None, tzinfo=None,
+                 fold=None):
+        import datetime
+        now = datetime.datetime.now()
+        args = {}
+        if year is not None:
+            args[&#34;year&#34;] = year
+        if month is not None:
+            args[&#34;month&#34;] = month
+        if day is not None:
+            args[&#34;day&#34;] = day
+        if hour is not None:
+            args[&#34;hour&#34;] = hour
+        if minute is not None:
+            args[&#34;minute&#34;] = minute
+        if second is not None:
+            args[&#34;second&#34;] = second
+        if microsecond is not None:
+            args[&#34;microsecond&#34;] = microsecond
+        if tzinfo is not None:
+            args[&#34;tzinfo&#34;] = tzinfo
+        if fold is not None:
+            args[&#34;fold&#34;] = fold
+        datetime_datetime = now.replace(**args)
+        return datetime_datetime
 
     @staticmethod
     def timestamp_to_datetime(timestamp):
@@ -91,9 +118,9 @@ class Time:
             time = cls.timestamp_to_datetime(custom_time)
         else:
             time = datetime.datetime.now()
-        time = cls._lp2(time.year) + &#34;.&#34; + cls._lp2(time.month) + &#34;.&#34; + cls._lp2(time.day) + &#34;_at_&#34; + \
-            cls._lp2(time.hour) + &#34;.&#34; + cls._lp2(time.minute) + &#34;.&#34; + cls._lp2(time.second) + &#34;.&#34; + \
-            cls._lp2(time.microsecond, 6)
+        time = cls.__lp2(time.year) + &#34;.&#34; + cls.__lp2(time.month) + &#34;.&#34; + cls.__lp2(time.day) + &#34;_at_&#34; + \
+            cls.__lp2(time.hour) + &#34;.&#34; + cls.__lp2(time.minute) + &#34;.&#34; + cls.__lp2(time.second) + &#34;.&#34; + \
+            cls.__lp2(time.microsecond, 6)
         return time
 
     @staticmethod
@@ -124,7 +151,7 @@ class Time:
 
     @classmethod
     def sleep(cls, seconds, verbose=False, check_per_sec=10):
-        &#34;&#34;&#34;Function to idle. If &#39;seconds more, than 1, running Time._timer. Otherwise run time.sleep and print time
+        &#34;&#34;&#34;Function to idle. If &#39;seconds&#39; more, than 1, running Time._timer. Otherwise, run time.sleep and print time
         left.
         &lt;br&gt;`param seconds` int|float, how long sleep
         &lt;br&gt;`param verbose` boolean, print remaining time
@@ -180,7 +207,7 @@ class Time:
     &#34;&#34;&#34;Class to work with time
     &#34;&#34;&#34;
     @staticmethod
-    def _lp2(string, length=2):
+    def __lp2(string, length=2):
         &#34;&#34;&#34;Internal alias to Str.leftpad
         &#34;&#34;&#34;
         from .str9 import Str
@@ -193,6 +220,33 @@ class Time:
         &#34;&#34;&#34;
         import time
         return time.time()
+    
+    @staticmethod
+    def datetime(year=None, month=None, day=None, hour=None, minute=None, second=None, microsecond=None, tzinfo=None,
+                 fold=None):
+        import datetime
+        now = datetime.datetime.now()
+        args = {}
+        if year is not None:
+            args[&#34;year&#34;] = year
+        if month is not None:
+            args[&#34;month&#34;] = month
+        if day is not None:
+            args[&#34;day&#34;] = day
+        if hour is not None:
+            args[&#34;hour&#34;] = hour
+        if minute is not None:
+            args[&#34;minute&#34;] = minute
+        if second is not None:
+            args[&#34;second&#34;] = second
+        if microsecond is not None:
+            args[&#34;microsecond&#34;] = microsecond
+        if tzinfo is not None:
+            args[&#34;tzinfo&#34;] = tzinfo
+        if fold is not None:
+            args[&#34;fold&#34;] = fold
+        datetime_datetime = now.replace(**args)
+        return datetime_datetime
 
     @staticmethod
     def timestamp_to_datetime(timestamp):
@@ -233,9 +287,9 @@ class Time:
             time = cls.timestamp_to_datetime(custom_time)
         else:
             time = datetime.datetime.now()
-        time = cls._lp2(time.year) + &#34;.&#34; + cls._lp2(time.month) + &#34;.&#34; + cls._lp2(time.day) + &#34;_at_&#34; + \
-            cls._lp2(time.hour) + &#34;.&#34; + cls._lp2(time.minute) + &#34;.&#34; + cls._lp2(time.second) + &#34;.&#34; + \
-            cls._lp2(time.microsecond, 6)
+        time = cls.__lp2(time.year) + &#34;.&#34; + cls.__lp2(time.month) + &#34;.&#34; + cls.__lp2(time.day) + &#34;_at_&#34; + \
+            cls.__lp2(time.hour) + &#34;.&#34; + cls.__lp2(time.minute) + &#34;.&#34; + cls.__lp2(time.second) + &#34;.&#34; + \
+            cls.__lp2(time.microsecond, 6)
         return time
 
     @staticmethod
@@ -266,7 +320,7 @@ class Time:
 
     @classmethod
     def sleep(cls, seconds, verbose=False, check_per_sec=10):
-        &#34;&#34;&#34;Function to idle. If &#39;seconds more, than 1, running Time._timer. Otherwise run time.sleep and print time
+        &#34;&#34;&#34;Function to idle. If &#39;seconds&#39; more, than 1, running Time._timer. Otherwise, run time.sleep and print time
         left.
         &lt;br&gt;`param seconds` int|float, how long sleep
         &lt;br&gt;`param verbose` boolean, print remaining time
@@ -298,6 +352,43 @@ class Time:
 </details>
 <h3>Static methods</h3>
 <dl>
+<dt id="commands.time9.Time.datetime"><code class="name flex">
+<span>def <span class="ident">datetime</span></span>(<span>year=None, month=None, day=None, hour=None, minute=None, second=None, microsecond=None, tzinfo=None, fold=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def datetime(year=None, month=None, day=None, hour=None, minute=None, second=None, microsecond=None, tzinfo=None,
+             fold=None):
+    import datetime
+    now = datetime.datetime.now()
+    args = {}
+    if year is not None:
+        args[&#34;year&#34;] = year
+    if month is not None:
+        args[&#34;month&#34;] = month
+    if day is not None:
+        args[&#34;day&#34;] = day
+    if hour is not None:
+        args[&#34;hour&#34;] = hour
+    if minute is not None:
+        args[&#34;minute&#34;] = minute
+    if second is not None:
+        args[&#34;second&#34;] = second
+    if microsecond is not None:
+        args[&#34;microsecond&#34;] = microsecond
+    if tzinfo is not None:
+        args[&#34;tzinfo&#34;] = tzinfo
+    if fold is not None:
+        args[&#34;fold&#34;] = fold
+    datetime_datetime = now.replace(**args)
+    return datetime_datetime</code></pre>
+</details>
+</dd>
 <dt id="commands.time9.Time.datetime_to_timestamp"><code class="name flex">
 <span>def <span class="ident">datetime_to_timestamp</span></span>(<span>datetime_object)</span>
 </code></dt>
@@ -368,9 +459,9 @@ def dotted(cls, custom_time=None):
         time = cls.timestamp_to_datetime(custom_time)
     else:
         time = datetime.datetime.now()
-    time = cls._lp2(time.year) + &#34;.&#34; + cls._lp2(time.month) + &#34;.&#34; + cls._lp2(time.day) + &#34;_at_&#34; + \
-        cls._lp2(time.hour) + &#34;.&#34; + cls._lp2(time.minute) + &#34;.&#34; + cls._lp2(time.second) + &#34;.&#34; + \
-        cls._lp2(time.microsecond, 6)
+    time = cls.__lp2(time.year) + &#34;.&#34; + cls.__lp2(time.month) + &#34;.&#34; + cls.__lp2(time.day) + &#34;_at_&#34; + \
+        cls.__lp2(time.hour) + &#34;.&#34; + cls.__lp2(time.minute) + &#34;.&#34; + cls.__lp2(time.second) + &#34;.&#34; + \
+        cls.__lp2(time.microsecond, 6)
     return time</code></pre>
 </details>
 </dd>
@@ -378,7 +469,7 @@ def dotted(cls, custom_time=None):
 <span>def <span class="ident">sleep</span></span>(<span>seconds, verbose=False, check_per_sec=10)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Function to idle. If 'seconds more, than 1, running Time._timer. Otherwise run time.sleep and print time
+<div class="desc"><p>Function to idle. If 'seconds' more, than 1, running Time._timer. Otherwise, run time.sleep and print time
 left.
 <br><code>param seconds</code> int|float, how long sleep
 <br><code>param verbose</code> boolean, print remaining time
@@ -390,7 +481,7 @@ left.
 </summary>
 <pre><code class="python">@classmethod
 def sleep(cls, seconds, verbose=False, check_per_sec=10):
-    &#34;&#34;&#34;Function to idle. If &#39;seconds more, than 1, running Time._timer. Otherwise run time.sleep and print time
+    &#34;&#34;&#34;Function to idle. If &#39;seconds&#39; more, than 1, running Time._timer. Otherwise, run time.sleep and print time
     left.
     &lt;br&gt;`param seconds` int|float, how long sleep
     &lt;br&gt;`param verbose` boolean, print remaining time
@@ -473,6 +564,7 @@ def timestamp_to_datetime(timestamp):
 <li>
 <h4><code><a title="commands.time9.Time" href="#commands.time9.Time">Time</a></code></h4>
 <ul class="">
+<li><code><a title="commands.time9.Time.datetime" href="#commands.time9.Time.datetime">datetime</a></code></li>
 <li><code><a title="commands.time9.Time.datetime_to_timestamp" href="#commands.time9.Time.datetime_to_timestamp">datetime_to_timestamp</a></code></li>
 <li><code><a title="commands.time9.Time.delta" href="#commands.time9.Time.delta">delta</a></code></li>
 <li><code><a title="commands.time9.Time.dotted" href="#commands.time9.Time.dotted">dotted</a></code></li>
@@ -487,7 +579,7 @@ def timestamp_to_datetime(timestamp):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

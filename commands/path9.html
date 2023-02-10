@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.1" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>commands.path9 API documentation</title>
 <meta name="description" content="Internal module with functions to work with path strings" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -35,7 +35,7 @@ __version__ = &#34;2.6.1&#34;
 
 
 class Path:
-    &#34;&#34;&#34;Class with funtions to work with path strings
+    &#34;&#34;&#34;Class with functions to work with path strings
     &#34;&#34;&#34;
     @staticmethod
     def full(path):
@@ -71,11 +71,10 @@ class Path:
         return os.getcwd()
 
     @classmethod
-    def combine(cls, path_first_path, *paths, debug=False):  # todo add support for \\? on Windows
+    def combine(cls, path_first_path, *paths):  # todo add support for \\? on Windows
         &#34;&#34;&#34;Create full path string from strings
         &lt;br&gt;`param path_first_path` string, first part of path
         &lt;br&gt;`param paths` strings, path shards to create full path string
-        &lt;br&gt;`param debug` boolean, print all movements
         &lt;br&gt;`return` string, path that can be used in shell or whatever
         &#34;&#34;&#34;
         import os
@@ -110,13 +109,12 @@ class Path:
         &#34;&#34;&#34;&lt;br&gt;`return` string, home directory of user&#34;&#34;&#34;
         from .os9 import OS
         from .console9 import Console
-        from .const9 import newline, newline2
         from .str9 import Str
 
         command = &#34;echo $HOME&#34;
         if OS.windows:
             command = &#34;echo %userprofile%&#34;
-        path = Console.get_output(command, pureshell=True)
+        path = Console.get_output(command, pure_shell=True)
         path = Str.nl(path)[0]
         return path
 
@@ -188,13 +186,13 @@ class Path:
 <span>class <span class="ident">Path</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Class with funtions to work with path strings</p></div>
+<div class="desc"><p>Class with functions to work with path strings</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Path:
-    &#34;&#34;&#34;Class with funtions to work with path strings
+    &#34;&#34;&#34;Class with functions to work with path strings
     &#34;&#34;&#34;
     @staticmethod
     def full(path):
@@ -230,11 +228,10 @@ class Path:
         return os.getcwd()
 
     @classmethod
-    def combine(cls, path_first_path, *paths, debug=False):  # todo add support for \\? on Windows
+    def combine(cls, path_first_path, *paths):  # todo add support for \\? on Windows
         &#34;&#34;&#34;Create full path string from strings
         &lt;br&gt;`param path_first_path` string, first part of path
         &lt;br&gt;`param paths` strings, path shards to create full path string
-        &lt;br&gt;`param debug` boolean, print all movements
         &lt;br&gt;`return` string, path that can be used in shell or whatever
         &#34;&#34;&#34;
         import os
@@ -269,13 +266,12 @@ class Path:
         &#34;&#34;&#34;&lt;br&gt;`return` string, home directory of user&#34;&#34;&#34;
         from .os9 import OS
         from .console9 import Console
-        from .const9 import newline, newline2
         from .str9 import Str
 
         command = &#34;echo $HOME&#34;
         if OS.windows:
             command = &#34;echo %userprofile%&#34;
-        path = Console.get_output(command, pureshell=True)
+        path = Console.get_output(command, pure_shell=True)
         path = Str.nl(path)[0]
         return path
 
@@ -360,24 +356,22 @@ def add_before_extension(filepath, infix):
 </details>
 </dd>
 <dt id="commands.path9.Path.combine"><code class="name flex">
-<span>def <span class="ident">combine</span></span>(<span>path_first_path, *paths, debug=False)</span>
+<span>def <span class="ident">combine</span></span>(<span>path_first_path, *paths)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create full path string from strings
 <br><code>param path_first_path</code> string, first part of path
 <br><code>param paths</code> strings, path shards to create full path string
-<br><code>param debug</code> boolean, print all movements
 <br><code>return</code> string, path that can be used in shell or whatever</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def combine(cls, path_first_path, *paths, debug=False):  # todo add support for \\? on Windows
+def combine(cls, path_first_path, *paths):  # todo add support for \\? on Windows
     &#34;&#34;&#34;Create full path string from strings
     &lt;br&gt;`param path_first_path` string, first part of path
     &lt;br&gt;`param paths` strings, path shards to create full path string
-    &lt;br&gt;`param debug` boolean, print all movements
     &lt;br&gt;`return` string, path that can be used in shell or whatever
     &#34;&#34;&#34;
     import os
@@ -501,13 +495,12 @@ def home():
     &#34;&#34;&#34;&lt;br&gt;`return` string, home directory of user&#34;&#34;&#34;
     from .os9 import OS
     from .console9 import Console
-    from .const9 import newline, newline2
     from .str9 import Str
 
     command = &#34;echo $HOME&#34;
     if OS.windows:
         command = &#34;echo %userprofile%&#34;
-    path = Console.get_output(command, pureshell=True)
+    path = Console.get_output(command, pure_shell=True)
     path = Str.nl(path)[0]
     return path</code></pre>
 </details>
@@ -648,7 +641,7 @@ def working():
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

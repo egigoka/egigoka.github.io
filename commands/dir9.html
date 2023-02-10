@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.1" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>commands.dir9 API documentation</title>
 <meta name="description" content="Internal module to work with directories" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -38,14 +38,14 @@ class Dir:
     &#34;&#34;&#34;Class to work with directories
     &#34;&#34;&#34;
     @staticmethod
-    def create(dirname):
+    def create(dir_name):
         &#34;&#34;&#34;Creates dir if it doesn&#39;t exist
-        &lt;br&gt;`param dirname` string with path to new dir
+        &lt;br&gt;`param dir_name` string with path to new dir
         &lt;br&gt;`return`
         &#34;&#34;&#34;
         import os
-        if not os.path.isdir(dirname):
-            os.makedirs(dirname)
+        if not os.path.isdir(dir_name):
+            os.makedirs(dir_name)
 
     @staticmethod
     def list_of_entries(path):
@@ -69,13 +69,12 @@ class Dir:
     @classmethod
     def number_of_files(cls, path, quiet=True):
         &#34;&#34;&#34;
-        &lt;br&gt;`param path` string with paht
+        &lt;br&gt;`param path` string with path
         &lt;br&gt;`param quiet` suppress print to console
         &lt;br&gt;`return` int count of files in directory
         &#34;&#34;&#34;
         import os
-        from .dir9 import Dir
-        if not Dir.exist(path):
+        if not cls.exist(path):
             raise FileNotFoundError(f&#34;Directory &#39;{path}&#39; not found&#34;)
         cnt = 0
         for root, dirs, files in os.walk(path):
@@ -102,8 +101,8 @@ class Dir:
                     print(filename, &#34;renamed to&#34;, final_name)
 
     @classmethod
-    def delete(cls, path, cleanup=False, remove_readonly=True, no_sleep=False, 
-               skip_PermissionError=False, quiet_PermissionError=False):
+    def delete(cls, path, cleanup=False, remove_readonly=True, no_sleep=False,
+               skip_permission_error=False, quiet_permission_error=False):
         &#34;&#34;&#34;Remove directory
         &lt;br&gt;`param path` string
         &lt;br&gt;`param cleanup` boolean, True doesn&#39;t delete &#34;path&#34; folder, only content
@@ -112,8 +111,8 @@ class Dir:
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
         import os
-        if quiet_PermissionError:
-            skip_PermissionError = True
+        if quiet_permission_error:
+            skip_permission_error = True
         for root, dirs, files in os.walk(path):  # , topdown=False):
             for name in files:
                 file_path = os.path.join(root, name)
@@ -123,7 +122,7 @@ class Dir:
                     except PermissionError:
                         # let&#39;s just assume that it&#39;s read-only and chmod it.
                         import stat
-                        if not skip_PermissionError:
+                        if not skip_permission_error:
                             os.chmod(file_path, stat.S_IWRITE)
                             os.remove(file_path)
                         else:
@@ -131,20 +130,20 @@ class Dir:
                                 os.chmod(file_path, stat.S_IWRITE)
                                 os.remove(file_path)
                             except PermissionError as err:
-                                if not quiet_PermissionError:
+                                if not quiet_permission_error:
                                     print(err)
                 else:
-                    if not skip_PermissionError:
+                    if not skip_permission_error:
                         os.remove(file_path)  # unsafe
                     else:
                         try:
                             os.remove(file_path)  # unsafe
                         except PermissionError as err:
-                            if not quiet_PermissionError:
+                            if not quiet_permission_error:
                                 print(err)
             for name in dirs:
                 cls.delete(os.path.join(root, name), cleanup, remove_readonly, no_sleep,
-                           skip_PermissionError, quiet_PermissionError)  # recursion
+                           skip_permission_error, quiet_permission_error)  # recursion
         if not cleanup:
             try:
                 
@@ -155,30 +154,29 @@ class Dir:
                     time.sleep(0.05)
                 os.rmdir(path)  # unsafe
 
-
     @classmethod
-    def cleanup(cls, path, skip_PermissionError=False, quiet_PermissionError=False):
+    def cleanup(cls, path, skip_permission_error=False, quiet_permission_error=False):
         &#34;&#34;&#34;Removes all content in directory
         &lt;br&gt;`param path` string
         &lt;br&gt;`param skip_PermissionError` boolean, if True, skips files with denied permissions to read|write
         &lt;br&gt;`param quiet_PermissionError` boolean, suppress console output when skip file by PermissionError
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
-        if quiet_PermissionError:
-            skip_PermissionError = True
-        cls.delete(path, cleanup=True, 
-                   skip_PermissionError=skip_PermissionError, quiet_PermissionError=quiet_PermissionError)
+        if quiet_permission_error:
+            skip_permission_error = True
+        cls.delete(path, cleanup=True,
+                   skip_permission_error=skip_permission_error, quiet_permission_error=quiet_permission_error)
 
     @classmethod
     def copy(cls, src, dst, symlinks=False, ignore=None,
-             skip_PermissionError=False, quiet_PermissionError=False,
-             skip_FileNotFoundError=False, quiet_FileNotFoundError=False,
-             skip_OSError=False, quiet_OSError=False,
+             skip_permission_error=False, quiet_permission_error=False,
+             skip_file_not_found_error=False, quiet_file_not_found_error=False,
+             skip_os_error=False, quiet_os_error=False,
              verbose=False):
         &#34;&#34;&#34;Same behavior as shutil.copytree, but can copy into existing directory
         https`//stackoverflow.com/a/22331852/6519078
         &lt;br&gt;`param src` string, source directory to copy
-        &lt;br&gt;`param dst` stirng, destination
+        &lt;br&gt;`param dst` string, destination
         &lt;br&gt;`param symlinks` boolean, following symlinks
         &lt;br&gt;`param ignore` You can define any function with any name you like before calling copytree function. This
         function (which could also be a lambda expression) takes two arguments` a directory name and the files in it, it
@@ -190,8 +188,8 @@ class Dir:
         import os
         import shutil
         import stat
-        if quiet_PermissionError:
-            skip_PermissionError = True
+        if quiet_permission_error:
+            skip_permission_error = True
         if not os.path.exists(dst):
             if verbose:
                 print(f&#34;creating dir {dst}&#34;)
@@ -212,13 +210,14 @@ class Dir:
                     st = os.lstat(s)
                     mode = stat.S_IMODE(st.st_mode)
                     os.lchmod(d, mode)
-                except:
+                except Exception:
                     pass  # lchmod not available
             elif os.path.isdir(s):
                 cls.copy(src=s, dst=d, symlinks=symlinks, ignore=ignore,
-                         skip_PermissionError=skip_PermissionError, quiet_PermissionError=quiet_PermissionError,
-                         skip_FileNotFoundError=skip_FileNotFoundError, quiet_FileNotFoundError=quiet_FileNotFoundError,
-                         skip_OSError=skip_OSError, quiet_OSError=quiet_OSError,
+                         skip_permission_error=skip_permission_error, quiet_permission_error=quiet_permission_error,
+                         skip_file_not_found_error=skip_file_not_found_error,
+                         quiet_file_not_found_error=quiet_file_not_found_error,
+                         skip_os_error=skip_os_error, quiet_os_error=quiet_os_error,
                          verbose=verbose)
             else:
                 try:
@@ -226,27 +225,27 @@ class Dir:
                         print(f&#34;copying {s} to {d}&#34;)
                     shutil.copy2(s, d)
                 except PermissionError as err:
-                    if not quiet_PermissionError:
+                    if not quiet_permission_error:
                         print(err)
-                    if not skip_PermissionError:
+                    if not skip_permission_error:
                         raise
                 except FileNotFoundError as err:
-                    if not quiet_FileNotFoundError:
+                    if not quiet_file_not_found_error:
                         print(err)
-                    if not skip_FileNotFoundError:
+                    if not skip_file_not_found_error:
                         raise
                 except OSError as err:
-                    if not quiet_OSError:
+                    if not quiet_os_error:
                         print(err)
-                    if not skip_OSError:
+                    if not skip_os_error:
                         raise
 
     @classmethod
     def move(cls, src_, dst_, symlinks_=False, ignore_=None,
-             skip_PermissionError=False, quiet_PermissionError=False, verbose=False):
-        &#34;&#34;&#34;Copies folder, than delete source folder
+             skip_permission_error=False, quiet_permission_error=False, verbose=False):
+        &#34;&#34;&#34;Copies folder, then delete source folder
         &lt;br&gt;`param src` string, source directory to copy
-        &lt;br&gt;`param dst` stirng, destination
+        &lt;br&gt;`param dst` string, destination
         &lt;br&gt;`param symlinks` boolean, following symlinks
         &lt;br&gt;`param ignore` You can define any function with any name you like before calling copytree function. This
         function (which could also be a lambda expression) takes two arguments` a directory name and the files in it, it
@@ -255,11 +254,11 @@ class Dir:
         &lt;br&gt;`param quiet_PermissionError` boolean, suppress console output when skip file by PermissionError
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
-        if quiet_PermissionError:
-            skip_PermissionError = True
+        if quiet_permission_error:
+            skip_permission_error = True
         cls.copy(src=src_, dst=dst_, symlinks=symlinks_, ignore=ignore_,
-                 skip_PermissionError=skip_PermissionError,
-                 quiet_PermissionError=quiet_PermissionError, verbose=verbose)
+                 skip_permission_error=skip_permission_error,
+                 quiet_permission_error=quiet_permission_error, verbose=verbose)
 
         cls.delete(src_)
 
@@ -322,14 +321,14 @@ class Dir:
     &#34;&#34;&#34;Class to work with directories
     &#34;&#34;&#34;
     @staticmethod
-    def create(dirname):
+    def create(dir_name):
         &#34;&#34;&#34;Creates dir if it doesn&#39;t exist
-        &lt;br&gt;`param dirname` string with path to new dir
+        &lt;br&gt;`param dir_name` string with path to new dir
         &lt;br&gt;`return`
         &#34;&#34;&#34;
         import os
-        if not os.path.isdir(dirname):
-            os.makedirs(dirname)
+        if not os.path.isdir(dir_name):
+            os.makedirs(dir_name)
 
     @staticmethod
     def list_of_entries(path):
@@ -353,13 +352,12 @@ class Dir:
     @classmethod
     def number_of_files(cls, path, quiet=True):
         &#34;&#34;&#34;
-        &lt;br&gt;`param path` string with paht
+        &lt;br&gt;`param path` string with path
         &lt;br&gt;`param quiet` suppress print to console
         &lt;br&gt;`return` int count of files in directory
         &#34;&#34;&#34;
         import os
-        from .dir9 import Dir
-        if not Dir.exist(path):
+        if not cls.exist(path):
             raise FileNotFoundError(f&#34;Directory &#39;{path}&#39; not found&#34;)
         cnt = 0
         for root, dirs, files in os.walk(path):
@@ -386,8 +384,8 @@ class Dir:
                     print(filename, &#34;renamed to&#34;, final_name)
 
     @classmethod
-    def delete(cls, path, cleanup=False, remove_readonly=True, no_sleep=False, 
-               skip_PermissionError=False, quiet_PermissionError=False):
+    def delete(cls, path, cleanup=False, remove_readonly=True, no_sleep=False,
+               skip_permission_error=False, quiet_permission_error=False):
         &#34;&#34;&#34;Remove directory
         &lt;br&gt;`param path` string
         &lt;br&gt;`param cleanup` boolean, True doesn&#39;t delete &#34;path&#34; folder, only content
@@ -396,8 +394,8 @@ class Dir:
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
         import os
-        if quiet_PermissionError:
-            skip_PermissionError = True
+        if quiet_permission_error:
+            skip_permission_error = True
         for root, dirs, files in os.walk(path):  # , topdown=False):
             for name in files:
                 file_path = os.path.join(root, name)
@@ -407,7 +405,7 @@ class Dir:
                     except PermissionError:
                         # let&#39;s just assume that it&#39;s read-only and chmod it.
                         import stat
-                        if not skip_PermissionError:
+                        if not skip_permission_error:
                             os.chmod(file_path, stat.S_IWRITE)
                             os.remove(file_path)
                         else:
@@ -415,20 +413,20 @@ class Dir:
                                 os.chmod(file_path, stat.S_IWRITE)
                                 os.remove(file_path)
                             except PermissionError as err:
-                                if not quiet_PermissionError:
+                                if not quiet_permission_error:
                                     print(err)
                 else:
-                    if not skip_PermissionError:
+                    if not skip_permission_error:
                         os.remove(file_path)  # unsafe
                     else:
                         try:
                             os.remove(file_path)  # unsafe
                         except PermissionError as err:
-                            if not quiet_PermissionError:
+                            if not quiet_permission_error:
                                 print(err)
             for name in dirs:
                 cls.delete(os.path.join(root, name), cleanup, remove_readonly, no_sleep,
-                           skip_PermissionError, quiet_PermissionError)  # recursion
+                           skip_permission_error, quiet_permission_error)  # recursion
         if not cleanup:
             try:
                 
@@ -439,30 +437,29 @@ class Dir:
                     time.sleep(0.05)
                 os.rmdir(path)  # unsafe
 
-
     @classmethod
-    def cleanup(cls, path, skip_PermissionError=False, quiet_PermissionError=False):
+    def cleanup(cls, path, skip_permission_error=False, quiet_permission_error=False):
         &#34;&#34;&#34;Removes all content in directory
         &lt;br&gt;`param path` string
         &lt;br&gt;`param skip_PermissionError` boolean, if True, skips files with denied permissions to read|write
         &lt;br&gt;`param quiet_PermissionError` boolean, suppress console output when skip file by PermissionError
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
-        if quiet_PermissionError:
-            skip_PermissionError = True
-        cls.delete(path, cleanup=True, 
-                   skip_PermissionError=skip_PermissionError, quiet_PermissionError=quiet_PermissionError)
+        if quiet_permission_error:
+            skip_permission_error = True
+        cls.delete(path, cleanup=True,
+                   skip_permission_error=skip_permission_error, quiet_permission_error=quiet_permission_error)
 
     @classmethod
     def copy(cls, src, dst, symlinks=False, ignore=None,
-             skip_PermissionError=False, quiet_PermissionError=False,
-             skip_FileNotFoundError=False, quiet_FileNotFoundError=False,
-             skip_OSError=False, quiet_OSError=False,
+             skip_permission_error=False, quiet_permission_error=False,
+             skip_file_not_found_error=False, quiet_file_not_found_error=False,
+             skip_os_error=False, quiet_os_error=False,
              verbose=False):
         &#34;&#34;&#34;Same behavior as shutil.copytree, but can copy into existing directory
         https`//stackoverflow.com/a/22331852/6519078
         &lt;br&gt;`param src` string, source directory to copy
-        &lt;br&gt;`param dst` stirng, destination
+        &lt;br&gt;`param dst` string, destination
         &lt;br&gt;`param symlinks` boolean, following symlinks
         &lt;br&gt;`param ignore` You can define any function with any name you like before calling copytree function. This
         function (which could also be a lambda expression) takes two arguments` a directory name and the files in it, it
@@ -474,8 +471,8 @@ class Dir:
         import os
         import shutil
         import stat
-        if quiet_PermissionError:
-            skip_PermissionError = True
+        if quiet_permission_error:
+            skip_permission_error = True
         if not os.path.exists(dst):
             if verbose:
                 print(f&#34;creating dir {dst}&#34;)
@@ -496,13 +493,14 @@ class Dir:
                     st = os.lstat(s)
                     mode = stat.S_IMODE(st.st_mode)
                     os.lchmod(d, mode)
-                except:
+                except Exception:
                     pass  # lchmod not available
             elif os.path.isdir(s):
                 cls.copy(src=s, dst=d, symlinks=symlinks, ignore=ignore,
-                         skip_PermissionError=skip_PermissionError, quiet_PermissionError=quiet_PermissionError,
-                         skip_FileNotFoundError=skip_FileNotFoundError, quiet_FileNotFoundError=quiet_FileNotFoundError,
-                         skip_OSError=skip_OSError, quiet_OSError=quiet_OSError,
+                         skip_permission_error=skip_permission_error, quiet_permission_error=quiet_permission_error,
+                         skip_file_not_found_error=skip_file_not_found_error,
+                         quiet_file_not_found_error=quiet_file_not_found_error,
+                         skip_os_error=skip_os_error, quiet_os_error=quiet_os_error,
                          verbose=verbose)
             else:
                 try:
@@ -510,27 +508,27 @@ class Dir:
                         print(f&#34;copying {s} to {d}&#34;)
                     shutil.copy2(s, d)
                 except PermissionError as err:
-                    if not quiet_PermissionError:
+                    if not quiet_permission_error:
                         print(err)
-                    if not skip_PermissionError:
+                    if not skip_permission_error:
                         raise
                 except FileNotFoundError as err:
-                    if not quiet_FileNotFoundError:
+                    if not quiet_file_not_found_error:
                         print(err)
-                    if not skip_FileNotFoundError:
+                    if not skip_file_not_found_error:
                         raise
                 except OSError as err:
-                    if not quiet_OSError:
+                    if not quiet_os_error:
                         print(err)
-                    if not skip_OSError:
+                    if not skip_os_error:
                         raise
 
     @classmethod
     def move(cls, src_, dst_, symlinks_=False, ignore_=None,
-             skip_PermissionError=False, quiet_PermissionError=False, verbose=False):
-        &#34;&#34;&#34;Copies folder, than delete source folder
+             skip_permission_error=False, quiet_permission_error=False, verbose=False):
+        &#34;&#34;&#34;Copies folder, then delete source folder
         &lt;br&gt;`param src` string, source directory to copy
-        &lt;br&gt;`param dst` stirng, destination
+        &lt;br&gt;`param dst` string, destination
         &lt;br&gt;`param symlinks` boolean, following symlinks
         &lt;br&gt;`param ignore` You can define any function with any name you like before calling copytree function. This
         function (which could also be a lambda expression) takes two arguments` a directory name and the files in it, it
@@ -539,11 +537,11 @@ class Dir:
         &lt;br&gt;`param quiet_PermissionError` boolean, suppress console output when skip file by PermissionError
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
-        if quiet_PermissionError:
-            skip_PermissionError = True
+        if quiet_permission_error:
+            skip_permission_error = True
         cls.copy(src=src_, dst=dst_, symlinks=symlinks_, ignore=ignore_,
-                 skip_PermissionError=skip_PermissionError,
-                 quiet_PermissionError=quiet_PermissionError, verbose=verbose)
+                 skip_permission_error=skip_permission_error,
+                 quiet_permission_error=quiet_permission_error, verbose=verbose)
 
         cls.delete(src_)
 
@@ -618,7 +616,7 @@ def batch_rename(cls, directory, previous_name_substring, new_name_substring, qu
 </details>
 </dd>
 <dt id="commands.dir9.Dir.cleanup"><code class="name flex">
-<span>def <span class="ident">cleanup</span></span>(<span>path, skip_PermissionError=False, quiet_PermissionError=False)</span>
+<span>def <span class="ident">cleanup</span></span>(<span>path, skip_permission_error=False, quiet_permission_error=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Removes all content in directory
@@ -631,27 +629,27 @@ def batch_rename(cls, directory, previous_name_substring, new_name_substring, qu
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def cleanup(cls, path, skip_PermissionError=False, quiet_PermissionError=False):
+def cleanup(cls, path, skip_permission_error=False, quiet_permission_error=False):
     &#34;&#34;&#34;Removes all content in directory
     &lt;br&gt;`param path` string
     &lt;br&gt;`param skip_PermissionError` boolean, if True, skips files with denied permissions to read|write
     &lt;br&gt;`param quiet_PermissionError` boolean, suppress console output when skip file by PermissionError
     &lt;br&gt;`return` None
     &#34;&#34;&#34;
-    if quiet_PermissionError:
-        skip_PermissionError = True
-    cls.delete(path, cleanup=True, 
-               skip_PermissionError=skip_PermissionError, quiet_PermissionError=quiet_PermissionError)</code></pre>
+    if quiet_permission_error:
+        skip_permission_error = True
+    cls.delete(path, cleanup=True,
+               skip_permission_error=skip_permission_error, quiet_permission_error=quiet_permission_error)</code></pre>
 </details>
 </dd>
 <dt id="commands.dir9.Dir.copy"><code class="name flex">
-<span>def <span class="ident">copy</span></span>(<span>src, dst, symlinks=False, ignore=None, skip_PermissionError=False, quiet_PermissionError=False, skip_FileNotFoundError=False, quiet_FileNotFoundError=False, skip_OSError=False, quiet_OSError=False, verbose=False)</span>
+<span>def <span class="ident">copy</span></span>(<span>src, dst, symlinks=False, ignore=None, skip_permission_error=False, quiet_permission_error=False, skip_file_not_found_error=False, quiet_file_not_found_error=False, skip_os_error=False, quiet_os_error=False, verbose=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Same behavior as shutil.copytree, but can copy into existing directory
 https<code>//stackoverflow.com/a/22331852/6519078
 &lt;br&gt;&lt;code&gt;param src&lt;/code&gt; string, source directory to copy
-&lt;br&gt;&lt;code&gt;param dst&lt;/code&gt; stirng, destination
+&lt;br&gt;&lt;code&gt;param dst&lt;/code&gt; string, destination
 &lt;br&gt;&lt;code&gt;param symlinks&lt;/code&gt; boolean, following symlinks
 &lt;br&gt;&lt;code&gt;param ignore&lt;/code&gt; You can define any function with any name you like before calling copytree function. This
 function (which could also be a lambda expression) takes two arguments</code> a directory name and the files in it, it
@@ -665,14 +663,14 @@ should return an iterable of ignored files.
 </summary>
 <pre><code class="python">@classmethod
 def copy(cls, src, dst, symlinks=False, ignore=None,
-         skip_PermissionError=False, quiet_PermissionError=False,
-         skip_FileNotFoundError=False, quiet_FileNotFoundError=False,
-         skip_OSError=False, quiet_OSError=False,
+         skip_permission_error=False, quiet_permission_error=False,
+         skip_file_not_found_error=False, quiet_file_not_found_error=False,
+         skip_os_error=False, quiet_os_error=False,
          verbose=False):
     &#34;&#34;&#34;Same behavior as shutil.copytree, but can copy into existing directory
     https`//stackoverflow.com/a/22331852/6519078
     &lt;br&gt;`param src` string, source directory to copy
-    &lt;br&gt;`param dst` stirng, destination
+    &lt;br&gt;`param dst` string, destination
     &lt;br&gt;`param symlinks` boolean, following symlinks
     &lt;br&gt;`param ignore` You can define any function with any name you like before calling copytree function. This
     function (which could also be a lambda expression) takes two arguments` a directory name and the files in it, it
@@ -684,8 +682,8 @@ def copy(cls, src, dst, symlinks=False, ignore=None,
     import os
     import shutil
     import stat
-    if quiet_PermissionError:
-        skip_PermissionError = True
+    if quiet_permission_error:
+        skip_permission_error = True
     if not os.path.exists(dst):
         if verbose:
             print(f&#34;creating dir {dst}&#34;)
@@ -706,13 +704,14 @@ def copy(cls, src, dst, symlinks=False, ignore=None,
                 st = os.lstat(s)
                 mode = stat.S_IMODE(st.st_mode)
                 os.lchmod(d, mode)
-            except:
+            except Exception:
                 pass  # lchmod not available
         elif os.path.isdir(s):
             cls.copy(src=s, dst=d, symlinks=symlinks, ignore=ignore,
-                     skip_PermissionError=skip_PermissionError, quiet_PermissionError=quiet_PermissionError,
-                     skip_FileNotFoundError=skip_FileNotFoundError, quiet_FileNotFoundError=quiet_FileNotFoundError,
-                     skip_OSError=skip_OSError, quiet_OSError=quiet_OSError,
+                     skip_permission_error=skip_permission_error, quiet_permission_error=quiet_permission_error,
+                     skip_file_not_found_error=skip_file_not_found_error,
+                     quiet_file_not_found_error=quiet_file_not_found_error,
+                     skip_os_error=skip_os_error, quiet_os_error=quiet_os_error,
                      verbose=verbose)
         else:
             try:
@@ -720,46 +719,46 @@ def copy(cls, src, dst, symlinks=False, ignore=None,
                     print(f&#34;copying {s} to {d}&#34;)
                 shutil.copy2(s, d)
             except PermissionError as err:
-                if not quiet_PermissionError:
+                if not quiet_permission_error:
                     print(err)
-                if not skip_PermissionError:
+                if not skip_permission_error:
                     raise
             except FileNotFoundError as err:
-                if not quiet_FileNotFoundError:
+                if not quiet_file_not_found_error:
                     print(err)
-                if not skip_FileNotFoundError:
+                if not skip_file_not_found_error:
                     raise
             except OSError as err:
-                if not quiet_OSError:
+                if not quiet_os_error:
                     print(err)
-                if not skip_OSError:
+                if not skip_os_error:
                     raise</code></pre>
 </details>
 </dd>
 <dt id="commands.dir9.Dir.create"><code class="name flex">
-<span>def <span class="ident">create</span></span>(<span>dirname)</span>
+<span>def <span class="ident">create</span></span>(<span>dir_name)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Creates dir if it doesn't exist
-<br><code>param dirname</code> string with path to new dir
+<br><code>param dir_name</code> string with path to new dir
 <br><code>return</code></p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
-def create(dirname):
+def create(dir_name):
     &#34;&#34;&#34;Creates dir if it doesn&#39;t exist
-    &lt;br&gt;`param dirname` string with path to new dir
+    &lt;br&gt;`param dir_name` string with path to new dir
     &lt;br&gt;`return`
     &#34;&#34;&#34;
     import os
-    if not os.path.isdir(dirname):
-        os.makedirs(dirname)</code></pre>
+    if not os.path.isdir(dir_name):
+        os.makedirs(dir_name)</code></pre>
 </details>
 </dd>
 <dt id="commands.dir9.Dir.delete"><code class="name flex">
-<span>def <span class="ident">delete</span></span>(<span>path, cleanup=False, remove_readonly=True, no_sleep=False, skip_PermissionError=False, quiet_PermissionError=False)</span>
+<span>def <span class="ident">delete</span></span>(<span>path, cleanup=False, remove_readonly=True, no_sleep=False, skip_permission_error=False, quiet_permission_error=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Remove directory
@@ -773,8 +772,8 @@ def create(dirname):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def delete(cls, path, cleanup=False, remove_readonly=True, no_sleep=False, 
-           skip_PermissionError=False, quiet_PermissionError=False):
+def delete(cls, path, cleanup=False, remove_readonly=True, no_sleep=False,
+           skip_permission_error=False, quiet_permission_error=False):
     &#34;&#34;&#34;Remove directory
     &lt;br&gt;`param path` string
     &lt;br&gt;`param cleanup` boolean, True doesn&#39;t delete &#34;path&#34; folder, only content
@@ -783,8 +782,8 @@ def delete(cls, path, cleanup=False, remove_readonly=True, no_sleep=False,
     &lt;br&gt;`return` None
     &#34;&#34;&#34;
     import os
-    if quiet_PermissionError:
-        skip_PermissionError = True
+    if quiet_permission_error:
+        skip_permission_error = True
     for root, dirs, files in os.walk(path):  # , topdown=False):
         for name in files:
             file_path = os.path.join(root, name)
@@ -794,7 +793,7 @@ def delete(cls, path, cleanup=False, remove_readonly=True, no_sleep=False,
                 except PermissionError:
                     # let&#39;s just assume that it&#39;s read-only and chmod it.
                     import stat
-                    if not skip_PermissionError:
+                    if not skip_permission_error:
                         os.chmod(file_path, stat.S_IWRITE)
                         os.remove(file_path)
                     else:
@@ -802,20 +801,20 @@ def delete(cls, path, cleanup=False, remove_readonly=True, no_sleep=False,
                             os.chmod(file_path, stat.S_IWRITE)
                             os.remove(file_path)
                         except PermissionError as err:
-                            if not quiet_PermissionError:
+                            if not quiet_permission_error:
                                 print(err)
             else:
-                if not skip_PermissionError:
+                if not skip_permission_error:
                     os.remove(file_path)  # unsafe
                 else:
                     try:
                         os.remove(file_path)  # unsafe
                     except PermissionError as err:
-                        if not quiet_PermissionError:
+                        if not quiet_permission_error:
                             print(err)
         for name in dirs:
             cls.delete(os.path.join(root, name), cleanup, remove_readonly, no_sleep,
-                       skip_PermissionError, quiet_PermissionError)  # recursion
+                       skip_permission_error, quiet_permission_error)  # recursion
     if not cleanup:
         try:
             
@@ -955,12 +954,12 @@ def list_of_files(path):
 </details>
 </dd>
 <dt id="commands.dir9.Dir.move"><code class="name flex">
-<span>def <span class="ident">move</span></span>(<span>src_, dst_, symlinks_=False, ignore_=None, skip_PermissionError=False, quiet_PermissionError=False, verbose=False)</span>
+<span>def <span class="ident">move</span></span>(<span>src_, dst_, symlinks_=False, ignore_=None, skip_permission_error=False, quiet_permission_error=False, verbose=False)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Copies folder, than delete source folder
+<div class="desc"><p>Copies folder, then delete source folder
 <br><code>param src</code> string, source directory to copy
-<br><code>param dst</code> stirng, destination
+<br><code>param dst</code> string, destination
 <br><code>param symlinks</code> boolean, following symlinks
 <br><code>param ignore</code> You can define any function with any name you like before calling copytree function. This
 function (which could also be a lambda expression) takes two arguments` a directory name and the files in it, it
@@ -974,10 +973,10 @@ should return an iterable of ignore files.
 </summary>
 <pre><code class="python">@classmethod
 def move(cls, src_, dst_, symlinks_=False, ignore_=None,
-         skip_PermissionError=False, quiet_PermissionError=False, verbose=False):
-    &#34;&#34;&#34;Copies folder, than delete source folder
+         skip_permission_error=False, quiet_permission_error=False, verbose=False):
+    &#34;&#34;&#34;Copies folder, then delete source folder
     &lt;br&gt;`param src` string, source directory to copy
-    &lt;br&gt;`param dst` stirng, destination
+    &lt;br&gt;`param dst` string, destination
     &lt;br&gt;`param symlinks` boolean, following symlinks
     &lt;br&gt;`param ignore` You can define any function with any name you like before calling copytree function. This
     function (which could also be a lambda expression) takes two arguments` a directory name and the files in it, it
@@ -986,11 +985,11 @@ def move(cls, src_, dst_, symlinks_=False, ignore_=None,
     &lt;br&gt;`param quiet_PermissionError` boolean, suppress console output when skip file by PermissionError
     &lt;br&gt;`return` None
     &#34;&#34;&#34;
-    if quiet_PermissionError:
-        skip_PermissionError = True
+    if quiet_permission_error:
+        skip_permission_error = True
     cls.copy(src=src_, dst=dst_, symlinks=symlinks_, ignore=ignore_,
-             skip_PermissionError=skip_PermissionError,
-             quiet_PermissionError=quiet_PermissionError, verbose=verbose)
+             skip_permission_error=skip_permission_error,
+             quiet_permission_error=quiet_permission_error, verbose=verbose)
 
     cls.delete(src_)</code></pre>
 </details>
@@ -999,7 +998,7 @@ def move(cls, src_, dst_, symlinks_=False, ignore_=None,
 <span>def <span class="ident">number_of_files</span></span>(<span>path, quiet=True)</span>
 </code></dt>
 <dd>
-<div class="desc"><p><br><code>param path</code> string with paht
+<div class="desc"><p><br><code>param path</code> string with path
 <br><code>param quiet</code> suppress print to console
 <br><code>return</code> int count of files in directory</p></div>
 <details class="source">
@@ -1009,13 +1008,12 @@ def move(cls, src_, dst_, symlinks_=False, ignore_=None,
 <pre><code class="python">@classmethod
 def number_of_files(cls, path, quiet=True):
     &#34;&#34;&#34;
-    &lt;br&gt;`param path` string with paht
+    &lt;br&gt;`param path` string with path
     &lt;br&gt;`param quiet` suppress print to console
     &lt;br&gt;`return` int count of files in directory
     &#34;&#34;&#34;
     import os
-    from .dir9 import Dir
-    if not Dir.exist(path):
+    if not cls.exist(path):
         raise FileNotFoundError(f&#34;Directory &#39;{path}&#39; not found&#34;)
     cnt = 0
     for root, dirs, files in os.walk(path):
@@ -1068,7 +1066,7 @@ def number_of_files(cls, path, quiet=True):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

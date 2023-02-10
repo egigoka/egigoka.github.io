@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.1" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>commands.network9 API documentation</title>
 <meta name="description" content="Internal module with functions to work with network" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -31,13 +31,15 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions to work with network
 &#34;&#34;&#34;
-__version__ = &#34;0.8.0&#34;
+__version__ = &#34;0.10.0&#34;
+
 from typing import Union
 
 
 class Network:
     &#34;&#34;&#34;Class with functions to work with network
     &#34;&#34;&#34;
+
     @staticmethod
     def get_domain_of_url(url):
         &#34;&#34;&#34;
@@ -96,6 +98,7 @@ class Network:
                  from ping command
         &#34;&#34;&#34;
         # todo properly work with exception
+        import re
         from .os9 import OS
         from .console9 import Console
         domain = cls.get_domain_of_url(domain)
@@ -128,7 +131,7 @@ class Network:
             except UnboundLocalError:
                 backup_ping_output = &#34;&#34;
             ping_output = &#34;&#34;
-        uplink = ping_output.lower().count(&#34;time=&#34;)+ping_output.lower().count(&#34;time&lt;&#34;) &gt;= count
+        uplink = ping_output.lower().count(&#34;time=&#34;) + ping_output.lower().count(&#34;time&lt;&#34;) &gt;= count
 
         if logfile or (not quiet):
             import termcolor
@@ -154,9 +157,7 @@ class Network:
             try:
                 for line in Str.nl(ping_output + backup_ping_output):
                     if len(Str.get_integers(line, float_support=False)) &gt;= 4:
-                        octaves = Str.get_integers(line, float_support=False)  # todo change to regex!!!!!!!!!
-                        # pylint: disable=invalid-name
-                        ip = str(octaves[0]) + &#34;.&#34; + str(octaves[1]) + &#34;.&#34; + str(octaves[2]) + &#34;.&#34; + str(octaves[3])
+                        ip = re.findall(r&#39;(?:\d{1,3}\.)+(?:\d{1,3})&#39;, line)
                         break
             except TypeError:
                 pass
@@ -295,10 +296,10 @@ class Network:
                     (&#39;Accept-Language&#39;, &#34;en-US,en;q=0.5&#34;)]
 
                 try:
-                    url = opener.open(server, timeout=4)
+                    url = opener.open(server, timeout=1)
                     content = url.read()
 
-                    # Didn&#39;t want to import chardet. Prefered to stick to stdlib
+                    # Didn&#39;t want to import chardet. Preferred to stick to stdlib
                     if PY3K:
                         try:
                             content = content.decode(&#39;UTF-8&#39;)
@@ -334,10 +335,11 @@ class Network:
                     print(&#34;IP&#39;s :&#34;)
                     for ip, ocorrencia in zip(ips_set, map(lambda x: ips.count(x), ips_set)):
                         print(&#39;{0} = {1} ocurrenc{2}&#39;.format(ip if len(ip) &gt; 0 else &#39;broken server&#39;, ocorrencia,
-                                                            &#39;y&#39; if ocorrencia == 1 else &#39;ies&#39;))
+                                                             &#39;y&#39; if ocorrencia == 1 else &#39;ies&#39;))
                     print(&#39;\n&#39;)
                     print(resultdict)
                 return resultdict
+
         # end code by phoemur@gmail.com
 
         ipgetter = IPgetter()
@@ -371,7 +373,8 @@ class Network:
             return ipgetter.get_external_ip()
 
     @staticmethod
-    def check_response(endpoint: str, good_response: Union[str, bytes, list], timeout: int = 10, debug: bool = False) -&gt; bool:
+    def check_response(endpoint: str, good_response: Union[str, bytes, list, tuple], timeout: int = 10,
+                       debug: bool = False) -&gt; bool:
         import requests
         from .list9 import List
 
@@ -412,14 +415,43 @@ class Network:
                                   timeout=timeout, debug=debug)
 
     @staticmethod
-    def get(url, params=None, **kwargs):
+    def request(url, method, params=None, basic_auth_user=None, basic_auth_password=None, data=None, json=None,
+                headers=None, **kwargs):
         import requests
-        return requests.get(url=url, params=params, **kwargs)
 
-    @staticmethod
-    def post(url, data=None, json=None, **kwargs):
-        import requests
-        return requests.post(url=url, data=data, json=json, **kwargs)</code></pre>
+        auth = None
+        if basic_auth_user and basic_auth_password:
+            import requests.auth
+            auth = requests.auth.HTTPBasicAuth(basic_auth_user, basic_auth_password)
+
+        if method == &#34;get&#34;:
+            func = requests.get
+            kwargs.update({&#34;url&#34;: url,
+                           &#34;auth&#34;: auth,
+                           &#34;params&#34;: params,
+                           &#34;headers&#34;: headers})
+        elif method == &#34;post&#34;:
+            func = requests.post
+            kwargs.update({&#34;url&#34;: url,
+                           &#34;auth&#34;: auth,
+                           &#34;params&#34;: params,
+                           &#34;data&#34;: data,
+                           &#34;json&#34;: json,
+                           &#34;headers&#34;: headers})
+        else:
+            raise NotImplementedError(f&#34;Method {method} isn&#39;t supported&#34;)
+
+        return func(**kwargs)
+
+    @classmethod
+    def get(cls, url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
+        return cls.request(url=url, method=&#34;get&#34;, params=params, basic_auth_user=basic_auth_user,
+                           basic_auth_password=basic_auth_password, headers=headers, **kwargs)
+
+    @classmethod
+    def post(cls, url, params=None, data=None, json=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
+        return cls.request(url=url, method=&#34;post&#34;, params=params, basic_auth_user=basic_auth_user,
+                           basic_auth_password=basic_auth_password, data=data, json=json, headers=headers, **kwargs)</code></pre>
 </details>
 </section>
 <section>
@@ -443,6 +475,7 @@ class Network:
 <pre><code class="python">class Network:
     &#34;&#34;&#34;Class with functions to work with network
     &#34;&#34;&#34;
+
     @staticmethod
     def get_domain_of_url(url):
         &#34;&#34;&#34;
@@ -501,6 +534,7 @@ class Network:
                  from ping command
         &#34;&#34;&#34;
         # todo properly work with exception
+        import re
         from .os9 import OS
         from .console9 import Console
         domain = cls.get_domain_of_url(domain)
@@ -533,7 +567,7 @@ class Network:
             except UnboundLocalError:
                 backup_ping_output = &#34;&#34;
             ping_output = &#34;&#34;
-        uplink = ping_output.lower().count(&#34;time=&#34;)+ping_output.lower().count(&#34;time&lt;&#34;) &gt;= count
+        uplink = ping_output.lower().count(&#34;time=&#34;) + ping_output.lower().count(&#34;time&lt;&#34;) &gt;= count
 
         if logfile or (not quiet):
             import termcolor
@@ -559,9 +593,7 @@ class Network:
             try:
                 for line in Str.nl(ping_output + backup_ping_output):
                     if len(Str.get_integers(line, float_support=False)) &gt;= 4:
-                        octaves = Str.get_integers(line, float_support=False)  # todo change to regex!!!!!!!!!
-                        # pylint: disable=invalid-name
-                        ip = str(octaves[0]) + &#34;.&#34; + str(octaves[1]) + &#34;.&#34; + str(octaves[2]) + &#34;.&#34; + str(octaves[3])
+                        ip = re.findall(r&#39;(?:\d{1,3}\.)+(?:\d{1,3})&#39;, line)
                         break
             except TypeError:
                 pass
@@ -700,10 +732,10 @@ class Network:
                     (&#39;Accept-Language&#39;, &#34;en-US,en;q=0.5&#34;)]
 
                 try:
-                    url = opener.open(server, timeout=4)
+                    url = opener.open(server, timeout=1)
                     content = url.read()
 
-                    # Didn&#39;t want to import chardet. Prefered to stick to stdlib
+                    # Didn&#39;t want to import chardet. Preferred to stick to stdlib
                     if PY3K:
                         try:
                             content = content.decode(&#39;UTF-8&#39;)
@@ -739,10 +771,11 @@ class Network:
                     print(&#34;IP&#39;s :&#34;)
                     for ip, ocorrencia in zip(ips_set, map(lambda x: ips.count(x), ips_set)):
                         print(&#39;{0} = {1} ocurrenc{2}&#39;.format(ip if len(ip) &gt; 0 else &#39;broken server&#39;, ocorrencia,
-                                                            &#39;y&#39; if ocorrencia == 1 else &#39;ies&#39;))
+                                                             &#39;y&#39; if ocorrencia == 1 else &#39;ies&#39;))
                     print(&#39;\n&#39;)
                     print(resultdict)
                 return resultdict
+
         # end code by phoemur@gmail.com
 
         ipgetter = IPgetter()
@@ -776,7 +809,8 @@ class Network:
             return ipgetter.get_external_ip()
 
     @staticmethod
-    def check_response(endpoint: str, good_response: Union[str, bytes, list], timeout: int = 10, debug: bool = False) -&gt; bool:
+    def check_response(endpoint: str, good_response: Union[str, bytes, list, tuple], timeout: int = 10,
+                       debug: bool = False) -&gt; bool:
         import requests
         from .list9 import List
 
@@ -817,14 +851,43 @@ class Network:
                                   timeout=timeout, debug=debug)
 
     @staticmethod
-    def get(url, params=None, **kwargs):
+    def request(url, method, params=None, basic_auth_user=None, basic_auth_password=None, data=None, json=None,
+                headers=None, **kwargs):
         import requests
-        return requests.get(url=url, params=params, **kwargs)
 
-    @staticmethod
-    def post(url, data=None, json=None, **kwargs):
-        import requests
-        return requests.post(url=url, data=data, json=json, **kwargs)</code></pre>
+        auth = None
+        if basic_auth_user and basic_auth_password:
+            import requests.auth
+            auth = requests.auth.HTTPBasicAuth(basic_auth_user, basic_auth_password)
+
+        if method == &#34;get&#34;:
+            func = requests.get
+            kwargs.update({&#34;url&#34;: url,
+                           &#34;auth&#34;: auth,
+                           &#34;params&#34;: params,
+                           &#34;headers&#34;: headers})
+        elif method == &#34;post&#34;:
+            func = requests.post
+            kwargs.update({&#34;url&#34;: url,
+                           &#34;auth&#34;: auth,
+                           &#34;params&#34;: params,
+                           &#34;data&#34;: data,
+                           &#34;json&#34;: json,
+                           &#34;headers&#34;: headers})
+        else:
+            raise NotImplementedError(f&#34;Method {method} isn&#39;t supported&#34;)
+
+        return func(**kwargs)
+
+    @classmethod
+    def get(cls, url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
+        return cls.request(url=url, method=&#34;get&#34;, params=params, basic_auth_user=basic_auth_user,
+                           basic_auth_password=basic_auth_password, headers=headers, **kwargs)
+
+    @classmethod
+    def post(cls, url, params=None, data=None, json=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
+        return cls.request(url=url, method=&#34;post&#34;, params=params, basic_auth_user=basic_auth_user,
+                           basic_auth_password=basic_auth_password, data=data, json=json, headers=headers, **kwargs)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -862,7 +925,7 @@ def check_internet_microsoft(cls, timeout=10, debug=False):
 </details>
 </dd>
 <dt id="commands.network9.Network.check_response"><code class="name flex">
-<span>def <span class="ident">check_response</span></span>(<span>endpoint: str, good_response: Union[str, bytes, list], timeout: int = 10, debug: bool = False) ‑> bool</span>
+<span>def <span class="ident">check_response</span></span>(<span>endpoint: str, good_response: Union[str, bytes, list, tuple], timeout: int = 10, debug: bool = False) ‑> bool</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -871,7 +934,8 @@ def check_internet_microsoft(cls, timeout=10, debug=False):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
-def check_response(endpoint: str, good_response: Union[str, bytes, list], timeout: int = 10, debug: bool = False) -&gt; bool:
+def check_response(endpoint: str, good_response: Union[str, bytes, list, tuple], timeout: int = 10,
+                   debug: bool = False) -&gt; bool:
     import requests
     from .list9 import List
 
@@ -947,7 +1011,7 @@ def download_file(url, out=None, quiet=None):
 </details>
 </dd>
 <dt id="commands.network9.Network.get"><code class="name flex">
-<span>def <span class="ident">get</span></span>(<span>url, params=None, **kwargs)</span>
+<span>def <span class="ident">get</span></span>(<span>url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -955,10 +1019,10 @@ def download_file(url, out=None, quiet=None):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">@staticmethod
-def get(url, params=None, **kwargs):
-    import requests
-    return requests.get(url=url, params=params, **kwargs)</code></pre>
+<pre><code class="python">@classmethod
+def get(cls, url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
+    return cls.request(url=url, method=&#34;get&#34;, params=params, basic_auth_user=basic_auth_user,
+                       basic_auth_password=basic_auth_password, headers=headers, **kwargs)</code></pre>
 </details>
 </dd>
 <dt id="commands.network9.Network.get_domain_of_url"><code class="name flex">
@@ -1123,10 +1187,10 @@ def get_ip(fast=True, quiet=True):
                 (&#39;Accept-Language&#39;, &#34;en-US,en;q=0.5&#34;)]
 
             try:
-                url = opener.open(server, timeout=4)
+                url = opener.open(server, timeout=1)
                 content = url.read()
 
-                # Didn&#39;t want to import chardet. Prefered to stick to stdlib
+                # Didn&#39;t want to import chardet. Preferred to stick to stdlib
                 if PY3K:
                     try:
                         content = content.decode(&#39;UTF-8&#39;)
@@ -1162,10 +1226,11 @@ def get_ip(fast=True, quiet=True):
                 print(&#34;IP&#39;s :&#34;)
                 for ip, ocorrencia in zip(ips_set, map(lambda x: ips.count(x), ips_set)):
                     print(&#39;{0} = {1} ocurrenc{2}&#39;.format(ip if len(ip) &gt; 0 else &#39;broken server&#39;, ocorrencia,
-                                                        &#39;y&#39; if ocorrencia == 1 else &#39;ies&#39;))
+                                                         &#39;y&#39; if ocorrencia == 1 else &#39;ies&#39;))
                 print(&#39;\n&#39;)
                 print(resultdict)
             return resultdict
+
     # end code by phoemur@gmail.com
 
     ipgetter = IPgetter()
@@ -1268,6 +1333,7 @@ def ping(cls,
              from ping command
     &#34;&#34;&#34;
     # todo properly work with exception
+    import re
     from .os9 import OS
     from .console9 import Console
     domain = cls.get_domain_of_url(domain)
@@ -1300,7 +1366,7 @@ def ping(cls,
         except UnboundLocalError:
             backup_ping_output = &#34;&#34;
         ping_output = &#34;&#34;
-    uplink = ping_output.lower().count(&#34;time=&#34;)+ping_output.lower().count(&#34;time&lt;&#34;) &gt;= count
+    uplink = ping_output.lower().count(&#34;time=&#34;) + ping_output.lower().count(&#34;time&lt;&#34;) &gt;= count
 
     if logfile or (not quiet):
         import termcolor
@@ -1326,9 +1392,7 @@ def ping(cls,
         try:
             for line in Str.nl(ping_output + backup_ping_output):
                 if len(Str.get_integers(line, float_support=False)) &gt;= 4:
-                    octaves = Str.get_integers(line, float_support=False)  # todo change to regex!!!!!!!!!
-                    # pylint: disable=invalid-name
-                    ip = str(octaves[0]) + &#34;.&#34; + str(octaves[1]) + &#34;.&#34; + str(octaves[2]) + &#34;.&#34; + str(octaves[3])
+                    ip = re.findall(r&#39;(?:\d{1,3}\.)+(?:\d{1,3})&#39;, line)
                     break
         except TypeError:
             pass
@@ -1339,7 +1403,22 @@ def ping(cls,
 </details>
 </dd>
 <dt id="commands.network9.Network.post"><code class="name flex">
-<span>def <span class="ident">post</span></span>(<span>url, data=None, json=None, **kwargs)</span>
+<span>def <span class="ident">post</span></span>(<span>url, params=None, data=None, json=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def post(cls, url, params=None, data=None, json=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
+    return cls.request(url=url, method=&#34;post&#34;, params=params, basic_auth_user=basic_auth_user,
+                       basic_auth_password=basic_auth_password, data=data, json=json, headers=headers, **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="commands.network9.Network.request"><code class="name flex">
+<span>def <span class="ident">request</span></span>(<span>url, method, params=None, basic_auth_user=None, basic_auth_password=None, data=None, json=None, headers=None, **kwargs)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -1348,9 +1427,33 @@ def ping(cls,
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
-def post(url, data=None, json=None, **kwargs):
+def request(url, method, params=None, basic_auth_user=None, basic_auth_password=None, data=None, json=None,
+            headers=None, **kwargs):
     import requests
-    return requests.post(url=url, data=data, json=json, **kwargs)</code></pre>
+
+    auth = None
+    if basic_auth_user and basic_auth_password:
+        import requests.auth
+        auth = requests.auth.HTTPBasicAuth(basic_auth_user, basic_auth_password)
+
+    if method == &#34;get&#34;:
+        func = requests.get
+        kwargs.update({&#34;url&#34;: url,
+                       &#34;auth&#34;: auth,
+                       &#34;params&#34;: params,
+                       &#34;headers&#34;: headers})
+    elif method == &#34;post&#34;:
+        func = requests.post
+        kwargs.update({&#34;url&#34;: url,
+                       &#34;auth&#34;: auth,
+                       &#34;params&#34;: params,
+                       &#34;data&#34;: data,
+                       &#34;json&#34;: json,
+                       &#34;headers&#34;: headers})
+    else:
+        raise NotImplementedError(f&#34;Method {method} isn&#39;t supported&#34;)
+
+    return func(**kwargs)</code></pre>
 </details>
 </dd>
 </dl>
@@ -1387,6 +1490,7 @@ def post(url, data=None, json=None, **kwargs):
 <li><code><a title="commands.network9.Network.get_protocol_of_url" href="#commands.network9.Network.get_protocol_of_url">get_protocol_of_url</a></code></li>
 <li><code><a title="commands.network9.Network.ping" href="#commands.network9.Network.ping">ping</a></code></li>
 <li><code><a title="commands.network9.Network.post" href="#commands.network9.Network.post">post</a></code></li>
+<li><code><a title="commands.network9.Network.request" href="#commands.network9.Network.request">request</a></code></li>
 </ul>
 </li>
 </ul>
@@ -1395,7 +1499,7 @@ def post(url, data=None, json=None, **kwargs):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

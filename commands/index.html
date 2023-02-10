@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.1" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>commands API documentation</title>
-<meta name="description" content="This is kinda tiny framework? Idk.
+<meta name="description" content="This is kinda tiny framework? IDK.
 I learn Python by creating this.
-Also I have some memory issues, so programming with this library and fixing it …" />
+Also, I have some memory issues, so programming with this library and fixing it …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -24,20 +24,20 @@ Also I have some memory issues, so programming with this library and fixing it �
 <h1 class="title">Package <code>commands</code></h1>
 </header>
 <section id="section-intro">
-<p>This is kinda tiny framework? Idk.
+<p>This is kinda tiny framework? IDK.
 I learn Python by creating this.
-Also I have some memory issues, so programming with this library and fixing it help me to learn programming.
-Otherwise I every time search how to do some thing and just copy-paste it without understanding and memorizing.</p>
+Also, I have some memory issues, so programming with this library and fixing it help me to learn programming.
+Otherwise, I every time search how to do something and just copy-paste it without understanding and memorizing.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">#! python3
 # -*- coding: utf-8 -*-
-&#34;&#34;&#34;This is kinda tiny framework? Idk.
+&#34;&#34;&#34;This is kinda tiny framework? IDK.
 I learn Python by creating this.
-Also I have some memory issues, so programming with this library and fixing it help me to learn programming.
-Otherwise I every time search how to do some thing and just copy-paste it without understanding and memorizing.
+Also, I have some memory issues, so programming with this library and fixing it help me to learn programming.
+Otherwise, I every time search how to do something and just copy-paste it without understanding and memorizing.
 &#34;&#34;&#34;
 
 from .bench9 import Bench
@@ -53,10 +53,11 @@ from .time9 import Time
 from .json9 import Json, JsonDict, JsonList
 from .list9 import List
 from .process9 import Process
-from .dict9 import Dict, imdict
+from .dict9 import Dict, ImDict
 from .network9 import Network
 from .bash9 import Bash
 from .macos9 import macOS
+from .mouse9 import Mouse
 from .windows9 import Windows
 from .gui9 import Gui
 from .tkinter9 import Tkinter
@@ -65,7 +66,7 @@ from .wget9 import Wget
 from .int9 import Int
 from .cli9 import CLI
 from .base64_9 import Base64
-from .funcs9 import dirify, multiple, copy, paste
+from .funcs9 import dirify, multiple, copy, paste, q, exit
 from .id9 import ID
 from .git9 import Git
 from .tsql9 import TSQL
@@ -77,7 +78,11 @@ from .giv9 import GIV
 from .archive9 import Archive, Unarchive
 from .ffmpeg9 import FFMpeg
 from .keyboard9 import Keyboard
-from .const9 import backslash, newline, newline2, ruble, rtl, KiB, MiB, GiB
+from .obj9 import Obj
+from .screen9 import Screen
+from .video9 import Video
+from .audio9 import Audio
+from .const9 import backslash, newline, newline2, ruble, rtl, KiB, MiB, GiB, TiB
 from ._version import __version__</code></pre>
 </details>
 </section>
@@ -87,6 +92,10 @@ from ._version import __version__</code></pre>
 <dt><code class="name"><a title="commands.archive9" href="archive9.html">commands.archive9</a></code></dt>
 <dd>
 <div class="desc"><p>Internal module to work with zip and tar.lzma archives</p></div>
+</dd>
+<dt><code class="name"><a title="commands.audio9" href="audio9.html">commands.audio9</a></code></dt>
+<dd>
+<div class="desc"><p>Internal module to work with base64</p></div>
 </dd>
 <dt><code class="name"><a title="commands.base64_9" href="base64_9.html">commands.base64_9</a></code></dt>
 <dd>
@@ -188,6 +197,10 @@ from ._version import __version__</code></pre>
 <dd>
 <div class="desc"><p>Internal module with functions to work with network</p></div>
 </dd>
+<dt><code class="name"><a title="commands.obj9" href="obj9.html">commands.obj9</a></code></dt>
+<dd>
+<div class="desc"><p>Internal module for logging</p></div>
+</dd>
 <dt><code class="name"><a title="commands.os9" href="os9.html">commands.os9</a></code></dt>
 <dd>
 <div class="desc"><p>Internal module to check some environment properties</p></div>
@@ -216,6 +229,10 @@ from ._version import __version__</code></pre>
 <dd>
 <div class="desc"></div>
 </dd>
+<dt><code class="name"><a title="commands.screen9" href="screen9.html">commands.screen9</a></code></dt>
+<dd>
+<div class="desc"><p>Internal module with functions for screen capture.</p></div>
+</dd>
 <dt><code class="name"><a title="commands.ssh9" href="ssh9.html">commands.ssh9</a></code></dt>
 <dd>
 <div class="desc"><p>Internal module with functions to work with ssh</p></div>
@@ -226,7 +243,7 @@ from ._version import __version__</code></pre>
 </dd>
 <dt><code class="name"><a title="commands.threading9" href="threading9.html">commands.threading9</a></code></dt>
 <dd>
-<div class="desc"><p>I trying work with threads</p></div>
+<div class="desc"><p>I'm trying work with threads</p></div>
 </dd>
 <dt><code class="name"><a title="commands.time9" href="time9.html">commands.time9</a></code></dt>
 <dd>
@@ -239,6 +256,10 @@ from ._version import __version__</code></pre>
 <dt><code class="name"><a title="commands.tsql9" href="tsql9.html">commands.tsql9</a></code></dt>
 <dd>
 <div class="desc"><p>Internal module to interact with transact sql</p></div>
+</dd>
+<dt><code class="name"><a title="commands.video9" href="video9.html">commands.video9</a></code></dt>
+<dd>
+<div class="desc"><p>Internal module to work with video</p></div>
 </dd>
 <dt><code class="name"><a title="commands.wget9" href="wget9.html">commands.wget9</a></code></dt>
 <dd>
@@ -266,6 +287,7 @@ from ._version import __version__</code></pre>
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
 <li><code><a title="commands.archive9" href="archive9.html">commands.archive9</a></code></li>
+<li><code><a title="commands.audio9" href="audio9.html">commands.audio9</a></code></li>
 <li><code><a title="commands.base64_9" href="base64_9.html">commands.base64_9</a></code></li>
 <li><code><a title="commands.bash9" href="bash9.html">commands.bash9</a></code></li>
 <li><code><a title="commands.bench9" href="bench9.html">commands.bench9</a></code></li>
@@ -291,6 +313,7 @@ from ._version import __version__</code></pre>
 <li><code><a title="commands.macos9" href="macos9.html">commands.macos9</a></code></li>
 <li><code><a title="commands.mouse9" href="mouse9.html">commands.mouse9</a></code></li>
 <li><code><a title="commands.network9" href="network9.html">commands.network9</a></code></li>
+<li><code><a title="commands.obj9" href="obj9.html">commands.obj9</a></code></li>
 <li><code><a title="commands.os9" href="os9.html">commands.os9</a></code></li>
 <li><code><a title="commands.path9" href="path9.html">commands.path9</a></code></li>
 <li><code><a title="commands.pip9" href="pip9.html">commands.pip9</a></code></li>
@@ -298,12 +321,14 @@ from ._version import __version__</code></pre>
 <li><code><a title="commands.process9" href="process9.html">commands.process9</a></code></li>
 <li><code><a title="commands.random9" href="random9.html">commands.random9</a></code></li>
 <li><code><a title="commands.resources9" href="resources9.html">commands.resources9</a></code></li>
+<li><code><a title="commands.screen9" href="screen9.html">commands.screen9</a></code></li>
 <li><code><a title="commands.ssh9" href="ssh9.html">commands.ssh9</a></code></li>
 <li><code><a title="commands.str9" href="str9.html">commands.str9</a></code></li>
 <li><code><a title="commands.threading9" href="threading9.html">commands.threading9</a></code></li>
 <li><code><a title="commands.time9" href="time9.html">commands.time9</a></code></li>
 <li><code><a title="commands.tkinter9" href="tkinter9.html">commands.tkinter9</a></code></li>
 <li><code><a title="commands.tsql9" href="tsql9.html">commands.tsql9</a></code></li>
+<li><code><a title="commands.video9" href="video9.html">commands.video9</a></code></li>
 <li><code><a title="commands.wget9" href="wget9.html">commands.wget9</a></code></li>
 <li><code><a title="commands.windows9" href="windows9.html">commands.windows9</a></code></li>
 </ul>
@@ -312,7 +337,7 @@ from ._version import __version__</code></pre>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

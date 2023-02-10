@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.1" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>commands.file9 API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -31,7 +31,7 @@
 from typing import Union
 &#34;&#34;&#34;Internal module to work with files
 &#34;&#34;&#34;
-__version__ = &#34;1.2.1&#34;
+__version__ = &#34;1.7.0&#34;
 # pylint: disable=c-extension-no-member
 
 
@@ -40,7 +40,7 @@ class File:
     &#34;&#34;&#34;
     @classmethod
     def create(cls, filename, quiet=True):
-        &#34;&#34;&#34;Creates subdirs, if needed
+        &#34;&#34;&#34;Creates subdirectories, if needed
         &lt;br&gt;`param filename` string with path to creating file
         &lt;br&gt;`param quiet` boolean, if True, suppress output to console
         &lt;br&gt;`return` None
@@ -72,7 +72,8 @@ class File:
         &#34;&#34;&#34;
         &lt;br&gt;`param path` string with path to deleting file
         &lt;br&gt;`param quiet` boolean, suppress print to console
-        &lt;br&gt;`param no_sleep` boolean, if True - function skip sleep in 0.05 seconds after deleting file (to ensure than file
+        &lt;br&gt;`param no_sleep` boolean, if True - function skip sleep in 0.05 seconds after deleting file
+        (to ensure than file
         deleted before next code run)
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
@@ -150,10 +151,10 @@ class File:
         return filename
 
     @classmethod
-    def backup(cls, filename, subfolder=&#34;bak&#34;, hide=True, quiet=False):
-        &#34;&#34;&#34;Move file to subfolder, adds sort of timestamp to filename and hide file if &#39;hide&#39; argument is True
+    def backup(cls, filename, subdirectory=&#34;bak&#34;, hide=True, quiet=False):
+        &#34;&#34;&#34;Move file to subdirectory, adds sort of timestamp to filename and hide file if &#39;hide&#39; argument is True
         &lt;br&gt;`param filename` string with path to file
-        &lt;br&gt;`param subfolder` string with name of subfolder of backed up files
+        &lt;br&gt;`param subdirectory` string with name of subdirectory of backed up files
         &lt;br&gt;`param hide` boolean, define hide file or not
         &lt;br&gt;`param quiet` boolean, suppress print to console
         &lt;br&gt;`return`
@@ -164,17 +165,17 @@ class File:
         from .dir9 import Dir
         from .time9 import Time
         filename = Path.full(filename)  # normalize filename
-        backup_filename = str(filename) + &#34;.&#34; + Time.dotted() + &#34;.bak&#34;  # add dotted time to backup filename
+        backup_filename = str(filename) + &#34;.&#34; + Time.dotted() + &#34;.bak&#34;  # add dotted time to back up filename
         backup_filename = os.path.split(backup_filename)  # splitting filename to folder and file
-        try:  # if subfolder has no len
-            if len(subfolder) &lt; 1:  # if subfolder has zero len
-                raise TypeError(&#34;subfolder must have non-zero len&#34;)
-        except TypeError:  # if subfolder has no len
-            subfolder = &#34;bak&#34;  # set subfolder to default
-            print(&#34;len(subfolder) &lt; 1, so subfolder = &#39;bak&#39;&#34;)  # print error
-        subfolder = Path.combine(backup_filename[0], subfolder)  # append subfolder name
-        Dir.create(subfolder)  # create subfolder
-        backup_filename = Path.combine(subfolder, backup_filename[1])  # backup file name full path
+        try:  # if subdirectory has no len
+            if len(subdirectory) &lt; 1:  # if subdirectory has zero len
+                raise TypeError(&#34;subdirectory must have non-zero len&#34;)
+        except TypeError:  # if subdirectory has no len
+            subdirectory = &#34;bak&#34;  # set subdirectory to default
+            print(&#34;len(subdirectory) &lt; 1, so subdirectory = &#39;bak&#39;&#34;)  # print error
+        subdirectory = Path.combine(backup_filename[0], subdirectory)  # append subdirectory name
+        Dir.create(subdirectory)  # create subdirectory
+        backup_filename = Path.combine(subdirectory, backup_filename[1])  # backup file name full path
         shutil.copy2(filename, backup_filename)  # finally backup file
         if hide:
             backup_filename = cls.hide(backup_filename)  # hiding file
@@ -204,13 +205,19 @@ class File:
         count_of_symbols = count_of_symbols
         if count_of_symbols is True:  # you can define how much symbols use to define encoding
             count_of_symbols = 10000
-        with open(path, &#34;rb&#34;) as rawfile:
-            slice_of_raw_data = rawfile.read(count_of_symbols)
+        with open(path, &#34;rb&#34;) as raw_file:
+            slice_of_raw_data = raw_file.read(count_of_symbols)
         encoding = Bytes.get_encoding(slice_of_raw_data)
         return encoding
 
+    @staticmethod
+    def _read_with_encoding(path, encoding):
+        with open(path, &#34;r&#34;, encoding=encoding) as file:
+            return file.read()
+
     @classmethod
-    def read(cls, path, encoding: str = &#34;utf-8&#34;, auto_detect_encoding: Union[bool, int] = True, mode: str = &#34;r&#34;):  # return pipe to file content
+    def read(cls, path, encoding: str = &#34;utf-8&#34;, auto_detect_encoding: Union[bool, int] = True, mode: str = &#34;r&#34;):
+        # return pipe to file content
         &#34;&#34;&#34;
         &lt;br&gt;`param path` path to file
         &lt;br&gt;`param auto_detect_encoding` how much symbols use to auto define decoding, if True, uses 10000
@@ -220,8 +227,11 @@ class File:
             try:
                 if auto_detect_encoding:
                     encoding = cls.get_encoding(path, count_of_symbols=auto_detect_encoding)
-                with open(path, &#34;r&#34;, encoding=encoding) as file:
-                    return file.read()
+                try:
+                    return cls._read_with_encoding(path, encoding)
+                except LookupError:
+                    if encoding.lower() == &#34;EUC-TW&#34;.lower():
+                        return cls._read_with_encoding(path, &#34;TIS-620&#34;)  # crude fix for EUC-TW
             except UnicodeDecodeError:
                 import codecs
                 with codecs.open(path, encoding=&#39;cp1251&#39;, errors=&#39;replace&#39;) as file:
@@ -233,11 +243,12 @@ class File:
                 return content
 
     @staticmethod
-    def write(filename, what_to_write, mode=&#34;a&#34;, quiet=True):
+    def write(filename, what_to_write, mode=&#34;a&#34;, encoding=&#34;utf-8&#34;, quiet=True):
         &#34;&#34;&#34;Write to end of file if &#34;mode&#34; arg isn&#39;t redefined
         &lt;br&gt;`param filename` string with path to file
         &lt;br&gt;`param what_to_write` string to write
         &lt;br&gt;`param mode` string with any mode that supported by python open() func
+        &lt;br&gt;`param encoding` string with any encoding
         &lt;br&gt;`param quiet` boolean, if True, suppress output to console
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
@@ -245,7 +256,7 @@ class File:
             print(f&#34;Writing to file {filename}&#34;)
         if &#34;b&#34; not in mode and isinstance(what_to_write, str):
             with open(filename, mode=mode+&#34;b&#34;) as file:  # open file then closes it
-                file.write(what_to_write.encode(&#34;utf-8&#34;))
+                file.write(what_to_write.encode(encoding))
         else:
             with open(filename, mode=mode) as file:  # open file then closes it
                 if isinstance(what_to_write, int):
@@ -264,13 +275,53 @@ class File:
         return os.path.isfile(filename)
 
     @staticmethod
-    def get_size(filename):  # return size in bytes
+    def format_size_human_readable(size_in_bytes):
+        from .const9 import KiB, MiB, GiB, TiB
+
+        size_string = f&#34; {str(int(size_in_bytes % KiB))}b&#34;
+
+        if size_in_bytes &lt; KiB:
+            return size_string.strip()
+
+        size_string = size_string.strip().zfill(4)
+        size_string = &#34; &#34; + size_string
+        size_string = f&#34; {str(int(size_in_bytes / KiB % 1024))}KiB&#34; + size_string
+
+        if size_in_bytes &lt; MiB:
+            return size_string.strip()
+
+        size_string = size_string.strip().zfill(11)
+        size_string = &#34; &#34; + size_string
+        size_string = f&#34; {str(int(size_in_bytes / MiB % 1024))}MiB&#34; + size_string
+
+        if size_in_bytes &lt; GiB:
+            return size_string.strip()
+
+        size_string = size_string.strip().zfill(18)
+        size_string = &#34; &#34; + size_string
+        size_string = f&#34; {str(int(size_in_bytes / GiB % 1024))}GiB&#34; + size_string
+
+        if size_in_bytes &lt; TiB:
+            return size_string.strip()
+
+        size_string = size_string.strip().zfill(25)
+        size_string = &#34; &#34; + size_string
+        size_string = f&#34; {str(int(size_in_bytes / TiB))}TiB&#34; + size_string
+
+        return size_string.strip()
+
+    @classmethod
+    def get_size(cls, filename, human_readable=False):  # return size in bytes
         &#34;&#34;&#34;
         &lt;br&gt;`param filename` string with path to file
-        &lt;br&gt;`return` int with filesize in bytes
+        &lt;br&gt;`return` int with file size in bytes
         &#34;&#34;&#34;
         import os
-        return os.stat(filename).st_size
+        size_in_bytes = os.stat(filename).st_size
+        if not human_readable:
+            return size_in_bytes
+
+        return cls.format_size_human_readable(size_in_bytes=size_in_bytes)
 
     @staticmethod
     def get_modification_time(filename):
@@ -313,6 +364,15 @@ class File:
                 return out.split(&#34;; &#34;)[1]
             except IndexError:
                 return &#34;unknown&#34;
+
+    @staticmethod
+    def set_modification_time(filepath, datetime):
+        import time
+        import os
+
+        mod_time = time.mktime(datetime.timetuple())
+
+        os.utime(filepath, (mod_time, mod_time))
 
     all_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp273&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp720&#39;, &#39;cp737&#39;,
                      &#39;cp775&#39;, &#39;cp850&#39;, &#39;cp852&#39;, &#39;cp855&#39;, &#39;cp856&#39;, &#39;cp857&#39;, &#39;cp858&#39;, &#39;cp860&#39;, &#39;cp861&#39;, &#39;cp862&#39;, &#39;cp863&#39;,
@@ -351,7 +411,7 @@ class File:
     &#34;&#34;&#34;
     @classmethod
     def create(cls, filename, quiet=True):
-        &#34;&#34;&#34;Creates subdirs, if needed
+        &#34;&#34;&#34;Creates subdirectories, if needed
         &lt;br&gt;`param filename` string with path to creating file
         &lt;br&gt;`param quiet` boolean, if True, suppress output to console
         &lt;br&gt;`return` None
@@ -383,7 +443,8 @@ class File:
         &#34;&#34;&#34;
         &lt;br&gt;`param path` string with path to deleting file
         &lt;br&gt;`param quiet` boolean, suppress print to console
-        &lt;br&gt;`param no_sleep` boolean, if True - function skip sleep in 0.05 seconds after deleting file (to ensure than file
+        &lt;br&gt;`param no_sleep` boolean, if True - function skip sleep in 0.05 seconds after deleting file
+        (to ensure than file
         deleted before next code run)
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
@@ -461,10 +522,10 @@ class File:
         return filename
 
     @classmethod
-    def backup(cls, filename, subfolder=&#34;bak&#34;, hide=True, quiet=False):
-        &#34;&#34;&#34;Move file to subfolder, adds sort of timestamp to filename and hide file if &#39;hide&#39; argument is True
+    def backup(cls, filename, subdirectory=&#34;bak&#34;, hide=True, quiet=False):
+        &#34;&#34;&#34;Move file to subdirectory, adds sort of timestamp to filename and hide file if &#39;hide&#39; argument is True
         &lt;br&gt;`param filename` string with path to file
-        &lt;br&gt;`param subfolder` string with name of subfolder of backed up files
+        &lt;br&gt;`param subdirectory` string with name of subdirectory of backed up files
         &lt;br&gt;`param hide` boolean, define hide file or not
         &lt;br&gt;`param quiet` boolean, suppress print to console
         &lt;br&gt;`return`
@@ -475,17 +536,17 @@ class File:
         from .dir9 import Dir
         from .time9 import Time
         filename = Path.full(filename)  # normalize filename
-        backup_filename = str(filename) + &#34;.&#34; + Time.dotted() + &#34;.bak&#34;  # add dotted time to backup filename
+        backup_filename = str(filename) + &#34;.&#34; + Time.dotted() + &#34;.bak&#34;  # add dotted time to back up filename
         backup_filename = os.path.split(backup_filename)  # splitting filename to folder and file
-        try:  # if subfolder has no len
-            if len(subfolder) &lt; 1:  # if subfolder has zero len
-                raise TypeError(&#34;subfolder must have non-zero len&#34;)
-        except TypeError:  # if subfolder has no len
-            subfolder = &#34;bak&#34;  # set subfolder to default
-            print(&#34;len(subfolder) &lt; 1, so subfolder = &#39;bak&#39;&#34;)  # print error
-        subfolder = Path.combine(backup_filename[0], subfolder)  # append subfolder name
-        Dir.create(subfolder)  # create subfolder
-        backup_filename = Path.combine(subfolder, backup_filename[1])  # backup file name full path
+        try:  # if subdirectory has no len
+            if len(subdirectory) &lt; 1:  # if subdirectory has zero len
+                raise TypeError(&#34;subdirectory must have non-zero len&#34;)
+        except TypeError:  # if subdirectory has no len
+            subdirectory = &#34;bak&#34;  # set subdirectory to default
+            print(&#34;len(subdirectory) &lt; 1, so subdirectory = &#39;bak&#39;&#34;)  # print error
+        subdirectory = Path.combine(backup_filename[0], subdirectory)  # append subdirectory name
+        Dir.create(subdirectory)  # create subdirectory
+        backup_filename = Path.combine(subdirectory, backup_filename[1])  # backup file name full path
         shutil.copy2(filename, backup_filename)  # finally backup file
         if hide:
             backup_filename = cls.hide(backup_filename)  # hiding file
@@ -515,13 +576,19 @@ class File:
         count_of_symbols = count_of_symbols
         if count_of_symbols is True:  # you can define how much symbols use to define encoding
             count_of_symbols = 10000
-        with open(path, &#34;rb&#34;) as rawfile:
-            slice_of_raw_data = rawfile.read(count_of_symbols)
+        with open(path, &#34;rb&#34;) as raw_file:
+            slice_of_raw_data = raw_file.read(count_of_symbols)
         encoding = Bytes.get_encoding(slice_of_raw_data)
         return encoding
 
+    @staticmethod
+    def _read_with_encoding(path, encoding):
+        with open(path, &#34;r&#34;, encoding=encoding) as file:
+            return file.read()
+
     @classmethod
-    def read(cls, path, encoding: str = &#34;utf-8&#34;, auto_detect_encoding: Union[bool, int] = True, mode: str = &#34;r&#34;):  # return pipe to file content
+    def read(cls, path, encoding: str = &#34;utf-8&#34;, auto_detect_encoding: Union[bool, int] = True, mode: str = &#34;r&#34;):
+        # return pipe to file content
         &#34;&#34;&#34;
         &lt;br&gt;`param path` path to file
         &lt;br&gt;`param auto_detect_encoding` how much symbols use to auto define decoding, if True, uses 10000
@@ -531,8 +598,11 @@ class File:
             try:
                 if auto_detect_encoding:
                     encoding = cls.get_encoding(path, count_of_symbols=auto_detect_encoding)
-                with open(path, &#34;r&#34;, encoding=encoding) as file:
-                    return file.read()
+                try:
+                    return cls._read_with_encoding(path, encoding)
+                except LookupError:
+                    if encoding.lower() == &#34;EUC-TW&#34;.lower():
+                        return cls._read_with_encoding(path, &#34;TIS-620&#34;)  # crude fix for EUC-TW
             except UnicodeDecodeError:
                 import codecs
                 with codecs.open(path, encoding=&#39;cp1251&#39;, errors=&#39;replace&#39;) as file:
@@ -544,11 +614,12 @@ class File:
                 return content
 
     @staticmethod
-    def write(filename, what_to_write, mode=&#34;a&#34;, quiet=True):
+    def write(filename, what_to_write, mode=&#34;a&#34;, encoding=&#34;utf-8&#34;, quiet=True):
         &#34;&#34;&#34;Write to end of file if &#34;mode&#34; arg isn&#39;t redefined
         &lt;br&gt;`param filename` string with path to file
         &lt;br&gt;`param what_to_write` string to write
         &lt;br&gt;`param mode` string with any mode that supported by python open() func
+        &lt;br&gt;`param encoding` string with any encoding
         &lt;br&gt;`param quiet` boolean, if True, suppress output to console
         &lt;br&gt;`return` None
         &#34;&#34;&#34;
@@ -556,7 +627,7 @@ class File:
             print(f&#34;Writing to file {filename}&#34;)
         if &#34;b&#34; not in mode and isinstance(what_to_write, str):
             with open(filename, mode=mode+&#34;b&#34;) as file:  # open file then closes it
-                file.write(what_to_write.encode(&#34;utf-8&#34;))
+                file.write(what_to_write.encode(encoding))
         else:
             with open(filename, mode=mode) as file:  # open file then closes it
                 if isinstance(what_to_write, int):
@@ -575,13 +646,53 @@ class File:
         return os.path.isfile(filename)
 
     @staticmethod
-    def get_size(filename):  # return size in bytes
+    def format_size_human_readable(size_in_bytes):
+        from .const9 import KiB, MiB, GiB, TiB
+
+        size_string = f&#34; {str(int(size_in_bytes % KiB))}b&#34;
+
+        if size_in_bytes &lt; KiB:
+            return size_string.strip()
+
+        size_string = size_string.strip().zfill(4)
+        size_string = &#34; &#34; + size_string
+        size_string = f&#34; {str(int(size_in_bytes / KiB % 1024))}KiB&#34; + size_string
+
+        if size_in_bytes &lt; MiB:
+            return size_string.strip()
+
+        size_string = size_string.strip().zfill(11)
+        size_string = &#34; &#34; + size_string
+        size_string = f&#34; {str(int(size_in_bytes / MiB % 1024))}MiB&#34; + size_string
+
+        if size_in_bytes &lt; GiB:
+            return size_string.strip()
+
+        size_string = size_string.strip().zfill(18)
+        size_string = &#34; &#34; + size_string
+        size_string = f&#34; {str(int(size_in_bytes / GiB % 1024))}GiB&#34; + size_string
+
+        if size_in_bytes &lt; TiB:
+            return size_string.strip()
+
+        size_string = size_string.strip().zfill(25)
+        size_string = &#34; &#34; + size_string
+        size_string = f&#34; {str(int(size_in_bytes / TiB))}TiB&#34; + size_string
+
+        return size_string.strip()
+
+    @classmethod
+    def get_size(cls, filename, human_readable=False):  # return size in bytes
         &#34;&#34;&#34;
         &lt;br&gt;`param filename` string with path to file
-        &lt;br&gt;`return` int with filesize in bytes
+        &lt;br&gt;`return` int with file size in bytes
         &#34;&#34;&#34;
         import os
-        return os.stat(filename).st_size
+        size_in_bytes = os.stat(filename).st_size
+        if not human_readable:
+            return size_in_bytes
+
+        return cls.format_size_human_readable(size_in_bytes=size_in_bytes)
 
     @staticmethod
     def get_modification_time(filename):
@@ -625,6 +736,15 @@ class File:
             except IndexError:
                 return &#34;unknown&#34;
 
+    @staticmethod
+    def set_modification_time(filepath, datetime):
+        import time
+        import os
+
+        mod_time = time.mktime(datetime.timetuple())
+
+        os.utime(filepath, (mod_time, mod_time))
+
     all_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp273&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp720&#39;, &#39;cp737&#39;,
                      &#39;cp775&#39;, &#39;cp850&#39;, &#39;cp852&#39;, &#39;cp855&#39;, &#39;cp856&#39;, &#39;cp857&#39;, &#39;cp858&#39;, &#39;cp860&#39;, &#39;cp861&#39;, &#39;cp862&#39;, &#39;cp863&#39;,
                      &#39;cp864&#39;, &#39;cp865&#39;, &#39;cp866&#39;, &#39;cp869&#39;, &#39;cp874&#39;, &#39;cp875&#39;, &#39;cp932&#39;, &#39;cp949&#39;, &#39;cp950&#39;, &#39;cp1006&#39;,
@@ -648,12 +768,12 @@ class File:
 <h3>Static methods</h3>
 <dl>
 <dt id="commands.file9.File.backup"><code class="name flex">
-<span>def <span class="ident">backup</span></span>(<span>filename, subfolder='bak', hide=True, quiet=False)</span>
+<span>def <span class="ident">backup</span></span>(<span>filename, subdirectory='bak', hide=True, quiet=False)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Move file to subfolder, adds sort of timestamp to filename and hide file if 'hide' argument is True
+<div class="desc"><p>Move file to subdirectory, adds sort of timestamp to filename and hide file if 'hide' argument is True
 <br><code>param filename</code> string with path to file
-<br><code>param subfolder</code> string with name of subfolder of backed up files
+<br><code>param subdirectory</code> string with name of subdirectory of backed up files
 <br><code>param hide</code> boolean, define hide file or not
 <br><code>param quiet</code> boolean, suppress print to console
 <br><code>return</code></p></div>
@@ -662,10 +782,10 @@ class File:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def backup(cls, filename, subfolder=&#34;bak&#34;, hide=True, quiet=False):
-    &#34;&#34;&#34;Move file to subfolder, adds sort of timestamp to filename and hide file if &#39;hide&#39; argument is True
+def backup(cls, filename, subdirectory=&#34;bak&#34;, hide=True, quiet=False):
+    &#34;&#34;&#34;Move file to subdirectory, adds sort of timestamp to filename and hide file if &#39;hide&#39; argument is True
     &lt;br&gt;`param filename` string with path to file
-    &lt;br&gt;`param subfolder` string with name of subfolder of backed up files
+    &lt;br&gt;`param subdirectory` string with name of subdirectory of backed up files
     &lt;br&gt;`param hide` boolean, define hide file or not
     &lt;br&gt;`param quiet` boolean, suppress print to console
     &lt;br&gt;`return`
@@ -676,17 +796,17 @@ def backup(cls, filename, subfolder=&#34;bak&#34;, hide=True, quiet=False):
     from .dir9 import Dir
     from .time9 import Time
     filename = Path.full(filename)  # normalize filename
-    backup_filename = str(filename) + &#34;.&#34; + Time.dotted() + &#34;.bak&#34;  # add dotted time to backup filename
+    backup_filename = str(filename) + &#34;.&#34; + Time.dotted() + &#34;.bak&#34;  # add dotted time to back up filename
     backup_filename = os.path.split(backup_filename)  # splitting filename to folder and file
-    try:  # if subfolder has no len
-        if len(subfolder) &lt; 1:  # if subfolder has zero len
-            raise TypeError(&#34;subfolder must have non-zero len&#34;)
-    except TypeError:  # if subfolder has no len
-        subfolder = &#34;bak&#34;  # set subfolder to default
-        print(&#34;len(subfolder) &lt; 1, so subfolder = &#39;bak&#39;&#34;)  # print error
-    subfolder = Path.combine(backup_filename[0], subfolder)  # append subfolder name
-    Dir.create(subfolder)  # create subfolder
-    backup_filename = Path.combine(subfolder, backup_filename[1])  # backup file name full path
+    try:  # if subdirectory has no len
+        if len(subdirectory) &lt; 1:  # if subdirectory has zero len
+            raise TypeError(&#34;subdirectory must have non-zero len&#34;)
+    except TypeError:  # if subdirectory has no len
+        subdirectory = &#34;bak&#34;  # set subdirectory to default
+        print(&#34;len(subdirectory) &lt; 1, so subdirectory = &#39;bak&#39;&#34;)  # print error
+    subdirectory = Path.combine(backup_filename[0], subdirectory)  # append subdirectory name
+    Dir.create(subdirectory)  # create subdirectory
+    backup_filename = Path.combine(subdirectory, backup_filename[1])  # backup file name full path
     shutil.copy2(filename, backup_filename)  # finally backup file
     if hide:
         backup_filename = cls.hide(backup_filename)  # hiding file
@@ -723,7 +843,7 @@ def copy(input_file, output_file):
 <span>def <span class="ident">create</span></span>(<span>filename, quiet=True)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Creates subdirs, if needed
+<div class="desc"><p>Creates subdirectories, if needed
 <br><code>param filename</code> string with path to creating file
 <br><code>param quiet</code> boolean, if True, suppress output to console
 <br><code>return</code> None</p></div>
@@ -733,7 +853,7 @@ def copy(input_file, output_file):
 </summary>
 <pre><code class="python">@classmethod
 def create(cls, filename, quiet=True):
-    &#34;&#34;&#34;Creates subdirs, if needed
+    &#34;&#34;&#34;Creates subdirectories, if needed
     &lt;br&gt;`param filename` string with path to creating file
     &lt;br&gt;`param quiet` boolean, if True, suppress output to console
     &lt;br&gt;`return` None
@@ -767,7 +887,8 @@ def create(cls, filename, quiet=True):
 <dd>
 <div class="desc"><p><br><code>param path</code> string with path to deleting file
 <br><code>param quiet</code> boolean, suppress print to console
-<br><code>param no_sleep</code> boolean, if True - function skip sleep in 0.05 seconds after deleting file (to ensure than file
+<br><code>param no_sleep</code> boolean, if True - function skip sleep in 0.05 seconds after deleting file
+(to ensure than file
 deleted before next code run)
 <br><code>return</code> None</p></div>
 <details class="source">
@@ -779,7 +900,8 @@ def delete(cls, path, quiet=True, no_sleep=False):
     &#34;&#34;&#34;
     &lt;br&gt;`param path` string with path to deleting file
     &lt;br&gt;`param quiet` boolean, suppress print to console
-    &lt;br&gt;`param no_sleep` boolean, if True - function skip sleep in 0.05 seconds after deleting file (to ensure than file
+    &lt;br&gt;`param no_sleep` boolean, if True - function skip sleep in 0.05 seconds after deleting file
+    (to ensure than file
     deleted before next code run)
     &lt;br&gt;`return` None
     &#34;&#34;&#34;
@@ -820,6 +942,52 @@ def exist(filename):
     return os.path.isfile(filename)</code></pre>
 </details>
 </dd>
+<dt id="commands.file9.File.format_size_human_readable"><code class="name flex">
+<span>def <span class="ident">format_size_human_readable</span></span>(<span>size_in_bytes)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def format_size_human_readable(size_in_bytes):
+    from .const9 import KiB, MiB, GiB, TiB
+
+    size_string = f&#34; {str(int(size_in_bytes % KiB))}b&#34;
+
+    if size_in_bytes &lt; KiB:
+        return size_string.strip()
+
+    size_string = size_string.strip().zfill(4)
+    size_string = &#34; &#34; + size_string
+    size_string = f&#34; {str(int(size_in_bytes / KiB % 1024))}KiB&#34; + size_string
+
+    if size_in_bytes &lt; MiB:
+        return size_string.strip()
+
+    size_string = size_string.strip().zfill(11)
+    size_string = &#34; &#34; + size_string
+    size_string = f&#34; {str(int(size_in_bytes / MiB % 1024))}MiB&#34; + size_string
+
+    if size_in_bytes &lt; GiB:
+        return size_string.strip()
+
+    size_string = size_string.strip().zfill(18)
+    size_string = &#34; &#34; + size_string
+    size_string = f&#34; {str(int(size_in_bytes / GiB % 1024))}GiB&#34; + size_string
+
+    if size_in_bytes &lt; TiB:
+        return size_string.strip()
+
+    size_string = size_string.strip().zfill(25)
+    size_string = &#34; &#34; + size_string
+    size_string = f&#34; {str(int(size_in_bytes / TiB))}TiB&#34; + size_string
+
+    return size_string.strip()</code></pre>
+</details>
+</dd>
 <dt id="commands.file9.File.get_encoding"><code class="name flex">
 <span>def <span class="ident">get_encoding</span></span>(<span>path, count_of_symbols: Union[bool, int] = True)</span>
 </code></dt>
@@ -842,8 +1010,8 @@ def get_encoding(path, count_of_symbols: Union[bool, int] = True):
     count_of_symbols = count_of_symbols
     if count_of_symbols is True:  # you can define how much symbols use to define encoding
         count_of_symbols = 10000
-    with open(path, &#34;rb&#34;) as rawfile:
-        slice_of_raw_data = rawfile.read(count_of_symbols)
+    with open(path, &#34;rb&#34;) as raw_file:
+        slice_of_raw_data = raw_file.read(count_of_symbols)
     encoding = Bytes.get_encoding(slice_of_raw_data)
     return encoding</code></pre>
 </details>
@@ -913,23 +1081,27 @@ def get_modification_time(filename):
 </details>
 </dd>
 <dt id="commands.file9.File.get_size"><code class="name flex">
-<span>def <span class="ident">get_size</span></span>(<span>filename)</span>
+<span>def <span class="ident">get_size</span></span>(<span>filename, human_readable=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p><br><code>param filename</code> string with path to file
-<br><code>return</code> int with filesize in bytes</p></div>
+<br><code>return</code> int with file size in bytes</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">@staticmethod
-def get_size(filename):  # return size in bytes
+<pre><code class="python">@classmethod
+def get_size(cls, filename, human_readable=False):  # return size in bytes
     &#34;&#34;&#34;
     &lt;br&gt;`param filename` string with path to file
-    &lt;br&gt;`return` int with filesize in bytes
+    &lt;br&gt;`return` int with file size in bytes
     &#34;&#34;&#34;
     import os
-    return os.stat(filename).st_size</code></pre>
+    size_in_bytes = os.stat(filename).st_size
+    if not human_readable:
+        return size_in_bytes
+
+    return cls.format_size_human_readable(size_in_bytes=size_in_bytes)</code></pre>
 </details>
 </dd>
 <dt id="commands.file9.File.hide"><code class="name flex">
@@ -1008,7 +1180,8 @@ def move(cls, input_file, output_file):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def read(cls, path, encoding: str = &#34;utf-8&#34;, auto_detect_encoding: Union[bool, int] = True, mode: str = &#34;r&#34;):  # return pipe to file content
+def read(cls, path, encoding: str = &#34;utf-8&#34;, auto_detect_encoding: Union[bool, int] = True, mode: str = &#34;r&#34;):
+    # return pipe to file content
     &#34;&#34;&#34;
     &lt;br&gt;`param path` path to file
     &lt;br&gt;`param auto_detect_encoding` how much symbols use to auto define decoding, if True, uses 10000
@@ -1018,8 +1191,11 @@ def read(cls, path, encoding: str = &#34;utf-8&#34;, auto_detect_encoding: Union
         try:
             if auto_detect_encoding:
                 encoding = cls.get_encoding(path, count_of_symbols=auto_detect_encoding)
-            with open(path, &#34;r&#34;, encoding=encoding) as file:
-                return file.read()
+            try:
+                return cls._read_with_encoding(path, encoding)
+            except LookupError:
+                if encoding.lower() == &#34;EUC-TW&#34;.lower():
+                    return cls._read_with_encoding(path, &#34;TIS-620&#34;)  # crude fix for EUC-TW
         except UnicodeDecodeError:
             import codecs
             with codecs.open(path, encoding=&#39;cp1251&#39;, errors=&#39;replace&#39;) as file:
@@ -1050,6 +1226,25 @@ def rename(cls, input_file, output_file):
     &lt;br&gt;`return` string with path to new file place
     &#34;&#34;&#34;
     return cls.move(input_file, output_file)</code></pre>
+</details>
+</dd>
+<dt id="commands.file9.File.set_modification_time"><code class="name flex">
+<span>def <span class="ident">set_modification_time</span></span>(<span>filepath, datetime)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def set_modification_time(filepath, datetime):
+    import time
+    import os
+
+    mod_time = time.mktime(datetime.timetuple())
+
+    os.utime(filepath, (mod_time, mod_time))</code></pre>
 </details>
 </dd>
 <dt id="commands.file9.File.sha256_checksum"><code class="name flex">
@@ -1093,13 +1288,14 @@ def wipe(path):
 </details>
 </dd>
 <dt id="commands.file9.File.write"><code class="name flex">
-<span>def <span class="ident">write</span></span>(<span>filename, what_to_write, mode='a', quiet=True)</span>
+<span>def <span class="ident">write</span></span>(<span>filename, what_to_write, mode='a', encoding='utf-8', quiet=True)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Write to end of file if "mode" arg isn't redefined
 <br><code>param filename</code> string with path to file
 <br><code>param what_to_write</code> string to write
 <br><code>param mode</code> string with any mode that supported by python open() func
+<br><code>param encoding</code> string with any encoding
 <br><code>param quiet</code> boolean, if True, suppress output to console
 <br><code>return</code> None</p></div>
 <details class="source">
@@ -1107,11 +1303,12 @@ def wipe(path):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
-def write(filename, what_to_write, mode=&#34;a&#34;, quiet=True):
+def write(filename, what_to_write, mode=&#34;a&#34;, encoding=&#34;utf-8&#34;, quiet=True):
     &#34;&#34;&#34;Write to end of file if &#34;mode&#34; arg isn&#39;t redefined
     &lt;br&gt;`param filename` string with path to file
     &lt;br&gt;`param what_to_write` string to write
     &lt;br&gt;`param mode` string with any mode that supported by python open() func
+    &lt;br&gt;`param encoding` string with any encoding
     &lt;br&gt;`param quiet` boolean, if True, suppress output to console
     &lt;br&gt;`return` None
     &#34;&#34;&#34;
@@ -1119,7 +1316,7 @@ def write(filename, what_to_write, mode=&#34;a&#34;, quiet=True):
         print(f&#34;Writing to file {filename}&#34;)
     if &#34;b&#34; not in mode and isinstance(what_to_write, str):
         with open(filename, mode=mode+&#34;b&#34;) as file:  # open file then closes it
-            file.write(what_to_write.encode(&#34;utf-8&#34;))
+            file.write(what_to_write.encode(encoding))
     else:
         with open(filename, mode=mode) as file:  # open file then closes it
             if isinstance(what_to_write, int):
@@ -1156,6 +1353,7 @@ def write(filename, what_to_write, mode=&#34;a&#34;, quiet=True):
 <li><code><a title="commands.file9.File.create" href="#commands.file9.File.create">create</a></code></li>
 <li><code><a title="commands.file9.File.delete" href="#commands.file9.File.delete">delete</a></code></li>
 <li><code><a title="commands.file9.File.exist" href="#commands.file9.File.exist">exist</a></code></li>
+<li><code><a title="commands.file9.File.format_size_human_readable" href="#commands.file9.File.format_size_human_readable">format_size_human_readable</a></code></li>
 <li><code><a title="commands.file9.File.get_encoding" href="#commands.file9.File.get_encoding">get_encoding</a></code></li>
 <li><code><a title="commands.file9.File.get_extension" href="#commands.file9.File.get_extension">get_extension</a></code></li>
 <li><code><a title="commands.file9.File.get_mime" href="#commands.file9.File.get_mime">get_mime</a></code></li>
@@ -1165,6 +1363,7 @@ def write(filename, what_to_write, mode=&#34;a&#34;, quiet=True):
 <li><code><a title="commands.file9.File.move" href="#commands.file9.File.move">move</a></code></li>
 <li><code><a title="commands.file9.File.read" href="#commands.file9.File.read">read</a></code></li>
 <li><code><a title="commands.file9.File.rename" href="#commands.file9.File.rename">rename</a></code></li>
+<li><code><a title="commands.file9.File.set_modification_time" href="#commands.file9.File.set_modification_time">set_modification_time</a></code></li>
 <li><code><a title="commands.file9.File.sha256_checksum" href="#commands.file9.File.sha256_checksum">sha256_checksum</a></code></li>
 <li><code><a title="commands.file9.File.wipe" href="#commands.file9.File.wipe">wipe</a></code></li>
 <li><code><a title="commands.file9.File.write" href="#commands.file9.File.write">write</a></code></li>
@@ -1176,7 +1375,7 @@ def write(filename, what_to_write, mode=&#34;a&#34;, quiet=True):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>

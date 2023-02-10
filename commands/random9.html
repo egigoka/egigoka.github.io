@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.9.1" />
+<meta name="generator" content="pdoc 0.10.0" />
 <title>commands.random9 API documentation</title>
 <meta name="description" content="Internal module with functions for creating some random values." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -37,6 +37,7 @@ __version__ = &#34;0.7.0&#34;
 class Random:
     &#34;&#34;&#34;Class with functions for creating some random values.
     &#34;&#34;&#34;
+
     @staticmethod
     def integer(minimum, maximum, to_str=False):
         &#34;&#34;&#34;
@@ -103,11 +104,6 @@ class Random:
         &#34;&#34;&#34;
         import random
 
-        try:
-            get_char = unichr  # py2
-        except NameError:
-            get_char = chr
-
         # Update this to include code point ranges to be sampled
         include_ranges = [
             (0x0021, 0x0021),
@@ -124,9 +120,9 @@ class Random:
             (0x0384, 0x038A),
             (0x038C, 0x038C)]
 
-        alphabet = [get_char(code_point) for current_range in include_ranges
-            for code_point in range(current_range[0], current_range[1] + 1)]
-        return &#39;&#39;.join(random.choice(alphabet) for i in range(length))
+        alphabet = [chr(code_point) for current_range in include_ranges
+                    for code_point in range(current_range[0], current_range[1] + 1)]
+        return &#39;&#39;.join(random.choice(alphabet) for _ in range(length))
 
     @staticmethod
     def boolean():
@@ -143,7 +139,7 @@ class Random:
         &#34;&#34;&#34;
         import string
         symbols = cls.string(32, string.digits + &#34;abcdef&#34;)
-        string = symbols[:8] + &#34;-&#34; + symbols[8:12] + &#34;-&#34; + symbols [12:16] + &#34;-&#34; + symbols[16:20] + &#34;-&#34; + symbols[20:]
+        string = symbols[:8] + &#34;-&#34; + symbols[8:12] + &#34;-&#34; + symbols[12:16] + &#34;-&#34; + symbols[16:20] + &#34;-&#34; + symbols[20:]
         return string
 
     @staticmethod
@@ -175,6 +171,7 @@ class Random:
 <pre><code class="python">class Random:
     &#34;&#34;&#34;Class with functions for creating some random values.
     &#34;&#34;&#34;
+
     @staticmethod
     def integer(minimum, maximum, to_str=False):
         &#34;&#34;&#34;
@@ -241,11 +238,6 @@ class Random:
         &#34;&#34;&#34;
         import random
 
-        try:
-            get_char = unichr  # py2
-        except NameError:
-            get_char = chr
-
         # Update this to include code point ranges to be sampled
         include_ranges = [
             (0x0021, 0x0021),
@@ -262,9 +254,9 @@ class Random:
             (0x0384, 0x038A),
             (0x038C, 0x038C)]
 
-        alphabet = [get_char(code_point) for current_range in include_ranges
-            for code_point in range(current_range[0], current_range[1] + 1)]
-        return &#39;&#39;.join(random.choice(alphabet) for i in range(length))
+        alphabet = [chr(code_point) for current_range in include_ranges
+                    for code_point in range(current_range[0], current_range[1] + 1)]
+        return &#39;&#39;.join(random.choice(alphabet) for _ in range(length))
 
     @staticmethod
     def boolean():
@@ -281,7 +273,7 @@ class Random:
         &#34;&#34;&#34;
         import string
         symbols = cls.string(32, string.digits + &#34;abcdef&#34;)
-        string = symbols[:8] + &#34;-&#34; + symbols[8:12] + &#34;-&#34; + symbols [12:16] + &#34;-&#34; + symbols[16:20] + &#34;-&#34; + symbols[20:]
+        string = symbols[:8] + &#34;-&#34; + symbols[8:12] + &#34;-&#34; + symbols[12:16] + &#34;-&#34; + symbols[16:20] + &#34;-&#34; + symbols[20:]
         return string
 
     @staticmethod
@@ -349,7 +341,7 @@ def guid(cls):
     &#34;&#34;&#34;
     import string
     symbols = cls.string(32, string.digits + &#34;abcdef&#34;)
-    string = symbols[:8] + &#34;-&#34; + symbols[8:12] + &#34;-&#34; + symbols [12:16] + &#34;-&#34; + symbols[16:20] + &#34;-&#34; + symbols[20:]
+    string = symbols[:8] + &#34;-&#34; + symbols[8:12] + &#34;-&#34; + symbols[12:16] + &#34;-&#34; + symbols[16:20] + &#34;-&#34; + symbols[20:]
     return string</code></pre>
 </details>
 </dd>
@@ -471,11 +463,6 @@ def string_unicode(length):
     &#34;&#34;&#34;
     import random
 
-    try:
-        get_char = unichr  # py2
-    except NameError:
-        get_char = chr
-
     # Update this to include code point ranges to be sampled
     include_ranges = [
         (0x0021, 0x0021),
@@ -492,9 +479,9 @@ def string_unicode(length):
         (0x0384, 0x038A),
         (0x038C, 0x038C)]
 
-    alphabet = [get_char(code_point) for current_range in include_ranges
-        for code_point in range(current_range[0], current_range[1] + 1)]
-    return &#39;&#39;.join(random.choice(alphabet) for i in range(length))</code></pre>
+    alphabet = [chr(code_point) for current_range in include_ranges
+                for code_point in range(current_range[0], current_range[1] + 1)]
+    return &#39;&#39;.join(random.choice(alphabet) for _ in range(length))</code></pre>
 </details>
 </dd>
 </dl>
@@ -534,7 +521,7 @@ def string_unicode(length):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
 </footer>
 </body>
 </html>
