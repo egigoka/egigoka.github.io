@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions for managing strings.
 &#34;&#34;&#34;
-__version__ = &#34;0.14.2&#34;
+__version__ = &#34;0.15.0&#34;
 
 
 class Str:
@@ -128,7 +128,7 @@ class Str:
         return cls.newlines_to_strings(string=string)
 
     @staticmethod
-    def split_every(string, chars):
+    def split_every(string, chars, reverse = False):
         &#34;&#34;&#34;Split line every N chars
         &lt;br&gt;`param string` string, input
         &lt;br&gt;`param chars` int, count of chars, that split line
@@ -144,7 +144,13 @@ class Str:
         char_exists = &#34;.&#34;
         char_can_be_exists = &#34;.?&#34;
         regexp = char_exists + char_can_be_exists*(chars-1)
-        return re.findall(regexp, string, re.DOTALL)
+        if reverse:
+            string = string[::-1]
+        output = re.findall(regexp, string, re.DOTALL)
+        if reverse:
+            output = reversed(output)
+            output = [s[::-1] for s in output]
+        return output
 
     @staticmethod
     def leftpad(string, length, char=&#34;0&#34;, rightpad=False):
@@ -542,7 +548,7 @@ class Str:
         return cls.newlines_to_strings(string=string)
 
     @staticmethod
-    def split_every(string, chars):
+    def split_every(string, chars, reverse = False):
         &#34;&#34;&#34;Split line every N chars
         &lt;br&gt;`param string` string, input
         &lt;br&gt;`param chars` int, count of chars, that split line
@@ -558,7 +564,13 @@ class Str:
         char_exists = &#34;.&#34;
         char_can_be_exists = &#34;.?&#34;
         regexp = char_exists + char_can_be_exists*(chars-1)
-        return re.findall(regexp, string, re.DOTALL)
+        if reverse:
+            string = string[::-1]
+        output = re.findall(regexp, string, re.DOTALL)
+        if reverse:
+            output = reversed(output)
+            output = [s[::-1] for s in output]
+        return output
 
     @staticmethod
     def leftpad(string, length, char=&#34;0&#34;, rightpad=False):
@@ -1340,7 +1352,7 @@ def rreplace(string: str, old: str, new: str, occurrence: int):
 </details>
 </dd>
 <dt id="commands.str9.Str.split_every"><code class="name flex">
-<span>def <span class="ident">split_every</span></span>(<span>string, chars)</span>
+<span>def <span class="ident">split_every</span></span>(<span>string, chars, reverse=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Split line every N chars
@@ -1352,7 +1364,7 @@ def rreplace(string: str, old: str, new: str, occurrence: int):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
-def split_every(string, chars):
+def split_every(string, chars, reverse = False):
     &#34;&#34;&#34;Split line every N chars
     &lt;br&gt;`param string` string, input
     &lt;br&gt;`param chars` int, count of chars, that split line
@@ -1368,7 +1380,13 @@ def split_every(string, chars):
     char_exists = &#34;.&#34;
     char_can_be_exists = &#34;.?&#34;
     regexp = char_exists + char_can_be_exists*(chars-1)
-    return re.findall(regexp, string, re.DOTALL)</code></pre>
+    if reverse:
+        string = string[::-1]
+    output = re.findall(regexp, string, re.DOTALL)
+    if reverse:
+        output = reversed(output)
+        output = [s[::-1] for s in output]
+    return output</code></pre>
 </details>
 </dd>
 <dt id="commands.str9.Str.substring"><code class="name flex">
