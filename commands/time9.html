@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with time
 &#34;&#34;&#34;
-__version__ = &#34;1.2.0&#34;
+__version__ = &#34;1.2.2&#34;
 
 
 class Time:
@@ -194,8 +194,8 @@ class Time:
         
         units = [(&#39;y&#39;, 31536000), (&#39;m&#39;, 2592000), (&#39;w&#39;, 604800), (&#39;d&#39;, 86400), (&#39;h&#39;, 3600), (&#39;m&#39;, 60), (&#39;s&#39;, 1)]
 
-        total_seconds = int(time)
-        microseconds = int((time - total_seconds) * 1000000)
+        total_seconds = int(timedelta)
+        microseconds = int((timedelta - total_seconds) * 1000000)
         
         parts = []
     
@@ -393,8 +393,8 @@ class Time:
         
         units = [(&#39;y&#39;, 31536000), (&#39;m&#39;, 2592000), (&#39;w&#39;, 604800), (&#39;d&#39;, 86400), (&#39;h&#39;, 3600), (&#39;m&#39;, 60), (&#39;s&#39;, 1)]
 
-        total_seconds = int(time)
-        microseconds = int((time - total_seconds) * 1000000)
+        total_seconds = int(timedelta)
+        microseconds = int((timedelta - total_seconds) * 1000000)
         
         parts = []
     
@@ -547,8 +547,8 @@ def human_readable(timedelta):
     
     units = [(&#39;y&#39;, 31536000), (&#39;m&#39;, 2592000), (&#39;w&#39;, 604800), (&#39;d&#39;, 86400), (&#39;h&#39;, 3600), (&#39;m&#39;, 60), (&#39;s&#39;, 1)]
 
-    total_seconds = int(time)
-    microseconds = int((time - total_seconds) * 1000000)
+    total_seconds = int(timedelta)
+    microseconds = int((timedelta - total_seconds) * 1000000)
     
     parts = []
 
