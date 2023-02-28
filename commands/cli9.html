@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with commandline interfaces
 &#34;&#34;&#34;
-__version__ = &#34;0.4.10&#34;
+__version__ = &#34;0.5.0&#34;
 
 
 class CLI:
@@ -119,6 +119,14 @@ class CLI:
     @classmethod
     def get_int(cls, question):
         return cls.get_ints(question=question, count_of_ints=1)
+
+    @classmethod
+    def get_integer(cls, question):
+        return cls.get_int(question=question)
+
+    @classmethod
+    def get_integers(cls, question, count_of_ints):
+        return cls.get_ints(question=question, count_of_ints=count_of_ints)
 
     wait_update_pos = 0
 
@@ -325,6 +333,14 @@ class CLI:
     def get_int(cls, question):
         return cls.get_ints(question=question, count_of_ints=1)
 
+    @classmethod
+    def get_integer(cls, question):
+        return cls.get_int(question=question)
+
+    @classmethod
+    def get_integers(cls, question, count_of_ints):
+        return cls.get_ints(question=question, count_of_ints=count_of_ints)
+
     wait_update_pos = 0
 
     @classmethod
@@ -509,6 +525,34 @@ def get_date(date_name: str, always_return_date: bool = False):
 <pre><code class="python">@classmethod
 def get_int(cls, question):
     return cls.get_ints(question=question, count_of_ints=1)</code></pre>
+</details>
+</dd>
+<dt id="commands.cli9.CLI.get_integer"><code class="name flex">
+<span>def <span class="ident">get_integer</span></span>(<span>question)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def get_integer(cls, question):
+    return cls.get_int(question=question)</code></pre>
+</details>
+</dd>
+<dt id="commands.cli9.CLI.get_integers"><code class="name flex">
+<span>def <span class="ident">get_integers</span></span>(<span>question, count_of_ints)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def get_integers(cls, question, count_of_ints):
+    return cls.get_ints(question=question, count_of_ints=count_of_ints)</code></pre>
 </details>
 </dd>
 <dt id="commands.cli9.CLI.get_ints"><code class="name flex">
@@ -725,6 +769,8 @@ def wait_update(cls, quiet=False):
 <ul class="two-column">
 <li><code><a title="commands.cli9.CLI.get_date" href="#commands.cli9.CLI.get_date">get_date</a></code></li>
 <li><code><a title="commands.cli9.CLI.get_int" href="#commands.cli9.CLI.get_int">get_int</a></code></li>
+<li><code><a title="commands.cli9.CLI.get_integer" href="#commands.cli9.CLI.get_integer">get_integer</a></code></li>
+<li><code><a title="commands.cli9.CLI.get_integers" href="#commands.cli9.CLI.get_integers">get_integers</a></code></li>
 <li><code><a title="commands.cli9.CLI.get_ints" href="#commands.cli9.CLI.get_ints">get_ints</a></code></li>
 <li><code><a title="commands.cli9.CLI.get_y_n" href="#commands.cli9.CLI.get_y_n">get_y_n</a></code></li>
 <li><code><a title="commands.cli9.CLI.multiline_input" href="#commands.cli9.CLI.multiline_input">multiline_input</a></code></li>

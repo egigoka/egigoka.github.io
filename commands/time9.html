@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with time
 &#34;&#34;&#34;
-__version__ = &#34;1.1.0&#34;
+__version__ = &#34;1.2.0&#34;
 
 
 class Time:
@@ -167,12 +167,17 @@ class Time:
             time.sleep(seconds)
 
     @classmethod
-    def delta(cls, time_a, time_b):
+    def delta(cls, time_a, time_b=None):
         &#34;&#34;&#34;
         &lt;br&gt;`param time_a` datetime.datetime time object|float of timestamp
         &lt;br&gt;`param time_b` datetime.datetime time object|float of timestamp
         &lt;br&gt;`return` difference between two timestamps
         &#34;&#34;&#34;
+        from .funcs9 import multiple
+        if isinstance(time_a, multiple(int, float)) and time_b is None:
+            import datetime
+            return datetime.timedelta(seconds=time_a)
+        
         if time_a &gt; time_b:
             time_a, time_b = time_b, time_a
         time_a = cls.timestamp_to_datetime(time_a)
@@ -180,6 +185,31 @@ class Time:
         delta = time_b - time_a
         delta_combined = delta.seconds + delta.microseconds / 1E6
         return delta_combined
+
+    @classmethod
+    def human_readable(timedelta):
+        import datetime
+        if isinstance(timedelta, datetime.timedelta):
+            timedelta = timedelta.total_seconds()
+        
+        units = [(&#39;y&#39;, 31536000), (&#39;m&#39;, 2592000), (&#39;w&#39;, 604800), (&#39;d&#39;, 86400), (&#39;h&#39;, 3600), (&#39;m&#39;, 60), (&#39;s&#39;, 1)]
+
+        total_seconds = int(time)
+        microseconds = int((time - total_seconds) * 1000000)
+        
+        parts = []
+    
+        for unit, factor in units:
+            if total_seconds &gt;= factor:
+                value, total_seconds = divmod(total_seconds, factor)
+                parts.append(f&#34;{value}{unit}&#34;)
+        
+        if total_seconds &gt; 0 or microseconds &gt; 0:
+            parts.append(f&#34;{total_seconds:02}s&#34;)
+        if microseconds &gt; 0:
+            parts.append(f&#34;{microseconds:06}ms&#34;)
+    
+        return &#34; &#34;.join(parts)
 
 # datetime.datetime.now().strftime(&#39;some&#39;) todo implement
 # Popen work with todo implement</code></pre>
@@ -336,19 +366,49 @@ class Time:
             time.sleep(seconds)
 
     @classmethod
-    def delta(cls, time_a, time_b):
+    def delta(cls, time_a, time_b=None):
         &#34;&#34;&#34;
         &lt;br&gt;`param time_a` datetime.datetime time object|float of timestamp
         &lt;br&gt;`param time_b` datetime.datetime time object|float of timestamp
         &lt;br&gt;`return` difference between two timestamps
         &#34;&#34;&#34;
+        from .funcs9 import multiple
+        if isinstance(time_a, multiple(int, float)) and time_b is None:
+            import datetime
+            return datetime.timedelta(seconds=time_a)
+        
         if time_a &gt; time_b:
             time_a, time_b = time_b, time_a
         time_a = cls.timestamp_to_datetime(time_a)
         time_b = cls.timestamp_to_datetime(time_b)
         delta = time_b - time_a
         delta_combined = delta.seconds + delta.microseconds / 1E6
-        return delta_combined</code></pre>
+        return delta_combined
+
+    @classmethod
+    def human_readable(timedelta):
+        import datetime
+        if isinstance(timedelta, datetime.timedelta):
+            timedelta = timedelta.total_seconds()
+        
+        units = [(&#39;y&#39;, 31536000), (&#39;m&#39;, 2592000), (&#39;w&#39;, 604800), (&#39;d&#39;, 86400), (&#39;h&#39;, 3600), (&#39;m&#39;, 60), (&#39;s&#39;, 1)]
+
+        total_seconds = int(time)
+        microseconds = int((time - total_seconds) * 1000000)
+        
+        parts = []
+    
+        for unit, factor in units:
+            if total_seconds &gt;= factor:
+                value, total_seconds = divmod(total_seconds, factor)
+                parts.append(f&#34;{value}{unit}&#34;)
+        
+        if total_seconds &gt; 0 or microseconds &gt; 0:
+            parts.append(f&#34;{total_seconds:02}s&#34;)
+        if microseconds &gt; 0:
+            parts.append(f&#34;{microseconds:06}ms&#34;)
+    
+        return &#34; &#34;.join(parts)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -412,7 +472,7 @@ def datetime_to_timestamp(datetime_object):
 </details>
 </dd>
 <dt id="commands.time9.Time.delta"><code class="name flex">
-<span>def <span class="ident">delta</span></span>(<span>time_a, time_b)</span>
+<span>def <span class="ident">delta</span></span>(<span>time_a, time_b=None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p><br><code>param time_a</code> datetime.datetime time object|float of timestamp
@@ -423,12 +483,17 @@ def datetime_to_timestamp(datetime_object):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def delta(cls, time_a, time_b):
+def delta(cls, time_a, time_b=None):
     &#34;&#34;&#34;
     &lt;br&gt;`param time_a` datetime.datetime time object|float of timestamp
     &lt;br&gt;`param time_b` datetime.datetime time object|float of timestamp
     &lt;br&gt;`return` difference between two timestamps
     &#34;&#34;&#34;
+    from .funcs9 import multiple
+    if isinstance(time_a, multiple(int, float)) and time_b is None:
+        import datetime
+        return datetime.timedelta(seconds=time_a)
+    
     if time_a &gt; time_b:
         time_a, time_b = time_b, time_a
     time_a = cls.timestamp_to_datetime(time_a)
@@ -463,6 +528,41 @@ def dotted(cls, custom_time=None):
         cls.__lp2(time.hour) + &#34;.&#34; + cls.__lp2(time.minute) + &#34;.&#34; + cls.__lp2(time.second) + &#34;.&#34; + \
         cls.__lp2(time.microsecond, 6)
     return time</code></pre>
+</details>
+</dd>
+<dt id="commands.time9.Time.human_readable"><code class="name flex">
+<span>def <span class="ident">human_readable</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def human_readable(timedelta):
+    import datetime
+    if isinstance(timedelta, datetime.timedelta):
+        timedelta = timedelta.total_seconds()
+    
+    units = [(&#39;y&#39;, 31536000), (&#39;m&#39;, 2592000), (&#39;w&#39;, 604800), (&#39;d&#39;, 86400), (&#39;h&#39;, 3600), (&#39;m&#39;, 60), (&#39;s&#39;, 1)]
+
+    total_seconds = int(time)
+    microseconds = int((time - total_seconds) * 1000000)
+    
+    parts = []
+
+    for unit, factor in units:
+        if total_seconds &gt;= factor:
+            value, total_seconds = divmod(total_seconds, factor)
+            parts.append(f&#34;{value}{unit}&#34;)
+    
+    if total_seconds &gt; 0 or microseconds &gt; 0:
+        parts.append(f&#34;{total_seconds:02}s&#34;)
+    if microseconds &gt; 0:
+        parts.append(f&#34;{microseconds:06}ms&#34;)
+
+    return &#34; &#34;.join(parts)</code></pre>
 </details>
 </dd>
 <dt id="commands.time9.Time.sleep"><code class="name flex">
@@ -568,6 +668,7 @@ def timestamp_to_datetime(timestamp):
 <li><code><a title="commands.time9.Time.datetime_to_timestamp" href="#commands.time9.Time.datetime_to_timestamp">datetime_to_timestamp</a></code></li>
 <li><code><a title="commands.time9.Time.delta" href="#commands.time9.Time.delta">delta</a></code></li>
 <li><code><a title="commands.time9.Time.dotted" href="#commands.time9.Time.dotted">dotted</a></code></li>
+<li><code><a title="commands.time9.Time.human_readable" href="#commands.time9.Time.human_readable">human_readable</a></code></li>
 <li><code><a title="commands.time9.Time.sleep" href="#commands.time9.Time.sleep">sleep</a></code></li>
 <li><code><a title="commands.time9.Time.stamp" href="#commands.time9.Time.stamp">stamp</a></code></li>
 <li><code><a title="commands.time9.Time.timestamp_to_datetime" href="#commands.time9.Time.timestamp_to_datetime">timestamp_to_datetime</a></code></li>
