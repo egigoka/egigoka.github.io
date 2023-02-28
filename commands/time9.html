@@ -186,7 +186,7 @@ class Time:
         delta_combined = delta.seconds + delta.microseconds / 1E6
         return delta_combined
 
-    @classmethod
+    @staticmethod
     def human_readable(timedelta):
         import datetime
         if isinstance(timedelta, datetime.timedelta):
@@ -385,7 +385,7 @@ class Time:
         delta_combined = delta.seconds + delta.microseconds / 1E6
         return delta_combined
 
-    @classmethod
+    @staticmethod
     def human_readable(timedelta):
         import datetime
         if isinstance(timedelta, datetime.timedelta):
@@ -531,7 +531,7 @@ def dotted(cls, custom_time=None):
 </details>
 </dd>
 <dt id="commands.time9.Time.human_readable"><code class="name flex">
-<span>def <span class="ident">human_readable</span></span>(<span>)</span>
+<span>def <span class="ident">human_readable</span></span>(<span>timedelta)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -539,7 +539,7 @@ def dotted(cls, custom_time=None):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">@classmethod
+<pre><code class="python">@staticmethod
 def human_readable(timedelta):
     import datetime
     if isinstance(timedelta, datetime.timedelta):
