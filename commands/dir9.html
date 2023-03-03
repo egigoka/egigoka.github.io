@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with directories
 &#34;&#34;&#34;
-__version__ = &#34;1.7.0&#34;
+__version__ = &#34;1.8.0&#34;
 
 
 class Dir:
@@ -270,6 +270,10 @@ class Dir:
         &#34;&#34;&#34;
         import os
         return os.path.isdir(filename)
+
+    @classmethod
+    def exists(cls, filename):
+        return cls.exist(filename=filename)
 
     @classmethod
     def get_size(cls, path):
@@ -553,6 +557,10 @@ class Dir:
         &#34;&#34;&#34;
         import os
         return os.path.isdir(filename)
+
+    @classmethod
+    def exists(cls, filename):
+        return cls.exist(filename=filename)
 
     @classmethod
     def get_size(cls, path):
@@ -846,6 +854,20 @@ def exist(filename):
     return os.path.isdir(filename)</code></pre>
 </details>
 </dd>
+<dt id="commands.dir9.Dir.exists"><code class="name flex">
+<span>def <span class="ident">exists</span></span>(<span>filename)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def exists(cls, filename):
+    return cls.exist(filename=filename)</code></pre>
+</details>
+</dd>
 <dt id="commands.dir9.Dir.get_free_space"><code class="name flex">
 <span>def <span class="ident">get_free_space</span></span>(<span>path)</span>
 </code></dt>
@@ -1050,6 +1072,7 @@ def number_of_files(cls, path, quiet=True):
 <li><code><a title="commands.dir9.Dir.create" href="#commands.dir9.Dir.create">create</a></code></li>
 <li><code><a title="commands.dir9.Dir.delete" href="#commands.dir9.Dir.delete">delete</a></code></li>
 <li><code><a title="commands.dir9.Dir.exist" href="#commands.dir9.Dir.exist">exist</a></code></li>
+<li><code><a title="commands.dir9.Dir.exists" href="#commands.dir9.Dir.exists">exists</a></code></li>
 <li><code><a title="commands.dir9.Dir.get_free_space" href="#commands.dir9.Dir.get_free_space">get_free_space</a></code></li>
 <li><code><a title="commands.dir9.Dir.get_modification_time" href="#commands.dir9.Dir.get_modification_time">get_modification_time</a></code></li>
 <li><code><a title="commands.dir9.Dir.get_size" href="#commands.dir9.Dir.get_size">get_size</a></code></li>
