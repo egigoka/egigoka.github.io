@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I&#39;m trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;1.7.0&#34;
+__version__ = &#34;1.8.0&#34;
 
 from .dict9 import ImDict
 
@@ -62,7 +62,7 @@ class MyThread:
         self.kwargs = kwargs
         self.quiet = quiet
         from .bench9 import Bench
-        self.bench = Bench(name, quiet=True)
+        self.bench = Bench(name, verbose=False)
 
     def qprint(self, *args, **kwargs):
         if not self.quiet:
@@ -123,27 +123,57 @@ class MyThread:
 class Threading:
     _imdict = ImDict({})
 
-    def __init__(self, daemons=None, verbose=None):
+    def __init__(self, daemons=None, verbose=None, max_threads=0, start_from_first=False):
         from .id9 import ID
-        self.threads = []
+        self.input_threads = []
+        self.runner_threads = []
         self.thread_ids = ID()
         self.daemons = daemons
         self.quiet = not verbose
+        self.max_threads = max_threads
+        self.thread_pop_lock = Lock()
+        self.start_from_first = start_from_first
+        self.results = {}
 
     def add(self, func, name=None, args=(), kwargs=_imdict, daemon=None, quiet=None):
         if daemon is None:
             daemon = self.daemons
         if quiet is None:
             quiet = self.quiet
-        self.threads.append(MyThread(thread_id=self.thread_ids.get(), func=func, name=name, args=args, kwargs=kwargs,
-                                     daemon=daemon, quiet=quiet))
+        self.input_threads.append(MyThread(thread_id=self.thread_ids.get(), func=func, name=name, args=args,
+                                           kwargs=kwargs, daemon=daemon, quiet=quiet))
+
+    def runner(self, runner_no):
+        if not self.quiet:
+            print(f&#34;Started runner #{runner_no}&#34;)
+        while True:
+            with self.thread_pop_lock:
+                cnt_of_threads = len(self.input_threads)
+                if not cnt_of_threads:
+                    if not self.quiet:
+                        print(f&#34;Finished runner #{runner_no}&#34;)
+                    return
+                thread = self.input_threads.pop()
+            self.results[thread.thread_id] = IsRunning()
+            thread.start(wait_for_keyboard_interrupt=True)
+            self.results[thread.thread_id] = thread.result
+
 
     def start(self, wait_for_keyboard_interrupt=False, quiet=True):
         &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
-        assert len(self.threads) != 0, &#34;No threads&#34;
+        assert len(self.input_threads) != 0, &#34;No threads&#34;
 
-        for thread in self.threads:
-            thread.start()
+        max_threads = self.max_threads
+        if max_threads == 0:
+            max_threads = len(self.input_threads)
+
+        if self.start_from_first:
+            self.input_threads.reverse()
+
+        for i in range(1, max_threads + 1):
+            t = MyThread(self.runner, kwargs=ImDict({&#34;runner_no&#34;: i}))
+            self.runner_threads.append(t)
+            t.start()
 
         if wait_for_keyboard_interrupt:
             self.wait_for_keyboard_interrupt(quiet=quiet)
@@ -153,7 +183,7 @@ class Threading:
         try:
             while True:
                 alive = []  # list of alive threads
-                for thread in self.threads:
+                for thread in self.runner_threads:
                     if thread.thread.is_alive():
                         alive.append(thread.thread.name)
                         time.sleep(1)
@@ -168,33 +198,38 @@ class Threading:
 
     def cleanup(self):
         &#34;&#34;&#34;Just clean queue&#34;&#34;&#34;
-        self.threads = []
+        self.input_threads = []
+        self.runner_threads = []
         self.thread_ids.__init__()
 
     def get_ids(self):
         ids = []
-        for thread in self.threads:
+        for thread in self.input_threads:
             ids.append(thread.get_id())
         return ids
 
     def raise_exception(self):
-        for thread in self.threads:
+        for thread in self.runner_threads:
+            thread.raise_exception()
+        for thread in self.input_threads:
             thread.raise_exception()
 
     kill = raise_exception
 
     def get_results(self):
-        results = []
-        for thread in self.threads:
-            results.append(thread.result)
-        return results
+        from .dict9 import Dict
+        results = Dict.sorted_by_key(self.results)
+        return results.values()
 
     def is_running(self):
         cnt = 0
-        for thread in self.threads:
+        for thread in self.input_threads:
             if thread.is_running():
                 cnt += 1
         return cnt
+
+    def total_input_threads(self):
+        return len(self.input_threads)
 
 
 class Lock:
@@ -260,7 +295,7 @@ Lock = Lock()</code></pre>
         self.kwargs = kwargs
         self.quiet = quiet
         from .bench9 import Bench
-        self.bench = Bench(name, quiet=True)
+        self.bench = Bench(name, verbose=False)
 
     def qprint(self, *args, **kwargs):
         if not self.quiet:
@@ -468,7 +503,7 @@ Lock = Lock()</code></pre>
 </dd>
 <dt id="commands.threading9.Threading"><code class="flex name class">
 <span>class <span class="ident">Threading</span></span>
-<span>(</span><span>daemons=None, verbose=None)</span>
+<span>(</span><span>daemons=None, verbose=None, max_threads=0, start_from_first=False)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -479,27 +514,57 @@ Lock = Lock()</code></pre>
 <pre><code class="python">class Threading:
     _imdict = ImDict({})
 
-    def __init__(self, daemons=None, verbose=None):
+    def __init__(self, daemons=None, verbose=None, max_threads=0, start_from_first=False):
         from .id9 import ID
-        self.threads = []
+        self.input_threads = []
+        self.runner_threads = []
         self.thread_ids = ID()
         self.daemons = daemons
         self.quiet = not verbose
+        self.max_threads = max_threads
+        self.thread_pop_lock = Lock()
+        self.start_from_first = start_from_first
+        self.results = {}
 
     def add(self, func, name=None, args=(), kwargs=_imdict, daemon=None, quiet=None):
         if daemon is None:
             daemon = self.daemons
         if quiet is None:
             quiet = self.quiet
-        self.threads.append(MyThread(thread_id=self.thread_ids.get(), func=func, name=name, args=args, kwargs=kwargs,
-                                     daemon=daemon, quiet=quiet))
+        self.input_threads.append(MyThread(thread_id=self.thread_ids.get(), func=func, name=name, args=args,
+                                           kwargs=kwargs, daemon=daemon, quiet=quiet))
+
+    def runner(self, runner_no):
+        if not self.quiet:
+            print(f&#34;Started runner #{runner_no}&#34;)
+        while True:
+            with self.thread_pop_lock:
+                cnt_of_threads = len(self.input_threads)
+                if not cnt_of_threads:
+                    if not self.quiet:
+                        print(f&#34;Finished runner #{runner_no}&#34;)
+                    return
+                thread = self.input_threads.pop()
+            self.results[thread.thread_id] = IsRunning()
+            thread.start(wait_for_keyboard_interrupt=True)
+            self.results[thread.thread_id] = thread.result
+
 
     def start(self, wait_for_keyboard_interrupt=False, quiet=True):
         &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
-        assert len(self.threads) != 0, &#34;No threads&#34;
+        assert len(self.input_threads) != 0, &#34;No threads&#34;
 
-        for thread in self.threads:
-            thread.start()
+        max_threads = self.max_threads
+        if max_threads == 0:
+            max_threads = len(self.input_threads)
+
+        if self.start_from_first:
+            self.input_threads.reverse()
+
+        for i in range(1, max_threads + 1):
+            t = MyThread(self.runner, kwargs=ImDict({&#34;runner_no&#34;: i}))
+            self.runner_threads.append(t)
+            t.start()
 
         if wait_for_keyboard_interrupt:
             self.wait_for_keyboard_interrupt(quiet=quiet)
@@ -509,7 +574,7 @@ Lock = Lock()</code></pre>
         try:
             while True:
                 alive = []  # list of alive threads
-                for thread in self.threads:
+                for thread in self.runner_threads:
                     if thread.thread.is_alive():
                         alive.append(thread.thread.name)
                         time.sleep(1)
@@ -524,33 +589,38 @@ Lock = Lock()</code></pre>
 
     def cleanup(self):
         &#34;&#34;&#34;Just clean queue&#34;&#34;&#34;
-        self.threads = []
+        self.input_threads = []
+        self.runner_threads = []
         self.thread_ids.__init__()
 
     def get_ids(self):
         ids = []
-        for thread in self.threads:
+        for thread in self.input_threads:
             ids.append(thread.get_id())
         return ids
 
     def raise_exception(self):
-        for thread in self.threads:
+        for thread in self.runner_threads:
+            thread.raise_exception()
+        for thread in self.input_threads:
             thread.raise_exception()
 
     kill = raise_exception
 
     def get_results(self):
-        results = []
-        for thread in self.threads:
-            results.append(thread.result)
-        return results
+        from .dict9 import Dict
+        results = Dict.sorted_by_key(self.results)
+        return results.values()
 
     def is_running(self):
         cnt = 0
-        for thread in self.threads:
+        for thread in self.input_threads:
             if thread.is_running():
                 cnt += 1
-        return cnt</code></pre>
+        return cnt
+
+    def total_input_threads(self):
+        return len(self.input_threads)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -568,8 +638,8 @@ Lock = Lock()</code></pre>
         daemon = self.daemons
     if quiet is None:
         quiet = self.quiet
-    self.threads.append(MyThread(thread_id=self.thread_ids.get(), func=func, name=name, args=args, kwargs=kwargs,
-                                 daemon=daemon, quiet=quiet))</code></pre>
+    self.input_threads.append(MyThread(thread_id=self.thread_ids.get(), func=func, name=name, args=args,
+                                       kwargs=kwargs, daemon=daemon, quiet=quiet))</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.cleanup"><code class="name flex">
@@ -583,7 +653,8 @@ Lock = Lock()</code></pre>
 </summary>
 <pre><code class="python">def cleanup(self):
     &#34;&#34;&#34;Just clean queue&#34;&#34;&#34;
-    self.threads = []
+    self.input_threads = []
+    self.runner_threads = []
     self.thread_ids.__init__()</code></pre>
 </details>
 </dd>
@@ -598,7 +669,7 @@ Lock = Lock()</code></pre>
 </summary>
 <pre><code class="python">def get_ids(self):
     ids = []
-    for thread in self.threads:
+    for thread in self.input_threads:
         ids.append(thread.get_id())
     return ids</code></pre>
 </details>
@@ -613,10 +684,9 @@ Lock = Lock()</code></pre>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def get_results(self):
-    results = []
-    for thread in self.threads:
-        results.append(thread.result)
-    return results</code></pre>
+    from .dict9 import Dict
+    results = Dict.sorted_by_key(self.results)
+    return results.values()</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.is_running"><code class="name flex">
@@ -630,7 +700,7 @@ Lock = Lock()</code></pre>
 </summary>
 <pre><code class="python">def is_running(self):
     cnt = 0
-    for thread in self.threads:
+    for thread in self.input_threads:
         if thread.is_running():
             cnt += 1
     return cnt</code></pre>
@@ -646,7 +716,9 @@ Lock = Lock()</code></pre>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def raise_exception(self):
-    for thread in self.threads:
+    for thread in self.runner_threads:
+        thread.raise_exception()
+    for thread in self.input_threads:
         thread.raise_exception()</code></pre>
 </details>
 </dd>
@@ -660,8 +732,35 @@ Lock = Lock()</code></pre>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def raise_exception(self):
-    for thread in self.threads:
+    for thread in self.runner_threads:
+        thread.raise_exception()
+    for thread in self.input_threads:
         thread.raise_exception()</code></pre>
+</details>
+</dd>
+<dt id="commands.threading9.Threading.runner"><code class="name flex">
+<span>def <span class="ident">runner</span></span>(<span>self, runner_no)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def runner(self, runner_no):
+    if not self.quiet:
+        print(f&#34;Started runner #{runner_no}&#34;)
+    while True:
+        with self.thread_pop_lock:
+            cnt_of_threads = len(self.input_threads)
+            if not cnt_of_threads:
+                if not self.quiet:
+                    print(f&#34;Finished runner #{runner_no}&#34;)
+                return
+            thread = self.input_threads.pop()
+        self.results[thread.thread_id] = IsRunning()
+        thread.start(wait_for_keyboard_interrupt=True)
+        self.results[thread.thread_id] = thread.result</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.start"><code class="name flex">
@@ -675,13 +774,35 @@ Lock = Lock()</code></pre>
 </summary>
 <pre><code class="python">def start(self, wait_for_keyboard_interrupt=False, quiet=True):
     &#34;&#34;&#34;Starts all added threads&#34;&#34;&#34;
-    assert len(self.threads) != 0, &#34;No threads&#34;
+    assert len(self.input_threads) != 0, &#34;No threads&#34;
 
-    for thread in self.threads:
-        thread.start()
+    max_threads = self.max_threads
+    if max_threads == 0:
+        max_threads = len(self.input_threads)
+
+    if self.start_from_first:
+        self.input_threads.reverse()
+
+    for i in range(1, max_threads + 1):
+        t = MyThread(self.runner, kwargs=ImDict({&#34;runner_no&#34;: i}))
+        self.runner_threads.append(t)
+        t.start()
 
     if wait_for_keyboard_interrupt:
         self.wait_for_keyboard_interrupt(quiet=quiet)</code></pre>
+</details>
+</dd>
+<dt id="commands.threading9.Threading.total_input_threads"><code class="name flex">
+<span>def <span class="ident">total_input_threads</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def total_input_threads(self):
+    return len(self.input_threads)</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.wait_for_keyboard_interrupt"><code class="name flex">
@@ -698,7 +819,7 @@ Lock = Lock()</code></pre>
     try:
         while True:
             alive = []  # list of alive threads
-            for thread in self.threads:
+            for thread in self.runner_threads:
                 if thread.thread.is_alive():
                     alive.append(thread.thread.name)
                     time.sleep(1)
@@ -757,7 +878,9 @@ Lock = Lock()</code></pre>
 <li><code><a title="commands.threading9.Threading.is_running" href="#commands.threading9.Threading.is_running">is_running</a></code></li>
 <li><code><a title="commands.threading9.Threading.kill" href="#commands.threading9.Threading.kill">kill</a></code></li>
 <li><code><a title="commands.threading9.Threading.raise_exception" href="#commands.threading9.Threading.raise_exception">raise_exception</a></code></li>
+<li><code><a title="commands.threading9.Threading.runner" href="#commands.threading9.Threading.runner">runner</a></code></li>
 <li><code><a title="commands.threading9.Threading.start" href="#commands.threading9.Threading.start">start</a></code></li>
+<li><code><a title="commands.threading9.Threading.total_input_threads" href="#commands.threading9.Threading.total_input_threads">total_input_threads</a></code></li>
 <li><code><a title="commands.threading9.Threading.wait_for_keyboard_interrupt" href="#commands.threading9.Threading.wait_for_keyboard_interrupt">wait_for_keyboard_interrupt</a></code></li>
 </ul>
 </li>

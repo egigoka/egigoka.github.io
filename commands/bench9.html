@@ -31,14 +31,14 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with Bench factory function
 &#34;&#34;&#34;
-__version__ = &#34;0.5.2&#34;
+__version__ = &#34;0.6.0&#34;
 
 
 class Bench:
     &#34;&#34;&#34;Benchmarking class (not so good, but enough for some purposes)
     &#34;&#34;&#34;
 
-    def __init__(self, prefix=&#34;Bench passed in&#34;, quiet=True, fraction_digits=3, time_start=None):
+    def __init__(self, prefix=&#34;Bench passed in&#34;, verbose=False, fraction_digits=3, time_start=None):
         &#34;&#34;&#34;
         &lt;br&gt;`param prefix` string, prints when ending of benchmark
         &lt;br&gt;`param quiet` boolean, suppress output to console
@@ -51,7 +51,7 @@ class Bench:
         else:
             self.time_start = datetime.datetime.now()
         self.time_end = None
-        self.quiet = quiet
+        self.quiet = not verbose
         self.prefix = prefix
         self.fraction_digits = fraction_digits
 
@@ -111,7 +111,7 @@ class Bench:
 <dl>
 <dt id="commands.bench9.Bench"><code class="flex name class">
 <span>class <span class="ident">Bench</span></span>
-<span>(</span><span>prefix='Bench passed in', quiet=True, fraction_digits=3, time_start=None)</span>
+<span>(</span><span>prefix='Bench passed in', verbose=False, fraction_digits=3, time_start=None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Benchmarking class (not so good, but enough for some purposes)</p>
@@ -127,7 +127,7 @@ class Bench:
     &#34;&#34;&#34;Benchmarking class (not so good, but enough for some purposes)
     &#34;&#34;&#34;
 
-    def __init__(self, prefix=&#34;Bench passed in&#34;, quiet=True, fraction_digits=3, time_start=None):
+    def __init__(self, prefix=&#34;Bench passed in&#34;, verbose=False, fraction_digits=3, time_start=None):
         &#34;&#34;&#34;
         &lt;br&gt;`param prefix` string, prints when ending of benchmark
         &lt;br&gt;`param quiet` boolean, suppress output to console
@@ -140,7 +140,7 @@ class Bench:
         else:
             self.time_start = datetime.datetime.now()
         self.time_end = None
-        self.quiet = quiet
+        self.quiet = not verbose
         self.prefix = prefix
         self.fraction_digits = fraction_digits
 
