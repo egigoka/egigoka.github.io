@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I&#39;m trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;1.8.0&#34;
+__version__ = &#34;1.9.0&#34;
 
 from .dict9 import ImDict
 
@@ -171,7 +171,7 @@ class Threading:
             self.input_threads.reverse()
 
         for i in range(1, max_threads + 1):
-            t = MyThread(self.runner, kwargs=ImDict({&#34;runner_no&#34;: i}))
+            t = MyThread(self.runner, name=f&#34;runner_{i}&#34;, kwargs=ImDict({&#34;runner_no&#34;: i}))
             self.runner_threads.append(t)
             t.start()
 
@@ -231,6 +231,13 @@ class Threading:
     def total_input_threads(self):
         return len(self.input_threads)
 
+    def running_threads(self):
+        running = 0
+        for runner in self.runner_threads:
+            if runner.is_running():
+                running += 1
+        running += len(self.input_threads)
+        return running
 
 class Lock:
     def __call__(self, *args, **kwargs):
@@ -562,7 +569,7 @@ Lock = Lock()</code></pre>
             self.input_threads.reverse()
 
         for i in range(1, max_threads + 1):
-            t = MyThread(self.runner, kwargs=ImDict({&#34;runner_no&#34;: i}))
+            t = MyThread(self.runner, name=f&#34;runner_{i}&#34;, kwargs=ImDict({&#34;runner_no&#34;: i}))
             self.runner_threads.append(t)
             t.start()
 
@@ -620,7 +627,15 @@ Lock = Lock()</code></pre>
         return cnt
 
     def total_input_threads(self):
-        return len(self.input_threads)</code></pre>
+        return len(self.input_threads)
+
+    def running_threads(self):
+        running = 0
+        for runner in self.runner_threads:
+            if runner.is_running():
+                running += 1
+        running += len(self.input_threads)
+        return running</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -763,6 +778,24 @@ Lock = Lock()</code></pre>
         self.results[thread.thread_id] = thread.result</code></pre>
 </details>
 </dd>
+<dt id="commands.threading9.Threading.running_threads"><code class="name flex">
+<span>def <span class="ident">running_threads</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def running_threads(self):
+    running = 0
+    for runner in self.runner_threads:
+        if runner.is_running():
+            running += 1
+    running += len(self.input_threads)
+    return running</code></pre>
+</details>
+</dd>
 <dt id="commands.threading9.Threading.start"><code class="name flex">
 <span>def <span class="ident">start</span></span>(<span>self, wait_for_keyboard_interrupt=False, quiet=True)</span>
 </code></dt>
@@ -784,7 +817,7 @@ Lock = Lock()</code></pre>
         self.input_threads.reverse()
 
     for i in range(1, max_threads + 1):
-        t = MyThread(self.runner, kwargs=ImDict({&#34;runner_no&#34;: i}))
+        t = MyThread(self.runner, name=f&#34;runner_{i}&#34;, kwargs=ImDict({&#34;runner_no&#34;: i}))
         self.runner_threads.append(t)
         t.start()
 
@@ -879,6 +912,7 @@ Lock = Lock()</code></pre>
 <li><code><a title="commands.threading9.Threading.kill" href="#commands.threading9.Threading.kill">kill</a></code></li>
 <li><code><a title="commands.threading9.Threading.raise_exception" href="#commands.threading9.Threading.raise_exception">raise_exception</a></code></li>
 <li><code><a title="commands.threading9.Threading.runner" href="#commands.threading9.Threading.runner">runner</a></code></li>
+<li><code><a title="commands.threading9.Threading.running_threads" href="#commands.threading9.Threading.running_threads">running_threads</a></code></li>
 <li><code><a title="commands.threading9.Threading.start" href="#commands.threading9.Threading.start">start</a></code></li>
 <li><code><a title="commands.threading9.Threading.total_input_threads" href="#commands.threading9.Threading.total_input_threads">total_input_threads</a></code></li>
 <li><code><a title="commands.threading9.Threading.wait_for_keyboard_interrupt" href="#commands.threading9.Threading.wait_for_keyboard_interrupt">wait_for_keyboard_interrupt</a></code></li>
