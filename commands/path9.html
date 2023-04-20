@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions to work with path strings
 &#34;&#34;&#34;
-__version__ = &#34;2.7.0&#34;
+__version__ = &#34;2.8.0&#34;
 
 
 class Path:
@@ -175,7 +175,12 @@ class Path:
     @staticmethod
     def separator():
         import os
-        return os.sep</code></pre>
+        return os.sep
+
+    @staticmethod
+    def split(path):
+        import os
+        return os.path.split(path)</code></pre>
 </details>
 </section>
 <section>
@@ -337,7 +342,12 @@ class Path:
     @staticmethod
     def separator():
         import os
-        return os.sep</code></pre>
+        return os.sep
+
+    @staticmethod
+    def split(path):
+        import os
+        return os.path.split(path)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -588,6 +598,21 @@ def set_working(path, quiet=True):
         Print.debug(&#34;os.getcwd()  # current directory is&#34;, os.getcwd())</code></pre>
 </details>
 </dd>
+<dt id="commands.path9.Path.split"><code class="name flex">
+<span>def <span class="ident">split</span></span>(<span>path)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def split(path):
+    import os
+    return os.path.split(path)</code></pre>
+</details>
+</dd>
 <dt id="commands.path9.Path.temp"><code class="name flex">
 <span>def <span class="ident">temp</span></span>(<span>)</span>
 </code></dt>
@@ -657,6 +682,7 @@ def working():
 <li><code><a title="commands.path9.Path.safe__file__" href="#commands.path9.Path.safe__file__">safe__file__</a></code></li>
 <li><code><a title="commands.path9.Path.separator" href="#commands.path9.Path.separator">separator</a></code></li>
 <li><code><a title="commands.path9.Path.set_working" href="#commands.path9.Path.set_working">set_working</a></code></li>
+<li><code><a title="commands.path9.Path.split" href="#commands.path9.Path.split">split</a></code></li>
 <li><code><a title="commands.path9.Path.temp" href="#commands.path9.Path.temp">temp</a></code></li>
 <li><code><a title="commands.path9.Path.working" href="#commands.path9.Path.working">working</a></code></li>
 </ul>
