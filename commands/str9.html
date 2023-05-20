@@ -198,6 +198,15 @@ class Str:
         if isinstance(before, bytes):
             from .bytes9 import Bytes
             before = Bytes.to_string(before)
+        if isinstance(before, bytes):
+            from .bytes9 import Bytes
+            after = Bytes.to_string(after)
+        if not isinstance(string, str):
+            string = str(string)
+        if not isinstance(before, str):
+            before = str(before)
+        if after is not None and not isinstance(after, str):
+            after = str(after)
         start_from = string.find(before)
         after_substring = &#34;&#34;
         if start_from != -1:
@@ -619,6 +628,15 @@ class Str:
         if isinstance(before, bytes):
             from .bytes9 import Bytes
             before = Bytes.to_string(before)
+        if isinstance(before, bytes):
+            from .bytes9 import Bytes
+            after = Bytes.to_string(after)
+        if not isinstance(string, str):
+            string = str(string)
+        if not isinstance(before, str):
+            before = str(before)
+        if after is not None and not isinstance(after, str):
+            after = str(after)
         start_from = string.find(before)
         after_substring = &#34;&#34;
         if start_from != -1:
@@ -1424,6 +1442,15 @@ def substring(string, before, after=None, return_after_substring=False, safe=Fal
     if isinstance(before, bytes):
         from .bytes9 import Bytes
         before = Bytes.to_string(before)
+    if isinstance(before, bytes):
+        from .bytes9 import Bytes
+        after = Bytes.to_string(after)
+    if not isinstance(string, str):
+        string = str(string)
+    if not isinstance(before, str):
+        before = str(before)
+    if after is not None and not isinstance(after, str):
+        after = str(after)
     start_from = string.find(before)
     after_substring = &#34;&#34;
     if start_from != -1:

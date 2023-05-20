@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;I&#39;m trying work with threads
 &#34;&#34;&#34;
-__version__ = &#34;1.9.0&#34;
+__version__ = &#34;1.10.1&#34;
 
 from .dict9 import ImDict
 
@@ -126,12 +126,15 @@ class Threading:
     def __init__(self, daemons=None, verbose=None, max_threads=0, start_from_first=False):
         from .id9 import ID
         self.input_threads = []
+        self.running_now_threads = []
+        self.finished_threads = []
         self.runner_threads = []
         self.thread_ids = ID()
         self.daemons = daemons
         self.quiet = not verbose
         self.max_threads = max_threads
         self.thread_pop_lock = Lock()
+        self.thread_move_lock = Lock()
         self.start_from_first = start_from_first
         self.results = {}
 
@@ -154,9 +157,13 @@ class Threading:
                         print(f&#34;Finished runner #{runner_no}&#34;)
                     return
                 thread = self.input_threads.pop()
+            with self.thread_move_lock:
+                self.running_now_threads.append(thread)
             self.results[thread.thread_id] = IsRunning()
             thread.start(wait_for_keyboard_interrupt=True)
             self.results[thread.thread_id] = thread.result
+            with self.thread_move_lock:
+                self.finished_threads.append(self.running_now_threads[self.running_now_threads.index(thread)])
 
 
     def start(self, wait_for_keyboard_interrupt=False, quiet=True):
@@ -524,12 +531,15 @@ Lock = Lock()</code></pre>
     def __init__(self, daemons=None, verbose=None, max_threads=0, start_from_first=False):
         from .id9 import ID
         self.input_threads = []
+        self.running_now_threads = []
+        self.finished_threads = []
         self.runner_threads = []
         self.thread_ids = ID()
         self.daemons = daemons
         self.quiet = not verbose
         self.max_threads = max_threads
         self.thread_pop_lock = Lock()
+        self.thread_move_lock = Lock()
         self.start_from_first = start_from_first
         self.results = {}
 
@@ -552,9 +562,13 @@ Lock = Lock()</code></pre>
                         print(f&#34;Finished runner #{runner_no}&#34;)
                     return
                 thread = self.input_threads.pop()
+            with self.thread_move_lock:
+                self.running_now_threads.append(thread)
             self.results[thread.thread_id] = IsRunning()
             thread.start(wait_for_keyboard_interrupt=True)
             self.results[thread.thread_id] = thread.result
+            with self.thread_move_lock:
+                self.finished_threads.append(self.running_now_threads[self.running_now_threads.index(thread)])
 
 
     def start(self, wait_for_keyboard_interrupt=False, quiet=True):
@@ -773,9 +787,13 @@ Lock = Lock()</code></pre>
                     print(f&#34;Finished runner #{runner_no}&#34;)
                 return
             thread = self.input_threads.pop()
+        with self.thread_move_lock:
+            self.running_now_threads.append(thread)
         self.results[thread.thread_id] = IsRunning()
         thread.start(wait_for_keyboard_interrupt=True)
-        self.results[thread.thread_id] = thread.result</code></pre>
+        self.results[thread.thread_id] = thread.result
+        with self.thread_move_lock:
+            self.finished_threads.append(self.running_now_threads[self.running_now_threads.index(thread)])</code></pre>
 </details>
 </dd>
 <dt id="commands.threading9.Threading.running_threads"><code class="name flex">
