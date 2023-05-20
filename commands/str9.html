@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions for managing strings.
 &#34;&#34;&#34;
-__version__ = &#34;0.15.0&#34;
+__version__ = &#34;0.15.1&#34;
 
 
 class Str:
@@ -198,16 +198,8 @@ class Str:
         if isinstance(before, bytes):
             from .bytes9 import Bytes
             before = Bytes.to_string(before)
-        if isinstance(before, bytes):
-            from .bytes9 import Bytes
-            after = Bytes.to_string(after)
-        if not isinstance(string, str):
-            string = str(string)
-        if not isinstance(before, str):
-            before = str(before)
-        if after is not None and not isinstance(after, str):
-            after = str(after)
         start_from = string.find(before)
+        after_substring = &#34;&#34;
         if start_from != -1:
             start_from = string.find(before) + len(before)
         else:
@@ -627,16 +619,8 @@ class Str:
         if isinstance(before, bytes):
             from .bytes9 import Bytes
             before = Bytes.to_string(before)
-        if isinstance(before, bytes):
-            from .bytes9 import Bytes
-            after = Bytes.to_string(after)
-        if not isinstance(string, str):
-            string = str(string)
-        if not isinstance(before, str):
-            before = str(before)
-        if after is not None and not isinstance(after, str):
-            after = str(after)
         start_from = string.find(before)
+        after_substring = &#34;&#34;
         if start_from != -1:
             start_from = string.find(before) + len(before)
         else:
@@ -1440,16 +1424,8 @@ def substring(string, before, after=None, return_after_substring=False, safe=Fal
     if isinstance(before, bytes):
         from .bytes9 import Bytes
         before = Bytes.to_string(before)
-    if isinstance(before, bytes):
-        from .bytes9 import Bytes
-        after = Bytes.to_string(after)
-    if not isinstance(string, str):
-        string = str(string)
-    if not isinstance(before, str):
-        before = str(before)
-    if after is not None and not isinstance(after, str):
-        after = str(after)
     start_from = string.find(before)
+    after_substring = &#34;&#34;
     if start_from != -1:
         start_from = string.find(before) + len(before)
     else:
