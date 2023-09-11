@@ -153,6 +153,9 @@ item not found!&#39;&#39;&#39;
     def keys(self):
         return self.string.keys()
 
+    def clear(self):
+        return self.string.clear()
+
 
 class JsonList(Json):
     __getitem__ = JsonDict.__getitem__
@@ -422,7 +425,10 @@ item not found!&#39;&#39;&#39;
         return self.string.values()
 
     def keys(self):
-        return self.string.keys()</code></pre>
+        return self.string.keys()
+
+    def clear(self):
+        return self.string.clear()</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -430,6 +436,19 @@ item not found!&#39;&#39;&#39;
 </ul>
 <h3>Methods</h3>
 <dl>
+<dt id="commands.json9.JsonDict.clear"><code class="name flex">
+<span>def <span class="ident">clear</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clear(self):
+    return self.string.clear()</code></pre>
+</details>
+</dd>
 <dt id="commands.json9.JsonDict.items"><code class="name flex">
 <span>def <span class="ident">items</span></span>(<span>self)</span>
 </code></dt>
@@ -582,6 +601,7 @@ item not found!&#39;&#39;&#39;
 <li>
 <h4><code><a title="commands.json9.JsonDict" href="#commands.json9.JsonDict">JsonDict</a></code></h4>
 <ul class="">
+<li><code><a title="commands.json9.JsonDict.clear" href="#commands.json9.JsonDict.clear">clear</a></code></li>
 <li><code><a title="commands.json9.JsonDict.items" href="#commands.json9.JsonDict.items">items</a></code></li>
 <li><code><a title="commands.json9.JsonDict.keys" href="#commands.json9.JsonDict.keys">keys</a></code></li>
 <li><code><a title="commands.json9.JsonDict.values" href="#commands.json9.JsonDict.values">values</a></code></li>
