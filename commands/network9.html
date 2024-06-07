@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module with functions to work with network
 &#34;&#34;&#34;
-__version__ = &#34;0.11.0&#34;
+__version__ = &#34;0.10.0&#34;
 
 from typing import Union
 
@@ -438,14 +438,6 @@ class Network:
                            &#34;data&#34;: data,
                            &#34;json&#34;: json,
                            &#34;headers&#34;: headers})
-        elif method == &#34;delete&#34;:
-            func = requests.delete
-            kwargs.update({&#34;url&#34;: url,
-                           &#34;auth&#34;: auth,
-                           &#34;params&#34;: params,
-                           &#34;data&#34;: data,
-                           &#34;json&#34;: json,
-                           &#34;headers&#34;: headers})
         else:
             raise NotImplementedError(f&#34;Method {method} isn&#39;t supported&#34;)
 
@@ -459,12 +451,7 @@ class Network:
     @classmethod
     def post(cls, url, params=None, data=None, json=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
         return cls.request(url=url, method=&#34;post&#34;, params=params, basic_auth_user=basic_auth_user,
-                           basic_auth_password=basic_auth_password, data=data, json=json, headers=headers, **kwargs)
-
-    @classmethod
-    def delete(cls, url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
-        return cls.request(url=url, method=&#34;delete&#34;, params=params, basic_auth_user=basic_auth_user,
-                           basic_auth_password=basic_auth_password, headers=headers, **kwargs)</code></pre>
+                           basic_auth_password=basic_auth_password, data=data, json=json, headers=headers, **kwargs)</code></pre>
 </details>
 </section>
 <section>
@@ -887,14 +874,6 @@ class Network:
                            &#34;data&#34;: data,
                            &#34;json&#34;: json,
                            &#34;headers&#34;: headers})
-        elif method == &#34;delete&#34;:
-            func = requests.delete
-            kwargs.update({&#34;url&#34;: url,
-                           &#34;auth&#34;: auth,
-                           &#34;params&#34;: params,
-                           &#34;data&#34;: data,
-                           &#34;json&#34;: json,
-                           &#34;headers&#34;: headers})
         else:
             raise NotImplementedError(f&#34;Method {method} isn&#39;t supported&#34;)
 
@@ -908,12 +887,7 @@ class Network:
     @classmethod
     def post(cls, url, params=None, data=None, json=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
         return cls.request(url=url, method=&#34;post&#34;, params=params, basic_auth_user=basic_auth_user,
-                           basic_auth_password=basic_auth_password, data=data, json=json, headers=headers, **kwargs)
-
-    @classmethod
-    def delete(cls, url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
-        return cls.request(url=url, method=&#34;delete&#34;, params=params, basic_auth_user=basic_auth_user,
-                           basic_auth_password=basic_auth_password, headers=headers, **kwargs)</code></pre>
+                           basic_auth_password=basic_auth_password, data=data, json=json, headers=headers, **kwargs)</code></pre>
 </details>
 <h3>Static methods</h3>
 <dl>
@@ -987,21 +961,6 @@ def check_response(endpoint: str, good_response: Union[str, bytes, list, tuple],
         from .print9 import Print
         Print.debug(response, good_response)
     return output</code></pre>
-</details>
-</dd>
-<dt id="commands.network9.Network.delete"><code class="name flex">
-<span>def <span class="ident">delete</span></span>(<span>url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def delete(cls, url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
-    return cls.request(url=url, method=&#34;delete&#34;, params=params, basic_auth_user=basic_auth_user,
-                       basic_auth_password=basic_auth_password, headers=headers, **kwargs)</code></pre>
 </details>
 </dd>
 <dt id="commands.network9.Network.dns_lookup"><code class="name flex">
@@ -1491,14 +1450,6 @@ def request(url, method, params=None, basic_auth_user=None, basic_auth_password=
                        &#34;data&#34;: data,
                        &#34;json&#34;: json,
                        &#34;headers&#34;: headers})
-    elif method == &#34;delete&#34;:
-        func = requests.delete
-        kwargs.update({&#34;url&#34;: url,
-                       &#34;auth&#34;: auth,
-                       &#34;params&#34;: params,
-                       &#34;data&#34;: data,
-                       &#34;json&#34;: json,
-                       &#34;headers&#34;: headers})
     else:
         raise NotImplementedError(f&#34;Method {method} isn&#39;t supported&#34;)
 
@@ -1529,7 +1480,6 @@ def request(url, method, params=None, basic_auth_user=None, basic_auth_password=
 <li><code><a title="commands.network9.Network.check_internet_apple" href="#commands.network9.Network.check_internet_apple">check_internet_apple</a></code></li>
 <li><code><a title="commands.network9.Network.check_internet_microsoft" href="#commands.network9.Network.check_internet_microsoft">check_internet_microsoft</a></code></li>
 <li><code><a title="commands.network9.Network.check_response" href="#commands.network9.Network.check_response">check_response</a></code></li>
-<li><code><a title="commands.network9.Network.delete" href="#commands.network9.Network.delete">delete</a></code></li>
 <li><code><a title="commands.network9.Network.dns_lookup" href="#commands.network9.Network.dns_lookup">dns_lookup</a></code></li>
 <li><code><a title="commands.network9.Network.download_file" href="#commands.network9.Network.download_file">download_file</a></code></li>
 <li><code><a title="commands.network9.Network.get" href="#commands.network9.Network.get">get</a></code></li>

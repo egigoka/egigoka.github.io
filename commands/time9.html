@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>commands.time9 API documentation</title>
-<meta name="description" content="Module with time functions" />
+<meta name="description" content="Internal module to work with time" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,20 +22,21 @@
 <h1 class="title">Module <code>commands.time9</code></h1>
 </header>
 <section id="section-intro">
-<p>Module with time functions</p>
+<p>Internal module to work with time</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">#! python3
 # -*- coding: utf-8 -*-
-&#34;&#34;&#34;Module with time functions
+&#34;&#34;&#34;Internal module to work with time
 &#34;&#34;&#34;
-__version__ = &#34;1.2.3&#34;
+__version__ = &#34;1.2.2&#34;
 
 
 class Time:
-    &#34;&#34;&#34;Module with time functions&#34;&#34;&#34;
+    &#34;&#34;&#34;Class to work with time
+    &#34;&#34;&#34;
     @staticmethod
     def __lp2(string, length=2):
         &#34;&#34;&#34;Internal alias to Str.leftpad
@@ -186,31 +187,28 @@ class Time:
         return delta_combined
 
     @staticmethod
-    def human_readable(timedelta: int):
-        &#34;&#34;&#34;Converts a timedelta to a human-readable string.&#34;&#34;&#34;
+    def human_readable(timedelta):
         import datetime
         if isinstance(timedelta, datetime.timedelta):
             timedelta = timedelta.total_seconds()
-
+        
         units = [(&#39;y&#39;, 31536000), (&#39;m&#39;, 2592000), (&#39;w&#39;, 604800), (&#39;d&#39;, 86400), (&#39;h&#39;, 3600), (&#39;m&#39;, 60), (&#39;s&#39;, 1)]
-        units_len = {&#39;y&#39;: 4, &#39;m&#39;: 2, &#39;w&#39;: 2, &#39;d&#39;: 2, &#39;h&#39;: 2, &#39;s&#39;: 2}
 
         total_seconds = int(timedelta)
         microseconds = int((timedelta - total_seconds) * 1000000)
-
+        
         parts = []
-
+    
         for unit, factor in units:
-            if total_seconds &gt;= factor or parts:
+            if total_seconds &gt;= factor:
                 value, total_seconds = divmod(total_seconds, factor)
-                zeros = 0
-                if parts:
-                    zeros = units_len[unit]
-                parts.append(f&#34;{str(value).zfill(zeros)}{unit}&#34;)
-
+                parts.append(f&#34;{value}{unit}&#34;)
+        
+        if total_seconds &gt; 0 or microseconds &gt; 0:
+            parts.append(f&#34;{total_seconds:02}s&#34;)
         if microseconds &gt; 0:
             parts.append(f&#34;{microseconds:06}ms&#34;)
-
+    
         return &#34; &#34;.join(parts)
 
 # datetime.datetime.now().strftime(&#39;some&#39;) todo implement
@@ -230,13 +228,14 @@ class Time:
 <span>class <span class="ident">Time</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Module with time functions</p></div>
+<div class="desc"><p>Class to work with time</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Time:
-    &#34;&#34;&#34;Module with time functions&#34;&#34;&#34;
+    &#34;&#34;&#34;Class to work with time
+    &#34;&#34;&#34;
     @staticmethod
     def __lp2(string, length=2):
         &#34;&#34;&#34;Internal alias to Str.leftpad
@@ -387,31 +386,28 @@ class Time:
         return delta_combined
 
     @staticmethod
-    def human_readable(timedelta: int):
-        &#34;&#34;&#34;Converts a timedelta to a human-readable string.&#34;&#34;&#34;
+    def human_readable(timedelta):
         import datetime
         if isinstance(timedelta, datetime.timedelta):
             timedelta = timedelta.total_seconds()
-
+        
         units = [(&#39;y&#39;, 31536000), (&#39;m&#39;, 2592000), (&#39;w&#39;, 604800), (&#39;d&#39;, 86400), (&#39;h&#39;, 3600), (&#39;m&#39;, 60), (&#39;s&#39;, 1)]
-        units_len = {&#39;y&#39;: 4, &#39;m&#39;: 2, &#39;w&#39;: 2, &#39;d&#39;: 2, &#39;h&#39;: 2, &#39;s&#39;: 2}
 
         total_seconds = int(timedelta)
         microseconds = int((timedelta - total_seconds) * 1000000)
-
+        
         parts = []
-
+    
         for unit, factor in units:
-            if total_seconds &gt;= factor or parts:
+            if total_seconds &gt;= factor:
                 value, total_seconds = divmod(total_seconds, factor)
-                zeros = 0
-                if parts:
-                    zeros = units_len[unit]
-                parts.append(f&#34;{str(value).zfill(zeros)}{unit}&#34;)
-
+                parts.append(f&#34;{value}{unit}&#34;)
+        
+        if total_seconds &gt; 0 or microseconds &gt; 0:
+            parts.append(f&#34;{total_seconds:02}s&#34;)
         if microseconds &gt; 0:
             parts.append(f&#34;{microseconds:06}ms&#34;)
-
+    
         return &#34; &#34;.join(parts)</code></pre>
 </details>
 <h3>Static methods</h3>
@@ -535,37 +531,34 @@ def dotted(cls, custom_time=None):
 </details>
 </dd>
 <dt id="commands.time9.Time.human_readable"><code class="name flex">
-<span>def <span class="ident">human_readable</span></span>(<span>timedelta: int)</span>
+<span>def <span class="ident">human_readable</span></span>(<span>timedelta)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Converts a timedelta to a human-readable string.</p></div>
+<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@staticmethod
-def human_readable(timedelta: int):
-    &#34;&#34;&#34;Converts a timedelta to a human-readable string.&#34;&#34;&#34;
+def human_readable(timedelta):
     import datetime
     if isinstance(timedelta, datetime.timedelta):
         timedelta = timedelta.total_seconds()
-
+    
     units = [(&#39;y&#39;, 31536000), (&#39;m&#39;, 2592000), (&#39;w&#39;, 604800), (&#39;d&#39;, 86400), (&#39;h&#39;, 3600), (&#39;m&#39;, 60), (&#39;s&#39;, 1)]
-    units_len = {&#39;y&#39;: 4, &#39;m&#39;: 2, &#39;w&#39;: 2, &#39;d&#39;: 2, &#39;h&#39;: 2, &#39;s&#39;: 2}
 
     total_seconds = int(timedelta)
     microseconds = int((timedelta - total_seconds) * 1000000)
-
+    
     parts = []
 
     for unit, factor in units:
-        if total_seconds &gt;= factor or parts:
+        if total_seconds &gt;= factor:
             value, total_seconds = divmod(total_seconds, factor)
-            zeros = 0
-            if parts:
-                zeros = units_len[unit]
-            parts.append(f&#34;{str(value).zfill(zeros)}{unit}&#34;)
-
+            parts.append(f&#34;{value}{unit}&#34;)
+    
+    if total_seconds &gt; 0 or microseconds &gt; 0:
+        parts.append(f&#34;{total_seconds:02}s&#34;)
     if microseconds &gt; 0:
         parts.append(f&#34;{microseconds:06}ms&#34;)
 

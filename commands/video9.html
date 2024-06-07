@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with video
 &#34;&#34;&#34;
-__version__ = &#34;0.1.2&#34;
+__version__ = &#34;0.2.0&#34;
 
 
 class Video:
@@ -42,7 +42,7 @@ class Video:
     def get_clip(path, raw = False):
         from moviepy.editor import VideoFileClip
         clip = VideoFileClip(path)
-        if raw: 
+        if raw:
             return clip
         outclip = {&#34;duration&#34;: clip.duration,
                    &#34;fps&#34;: clip.fps,
@@ -60,6 +60,18 @@ class Video:
     def get_fps(cls, path):
         clip = cls.get_clip(path)
         return clip[&#34;fps&#34;]
+
+    @classmethod
+    def get_bitrate(cls, path):
+        from .const9 import KiB
+        clip = cls.get_clip(path, raw=True)
+        return clip.reader.bitrate * KiB
+
+    @classmethod
+    def get_audio_bitrate(cls, path):
+        from .const9 import KiB
+        clip = cls.get_clip(path, raw=True)
+        return clip.audio.reader.bitrate * KiB
 
     @classmethod
     def get_resolution(cls, path):
@@ -97,7 +109,7 @@ class Video:
     def get_clip(path, raw = False):
         from moviepy.editor import VideoFileClip
         clip = VideoFileClip(path)
-        if raw: 
+        if raw:
             return clip
         outclip = {&#34;duration&#34;: clip.duration,
                    &#34;fps&#34;: clip.fps,
@@ -117,6 +129,18 @@ class Video:
         return clip[&#34;fps&#34;]
 
     @classmethod
+    def get_bitrate(cls, path):
+        from .const9 import KiB
+        clip = cls.get_clip(path, raw=True)
+        return clip.reader.bitrate * KiB
+
+    @classmethod
+    def get_audio_bitrate(cls, path):
+        from .const9 import KiB
+        clip = cls.get_clip(path, raw=True)
+        return clip.audio.reader.bitrate * KiB
+
+    @classmethod
     def get_resolution(cls, path):
         clip = cls.get_clip(path)
         return clip[&#34;size&#34;]
@@ -127,6 +151,38 @@ class Video:
 </details>
 <h3>Static methods</h3>
 <dl>
+<dt id="commands.video9.Video.get_audio_bitrate"><code class="name flex">
+<span>def <span class="ident">get_audio_bitrate</span></span>(<span>path)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def get_audio_bitrate(cls, path):
+    from .const9 import KiB
+    clip = cls.get_clip(path, raw=True)
+    return clip.audio.reader.bitrate * KiB</code></pre>
+</details>
+</dd>
+<dt id="commands.video9.Video.get_bitrate"><code class="name flex">
+<span>def <span class="ident">get_bitrate</span></span>(<span>path)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def get_bitrate(cls, path):
+    from .const9 import KiB
+    clip = cls.get_clip(path, raw=True)
+    return clip.reader.bitrate * KiB</code></pre>
+</details>
+</dd>
 <dt id="commands.video9.Video.get_clip"><code class="name flex">
 <span>def <span class="ident">get_clip</span></span>(<span>path, raw=False)</span>
 </code></dt>
@@ -140,7 +196,7 @@ class Video:
 def get_clip(path, raw = False):
     from moviepy.editor import VideoFileClip
     clip = VideoFileClip(path)
-    if raw: 
+    if raw:
         return clip
     outclip = {&#34;duration&#34;: clip.duration,
                &#34;fps&#34;: clip.fps,
@@ -229,7 +285,9 @@ def get_resolution(cls, path):
 <ul>
 <li>
 <h4><code><a title="commands.video9.Video" href="#commands.video9.Video">Video</a></code></h4>
-<ul class="">
+<ul class="two-column">
+<li><code><a title="commands.video9.Video.get_audio_bitrate" href="#commands.video9.Video.get_audio_bitrate">get_audio_bitrate</a></code></li>
+<li><code><a title="commands.video9.Video.get_bitrate" href="#commands.video9.Video.get_bitrate">get_bitrate</a></code></li>
 <li><code><a title="commands.video9.Video.get_clip" href="#commands.video9.Video.get_clip">get_clip</a></code></li>
 <li><code><a title="commands.video9.Video.get_fps" href="#commands.video9.Video.get_fps">get_fps</a></code></li>
 <li><code><a title="commands.video9.Video.get_info" href="#commands.video9.Video.get_info">get_info</a></code></li>
