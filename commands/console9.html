@@ -285,36 +285,60 @@ class Console:
             return out, err
 
     @classmethod
-    def fit(cls, *strings: str, sep: str = &#34; &#34;):
+    def fit(cls, *strings: str, sep: str = &#34; &#34;, reverse=False):
         &#34;&#34;&#34;Fit strings to console
+        &lt;br&gt;`param strings` list of strings
+        &lt;br&gt;`param sep` string to join strings
+        &lt;br&gt;`param reverse` boolean, if True, cut from end of string
         &lt;br&gt;`return` strings, that can be fit in one line print
         &lt;br&gt; yes, implementation is far beyond good
         &#34;&#34;&#34;
         from .os9 import OS
         from .list9 import List
+        from wcwidth import wcswidth
+
         console_width = cls.width()
-        if OS.windows:  # windows add symbol to end of string :(
+        
+        if OS.windows:  # windows adds symbol to end of string :(
             console_width -= 1
         strings = List.to_strings(strings)  # replace all to strings
-        len_all = len(sep.join(strings))  # count len of all
-
+        len_all = wcswidth(sep.join(strings))  # count len of all
+        reverse = not reverse
+        prefix = &#34;&gt;&gt;&#34; if reverse else &#34;&lt;&lt;&#34;
+        
         # check for fit
         if len_all &lt;= console_width:
             pass
         else:
             # get the longest line
-            longest_string = 0
+            longest_string_index = 0
             for cnt, string in enumerate(strings):
-                if len(string) &gt; len(strings[longest_string]):
-                    longest_string = cnt
-
+                if wcswidth(string) &gt; wcswidth(strings[longest_string_index]):
+                    longest_string_index = cnt
+            longest_string = strings[longest_string_index]
+            
             # cut line
-            cut_cnt = len_all - console_width
-            new_longest_string = strings[longest_string][cut_cnt:]
-            new_longest_string = &#34;&gt;&gt;&#34; + new_longest_string[2:]
+            cut_cnt = len_all - console_width + wcswidth(prefix)
+            desired_length = wcswidth(longest_string) - cut_cnt
+            lendiff = wcswidth(longest_string) - len(longest_string)  # add buffer for double characters
+            if reverse:
+                longest_string = longest_string[::-1]
 
-            # replace
-            strings[longest_string] = new_longest_string
+            longest_string = longest_string[:int(-cut_cnt+lendiff)]
+            
+            while wcswidth(longest_string) &gt; desired_length:
+                longest_string = longest_string[:-1]
+
+            while wcswidth(longest_string) &lt; desired_length:
+                longest_string += &#34; &#34;
+
+            longest_string += prefix
+
+            if reverse:
+                longest_string = longest_string[::-1]
+
+            
+            strings[longest_string_index] = longest_string
 
         return strings</code></pre>
 </details>
@@ -586,36 +610,60 @@ class Console:
             return out, err
 
     @classmethod
-    def fit(cls, *strings: str, sep: str = &#34; &#34;):
+    def fit(cls, *strings: str, sep: str = &#34; &#34;, reverse=False):
         &#34;&#34;&#34;Fit strings to console
+        &lt;br&gt;`param strings` list of strings
+        &lt;br&gt;`param sep` string to join strings
+        &lt;br&gt;`param reverse` boolean, if True, cut from end of string
         &lt;br&gt;`return` strings, that can be fit in one line print
         &lt;br&gt; yes, implementation is far beyond good
         &#34;&#34;&#34;
         from .os9 import OS
         from .list9 import List
+        from wcwidth import wcswidth
+
         console_width = cls.width()
-        if OS.windows:  # windows add symbol to end of string :(
+        
+        if OS.windows:  # windows adds symbol to end of string :(
             console_width -= 1
         strings = List.to_strings(strings)  # replace all to strings
-        len_all = len(sep.join(strings))  # count len of all
-
+        len_all = wcswidth(sep.join(strings))  # count len of all
+        reverse = not reverse
+        prefix = &#34;&gt;&gt;&#34; if reverse else &#34;&lt;&lt;&#34;
+        
         # check for fit
         if len_all &lt;= console_width:
             pass
         else:
             # get the longest line
-            longest_string = 0
+            longest_string_index = 0
             for cnt, string in enumerate(strings):
-                if len(string) &gt; len(strings[longest_string]):
-                    longest_string = cnt
-
+                if wcswidth(string) &gt; wcswidth(strings[longest_string_index]):
+                    longest_string_index = cnt
+            longest_string = strings[longest_string_index]
+            
             # cut line
-            cut_cnt = len_all - console_width
-            new_longest_string = strings[longest_string][cut_cnt:]
-            new_longest_string = &#34;&gt;&gt;&#34; + new_longest_string[2:]
+            cut_cnt = len_all - console_width + wcswidth(prefix)
+            desired_length = wcswidth(longest_string) - cut_cnt
+            lendiff = wcswidth(longest_string) - len(longest_string)  # add buffer for double characters
+            if reverse:
+                longest_string = longest_string[::-1]
 
-            # replace
-            strings[longest_string] = new_longest_string
+            longest_string = longest_string[:int(-cut_cnt+lendiff)]
+            
+            while wcswidth(longest_string) &gt; desired_length:
+                longest_string = longest_string[:-1]
+
+            while wcswidth(longest_string) &lt; desired_length:
+                longest_string += &#34; &#34;
+
+            longest_string += prefix
+
+            if reverse:
+                longest_string = longest_string[::-1]
+
+            
+            strings[longest_string_index] = longest_string
 
         return strings</code></pre>
 </details>
@@ -715,10 +763,13 @@ def clean():
 </details>
 </dd>
 <dt id="commands.console9.Console.fit"><code class="name flex">
-<span>def <span class="ident">fit</span></span>(<span>*strings: str, sep: str = ' ')</span>
+<span>def <span class="ident">fit</span></span>(<span>*strings: str, sep: str = ' ', reverse=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Fit strings to console
+<br><code>param strings</code> list of strings
+<br><code>param sep</code> string to join strings
+<br><code>param reverse</code> boolean, if True, cut from end of string
 <br><code>return</code> strings, that can be fit in one line print
 <br> yes, implementation is far beyond good</p></div>
 <details class="source">
@@ -726,36 +777,60 @@ def clean():
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@classmethod
-def fit(cls, *strings: str, sep: str = &#34; &#34;):
+def fit(cls, *strings: str, sep: str = &#34; &#34;, reverse=False):
     &#34;&#34;&#34;Fit strings to console
+    &lt;br&gt;`param strings` list of strings
+    &lt;br&gt;`param sep` string to join strings
+    &lt;br&gt;`param reverse` boolean, if True, cut from end of string
     &lt;br&gt;`return` strings, that can be fit in one line print
     &lt;br&gt; yes, implementation is far beyond good
     &#34;&#34;&#34;
     from .os9 import OS
     from .list9 import List
+    from wcwidth import wcswidth
+
     console_width = cls.width()
-    if OS.windows:  # windows add symbol to end of string :(
+    
+    if OS.windows:  # windows adds symbol to end of string :(
         console_width -= 1
     strings = List.to_strings(strings)  # replace all to strings
-    len_all = len(sep.join(strings))  # count len of all
-
+    len_all = wcswidth(sep.join(strings))  # count len of all
+    reverse = not reverse
+    prefix = &#34;&gt;&gt;&#34; if reverse else &#34;&lt;&lt;&#34;
+    
     # check for fit
     if len_all &lt;= console_width:
         pass
     else:
         # get the longest line
-        longest_string = 0
+        longest_string_index = 0
         for cnt, string in enumerate(strings):
-            if len(string) &gt; len(strings[longest_string]):
-                longest_string = cnt
-
+            if wcswidth(string) &gt; wcswidth(strings[longest_string_index]):
+                longest_string_index = cnt
+        longest_string = strings[longest_string_index]
+        
         # cut line
-        cut_cnt = len_all - console_width
-        new_longest_string = strings[longest_string][cut_cnt:]
-        new_longest_string = &#34;&gt;&gt;&#34; + new_longest_string[2:]
+        cut_cnt = len_all - console_width + wcswidth(prefix)
+        desired_length = wcswidth(longest_string) - cut_cnt
+        lendiff = wcswidth(longest_string) - len(longest_string)  # add buffer for double characters
+        if reverse:
+            longest_string = longest_string[::-1]
 
-        # replace
-        strings[longest_string] = new_longest_string
+        longest_string = longest_string[:int(-cut_cnt+lendiff)]
+        
+        while wcswidth(longest_string) &gt; desired_length:
+            longest_string = longest_string[:-1]
+
+        while wcswidth(longest_string) &lt; desired_length:
+            longest_string += &#34; &#34;
+
+        longest_string += prefix
+
+        if reverse:
+            longest_string = longest_string[::-1]
+
+        
+        strings[longest_string_index] = longest_string
 
     return strings</code></pre>
 </details>

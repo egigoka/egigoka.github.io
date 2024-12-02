@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with JSON
 &#34;&#34;&#34;
-__version__ = &#34;4.2.0&#34;
+__version__ = &#34;4.3.0&#34;
 
 
 class Json:
@@ -153,6 +153,9 @@ item not found!&#39;&#39;&#39;
     def keys(self):
         return self.string.keys()
 
+    def clear(self):
+        return self.string.clear()
+
 
 class JsonList(Json):
     __getitem__ = JsonDict.__getitem__
@@ -169,6 +172,10 @@ class JsonList(Json):
     def __str__(self):
         from .print9 import Print
         return Print.prettify(self.string, quiet=True)
+
+    def index(self, *args, **kwargs):
+        output = self.string.index(*args, **kwargs)
+        return output
 
     def append(self, element):
         self.string.append(element)
@@ -422,7 +429,10 @@ item not found!&#39;&#39;&#39;
         return self.string.values()
 
     def keys(self):
-        return self.string.keys()</code></pre>
+        return self.string.keys()
+
+    def clear(self):
+        return self.string.clear()</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -430,6 +440,19 @@ item not found!&#39;&#39;&#39;
 </ul>
 <h3>Methods</h3>
 <dl>
+<dt id="commands.json9.JsonDict.clear"><code class="name flex">
+<span>def <span class="ident">clear</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clear(self):
+    return self.string.clear()</code></pre>
+</details>
+</dd>
 <dt id="commands.json9.JsonDict.items"><code class="name flex">
 <span>def <span class="ident">items</span></span>(<span>self)</span>
 </code></dt>
@@ -506,6 +529,10 @@ item not found!&#39;&#39;&#39;
         from .print9 import Print
         return Print.prettify(self.string, quiet=True)
 
+    def index(self, *args, **kwargs):
+        output = self.string.index(*args, **kwargs)
+        return output
+
     def append(self, element):
         self.string.append(element)
 
@@ -529,6 +556,20 @@ item not found!&#39;&#39;&#39;
 </summary>
 <pre><code class="python">def append(self, element):
     self.string.append(element)</code></pre>
+</details>
+</dd>
+<dt id="commands.json9.JsonList.index"><code class="name flex">
+<span>def <span class="ident">index</span></span>(<span>self, *args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def index(self, *args, **kwargs):
+    output = self.string.index(*args, **kwargs)
+    return output</code></pre>
 </details>
 </dd>
 <dt id="commands.json9.JsonList.sort"><code class="name flex">
@@ -582,6 +623,7 @@ item not found!&#39;&#39;&#39;
 <li>
 <h4><code><a title="commands.json9.JsonDict" href="#commands.json9.JsonDict">JsonDict</a></code></h4>
 <ul class="">
+<li><code><a title="commands.json9.JsonDict.clear" href="#commands.json9.JsonDict.clear">clear</a></code></li>
 <li><code><a title="commands.json9.JsonDict.items" href="#commands.json9.JsonDict.items">items</a></code></li>
 <li><code><a title="commands.json9.JsonDict.keys" href="#commands.json9.JsonDict.keys">keys</a></code></li>
 <li><code><a title="commands.json9.JsonDict.values" href="#commands.json9.JsonDict.values">values</a></code></li>
@@ -591,6 +633,7 @@ item not found!&#39;&#39;&#39;
 <h4><code><a title="commands.json9.JsonList" href="#commands.json9.JsonList">JsonList</a></code></h4>
 <ul class="">
 <li><code><a title="commands.json9.JsonList.append" href="#commands.json9.JsonList.append">append</a></code></li>
+<li><code><a title="commands.json9.JsonList.index" href="#commands.json9.JsonList.index">index</a></code></li>
 <li><code><a title="commands.json9.JsonList.sort" href="#commands.json9.JsonList.sort">sort</a></code></li>
 </ul>
 </li>
