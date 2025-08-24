@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to interact with terminal|console
 &#34;&#34;&#34;
-__version__ = &#34;0.11.14&#34;
+__version__ = &#34;0.11.15&#34;
 
 import threading
 
@@ -94,6 +94,7 @@ class Console:
         import random
         from .os9 import OS
         from .print9 import Print
+        from .const9 import newline
         if (width is not None) and (height is not None) and OS.windows:
             import os
             os.system(&#34;mode con cols=&#34; + str(width) + &#34; lines=&#34; + str(height))
@@ -111,7 +112,7 @@ class Console:
             try:  # New version with one long line. Works perfect, as I see.
                 import time
                 string = string * height
-                Print.colored(string, color, highlight)
+                Print.colored(newline + string, color, highlight, end = &#34;&#34;)
                 time.sleep(sleep)
             except KeyboardInterrupt:
                 Print.colored(&#34;OK&#34;, &#34;white&#34;, &#34;on_grey&#34;)
@@ -144,20 +145,31 @@ class Console:
                     output = b&#39;&#39;
                     if is_string:
                         output = &#39;&#39;
-                    for string in obj:
-                        string_ = string
+                    finished = False
+                    # for string in obj:
+                    while not finished:
+                        string_input = b&#39;&#39;
+                        while True:
+                            sym = obj.read(1)
+                            if not sym:
+                                finished = True
+                                break
+                            string_input += sym
+                            if sym in [b&#39;\r&#39;, b&#39;\n&#39;]:
+                                break
+                        string_current = string_input
                         if decoding:
                             try:
-                                string_ = string.decode(decoding)
+                                string_current = string_input.decode(decoding)
                             except UnicodeDecodeError:
                                 # fallback to chardet
                                 import chardet
-                                string_ = string.decode(chardet.detect(string)[&#39;encoding&#39;])
-                        hook(string_)
-                        output += string_
+                                string_current = string_input.decode(chardet.detect(string_input)[&#39;encoding&#39;])
+                        hook(string_current)
+                        output += string_current
                         if print_std:
                             from .print9 import Print
-                            Print.colored(string_, color, end=&#39;&#39;, flush=True)
+                            Print.colored(string_current, color, end=&#39;&#39;, flush=True)
                     if timeout is not None:
                         timer.cancel()
                     return output
@@ -419,6 +431,7 @@ class Console:
         import random
         from .os9 import OS
         from .print9 import Print
+        from .const9 import newline
         if (width is not None) and (height is not None) and OS.windows:
             import os
             os.system(&#34;mode con cols=&#34; + str(width) + &#34; lines=&#34; + str(height))
@@ -436,7 +449,7 @@ class Console:
             try:  # New version with one long line. Works perfect, as I see.
                 import time
                 string = string * height
-                Print.colored(string, color, highlight)
+                Print.colored(newline + string, color, highlight, end = &#34;&#34;)
                 time.sleep(sleep)
             except KeyboardInterrupt:
                 Print.colored(&#34;OK&#34;, &#34;white&#34;, &#34;on_grey&#34;)
@@ -469,20 +482,31 @@ class Console:
                     output = b&#39;&#39;
                     if is_string:
                         output = &#39;&#39;
-                    for string in obj:
-                        string_ = string
+                    finished = False
+                    # for string in obj:
+                    while not finished:
+                        string_input = b&#39;&#39;
+                        while True:
+                            sym = obj.read(1)
+                            if not sym:
+                                finished = True
+                                break
+                            string_input += sym
+                            if sym in [b&#39;\r&#39;, b&#39;\n&#39;]:
+                                break
+                        string_current = string_input
                         if decoding:
                             try:
-                                string_ = string.decode(decoding)
+                                string_current = string_input.decode(decoding)
                             except UnicodeDecodeError:
                                 # fallback to chardet
                                 import chardet
-                                string_ = string.decode(chardet.detect(string)[&#39;encoding&#39;])
-                        hook(string_)
-                        output += string_
+                                string_current = string_input.decode(chardet.detect(string_input)[&#39;encoding&#39;])
+                        hook(string_current)
+                        output += string_current
                         if print_std:
                             from .print9 import Print
-                            Print.colored(string_, color, end=&#39;&#39;, flush=True)
+                            Print.colored(string_current, color, end=&#39;&#39;, flush=True)
                     if timeout is not None:
                         timer.cancel()
                     return output
@@ -708,6 +732,7 @@ def blink(cls, width=None, height=None, symbol=&#34;#&#34;, sleep=0.5):  # pylin
     import random
     from .os9 import OS
     from .print9 import Print
+    from .const9 import newline
     if (width is not None) and (height is not None) and OS.windows:
         import os
         os.system(&#34;mode con cols=&#34; + str(width) + &#34; lines=&#34; + str(height))
@@ -725,7 +750,7 @@ def blink(cls, width=None, height=None, symbol=&#34;#&#34;, sleep=0.5):  # pylin
         try:  # New version with one long line. Works perfect, as I see.
             import time
             string = string * height
-            Print.colored(string, color, highlight)
+            Print.colored(newline + string, color, highlight, end = &#34;&#34;)
             time.sleep(sleep)
         except KeyboardInterrupt:
             Print.colored(&#34;OK&#34;, &#34;white&#34;, &#34;on_grey&#34;)

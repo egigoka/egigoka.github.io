@@ -40,7 +40,7 @@ class Windows:
 
     class RemoteSystem:
         def __init__(self, hostname, username, password, port=None, transport=&#34;ntlm&#34;):
-            import winrm
+            import winrm  # pywinrm
             # FIX winrm #
 
             def fix_run_ps(self, script):
@@ -379,7 +379,7 @@ class Windows:
 
     class RemoteSystem:
         def __init__(self, hostname, username, password, port=None, transport=&#34;ntlm&#34;):
-            import winrm
+            import winrm  # pywinrm
             # FIX winrm #
 
             def fix_run_ps(self, script):

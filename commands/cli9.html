@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Internal module to work with commandline interfaces
 &#34;&#34;&#34;
-__version__ = &#34;0.5.0&#34;
+__version__ = &#34;0.5.1&#34;
 
 
 class CLI:
@@ -167,7 +167,11 @@ class CLI:
         :return: A string representing the progress bar.
         &#34;&#34;&#34;
         from .console9 import Console
+        from .os9 import OS
         console_width = Console.width()
+
+        if OS.windows:  # windows add symbol to end of string :(
+            console_width -= 1
 
         if reverse:
             done = total - done
@@ -418,7 +422,11 @@ class CLI:
         :return: A string representing the progress bar.
         &#34;&#34;&#34;
         from .console9 import Console
+        from .os9 import OS
         console_width = Console.width()
+
+        if OS.windows:  # windows add symbol to end of string :(
+            console_width -= 1
 
         if reverse:
             done = total - done
@@ -787,7 +795,11 @@ def progressbar(done, total, done_repr=&#34;&#34;, total_repr=&#34;&#34;, revers
     :return: A string representing the progress bar.
     &#34;&#34;&#34;
     from .console9 import Console
+    from .os9 import OS
     console_width = Console.width()
+
+    if OS.windows:  # windows add symbol to end of string :(
+        console_width -= 1
 
     if reverse:
         done = total - done

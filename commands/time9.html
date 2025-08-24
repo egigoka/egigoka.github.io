@@ -31,7 +31,7 @@
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;Module with time functions
 &#34;&#34;&#34;
-__version__ = &#34;1.2.3&#34;
+__version__ = &#34;1.2.5&#34;
 
 
 class Time:
@@ -172,8 +172,7 @@ class Time:
         &lt;br&gt;`param time_b` datetime.datetime time object|float of timestamp
         &lt;br&gt;`return` difference between two timestamps
         &#34;&#34;&#34;
-        from .funcs9 import multiple
-        if isinstance(time_a, multiple(int, float)) and time_b is None:
+        if isinstance(time_a, (int, float)) and time_b is None:
             import datetime
             return datetime.timedelta(seconds=time_a)
         
@@ -182,8 +181,8 @@ class Time:
         time_a = cls.timestamp_to_datetime(time_a)
         time_b = cls.timestamp_to_datetime(time_b)
         delta = time_b - time_a
-        delta_combined = delta.seconds + delta.microseconds / 1E6
-        return delta_combined
+
+        return delta.total_seconds()
 
     @staticmethod
     def human_readable(timedelta: int):
@@ -373,8 +372,7 @@ class Time:
         &lt;br&gt;`param time_b` datetime.datetime time object|float of timestamp
         &lt;br&gt;`return` difference between two timestamps
         &#34;&#34;&#34;
-        from .funcs9 import multiple
-        if isinstance(time_a, multiple(int, float)) and time_b is None:
+        if isinstance(time_a, (int, float)) and time_b is None:
             import datetime
             return datetime.timedelta(seconds=time_a)
         
@@ -383,8 +381,8 @@ class Time:
         time_a = cls.timestamp_to_datetime(time_a)
         time_b = cls.timestamp_to_datetime(time_b)
         delta = time_b - time_a
-        delta_combined = delta.seconds + delta.microseconds / 1E6
-        return delta_combined
+
+        return delta.total_seconds()
 
     @staticmethod
     def human_readable(timedelta: int):
@@ -493,8 +491,7 @@ def delta(cls, time_a, time_b=None):
     &lt;br&gt;`param time_b` datetime.datetime time object|float of timestamp
     &lt;br&gt;`return` difference between two timestamps
     &#34;&#34;&#34;
-    from .funcs9 import multiple
-    if isinstance(time_a, multiple(int, float)) and time_b is None:
+    if isinstance(time_a, (int, float)) and time_b is None:
         import datetime
         return datetime.timedelta(seconds=time_a)
     
@@ -503,8 +500,8 @@ def delta(cls, time_a, time_b=None):
     time_a = cls.timestamp_to_datetime(time_a)
     time_b = cls.timestamp_to_datetime(time_b)
     delta = time_b - time_a
-    delta_combined = delta.seconds + delta.microseconds / 1E6
-    return delta_combined</code></pre>
+
+    return delta.total_seconds()</code></pre>
 </details>
 </dd>
 <dt id="commands.time9.Time.dotted"><code class="name flex">
