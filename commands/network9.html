@@ -2,18 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.10.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
 <title>commands.network9 API documentation</title>
-<meta name="description" content="Internal module with functions to work with network" />
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
-<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<meta name="description" content="Internal module with functions to work with network">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
-<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
 </head>
 <body>
 <main>
@@ -23,410 +37,6 @@
 </header>
 <section id="section-intro">
 <p>Internal module with functions to work with network</p>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">#! python3
-# -*- coding: utf-8 -*-
-&#34;&#34;&#34;Internal module with functions to work with network
-&#34;&#34;&#34;
-__version__ = &#34;0.11.0&#34;
-
-import time
-from typing import Union
-
-
-class Network:
-    &#34;&#34;&#34;Class with functions to work with network
-    &#34;&#34;&#34;
-
-    @staticmethod
-    def get_domain_of_url(url):
-        &#34;&#34;&#34;
-        &lt;br&gt;`param url` string, URL
-        &lt;br&gt;`return` string, URL domain
-        &#34;&#34;&#34;
-        from .str9 import Str
-        if &#34;/&#34; in url:
-            try:
-                url_output = Str.substring(url, &#34;://&#34;, &#34;/&#34;)
-            except KeyError:
-                try:
-                    url_output = Str.substring(url, &#34;://&#34;)
-                except KeyError:
-                    try:
-                        url_output = Str.substring(url, None, &#34;/&#34;)
-                    except KeyError:
-                        url_output = url
-        else:
-            url_output = url
-        return url_output
-
-    @staticmethod
-    def get_protocol_of_url(url):
-        &#34;&#34;&#34;
-        &lt;br&gt;`param url` string, URL
-        &lt;br&gt;`return` string, URL domain
-        &#34;&#34;&#34;
-        from .str9 import Str
-        proto_prefix = &#34;://&#34;
-        return Str.substring(url, &#34;&#34;, proto_prefix, exception_message=&#34;The protocol of url not found&#34;) + proto_prefix
-
-    @staticmethod
-    def get_ip(domain):
-        &#34;&#34;&#34;Resolve IP from domain name with socket.gethostbyname
-        &lt;br&gt;`param domain` string, domain name
-        &lt;br&gt;`return` string, IP
-        &#34;&#34;&#34;
-        import socket
-        try:
-            return socket.gethostbyname(domain)  # I don&#39;t how it work todo check code of &#39;socket&#39;
-        except socket.gaierror:
-            return &#34;not found&#34;
-
-    @classmethod
-    def ping(cls,
-             domain=&#34;127.0.0.1&#34;, count=1, quiet=False, timeout=10000):
-        &#34;&#34;&#34;Wrapper under default ping command
-        &lt;br&gt;`param domain` string, domain or IP
-        &lt;br&gt;`param count` int, count of attempts
-        &lt;br&gt;`param quiet` boolean, suppress print to console
-        &lt;br&gt;`param timeout` int, timeout in milliseconds
-        &lt;br&gt;`param return_ip` boolean, return string with IP
-        &lt;br&gt;`return` boolean of availability of domain, or list of boolean domain availability, string ip and full output
-                 from ping command
-        &#34;&#34;&#34;
-        # todo properly work with exception
-        from ping3 import ping
-        domain = cls.get_domain_of_url(domain)
-        up_message = domain + &#34; is up!&#34;
-        down_message = domain + &#34; is down.&#34;
-        result = None
-        if not quiet:
-            from .print9 import Print
-            Print.rewrite(&#34;Pinging&#34;, domain, count, &#34;times...&#34;)
-        try:
-
-            uplink = True
-            for i in range(count):
-
-                if i &gt; 0:
-                    time.sleep(1)
-
-                result = ping(domain, timeout=int(timeout/1000))
-
-                if type(result) != float:
-                    uplink = False
-                    break
-
-        except KeyboardInterrupt:
-            import sys
-            sys.exit()
-        except Exception:  # pylint: disable=bare-except
-            uplink = False
-
-        if not quiet:
-            Print.rewrite(&#34;&#34;)
-            if uplink:
-                Print.colored(up_message, &#34;white&#34;, &#34;on_green&#34;)
-            else:
-                Print.colored(down_message, &#34;white&#34;, &#34;on_red&#34;)
-        if count == 1:
-            return result
-        return uplink
-
-    @staticmethod
-    def get_fqdn(ip=None):
-        import socket
-        if ip:
-            return socket.getfqdn(ip)
-        return socket.getfqdn()
-
-    @staticmethod
-    def get_netbios(ip):
-        import socket
-        if ip:
-            socket.gethostbyaddr(ip)
-        return socket.gethostname()
-
-    @staticmethod
-    def download_file(url, out=None, quiet=None):
-        import os
-        from .file9 import File
-        from .path9 import Path
-        if not out:
-            out = os.path.split(url)[1]
-        import urllib.request
-        response = urllib.request.urlopen(url)
-        data = response.read()  # a `bytes` object
-        File.write(out, data, mode=&#34;wb&#34;)
-        return Path.full(out)
-
-    @staticmethod
-    def get_global_ip(fast=True, quiet=True):
-        # much code by phoemur@gmail.com (ipgetter)
-        global Print
-        import re
-        import random
-        import ssl
-
-        from sys import version_info
-
-        import urllib.request as urllib
-        import http.cookiejar as cjar
-
-        __version__ = &#34;0.9&#34;
-
-        class IPgetter(object):
-
-            &#39;&#39;&#39;
-            This class is designed to fetch your external IP address from the internet.
-            It is used mostly when behind a NAT.
-            It picks your IP randomly from a serverlist to minimize request overhead
-            on a single server
-            &#39;&#39;&#39;
-
-            def __init__(self):
-                self.server_list = [&#39;http://ip.dnsexit.com&#39;,
-                                    # &#39;http://ifconfig.me/ip&#39;,
-                                    # &#39;http://ipecho.net/plain&#39;,
-                                    # &#39;http://checkip.dyndns.org/plain&#39;,
-                                    # &#39;http://websiteipaddress.com/WhatIsMyIp&#39;,
-                                    &#39;http://getmyipaddress.org/&#39;,
-                                    &#39;http://www.my-ip-address.net/&#39;,
-                                    &#39;http://myexternalip.com/raw&#39;,
-                                    &#39;http://www.canyouseeme.org/&#39;,
-                                    &#39;http://www.trackip.net/&#39;,
-                                    &#39;http://icanhazip.com/&#39;,
-                                    &#39;http://www.iplocation.net/&#39;,
-                                    &#39;http://www.ipchicken.com/&#39;,
-                                    &#39;http://whatsmyip.net/&#39;,
-                                    &#39;http://www.ip-adress.com/&#39;,
-                                    # &#39;http://checkmyip.com/&#39;,
-                                    &#39;http://www.tracemyip.org/&#39;,
-                                    &#39;http://www.lawrencegoetz.com/programs/ipinfo/&#39;,
-                                    &#39;http://www.findmyip.co/&#39;,
-                                    # &#39;http://ip-lookup.net/&#39;,
-                                    # &#39;http://www.mon-ip.com/en/my-ip/&#39;,
-                                    &#39;http://ipgoat.com/&#39;,
-                                    &#39;http://www.myipnumber.com/my-ip-address.asp&#39;,
-                                    # &#39;http://formyip.com/&#39;,
-                                    &#39;https://check.torproject.org/&#39;,
-                                    # &#39;http://www.displaymyip.com/&#39;,
-                                    # &#39;http://www.bobborst.com/tools/whatsmyip/&#39;,
-                                    &#39;http://www.geoiptool.com/&#39;,
-                                    &#39;https://www.whatsmydns.net/whats-my-ip-address.html&#39;,
-                                    &#39;https://www.privateinternetaccess.com/pages/whats-my-ip/&#39;,
-                                    &#39;http://checkip.dyndns.com/&#39;,
-                                    &#39;http://www.ip-adress.eu/&#39;,
-                                    &#39;http://www.infosniper.net/&#39;,
-                                    &#39;https://wtfismyip.com/text&#39;,
-                                    # &#39;http://ipinfo.io/&#39;,
-                                    &#39;http://httpbin.org/ip&#39;,
-                                    &#39;https://diagnostic.opendns.com/myip&#39;,
-                                    &#39;http://checkip.amazonaws.com&#39;,
-                                    &#39;https://api.ipify.org&#39;,
-                                    &#39;https://v4.ident.me&#39;]
-
-            def get_external_ip(self):
-                &#39;&#39;&#39;
-                This function gets your IP from a random server
-                &#39;&#39;&#39;
-
-                myip = &#39;&#39;
-                for i in range(7):
-                    myip = self.fetch(random.choice(self.server_list))
-                    if myip != &#39;&#39;:
-                        return myip
-                    else:
-                        continue
-                return &#39;&#39;
-
-            def fetch(self, server):
-                &#39;&#39;&#39;
-                This function gets your IP from a specific server.
-                &#39;&#39;&#39;
-                url = None
-                cj = cjar.CookieJar()
-                ctx = ssl.create_default_context()
-                ctx.check_hostname = False
-                ctx.verify_mode = ssl.CERT_NONE
-                opener = urllib.build_opener(urllib.HTTPCookieProcessor(cj), urllib.HTTPSHandler(context=ctx))
-                opener.addheaders = [
-                    (&#39;User-agent&#39;, &#34;Mozilla/5.0 (X11; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0&#34;),
-                    (&#39;Accept&#39;, &#34;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#34;),
-                    (&#39;Accept-Language&#39;, &#34;en-US,en;q=0.5&#34;)]
-
-                try:
-                    url = opener.open(server, timeout=1)
-                    content = url.read()
-
-                    try:
-                        content = content.decode(&#39;UTF-8&#39;)
-                    except UnicodeDecodeError:
-                        content = content.decode(&#39;ISO-8859-1&#39;)
-
-                    m = re.search(
-                        r&#39;(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)&#39;,
-                        content)
-                    myip = m.group(0)
-                    return myip if len(myip) &gt; 0 else &#39;&#39;
-                except Exception:
-                    return &#39;&#39;
-                finally:
-                    if url:
-                        url.close()
-
-            def test(self, quiet=True):
-                &#34;&#34;&#34;
-                This functions tests the consistency of the servers
-                on the list when retrieving your IP.
-                All results should be the same.
-                &#34;&#34;&#34;
-
-                resultdict = {}
-                for server in self.server_list:
-                    resultdict.update(**{server: self.fetch(server)})
-
-                if not quiet:
-                    ips = sorted(resultdict.values())
-                    ips_set = set(ips)
-                    print(&#39;\nNumber of servers: {}&#39;.format(len(self.server_list)))
-                    print(&#34;IP&#39;s :&#34;)
-                    for ip, ocorrencia in zip(ips_set, map(lambda x: ips.count(x), ips_set)):
-                        print(&#39;{0} = {1} ocurrenc{2}&#39;.format(ip if len(ip) &gt; 0 else &#39;broken server&#39;, ocorrencia,
-                                                             &#39;y&#39; if ocorrencia == 1 else &#39;ies&#39;))
-                    print(&#39;\n&#39;)
-                    print(resultdict)
-                return resultdict
-
-        # end code by phoemur@gmail.com
-
-        ipgetter = IPgetter()
-
-        if not fast:
-            if not quiet:
-                from .print9 import Print
-                Print.rewrite(&#34;Getting IP...&#34;)
-            from .dict9 import Dict
-            tempdict = {}
-            for server, ip in Dict.iterable(ipgetter.test()):
-                try:
-                    tempdict[ip] += 1
-                except KeyError:
-                    tempdict[ip] = 1
-
-            most_frequent_ip = 0
-            most_frequent_ip_cnt = 0
-            for ip, cnt in Dict.iterable(tempdict):
-                if cnt &gt; most_frequent_ip_cnt:
-                    most_frequent_ip = ip
-
-            if not quiet:
-                Print.rewrite()
-
-            if most_frequent_ip:  # do not return empty ip
-                return most_frequent_ip
-            else:
-                raise LookupError(&#34;IP not found&#34;)
-        else:
-            return ipgetter.get_external_ip()
-
-    @staticmethod
-    def check_response(endpoint: str, good_response: Union[str, bytes, list, tuple], timeout: int = 10,
-                       debug: bool = False) -&gt; bool:
-        import requests
-        from .list9 import List
-
-        if isinstance(good_response, str):
-            good_response = bytes(good_response, encoding=&#34;utf-8&#34;)
-        elif isinstance(good_response, list) or isinstance(good_response, tuple):
-            good_response = List.apply_lambda_to_all_elements(good_response, bytes)
-
-        try:
-            response = requests.get(endpoint, timeout=timeout).content
-        except (requests.exceptions.ConnectionError, requests.exceptions.ReadTimeout) as e:
-            if debug:
-                from .print9 import Print
-                Print.debug(e)
-            return False
-        if isinstance(good_response, bytes):
-            output = response == good_response
-        elif isinstance(good_response, list) or isinstance(good_response, tuple):
-            output = response in good_response
-        else:
-            raise TypeError(f&#34;good_response must be bytes, list or tuple, got &#39;{type(good_response)}&#39; instead&#34;)
-        if debug and not output:
-            from .print9 import Print
-            Print.debug(response, good_response)
-        return output
-
-    @classmethod
-    def check_internet_apple(cls, timeout=10, debug=False):
-        return cls.check_response(&#34;http://captive.apple.com/hotspot-detect.html&#34;,
-                                  (b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;,
-                                   b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;&#39;),
-                                  timeout=timeout, debug=debug)
-
-    @classmethod
-    def check_internet_microsoft(cls, timeout=10, debug=False):
-        return cls.check_response(&#34;http://www.msftncsi.com/ncsi.txt&#34;,
-                                  b&#39;Microsoft NCSI&#39;,
-                                  timeout=timeout, debug=debug)
-
-    @staticmethod
-    def request(url, method, params=None, basic_auth_user=None, basic_auth_password=None, data=None, json=None,
-                headers=None, **kwargs):
-        import requests
-
-        auth = None
-        if basic_auth_user and basic_auth_password:
-            import requests.auth
-            auth = requests.auth.HTTPBasicAuth(basic_auth_user, basic_auth_password)
-
-        if method == &#34;get&#34;:
-            func = requests.get
-            kwargs.update({&#34;url&#34;: url,
-                           &#34;auth&#34;: auth,
-                           &#34;params&#34;: params,
-                           &#34;headers&#34;: headers})
-        elif method == &#34;post&#34;:
-            func = requests.post
-            kwargs.update({&#34;url&#34;: url,
-                           &#34;auth&#34;: auth,
-                           &#34;params&#34;: params,
-                           &#34;data&#34;: data,
-                           &#34;json&#34;: json,
-                           &#34;headers&#34;: headers})
-        elif method == &#34;delete&#34;:
-            func = requests.delete
-            kwargs.update({&#34;url&#34;: url,
-                           &#34;auth&#34;: auth,
-                           &#34;params&#34;: params,
-                           &#34;data&#34;: data,
-                           &#34;json&#34;: json,
-                           &#34;headers&#34;: headers})
-        else:
-            raise NotImplementedError(f&#34;Method {method} isn&#39;t supported&#34;)
-
-        return func(**kwargs)
-
-    @classmethod
-    def get(cls, url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
-        return cls.request(url=url, method=&#34;get&#34;, params=params, basic_auth_user=basic_auth_user,
-                           basic_auth_password=basic_auth_password, headers=headers, **kwargs)
-
-    @classmethod
-    def post(cls, url, params=None, data=None, json=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
-        return cls.request(url=url, method=&#34;post&#34;, params=params, basic_auth_user=basic_auth_user,
-                           basic_auth_password=basic_auth_password, data=data, json=json, headers=headers, **kwargs)
-
-    @classmethod
-    def delete(cls, url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
-        return cls.request(url=url, method=&#34;delete&#34;, params=params, basic_auth_user=basic_auth_user,
-                           basic_auth_password=basic_auth_password, headers=headers, **kwargs)</code></pre>
-</details>
 </section>
 <section>
 </section>
@@ -441,7 +51,6 @@ class Network:
 <span>class <span class="ident">Network</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Class with functions to work with network</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -784,6 +393,34 @@ class Network:
                                   b&#39;Microsoft NCSI&#39;,
                                   timeout=timeout, debug=debug)
 
+    @classmethod
+    def check_internet_microsoft_connect(cls, timeout=10, debug=False):
+        return cls.check_response(&#34;http://www.msftconnecttest.com/connecttest.txt&#34;,
+                                  b&#39;Microsoft Connect Test&#39;,
+                                  timeout=timeout, debug=debug)
+
+    @classmethod
+    def check_internet_google(cls, timeout=10, debug=False):
+        import requests
+        try:
+            response = requests.get(&#34;http://connectivitycheck.gstatic.com/generate_204&#34;, timeout=timeout)
+            output = response.status_code == 204 and response.content == b&#39;&#39;
+        except (requests.exceptions.ConnectionError, requests.exceptions.ReadTimeout) as e:
+            if debug:
+                from .print9 import Print
+                Print.debug(e)
+            return False
+        if debug and not output:
+            from .print9 import Print
+            Print.debug(f&#34;Status: {response.status_code}, Content: {response.content}&#34;)
+        return output
+
+    @classmethod
+    def check_internet_firefox(cls, timeout=10, debug=False):
+        return cls.check_response(&#34;http://detectportal.firefox.com/success.txt&#34;,
+                                  b&#39;success\n&#39;,
+                                  timeout=timeout, debug=debug)
+
     @staticmethod
     def request(url, method, params=None, basic_auth_user=None, basic_auth_password=None, data=None, json=None,
                 headers=None, **kwargs):
@@ -836,6 +473,7 @@ class Network:
         return cls.request(url=url, method=&#34;delete&#34;, params=params, basic_auth_user=basic_auth_user,
                            basic_auth_password=basic_auth_password, headers=headers, **kwargs)</code></pre>
 </details>
+<div class="desc"><p>Class with functions to work with network</p></div>
 <h3>Static methods</h3>
 <dl>
 <dt id="commands.network9.Network.check_internet_apple"><code class="name flex">
@@ -843,39 +481,35 @@ class Network:
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def check_internet_apple(cls, timeout=10, debug=False):
-    return cls.check_response(&#34;http://captive.apple.com/hotspot-detect.html&#34;,
-                              (b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;\n&#39;,
-                               b&#39;&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Success&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;Success&lt;/BODY&gt;&lt;/HTML&gt;&#39;),
-                              timeout=timeout, debug=debug)</code></pre>
-</details>
+</dd>
+<dt id="commands.network9.Network.check_internet_firefox"><code class="name flex">
+<span>def <span class="ident">check_internet_firefox</span></span>(<span>timeout=10, debug=False)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="commands.network9.Network.check_internet_google"><code class="name flex">
+<span>def <span class="ident">check_internet_google</span></span>(<span>timeout=10, debug=False)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
 </dd>
 <dt id="commands.network9.Network.check_internet_microsoft"><code class="name flex">
 <span>def <span class="ident">check_internet_microsoft</span></span>(<span>timeout=10, debug=False)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def check_internet_microsoft(cls, timeout=10, debug=False):
-    return cls.check_response(&#34;http://www.msftncsi.com/ncsi.txt&#34;,
-                              b&#39;Microsoft NCSI&#39;,
-                              timeout=timeout, debug=debug)</code></pre>
-</details>
 </dd>
-<dt id="commands.network9.Network.check_response"><code class="name flex">
-<span>def <span class="ident">check_response</span></span>(<span>endpoint: str, good_response: Union[str, bytes, list, tuple], timeout: int = 10, debug: bool = False) ‑> bool</span>
+<dt id="commands.network9.Network.check_internet_microsoft_connect"><code class="name flex">
+<span>def <span class="ident">check_internet_microsoft_connect</span></span>(<span>timeout=10, debug=False)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
+</dd>
+<dt id="commands.network9.Network.check_response"><code class="name flex">
+<span>def <span class="ident">check_response</span></span>(<span>endpoint: str,<br>good_response: str | bytes | list | tuple,<br>timeout: int = 10,<br>debug: bool = False) ‑> bool</span>
+</code></dt>
+<dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -909,27 +543,18 @@ def check_response(endpoint: str, good_response: Union[str, bytes, list, tuple],
         Print.debug(response, good_response)
     return output</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.network9.Network.delete"><code class="name flex">
-<span>def <span class="ident">delete</span></span>(<span>url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs)</span>
+<span>def <span class="ident">delete</span></span>(<span>url,<br>params=None,<br>basic_auth_user=None,<br>basic_auth_password=None,<br>headers=None,<br>**kwargs)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def delete(cls, url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
-    return cls.request(url=url, method=&#34;delete&#34;, params=params, basic_auth_user=basic_auth_user,
-                       basic_auth_password=basic_auth_password, headers=headers, **kwargs)</code></pre>
-</details>
 </dd>
 <dt id="commands.network9.Network.download_file"><code class="name flex">
 <span>def <span class="ident">download_file</span></span>(<span>url, out=None, quiet=None)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -947,28 +572,18 @@ def download_file(url, out=None, quiet=None):
     File.write(out, data, mode=&#34;wb&#34;)
     return Path.full(out)</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.network9.Network.get"><code class="name flex">
-<span>def <span class="ident">get</span></span>(<span>url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs)</span>
+<span>def <span class="ident">get</span></span>(<span>url,<br>params=None,<br>basic_auth_user=None,<br>basic_auth_password=None,<br>headers=None,<br>**kwargs)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def get(cls, url, params=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
-    return cls.request(url=url, method=&#34;get&#34;, params=params, basic_auth_user=basic_auth_user,
-                       basic_auth_password=basic_auth_password, headers=headers, **kwargs)</code></pre>
-</details>
 </dd>
 <dt id="commands.network9.Network.get_domain_of_url"><code class="name flex">
 <span>def <span class="ident">get_domain_of_url</span></span>(<span>url)</span>
 </code></dt>
 <dd>
-<div class="desc"><p><br><code>param url</code> string, URL
-<br><code>return</code> string, URL domain</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -995,12 +610,13 @@ def get_domain_of_url(url):
         url_output = url
     return url_output</code></pre>
 </details>
+<div class="desc"><p><br><code>param url</code> string, URL
+<br><code>return</code> string, URL domain</p></div>
 </dd>
 <dt id="commands.network9.Network.get_fqdn"><code class="name flex">
 <span>def <span class="ident">get_fqdn</span></span>(<span>ip=None)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1012,12 +628,12 @@ def get_fqdn(ip=None):
         return socket.getfqdn(ip)
     return socket.getfqdn()</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.network9.Network.get_global_ip"><code class="name flex">
 <span>def <span class="ident">get_global_ip</span></span>(<span>fast=True, quiet=True)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1192,14 +808,12 @@ def get_global_ip(fast=True, quiet=True):
     else:
         return ipgetter.get_external_ip()</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.network9.Network.get_ip"><code class="name flex">
 <span>def <span class="ident">get_ip</span></span>(<span>domain)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Resolve IP from domain name with socket.gethostbyname
-<br><code>param domain</code> string, domain name
-<br><code>return</code> string, IP</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1216,12 +830,14 @@ def get_ip(domain):
     except socket.gaierror:
         return &#34;not found&#34;</code></pre>
 </details>
+<div class="desc"><p>Resolve IP from domain name with socket.gethostbyname
+<br><code>param domain</code> string, domain name
+<br><code>return</code> string, IP</p></div>
 </dd>
 <dt id="commands.network9.Network.get_netbios"><code class="name flex">
 <span>def <span class="ident">get_netbios</span></span>(<span>ip)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1233,13 +849,12 @@ def get_netbios(ip):
         socket.gethostbyaddr(ip)
     return socket.gethostname()</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.network9.Network.get_protocol_of_url"><code class="name flex">
 <span>def <span class="ident">get_protocol_of_url</span></span>(<span>url)</span>
 </code></dt>
 <dd>
-<div class="desc"><p><br><code>param url</code> string, URL
-<br><code>return</code> string, URL domain</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1254,6 +869,8 @@ def get_protocol_of_url(url):
     proto_prefix = &#34;://&#34;
     return Str.substring(url, &#34;&#34;, proto_prefix, exception_message=&#34;The protocol of url not found&#34;) + proto_prefix</code></pre>
 </details>
+<div class="desc"><p><br><code>param url</code> string, URL
+<br><code>return</code> string, URL domain</p></div>
 </dd>
 <dt id="commands.network9.Network.ping"><code class="name flex">
 <span>def <span class="ident">ping</span></span>(<span>domain='127.0.0.1', count=1, quiet=False, timeout=10000)</span>
@@ -1267,82 +884,17 @@ def get_protocol_of_url(url):
 <br><code>param return_ip</code> boolean, return string with IP
 <br><code>return</code> boolean of availability of domain, or list of boolean domain availability, string ip and full output
 from ping command</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def ping(cls,
-         domain=&#34;127.0.0.1&#34;, count=1, quiet=False, timeout=10000):
-    &#34;&#34;&#34;Wrapper under default ping command
-    &lt;br&gt;`param domain` string, domain or IP
-    &lt;br&gt;`param count` int, count of attempts
-    &lt;br&gt;`param quiet` boolean, suppress print to console
-    &lt;br&gt;`param timeout` int, timeout in milliseconds
-    &lt;br&gt;`param return_ip` boolean, return string with IP
-    &lt;br&gt;`return` boolean of availability of domain, or list of boolean domain availability, string ip and full output
-             from ping command
-    &#34;&#34;&#34;
-    # todo properly work with exception
-    from ping3 import ping
-    domain = cls.get_domain_of_url(domain)
-    up_message = domain + &#34; is up!&#34;
-    down_message = domain + &#34; is down.&#34;
-    result = None
-    if not quiet:
-        from .print9 import Print
-        Print.rewrite(&#34;Pinging&#34;, domain, count, &#34;times...&#34;)
-    try:
-
-        uplink = True
-        for i in range(count):
-
-            if i &gt; 0:
-                time.sleep(1)
-
-            result = ping(domain, timeout=int(timeout/1000))
-
-            if type(result) != float:
-                uplink = False
-                break
-
-    except KeyboardInterrupt:
-        import sys
-        sys.exit()
-    except Exception:  # pylint: disable=bare-except
-        uplink = False
-
-    if not quiet:
-        Print.rewrite(&#34;&#34;)
-        if uplink:
-            Print.colored(up_message, &#34;white&#34;, &#34;on_green&#34;)
-        else:
-            Print.colored(down_message, &#34;white&#34;, &#34;on_red&#34;)
-    if count == 1:
-        return result
-    return uplink</code></pre>
-</details>
 </dd>
 <dt id="commands.network9.Network.post"><code class="name flex">
-<span>def <span class="ident">post</span></span>(<span>url, params=None, data=None, json=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs)</span>
+<span>def <span class="ident">post</span></span>(<span>url,<br>params=None,<br>data=None,<br>json=None,<br>basic_auth_user=None,<br>basic_auth_password=None,<br>headers=None,<br>**kwargs)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def post(cls, url, params=None, data=None, json=None, basic_auth_user=None, basic_auth_password=None, headers=None, **kwargs):
-    return cls.request(url=url, method=&#34;post&#34;, params=params, basic_auth_user=basic_auth_user,
-                       basic_auth_password=basic_auth_password, data=data, json=json, headers=headers, **kwargs)</code></pre>
-</details>
 </dd>
 <dt id="commands.network9.Network.request"><code class="name flex">
-<span>def <span class="ident">request</span></span>(<span>url, method, params=None, basic_auth_user=None, basic_auth_password=None, data=None, json=None, headers=None, **kwargs)</span>
+<span>def <span class="ident">request</span></span>(<span>url,<br>method,<br>params=None,<br>basic_auth_user=None,<br>basic_auth_password=None,<br>data=None,<br>json=None,<br>headers=None,<br>**kwargs)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1384,6 +936,7 @@ def request(url, method, params=None, basic_auth_user=None, basic_auth_password=
 
     return func(**kwargs)</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 </dl>
 </dd>
@@ -1391,7 +944,6 @@ def request(url, method, params=None, basic_auth_user=None, basic_auth_password=
 </section>
 </article>
 <nav id="sidebar">
-<h1>Index</h1>
 <div class="toc">
 <ul></ul>
 </div>
@@ -1407,7 +959,10 @@ def request(url, method, params=None, basic_auth_user=None, basic_auth_password=
 <h4><code><a title="commands.network9.Network" href="#commands.network9.Network">Network</a></code></h4>
 <ul class="">
 <li><code><a title="commands.network9.Network.check_internet_apple" href="#commands.network9.Network.check_internet_apple">check_internet_apple</a></code></li>
+<li><code><a title="commands.network9.Network.check_internet_firefox" href="#commands.network9.Network.check_internet_firefox">check_internet_firefox</a></code></li>
+<li><code><a title="commands.network9.Network.check_internet_google" href="#commands.network9.Network.check_internet_google">check_internet_google</a></code></li>
 <li><code><a title="commands.network9.Network.check_internet_microsoft" href="#commands.network9.Network.check_internet_microsoft">check_internet_microsoft</a></code></li>
+<li><code><a title="commands.network9.Network.check_internet_microsoft_connect" href="#commands.network9.Network.check_internet_microsoft_connect">check_internet_microsoft_connect</a></code></li>
 <li><code><a title="commands.network9.Network.check_response" href="#commands.network9.Network.check_response">check_response</a></code></li>
 <li><code><a title="commands.network9.Network.delete" href="#commands.network9.Network.delete">delete</a></code></li>
 <li><code><a title="commands.network9.Network.download_file" href="#commands.network9.Network.download_file">download_file</a></code></li>
@@ -1429,7 +984,7 @@ def request(url, method, params=None, basic_auth_user=None, basic_auth_password=
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
 </footer>
 </body>
 </html>

@@ -2,18 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.10.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
 <title>commands.console9 API documentation</title>
-<meta name="description" content="Internal module to interact with terminal|console" />
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
-<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<meta name="description" content="Internal module to interact with terminal|console">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
-<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
 </head>
 <body>
 <main>
@@ -23,337 +37,6 @@
 </header>
 <section id="section-intro">
 <p>Internal module to interact with terminal|console</p>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">#! python3
-# -*- coding: utf-8 -*-
-&#34;&#34;&#34;Internal module to interact with terminal|console
-&#34;&#34;&#34;
-__version__ = &#34;0.11.15&#34;
-
-import threading
-
-
-class Console:
-    &#34;&#34;&#34;Class to interact with terminal|console
-    &#34;&#34;&#34;
-
-    @staticmethod
-    def clean():
-        &#34;&#34;&#34;Wipe terminal output. Not tested on linux
-        todo test on linux, make better
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
-        import os
-        from .os9 import OS
-        if OS.windows:
-            os.system(&#34;cls&#34;)
-        elif OS.linux:
-            import shutil
-            from .const9 import newline
-            print(newline * shutil.get_terminal_size().lines)
-        elif OS.macos:
-            os.system(r&#34;clear &amp;&amp; printf &#39;\e[3J&#39;&#34;)
-
-    @staticmethod
-    def width():
-        &#34;&#34;&#34;
-        &lt;br&gt;`return` int width of opened console in chars
-        &#34;&#34;&#34;
-        import shutil
-        return shutil.get_terminal_size().columns
-
-    @staticmethod
-    def height():
-        &#34;&#34;&#34;
-        &lt;br&gt;`return` int height of opened console in chars
-        &#34;&#34;&#34;
-        from .os9 import OS
-        height = None
-        if OS.windows:
-            import shutil
-            height = shutil.get_terminal_size().lines
-        elif OS.unix_family:
-            from .str9 import Str
-            sttysize = Console.get_output(&#34;stty size&#34;)
-            height = Str.get_integers(sttysize)[0]
-        return int(height)
-
-    @classmethod
-    def blink(cls, width=None, height=None, symbol=&#34;#&#34;, sleep=0.5):  # pylint: disable=too-many-locals
-        &#34;&#34;&#34;Print to terminal rectangle with random color. Complete shit. Arguments width and height changing size of
-        terminal, works only in Windows.
-        &lt;br&gt;`param width` int width of blinking rectangle
-        &lt;br&gt;`param height` int height of blinking rectangle
-        &lt;br&gt;`param symbol` string of characters, that fill blinking rectangle
-        &lt;br&gt;`param sleep` int|float define sleep between print new colored rectangle
-        &lt;br&gt;`return`
-        &#34;&#34;&#34;
-        import random
-        from .os9 import OS
-        from .print9 import Print
-        from .const9 import newline
-        if (width is not None) and (height is not None) and OS.windows:
-            import os
-            os.system(&#34;mode con cols=&#34; + str(width) + &#34; lines=&#34; + str(height))
-        if width is None:
-            width = cls.width()
-        if height is None:
-            height = cls.height()
-        while True:
-            colors = [&#34;grey&#34;, &#34;red&#34;, &#34;green&#34;, &#34;yellow&#34;, &#34;blue&#34;, &#34;magenta&#34;, &#34;cyan&#34;, &#34;white&#34;]
-            highlights = [&#34;on_grey&#34;, &#34;on_red&#34;, &#34;on_green&#34;, &#34;on_yellow&#34;, &#34;on_blue&#34;, &#34;on_magenta&#34;, &#34;on_cyan&#34;, &#34;on_white&#34;]
-            string = symbol * width
-            color = random.choice(colors)
-            colors.pop(colors.index(color))
-            highlight = random.choice(highlights)
-            try:  # New version with one long line. Works perfect, as I see.
-                import time
-                string = string * height
-                Print.colored(newline + string, color, highlight, end = &#34;&#34;)
-                time.sleep(sleep)
-            except KeyboardInterrupt:
-                Print.colored(&#34;OK&#34;, &#34;white&#34;, &#34;on_grey&#34;)
-                cls.clean()
-                break
-
-    @staticmethod
-    def _get_output(commands, print_std, decoding, pure_shell, universal_newlines, debug=False,
-                    hook_stdout=None, hook_stderr=None, timeout=None):
-        import subprocess
-        from .threading9 import Threading
-
-        is_string = decoding or universal_newlines
-
-        class State:
-            timeout_reached = False
-
-        def kill_popen(popen_obj):
-            State.timeout_reached = True
-            popen_obj.kill()
-
-        try:
-            with subprocess.Popen(commands, shell=pure_shell, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                  universal_newlines=universal_newlines) as popen_object:
-                def print_out_lines(obj: popen_object, stderr: bool, hook):
-                    if timeout is not None:
-                        timer = threading.Timer(timeout, kill_popen, args=[popen_object])
-                        timer.start()
-                    color = &#34;red&#34; if stderr else &#34;green&#34;
-                    output = b&#39;&#39;
-                    if is_string:
-                        output = &#39;&#39;
-                    finished = False
-                    # for string in obj:
-                    while not finished:
-                        string_input = b&#39;&#39;
-                        while True:
-                            sym = obj.read(1)
-                            if not sym:
-                                finished = True
-                                break
-                            string_input += sym
-                            if sym in [b&#39;\r&#39;, b&#39;\n&#39;]:
-                                break
-                        string_current = string_input
-                        if decoding:
-                            try:
-                                string_current = string_input.decode(decoding)
-                            except UnicodeDecodeError:
-                                # fallback to chardet
-                                import chardet
-                                string_current = string_input.decode(chardet.detect(string_input)[&#39;encoding&#39;])
-                        hook(string_current)
-                        output += string_current
-                        if print_std:
-                            from .print9 import Print
-                            Print.colored(string_current, color, end=&#39;&#39;, flush=True)
-                    if timeout is not None:
-                        timer.cancel()
-                    return output
-
-                pipes = Threading(verbose=debug)
-
-                pipes.add(print_out_lines, &#34;stdout&#34;,
-                          kwargs={&#34;obj&#34;: popen_object.stdout,
-                                  &#34;stderr&#34;: False,
-                                  &#34;hook&#34;: hook_stdout})
-                pipes.add(print_out_lines, &#34;stderr&#34;,
-                          kwargs={&#34;obj&#34;: popen_object.stderr,
-                                  &#34;stderr&#34;: True,
-                                  &#34;hook&#34;: hook_stderr})
-
-                pipes.start(wait_for_keyboard_interrupt=True)
-
-                out, err = pipes.get_results()
-
-        except FileNotFoundError as exception:
-            if debug:
-                from .print9 import Print
-                Print.debug(&#34;commands&#34;, commands,
-                            &#34;pure_shell&#34;, pure_shell,
-                            &#34;print_std&#34;, print_std,
-                            &#34;decoding&#34;, decoding,
-                            &#34;universal_newlines&#34;, universal_newlines)
-            raise FileNotFoundError(exception)
-        return out, err, State.timeout_reached
-
-    windows_cp65001 = False
-    windows_cp65001_fail = False
-
-    @classmethod
-    def get_output(cls, *commands, pure_shell=False, print_std=False, decoding=None, universal_newlines=False,
-                   auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False,
-                   create_cmd_subprocess=False, hook_stdout=None, hook_stderr=None):
-        &#34;&#34;&#34;Return output of executing command.
-        &lt;br&gt;`param commands` list[string if pure_shell is True] with command and arguments
-        &lt;br&gt;`param pure_shell` boolean, if True, the specified command will be executed through the shell
-        &lt;br&gt;`param print_std` boolean, if True, output from command will be printed immediately
-            (also adds argument -u to
-        &#39;py&#39; or &#39;python&#39; firs arg.)
-        &lt;br&gt;`return` tuple with strings stdout and stderr
-        &#34;&#34;&#34;
-        import os
-        from .os9 import OS
-        if len(commands) == 1:
-            commands = commands[0]
-        if isinstance(commands, str) and not pure_shell:
-            import shlex
-            commands = shlex.split(commands, posix=False)
-
-        if isinstance(commands, list) or isinstance(commands, tuple):
-            from .list9 import List
-            commands = List.to_strings(commands)
-
-        if not commands:
-            raise IndexError(&#34;commands must not be empty&#34;)
-
-        def empty_hook(_):
-            pass
-
-        if hook_stdout is None:
-            hook_stdout = empty_hook
-        if hook_stderr is None:
-            hook_stderr = empty_hook
-
-        # disable buffering for python
-        if (&#34;py&#34; in commands
-            or &#34;py&#34; in os.path.split(commands[0])[1]
-            or &#34;python&#34; in commands
-            or &#34;python&#34; in os.path.split(commands[0])[1]
-            or &#34;python3&#34; in commands
-            or &#34;python3&#34; in os.path.split(commands[0])[1]
-        ) and print_std and auto_disable_py_buffering:
-            if &#34;-u&#34; not in commands:
-                list_commands = list(commands)
-                list_commands.insert(1, &#34;-u&#34;)
-                commands = list_commands
-        # set decoding and init
-        if auto_decoding and not decoding and not universal_newlines:
-            if OS.windows:
-                if cls.windows_cp65001:
-                    decoding = &#34;cp65001&#34;
-                elif cls.windows_cp65001_fail:
-                    decoding = &#34;cp866&#34;
-                else:
-                    from .windows9 import Windows
-                    try:
-                        Windows.fix_unicode_encode_error(safe=False)
-                        cls.windows_cp65001 = True
-                        decoding = &#34;cp65001&#34;
-                    except IOError:  # if cp65001 cannot be set
-                        cls.windows_cp65001_fail = True
-                        decoding = f&#34;cp{Windows.get_cmd_code_page()}&#34;
-            elif OS.unix_family:
-                decoding = &#34;utf8&#34;
-            else:
-                universal_newlines = True
-
-        if decoding and universal_newlines:
-            raise TypeError(&#34;can&#39;t decode &#39;str&#39; to &#39;str&#39;, set universal_newlines to False for manually set decoding&#34;)
-
-        if create_cmd_subprocess:
-            commands_old = commands
-            commands = list()
-            commands.append(&#34;cmd&#34;)
-            # commands.append(&#34;/U&#34;)  # only cmd applications output in utf16,
-            #                          other applications output in default encoding D:
-            commands.append(&#34;/C&#34;)
-            commands.append(&#34; &#34;.join(commands_old))
-
-        out, err, timeout_reached = cls._get_output(commands, print_std=print_std, decoding=decoding,
-                                                    pure_shell=pure_shell,
-                                                    universal_newlines=universal_newlines, debug=debug,
-                                                    hook_stdout=hook_stdout,
-                                                    hook_stderr=hook_stderr,
-                                                    timeout=timeout)
-        if return_merged:
-            return out + err
-        if timeout:
-            return out, err, timeout_reached
-        else:
-            return out, err
-
-    @classmethod
-    def fit(cls, *strings: str, sep: str = &#34; &#34;, reverse=False):
-        &#34;&#34;&#34;Fit strings to console
-        &lt;br&gt;`param strings` list of strings
-        &lt;br&gt;`param sep` string to join strings
-        &lt;br&gt;`param reverse` boolean, if True, cut from end of string
-        &lt;br&gt;`return` strings, that can be fit in one line print
-        &lt;br&gt; yes, implementation is far beyond good
-        &#34;&#34;&#34;
-        from .os9 import OS
-        from .list9 import List
-        from wcwidth import wcswidth
-
-        console_width = cls.width()
-        
-        if OS.windows:  # windows adds symbol to end of string :(
-            console_width -= 1
-        strings = List.to_strings(strings)  # replace all to strings
-        len_all = wcswidth(sep.join(strings))  # count len of all
-        reverse = not reverse
-        prefix = &#34;&gt;&gt;&#34; if reverse else &#34;&lt;&lt;&#34;
-        
-        # check for fit
-        if len_all &lt;= console_width:
-            pass
-        else:
-            # get the longest line
-            longest_string_index = 0
-            for cnt, string in enumerate(strings):
-                if wcswidth(string) &gt; wcswidth(strings[longest_string_index]):
-                    longest_string_index = cnt
-            longest_string = strings[longest_string_index]
-            
-            # cut line
-            cut_cnt = len_all - console_width + wcswidth(prefix)
-            desired_length = wcswidth(longest_string) - cut_cnt
-            lendiff = wcswidth(longest_string) - len(longest_string)  # add buffer for double characters
-            if reverse:
-                longest_string = longest_string[::-1]
-
-            longest_string = longest_string[:int(-cut_cnt+lendiff)]
-            
-            while wcswidth(longest_string) &gt; desired_length:
-                longest_string = longest_string[:-1]
-
-            while wcswidth(longest_string) &lt; desired_length:
-                longest_string += &#34; &#34;
-
-            longest_string += prefix
-
-            if reverse:
-                longest_string = longest_string[::-1]
-
-            
-            strings[longest_string_index] = longest_string
-
-        return strings</code></pre>
-</details>
 </section>
 <section>
 </section>
@@ -368,7 +51,6 @@ class Console:
 <span>class <span class="ident">Console</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Class to interact with terminal|console</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -689,17 +371,235 @@ class Console:
             
             strings[longest_string_index] = longest_string
 
-        return strings</code></pre>
+        return strings
+
+    @staticmethod
+    def watch(command, interval=1, fade_duration=5, fade_steps=12, timeout=5, title=None):
+        &#34;&#34;&#34;Watch the output of a command or callable, refreshing periodically with fading diff highlights.
+        &lt;br&gt;`param command` string command, list/tuple of strings, or callable returning str
+        &lt;br&gt;`param interval` int|float seconds between refreshes
+        &lt;br&gt;`param fade_duration` int|float seconds for a changed cell highlight to fully fade out
+        &lt;br&gt;`param fade_steps` int number of distinct background shades in the fade
+        &lt;br&gt;`param timeout` int|float per-command timeout in seconds (ignored when command is callable)
+        &lt;br&gt;`param title` string header text; defaults to the command string
+        &lt;br&gt;`return` None
+        &#34;&#34;&#34;
+        import curses
+        import shlex
+        import subprocess
+        import time
+
+        if callable(command):
+            source = command
+            if title is None:
+                title = command.__name__ if hasattr(command, &#34;__name__&#34;) else &#34;watch&#34;
+        else:
+            if isinstance(command, str):
+                cmd_list = shlex.split(command)
+            else:
+                cmd_list = [str(a) for a in command]
+            if title is None:
+                title = shlex.join(cmd_list)
+
+            def source():
+                try:
+                    r = subprocess.run(cmd_list, capture_output=True, text=True, timeout=timeout)
+                    out = r.stdout
+                    if r.stderr:
+                        out += r.stderr
+                    return out
+                except subprocess.TimeoutExpired:
+                    return f&#34;[timeout: {shlex.join(cmd_list)}]\n&#34;
+                except Exception as e:
+                    return f&#34;[error: {e}]\n&#34;
+
+        def setup_colors(stdscr):
+            curses.use_default_colors()
+            stages = []
+            if curses.can_change_color() and curses.COLORS &gt;= 256:
+                for i in range(fade_steps):
+                    t = i / (fade_steps - 1) if fade_steps &gt; 1 else 0
+                    r = int(600 - t * 550)
+                    g = 0
+                    b = int(1000 - t * 920)
+                    color_id = 20 + i
+                    pair_id = 10 + i
+                    curses.init_color(color_id, r, g, b)
+                    curses.init_pair(pair_id, curses.COLOR_WHITE, color_id)
+                    stages.append((pair_id, 0))
+            else:
+                curses.init_pair(10, curses.COLOR_WHITE, curses.COLOR_MAGENTA)
+                stages = [(10, 0)] * fade_steps
+            return stages
+
+        def detect_changes(cur_lines, prev_lines, change_times, now):
+            for li, line in enumerate(cur_lines):
+                prev = prev_lines[li] if li &lt; len(prev_lines) else &#34;&#34;
+                if line == prev:
+                    continue
+                for ci, ch in enumerate(line):
+                    if ci &gt;= len(prev) or ch != prev[ci]:
+                        change_times[(li, ci)] = now
+                for ci in range(len(line), len(prev)):
+                    change_times.pop((li, ci), None)
+            stale = [k for k in change_times if k[0] &gt;= len(cur_lines)]
+            for k in stale:
+                del change_times[k]
+
+        def expire_old(change_times, now):
+            cutoff = now - fade_duration
+            stale = [k for k, t in change_times.items() if t &lt; cutoff]
+            for k in stale:
+                del change_times[k]
+
+        def fade_attr(age, stages):
+            step_dur = fade_duration / len(stages)
+            idx = int(age / step_dur)
+            if idx &lt; len(stages):
+                return stages[idx]
+            return 0, 0
+
+        def handle_keys(stdscr, scroll_y, scroll_x, max_y, max_x, body_h, body_w):
+            while True:
+                key = stdscr.getch()
+                if key == -1:
+                    break
+                if key in (ord(&#34;q&#34;), ord(&#34;Q&#34;), 27):
+                    return scroll_y, scroll_x, True
+                elif key == curses.KEY_UP:
+                    scroll_y = max(0, scroll_y - 1)
+                elif key == curses.KEY_DOWN:
+                    scroll_y = min(max(0, max_y - body_h), scroll_y + 1)
+                elif key == curses.KEY_LEFT:
+                    scroll_x = max(0, scroll_x - 4)
+                elif key == curses.KEY_RIGHT:
+                    scroll_x = min(max(0, max_x - body_w), scroll_x + 4)
+                elif key == curses.KEY_PPAGE:
+                    scroll_y = max(0, scroll_y - body_h)
+                elif key == curses.KEY_NPAGE:
+                    scroll_y = min(max(0, max_y - body_h), scroll_y + body_h)
+                elif key == curses.KEY_HOME:
+                    scroll_y = 0
+                    scroll_x = 0
+                elif key == curses.KEY_END:
+                    scroll_y = max(0, max_y - body_h)
+            return scroll_y, scroll_x, False
+
+        def draw(stdscr, cur_lines, change_times, scroll_y, scroll_x, now, stages):
+            height, width = stdscr.getmaxyx()
+            body_h = height - 2
+            if body_h &lt; 1:
+                return
+            stdscr.erase()
+
+            ts = time.strftime(&#34;%a %b %d %H:%M:%S %Y&#34;)
+            header_left = f&#34;Every {interval}s: {title}&#34;
+            header_right = ts
+            pad = width - len(header_left) - len(header_right)
+            if pad &lt; 1:
+                header_left = header_left[:width - len(header_right) - 1]
+                pad = 1
+            header = header_left + &#34; &#34; * pad + header_right
+            try:
+                stdscr.addnstr(0, 0, header, width, curses.A_BOLD)
+            except curses.error:
+                pass
+
+            for vi in range(body_h):
+                li = vi + scroll_y
+                row = vi + 2
+                if li &gt;= len(cur_lines):
+                    break
+                line = cur_lines[li]
+                visible = line[scroll_x: scroll_x + width]
+                has_highlights = any((li, ci) in change_times for ci in range(scroll_x, scroll_x + len(visible)))
+                if has_highlights:
+                    try:
+                        for col, ch in enumerate(visible):
+                            src_col = col + scroll_x
+                            ct = change_times.get((li, src_col))
+                            if ct is not None:
+                                age = now - ct
+                                pair, attr = fade_attr(age, stages)
+                                stdscr.addstr(row, col, ch, curses.color_pair(pair) | attr)
+                            else:
+                                stdscr.addstr(row, col, ch)
+                    except curses.error:
+                        pass
+                else:
+                    try:
+                        stdscr.addnstr(row, 0, visible, width)
+                    except curses.error:
+                        pass
+
+            max_y = len(cur_lines)
+            if max_y &gt; body_h or scroll_x &gt; 0:
+                indicator = f&#34; [{scroll_y + 1}-{min(scroll_y + body_h, max_y)}/{max_y}  x:{scroll_x}] &#34;
+                ix = width - len(indicator)
+                if ix &gt;= 0:
+                    try:
+                        stdscr.addnstr(height - 1, ix, indicator, len(indicator), curses.A_DIM)
+                    except curses.error:
+                        pass
+            stdscr.refresh()
+
+        def _main(stdscr):
+            curses.curs_set(0)
+            stages = setup_colors(stdscr)
+            stdscr.nodelay(True)
+            stdscr.keypad(True)
+
+            prev_lines = None
+            change_times = {}
+            scroll_y = 0
+            scroll_x = 0
+
+            while True:
+                now = time.monotonic()
+                output = source()
+                cur_lines = output.splitlines()
+
+                if prev_lines is not None:
+                    detect_changes(cur_lines, prev_lines, change_times, now)
+                expire_old(change_times, now)
+                prev_lines = cur_lines
+
+                height, width = stdscr.getmaxyx()
+                body_h = max(1, height - 2)
+                max_y = len(cur_lines)
+                max_x = max((len(l) for l in cur_lines), default=0)
+
+                scroll_y = max(0, min(scroll_y, max(0, max_y - body_h)))
+                scroll_x = max(0, min(scroll_x, max(0, max_x - width)))
+
+                draw(stdscr, cur_lines, change_times, scroll_y, scroll_x, now, stages)
+
+                deadline = time.monotonic() + interval
+                while time.monotonic() &lt; deadline:
+                    scroll_y, scroll_x, quit_ = handle_keys(
+                        stdscr, scroll_y, scroll_x, max_y, max_x, body_h, width)
+                    if quit_:
+                        return
+                    now = time.monotonic()
+                    expire_old(change_times, now)
+                    draw(stdscr, cur_lines, change_times, scroll_y, scroll_x, now, stages)
+                    time.sleep(0.03)
+
+        try:
+            curses.wrapper(_main)
+        except KeyboardInterrupt:
+            pass</code></pre>
 </details>
+<div class="desc"><p>Class to interact with terminal|console</p></div>
 <h3>Class variables</h3>
 <dl>
 <dt id="commands.console9.Console.windows_cp65001"><code class="name">var <span class="ident">windows_cp65001</span></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>The type of the None singleton.</p></div>
 </dd>
 <dt id="commands.console9.Console.windows_cp65001_fail"><code class="name">var <span class="ident">windows_cp65001_fail</span></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>The type of the None singleton.</p></div>
 </dd>
 </dl>
 <h3>Static methods</h3>
@@ -715,56 +615,11 @@ terminal, works only in Windows.
 <br><code>param symbol</code> string of characters, that fill blinking rectangle
 <br><code>param sleep</code> int|float define sleep between print new colored rectangle
 <br><code>return</code></p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def blink(cls, width=None, height=None, symbol=&#34;#&#34;, sleep=0.5):  # pylint: disable=too-many-locals
-    &#34;&#34;&#34;Print to terminal rectangle with random color. Complete shit. Arguments width and height changing size of
-    terminal, works only in Windows.
-    &lt;br&gt;`param width` int width of blinking rectangle
-    &lt;br&gt;`param height` int height of blinking rectangle
-    &lt;br&gt;`param symbol` string of characters, that fill blinking rectangle
-    &lt;br&gt;`param sleep` int|float define sleep between print new colored rectangle
-    &lt;br&gt;`return`
-    &#34;&#34;&#34;
-    import random
-    from .os9 import OS
-    from .print9 import Print
-    from .const9 import newline
-    if (width is not None) and (height is not None) and OS.windows:
-        import os
-        os.system(&#34;mode con cols=&#34; + str(width) + &#34; lines=&#34; + str(height))
-    if width is None:
-        width = cls.width()
-    if height is None:
-        height = cls.height()
-    while True:
-        colors = [&#34;grey&#34;, &#34;red&#34;, &#34;green&#34;, &#34;yellow&#34;, &#34;blue&#34;, &#34;magenta&#34;, &#34;cyan&#34;, &#34;white&#34;]
-        highlights = [&#34;on_grey&#34;, &#34;on_red&#34;, &#34;on_green&#34;, &#34;on_yellow&#34;, &#34;on_blue&#34;, &#34;on_magenta&#34;, &#34;on_cyan&#34;, &#34;on_white&#34;]
-        string = symbol * width
-        color = random.choice(colors)
-        colors.pop(colors.index(color))
-        highlight = random.choice(highlights)
-        try:  # New version with one long line. Works perfect, as I see.
-            import time
-            string = string * height
-            Print.colored(newline + string, color, highlight, end = &#34;&#34;)
-            time.sleep(sleep)
-        except KeyboardInterrupt:
-            Print.colored(&#34;OK&#34;, &#34;white&#34;, &#34;on_grey&#34;)
-            cls.clean()
-            break</code></pre>
-</details>
 </dd>
 <dt id="commands.console9.Console.clean"><code class="name flex">
 <span>def <span class="ident">clean</span></span>(<span>)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Wipe terminal output. Not tested on linux
-todo test on linux, make better
-<br><code>return</code> None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -786,6 +641,9 @@ def clean():
     elif OS.macos:
         os.system(r&#34;clear &amp;&amp; printf &#39;\e[3J&#39;&#34;)</code></pre>
 </details>
+<div class="desc"><p>Wipe terminal output. Not tested on linux
+todo test on linux, make better
+<br><code>return</code> None</p></div>
 </dd>
 <dt id="commands.console9.Console.fit"><code class="name flex">
 <span>def <span class="ident">fit</span></span>(<span>*strings: str, sep: str = ' ', reverse=False)</span>
@@ -797,71 +655,9 @@ def clean():
 <br><code>param reverse</code> boolean, if True, cut from end of string
 <br><code>return</code> strings, that can be fit in one line print
 <br> yes, implementation is far beyond good</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def fit(cls, *strings: str, sep: str = &#34; &#34;, reverse=False):
-    &#34;&#34;&#34;Fit strings to console
-    &lt;br&gt;`param strings` list of strings
-    &lt;br&gt;`param sep` string to join strings
-    &lt;br&gt;`param reverse` boolean, if True, cut from end of string
-    &lt;br&gt;`return` strings, that can be fit in one line print
-    &lt;br&gt; yes, implementation is far beyond good
-    &#34;&#34;&#34;
-    from .os9 import OS
-    from .list9 import List
-    from wcwidth import wcswidth
-
-    console_width = cls.width()
-    
-    if OS.windows:  # windows adds symbol to end of string :(
-        console_width -= 1
-    strings = List.to_strings(strings)  # replace all to strings
-    len_all = wcswidth(sep.join(strings))  # count len of all
-    reverse = not reverse
-    prefix = &#34;&gt;&gt;&#34; if reverse else &#34;&lt;&lt;&#34;
-    
-    # check for fit
-    if len_all &lt;= console_width:
-        pass
-    else:
-        # get the longest line
-        longest_string_index = 0
-        for cnt, string in enumerate(strings):
-            if wcswidth(string) &gt; wcswidth(strings[longest_string_index]):
-                longest_string_index = cnt
-        longest_string = strings[longest_string_index]
-        
-        # cut line
-        cut_cnt = len_all - console_width + wcswidth(prefix)
-        desired_length = wcswidth(longest_string) - cut_cnt
-        lendiff = wcswidth(longest_string) - len(longest_string)  # add buffer for double characters
-        if reverse:
-            longest_string = longest_string[::-1]
-
-        longest_string = longest_string[:int(-cut_cnt+lendiff)]
-        
-        while wcswidth(longest_string) &gt; desired_length:
-            longest_string = longest_string[:-1]
-
-        while wcswidth(longest_string) &lt; desired_length:
-            longest_string += &#34; &#34;
-
-        longest_string += prefix
-
-        if reverse:
-            longest_string = longest_string[::-1]
-
-        
-        strings[longest_string_index] = longest_string
-
-    return strings</code></pre>
-</details>
 </dd>
 <dt id="commands.console9.Console.get_output"><code class="name flex">
-<span>def <span class="ident">get_output</span></span>(<span>*commands, pure_shell=False, print_std=False, decoding=None, universal_newlines=False, auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False, create_cmd_subprocess=False, hook_stdout=None, hook_stderr=None)</span>
+<span>def <span class="ident">get_output</span></span>(<span>*commands,<br>pure_shell=False,<br>print_std=False,<br>decoding=None,<br>universal_newlines=False,<br>auto_decoding=True,<br>auto_disable_py_buffering=True,<br>return_merged=True,<br>timeout=None,<br>debug=False,<br>create_cmd_subprocess=False,<br>hook_stdout=None,<br>hook_stderr=None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Return output of executing command.
@@ -871,109 +667,11 @@ def fit(cls, *strings: str, sep: str = &#34; &#34;, reverse=False):
 (also adds argument -u to
 'py' or 'python' firs arg.)
 <br><code>return</code> tuple with strings stdout and stderr</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def get_output(cls, *commands, pure_shell=False, print_std=False, decoding=None, universal_newlines=False,
-               auto_decoding=True, auto_disable_py_buffering=True, return_merged=True, timeout=None, debug=False,
-               create_cmd_subprocess=False, hook_stdout=None, hook_stderr=None):
-    &#34;&#34;&#34;Return output of executing command.
-    &lt;br&gt;`param commands` list[string if pure_shell is True] with command and arguments
-    &lt;br&gt;`param pure_shell` boolean, if True, the specified command will be executed through the shell
-    &lt;br&gt;`param print_std` boolean, if True, output from command will be printed immediately
-        (also adds argument -u to
-    &#39;py&#39; or &#39;python&#39; firs arg.)
-    &lt;br&gt;`return` tuple with strings stdout and stderr
-    &#34;&#34;&#34;
-    import os
-    from .os9 import OS
-    if len(commands) == 1:
-        commands = commands[0]
-    if isinstance(commands, str) and not pure_shell:
-        import shlex
-        commands = shlex.split(commands, posix=False)
-
-    if isinstance(commands, list) or isinstance(commands, tuple):
-        from .list9 import List
-        commands = List.to_strings(commands)
-
-    if not commands:
-        raise IndexError(&#34;commands must not be empty&#34;)
-
-    def empty_hook(_):
-        pass
-
-    if hook_stdout is None:
-        hook_stdout = empty_hook
-    if hook_stderr is None:
-        hook_stderr = empty_hook
-
-    # disable buffering for python
-    if (&#34;py&#34; in commands
-        or &#34;py&#34; in os.path.split(commands[0])[1]
-        or &#34;python&#34; in commands
-        or &#34;python&#34; in os.path.split(commands[0])[1]
-        or &#34;python3&#34; in commands
-        or &#34;python3&#34; in os.path.split(commands[0])[1]
-    ) and print_std and auto_disable_py_buffering:
-        if &#34;-u&#34; not in commands:
-            list_commands = list(commands)
-            list_commands.insert(1, &#34;-u&#34;)
-            commands = list_commands
-    # set decoding and init
-    if auto_decoding and not decoding and not universal_newlines:
-        if OS.windows:
-            if cls.windows_cp65001:
-                decoding = &#34;cp65001&#34;
-            elif cls.windows_cp65001_fail:
-                decoding = &#34;cp866&#34;
-            else:
-                from .windows9 import Windows
-                try:
-                    Windows.fix_unicode_encode_error(safe=False)
-                    cls.windows_cp65001 = True
-                    decoding = &#34;cp65001&#34;
-                except IOError:  # if cp65001 cannot be set
-                    cls.windows_cp65001_fail = True
-                    decoding = f&#34;cp{Windows.get_cmd_code_page()}&#34;
-        elif OS.unix_family:
-            decoding = &#34;utf8&#34;
-        else:
-            universal_newlines = True
-
-    if decoding and universal_newlines:
-        raise TypeError(&#34;can&#39;t decode &#39;str&#39; to &#39;str&#39;, set universal_newlines to False for manually set decoding&#34;)
-
-    if create_cmd_subprocess:
-        commands_old = commands
-        commands = list()
-        commands.append(&#34;cmd&#34;)
-        # commands.append(&#34;/U&#34;)  # only cmd applications output in utf16,
-        #                          other applications output in default encoding D:
-        commands.append(&#34;/C&#34;)
-        commands.append(&#34; &#34;.join(commands_old))
-
-    out, err, timeout_reached = cls._get_output(commands, print_std=print_std, decoding=decoding,
-                                                pure_shell=pure_shell,
-                                                universal_newlines=universal_newlines, debug=debug,
-                                                hook_stdout=hook_stdout,
-                                                hook_stderr=hook_stderr,
-                                                timeout=timeout)
-    if return_merged:
-        return out + err
-    if timeout:
-        return out, err, timeout_reached
-    else:
-        return out, err</code></pre>
-</details>
 </dd>
 <dt id="commands.console9.Console.height"><code class="name flex">
 <span>def <span class="ident">height</span></span>(<span>)</span>
 </code></dt>
 <dd>
-<div class="desc"><p><br><code>return</code> int height of opened console in chars</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -994,12 +692,246 @@ def height():
         height = Str.get_integers(sttysize)[0]
     return int(height)</code></pre>
 </details>
+<div class="desc"><p><br><code>return</code> int height of opened console in chars</p></div>
+</dd>
+<dt id="commands.console9.Console.watch"><code class="name flex">
+<span>def <span class="ident">watch</span></span>(<span>command, interval=1, fade_duration=5, fade_steps=12, timeout=5, title=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+def watch(command, interval=1, fade_duration=5, fade_steps=12, timeout=5, title=None):
+    &#34;&#34;&#34;Watch the output of a command or callable, refreshing periodically with fading diff highlights.
+    &lt;br&gt;`param command` string command, list/tuple of strings, or callable returning str
+    &lt;br&gt;`param interval` int|float seconds between refreshes
+    &lt;br&gt;`param fade_duration` int|float seconds for a changed cell highlight to fully fade out
+    &lt;br&gt;`param fade_steps` int number of distinct background shades in the fade
+    &lt;br&gt;`param timeout` int|float per-command timeout in seconds (ignored when command is callable)
+    &lt;br&gt;`param title` string header text; defaults to the command string
+    &lt;br&gt;`return` None
+    &#34;&#34;&#34;
+    import curses
+    import shlex
+    import subprocess
+    import time
+
+    if callable(command):
+        source = command
+        if title is None:
+            title = command.__name__ if hasattr(command, &#34;__name__&#34;) else &#34;watch&#34;
+    else:
+        if isinstance(command, str):
+            cmd_list = shlex.split(command)
+        else:
+            cmd_list = [str(a) for a in command]
+        if title is None:
+            title = shlex.join(cmd_list)
+
+        def source():
+            try:
+                r = subprocess.run(cmd_list, capture_output=True, text=True, timeout=timeout)
+                out = r.stdout
+                if r.stderr:
+                    out += r.stderr
+                return out
+            except subprocess.TimeoutExpired:
+                return f&#34;[timeout: {shlex.join(cmd_list)}]\n&#34;
+            except Exception as e:
+                return f&#34;[error: {e}]\n&#34;
+
+    def setup_colors(stdscr):
+        curses.use_default_colors()
+        stages = []
+        if curses.can_change_color() and curses.COLORS &gt;= 256:
+            for i in range(fade_steps):
+                t = i / (fade_steps - 1) if fade_steps &gt; 1 else 0
+                r = int(600 - t * 550)
+                g = 0
+                b = int(1000 - t * 920)
+                color_id = 20 + i
+                pair_id = 10 + i
+                curses.init_color(color_id, r, g, b)
+                curses.init_pair(pair_id, curses.COLOR_WHITE, color_id)
+                stages.append((pair_id, 0))
+        else:
+            curses.init_pair(10, curses.COLOR_WHITE, curses.COLOR_MAGENTA)
+            stages = [(10, 0)] * fade_steps
+        return stages
+
+    def detect_changes(cur_lines, prev_lines, change_times, now):
+        for li, line in enumerate(cur_lines):
+            prev = prev_lines[li] if li &lt; len(prev_lines) else &#34;&#34;
+            if line == prev:
+                continue
+            for ci, ch in enumerate(line):
+                if ci &gt;= len(prev) or ch != prev[ci]:
+                    change_times[(li, ci)] = now
+            for ci in range(len(line), len(prev)):
+                change_times.pop((li, ci), None)
+        stale = [k for k in change_times if k[0] &gt;= len(cur_lines)]
+        for k in stale:
+            del change_times[k]
+
+    def expire_old(change_times, now):
+        cutoff = now - fade_duration
+        stale = [k for k, t in change_times.items() if t &lt; cutoff]
+        for k in stale:
+            del change_times[k]
+
+    def fade_attr(age, stages):
+        step_dur = fade_duration / len(stages)
+        idx = int(age / step_dur)
+        if idx &lt; len(stages):
+            return stages[idx]
+        return 0, 0
+
+    def handle_keys(stdscr, scroll_y, scroll_x, max_y, max_x, body_h, body_w):
+        while True:
+            key = stdscr.getch()
+            if key == -1:
+                break
+            if key in (ord(&#34;q&#34;), ord(&#34;Q&#34;), 27):
+                return scroll_y, scroll_x, True
+            elif key == curses.KEY_UP:
+                scroll_y = max(0, scroll_y - 1)
+            elif key == curses.KEY_DOWN:
+                scroll_y = min(max(0, max_y - body_h), scroll_y + 1)
+            elif key == curses.KEY_LEFT:
+                scroll_x = max(0, scroll_x - 4)
+            elif key == curses.KEY_RIGHT:
+                scroll_x = min(max(0, max_x - body_w), scroll_x + 4)
+            elif key == curses.KEY_PPAGE:
+                scroll_y = max(0, scroll_y - body_h)
+            elif key == curses.KEY_NPAGE:
+                scroll_y = min(max(0, max_y - body_h), scroll_y + body_h)
+            elif key == curses.KEY_HOME:
+                scroll_y = 0
+                scroll_x = 0
+            elif key == curses.KEY_END:
+                scroll_y = max(0, max_y - body_h)
+        return scroll_y, scroll_x, False
+
+    def draw(stdscr, cur_lines, change_times, scroll_y, scroll_x, now, stages):
+        height, width = stdscr.getmaxyx()
+        body_h = height - 2
+        if body_h &lt; 1:
+            return
+        stdscr.erase()
+
+        ts = time.strftime(&#34;%a %b %d %H:%M:%S %Y&#34;)
+        header_left = f&#34;Every {interval}s: {title}&#34;
+        header_right = ts
+        pad = width - len(header_left) - len(header_right)
+        if pad &lt; 1:
+            header_left = header_left[:width - len(header_right) - 1]
+            pad = 1
+        header = header_left + &#34; &#34; * pad + header_right
+        try:
+            stdscr.addnstr(0, 0, header, width, curses.A_BOLD)
+        except curses.error:
+            pass
+
+        for vi in range(body_h):
+            li = vi + scroll_y
+            row = vi + 2
+            if li &gt;= len(cur_lines):
+                break
+            line = cur_lines[li]
+            visible = line[scroll_x: scroll_x + width]
+            has_highlights = any((li, ci) in change_times for ci in range(scroll_x, scroll_x + len(visible)))
+            if has_highlights:
+                try:
+                    for col, ch in enumerate(visible):
+                        src_col = col + scroll_x
+                        ct = change_times.get((li, src_col))
+                        if ct is not None:
+                            age = now - ct
+                            pair, attr = fade_attr(age, stages)
+                            stdscr.addstr(row, col, ch, curses.color_pair(pair) | attr)
+                        else:
+                            stdscr.addstr(row, col, ch)
+                except curses.error:
+                    pass
+            else:
+                try:
+                    stdscr.addnstr(row, 0, visible, width)
+                except curses.error:
+                    pass
+
+        max_y = len(cur_lines)
+        if max_y &gt; body_h or scroll_x &gt; 0:
+            indicator = f&#34; [{scroll_y + 1}-{min(scroll_y + body_h, max_y)}/{max_y}  x:{scroll_x}] &#34;
+            ix = width - len(indicator)
+            if ix &gt;= 0:
+                try:
+                    stdscr.addnstr(height - 1, ix, indicator, len(indicator), curses.A_DIM)
+                except curses.error:
+                    pass
+        stdscr.refresh()
+
+    def _main(stdscr):
+        curses.curs_set(0)
+        stages = setup_colors(stdscr)
+        stdscr.nodelay(True)
+        stdscr.keypad(True)
+
+        prev_lines = None
+        change_times = {}
+        scroll_y = 0
+        scroll_x = 0
+
+        while True:
+            now = time.monotonic()
+            output = source()
+            cur_lines = output.splitlines()
+
+            if prev_lines is not None:
+                detect_changes(cur_lines, prev_lines, change_times, now)
+            expire_old(change_times, now)
+            prev_lines = cur_lines
+
+            height, width = stdscr.getmaxyx()
+            body_h = max(1, height - 2)
+            max_y = len(cur_lines)
+            max_x = max((len(l) for l in cur_lines), default=0)
+
+            scroll_y = max(0, min(scroll_y, max(0, max_y - body_h)))
+            scroll_x = max(0, min(scroll_x, max(0, max_x - width)))
+
+            draw(stdscr, cur_lines, change_times, scroll_y, scroll_x, now, stages)
+
+            deadline = time.monotonic() + interval
+            while time.monotonic() &lt; deadline:
+                scroll_y, scroll_x, quit_ = handle_keys(
+                    stdscr, scroll_y, scroll_x, max_y, max_x, body_h, width)
+                if quit_:
+                    return
+                now = time.monotonic()
+                expire_old(change_times, now)
+                draw(stdscr, cur_lines, change_times, scroll_y, scroll_x, now, stages)
+                time.sleep(0.03)
+
+    try:
+        curses.wrapper(_main)
+    except KeyboardInterrupt:
+        pass</code></pre>
+</details>
+<div class="desc"><p>Watch the output of a command or callable, refreshing periodically with fading diff highlights.
+<br><code>param command</code> string command, list/tuple of strings, or callable returning str
+<br><code>param interval</code> int|float seconds between refreshes
+<br><code>param fade_duration</code> int|float seconds for a changed cell highlight to fully fade out
+<br><code>param fade_steps</code> int number of distinct background shades in the fade
+<br><code>param timeout</code> int|float per-command timeout in seconds (ignored when command is callable)
+<br><code>param title</code> string header text; defaults to the command string
+<br><code>return</code> None</p></div>
 </dd>
 <dt id="commands.console9.Console.width"><code class="name flex">
 <span>def <span class="ident">width</span></span>(<span>)</span>
 </code></dt>
 <dd>
-<div class="desc"><p><br><code>return</code> int width of opened console in chars</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1012,6 +944,7 @@ def width():
     import shutil
     return shutil.get_terminal_size().columns</code></pre>
 </details>
+<div class="desc"><p><br><code>return</code> int width of opened console in chars</p></div>
 </dd>
 </dl>
 </dd>
@@ -1019,7 +952,6 @@ def width():
 </section>
 </article>
 <nav id="sidebar">
-<h1>Index</h1>
 <div class="toc">
 <ul></ul>
 </div>
@@ -1039,6 +971,7 @@ def width():
 <li><code><a title="commands.console9.Console.fit" href="#commands.console9.Console.fit">fit</a></code></li>
 <li><code><a title="commands.console9.Console.get_output" href="#commands.console9.Console.get_output">get_output</a></code></li>
 <li><code><a title="commands.console9.Console.height" href="#commands.console9.Console.height">height</a></code></li>
+<li><code><a title="commands.console9.Console.watch" href="#commands.console9.Console.watch">watch</a></code></li>
 <li><code><a title="commands.console9.Console.width" href="#commands.console9.Console.width">width</a></code></li>
 <li><code><a title="commands.console9.Console.windows_cp65001" href="#commands.console9.Console.windows_cp65001">windows_cp65001</a></code></li>
 <li><code><a title="commands.console9.Console.windows_cp65001_fail" href="#commands.console9.Console.windows_cp65001_fail">windows_cp65001_fail</a></code></li>
@@ -1050,7 +983,7 @@ def width():
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
 </footer>
 </body>
 </html>

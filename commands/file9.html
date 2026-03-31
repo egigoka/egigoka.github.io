@@ -2,18 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.10.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
 <title>commands.file9 API documentation</title>
-<meta name="description" content="" />
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
-<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
-<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
 </head>
 <body>
 <main>
@@ -22,371 +36,6 @@
 <h1 class="title">Module <code>commands.file9</code></h1>
 </header>
 <section id="section-intro">
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">#! python3
-# -*- coding: utf-8 -*-
-from typing import Union
-&#34;&#34;&#34;Internal module to work with files
-&#34;&#34;&#34;
-__version__ = &#34;1.7.0&#34;
-# pylint: disable=c-extension-no-member
-
-
-class File:
-    &#34;&#34;&#34;Class to work with files
-    &#34;&#34;&#34;
-    @classmethod
-    def create(cls, filename, quiet=True):
-        &#34;&#34;&#34;Creates subdirectories, if needed
-        &lt;br&gt;`param filename` string with path to creating file
-        &lt;br&gt;`param quiet` boolean, if True, suppress output to console
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
-        import os
-        from .path9 import Path
-        from .dir9 import Dir
-        if not isinstance(quiet, bool):
-            raise TypeError(&#34;argument &#39;quiet&#39; must be boolean&#34;)
-        filename = Path.full(filename)
-        if os.path.split(filename)[0] != &#34;&#34;:
-            Dir.create(os.path.split(filename)[0])
-        if not quiet:
-            print(f&#34;Creating file {filename}&#34;)
-        if not cls.exist(filename):
-            with open(filename, &#39;a&#39;):  # open file and close after
-                os.utime(filename, None)  # change time of file modification
-        else:
-            raise FileExistsError(&#34;file &#34; + str(filename) + &#34; exist&#34;)
-        if not cls.exist(filename):
-            import sys
-            raise FileNotFoundError(&#34;error while creating file &#34; + filename +
-                                    &#34;try to repair script at &#34; + Path.full(sys.argv[0]))
-        elif not quiet:
-            print(f&#34;File {filename} created&#34;)
-
-    @classmethod
-    def delete(cls, path, quiet=True, no_sleep=False):
-        &#34;&#34;&#34;
-        &lt;br&gt;`param path` string with path to deleting file
-        &lt;br&gt;`param quiet` boolean, suppress print to console
-        &lt;br&gt;`param no_sleep` boolean, if True - function skip sleep in 0.05 seconds after deleting file
-        (to ensure than file
-        deleted before next code run)
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
-        import time
-        import os
-        if os.path.isdir(path):
-            raise IsADirectoryError(path + &#34; is directory, use Dir.delete to delete&#34;)
-        try:
-            os.remove(path)
-        except FileNotFoundError:
-            if not quiet:
-                print(&#34;file&#34;, path, &#34;is not exist&#34;)
-        if not quiet:
-            print(&#34;file&#34;, path, &#34;is deleted&#34;)
-        if not no_sleep:
-            time.sleep(0.05)
-            if cls.exist(path):
-                raise FileExistsError(path + &#34; is not deleted&#34;)
-
-    @classmethod
-    def move(cls, input_file, output_file):
-        &#34;&#34;&#34;
-        &lt;br&gt;`param input_file` string with path to previous file place
-        &lt;br&gt;`param output_file` string with path to new file place
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
-        import shutil
-        if cls.exist(input_file):
-            return shutil.move(input_file, output_file)
-        raise FileNotFoundError(f&#34;When trying to move/rename file &#39;{input_file}&#39;&gt;&#39;{output_file}&#39;: &#34;
-                                f&#34;File &#39;{input_file}&#39; not found&#34;)
-
-    @staticmethod
-    def copy(input_file, output_file):
-        &#34;&#34;&#34;
-        &lt;br&gt;`param input_file` string with path to existing file
-        &lt;br&gt;`param output_file` string with path to new file
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
-        import shutil
-        shutil.copy2(input_file, output_file)
-
-    @classmethod
-    def rename(cls, input_file, output_file):
-        &#34;&#34;&#34;
-        &lt;br&gt;`param input_file` string with path to previous file place
-        &lt;br&gt;`param output_file` string with path to new file place
-        &lt;br&gt;`return` string with path to new file place
-        &#34;&#34;&#34;
-        return cls.move(input_file, output_file)
-
-    @classmethod
-    def hide(cls, filename, quiet=True):
-        &#34;&#34;&#34;Adding dot to filename and set attribute FILE_ATTRIBUTE_HIDDEN to
-        file, if running on Windows
-        &lt;br&gt;`param filename` string with path to file
-        &lt;br&gt;`param quiet` suppress print to console
-        &lt;br&gt;`return` string with new filename
-        &#34;&#34;&#34;
-        import os
-        from .path9 import Path
-        from .os9 import OS
-        filename = Path.full(filename)
-        if OS.windows:
-            import win32api
-            import win32con
-            win32api.SetFileAttributes(filename, win32con.FILE_ATTRIBUTE_HIDDEN)  # hiding file like windows do
-        elif OS.unix_family:
-            dotted_file = Path.combine(os.path.split(filename)[0], &#34;.&#34; + os.path.split(filename)[1])  # adding dot
-            filename = cls.rename(filename, dotted_file)  # adding dot
-        else:
-            raise NotImplementedError(&#34;Your OS doesn&#39;t supported&#34;)
-        if not quiet:
-            print(&#34;file&#34;, filename, &#34;is hidden now&#34;)
-        return filename
-
-    @classmethod
-    def backup(cls, filename, subdirectory=&#34;bak&#34;, hide=True, quiet=False):
-        &#34;&#34;&#34;Move file to subdirectory, adds sort of timestamp to filename and hide file if &#39;hide&#39; argument is True
-        &lt;br&gt;`param filename` string with path to file
-        &lt;br&gt;`param subdirectory` string with name of subdirectory of backed up files
-        &lt;br&gt;`param hide` boolean, define hide file or not
-        &lt;br&gt;`param quiet` boolean, suppress print to console
-        &lt;br&gt;`return`
-        &#34;&#34;&#34;
-        import os
-        import shutil
-        from .path9 import Path
-        from .dir9 import Dir
-        from .time9 import Time
-        filename = Path.full(filename)  # normalize filename
-        backup_filename = str(filename) + &#34;.&#34; + Time.dotted() + &#34;.bak&#34;  # add dotted time to back up filename
-        backup_filename = os.path.split(backup_filename)  # splitting filename to folder and file
-        try:  # if subdirectory has no len
-            if len(subdirectory) &lt; 1:  # if subdirectory has zero len
-                raise TypeError(&#34;subdirectory must have non-zero len&#34;)
-        except TypeError:  # if subdirectory has no len
-            subdirectory = &#34;bak&#34;  # set subdirectory to default
-            print(&#34;len(subdirectory) &lt; 1, so subdirectory = &#39;bak&#39;&#34;)  # print error
-        subdirectory = Path.combine(backup_filename[0], subdirectory)  # append subdirectory name
-        Dir.create(subdirectory)  # create subdirectory
-        backup_filename = Path.combine(subdirectory, backup_filename[1])  # backup file name full path
-        shutil.copy2(filename, backup_filename)  # finally backup file
-        if hide:
-            backup_filename = cls.hide(backup_filename)  # hiding file
-        if not os.path.isfile(backup_filename):  # if file is not created
-            raise FileNotFoundError(backup_filename + &#34; isn&#39;t created while backup&#34;)
-        if not quiet:
-            print(&#34;backup of file&#34;, filename, &#34;created as&#34;, backup_filename)  # all is ok, print that
-        return backup_filename
-
-    @staticmethod
-    def wipe(path):
-        &#34;&#34;&#34;Erase content of file
-        &lt;br&gt;`param path` string with path to file
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
-        file = open(path, &#39;w&#39;)
-        file.close()
-
-    @staticmethod
-    def get_encoding(path, count_of_symbols: Union[bool, int] = True):
-        &#34;&#34;&#34;
-        &lt;br&gt;`param path` path to file
-        &lt;br&gt;`param count_of_symbols` how much symbols use to auto define decoding, if True, uses 10000
-        &lt;br&gt;`return` string, file encoding
-        &#34;&#34;&#34;
-        from .bytes9 import Bytes
-        count_of_symbols = count_of_symbols
-        if count_of_symbols is True:  # you can define how much symbols use to define encoding
-            count_of_symbols = 10000
-        with open(path, &#34;rb&#34;) as raw_file:
-            slice_of_raw_data = raw_file.read(count_of_symbols)
-        encoding = Bytes.get_encoding(slice_of_raw_data)
-        return encoding
-
-    @staticmethod
-    def _read_with_encoding(path, encoding):
-        with open(path, &#34;r&#34;, encoding=encoding) as file:
-            return file.read()
-
-    @classmethod
-    def read(cls, path, encoding: str = &#34;utf-8&#34;, auto_detect_encoding: Union[bool, int] = True, mode: str = &#34;r&#34;):
-        # return pipe to file content
-        &#34;&#34;&#34;
-        &lt;br&gt;`param path` path to file
-        &lt;br&gt;`param auto_detect_encoding` how much symbols use to auto define decoding, if True, uses 10000
-        &lt;br&gt;`return` pipe, to file text content with utf-8 decoding
-        &#34;&#34;&#34;
-        if mode == &#34;r&#34;:
-            try:
-                if auto_detect_encoding:
-                    encoding = cls.get_encoding(path, count_of_symbols=auto_detect_encoding)
-                try:
-                    return cls._read_with_encoding(path, encoding)
-                except LookupError:
-                    if encoding.lower() == &#34;EUC-TW&#34;.lower():
-                        return cls._read_with_encoding(path, &#34;TIS-620&#34;)  # crude fix for EUC-TW
-            except UnicodeDecodeError:
-                import codecs
-                with codecs.open(path, encoding=&#39;cp1251&#39;, errors=&#39;replace&#39;) as file:
-                    content = file.read()
-                    return content
-        elif mode in [&#34;b&#34;, &#34;rb&#34;]:
-            with open(path, &#34;rb&#34;) as file:
-                content = file.read()
-                return content
-
-    @staticmethod
-    def write(filename, what_to_write, mode=&#34;a&#34;, encoding=&#34;utf-8&#34;, quiet=True):
-        &#34;&#34;&#34;Write to end of file if &#34;mode&#34; arg isn&#39;t redefined
-        &lt;br&gt;`param filename` string with path to file
-        &lt;br&gt;`param what_to_write` string to write
-        &lt;br&gt;`param mode` string with any mode that supported by python open() func
-        &lt;br&gt;`param encoding` string with any encoding
-        &lt;br&gt;`param quiet` boolean, if True, suppress output to console
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
-        if not quiet:
-            print(f&#34;Writing to file {filename}&#34;)
-        if &#34;b&#34; not in mode and isinstance(what_to_write, str):
-            with open(filename, mode=mode+&#34;b&#34;) as file:  # open file then closes it
-                file.write(what_to_write.encode(encoding))
-        else:
-            with open(filename, mode=mode) as file:  # open file then closes it
-                if isinstance(what_to_write, int):
-                    what_to_write = str(what_to_write)
-                file.write(what_to_write)
-        if not quiet:
-            print(f&#34;Written to file {filename}&#34;)
-
-    @staticmethod
-    def exist(filename):
-        &#34;&#34;&#34;
-        &lt;br&gt;`param filename` string with path to file
-        &lt;br&gt;`return` boolean that means existence of file
-        &#34;&#34;&#34;
-        import os
-        return os.path.isfile(filename)
-
-    @staticmethod
-    def format_size_human_readable(size_in_bytes):
-        from .const9 import KiB, MiB, GiB, TiB
-
-        size_string = f&#34; {str(int(size_in_bytes % KiB))}b&#34;
-
-        if size_in_bytes &lt; KiB:
-            return size_string.strip()
-
-        size_string = size_string.strip().zfill(4)
-        size_string = &#34; &#34; + size_string
-        size_string = f&#34; {str(int(size_in_bytes / KiB % 1024))}KiB&#34; + size_string
-
-        if size_in_bytes &lt; MiB:
-            return size_string.strip()
-
-        size_string = size_string.strip().zfill(11)
-        size_string = &#34; &#34; + size_string
-        size_string = f&#34; {str(int(size_in_bytes / MiB % 1024))}MiB&#34; + size_string
-
-        if size_in_bytes &lt; GiB:
-            return size_string.strip()
-
-        size_string = size_string.strip().zfill(18)
-        size_string = &#34; &#34; + size_string
-        size_string = f&#34; {str(int(size_in_bytes / GiB % 1024))}GiB&#34; + size_string
-
-        if size_in_bytes &lt; TiB:
-            return size_string.strip()
-
-        size_string = size_string.strip().zfill(25)
-        size_string = &#34; &#34; + size_string
-        size_string = f&#34; {str(int(size_in_bytes / TiB))}TiB&#34; + size_string
-
-        return size_string.strip()
-
-    @classmethod
-    def get_size(cls, filename, human_readable=False):  # return size in bytes
-        &#34;&#34;&#34;
-        &lt;br&gt;`param filename` string with path to file
-        &lt;br&gt;`return` int with file size in bytes
-        &#34;&#34;&#34;
-        import os
-        size_in_bytes = os.stat(filename).st_size
-        if not human_readable:
-            return size_in_bytes
-
-        return cls.format_size_human_readable(size_in_bytes=size_in_bytes)
-
-    @staticmethod
-    def get_modification_time(filename):
-        &#34;&#34;&#34;
-        &lt;br&gt;`param filename` string, path to file
-        &lt;br&gt;`return` float,
-        &#34;&#34;&#34;
-        import os
-        return os.path.getmtime(filename)
-
-    @staticmethod
-    def get_extension(filepath):
-        import os
-        filename, file_extension = os.path.splitext(filepath)
-        return file_extension
-
-    @staticmethod
-    def sha256_checksum(filename, block_size=65536):
-        import hashlib
-        sha256 = hashlib.sha256()
-        with open(filename, &#39;rb&#39;) as f:
-            for block in iter(lambda: f.read(block_size), b&#39;&#39;):
-                sha256.update(block)
-        return sha256.hexdigest()
-
-    @staticmethod
-    def get_mime(path):
-        from .os9 import OS
-        if OS.windows:
-            from winmagic import magic
-        else:
-            import magic
-        try:
-            return magic.from_file(path, mime=True)
-        except OSError:
-            from .console9 import Console
-            from .path9 import Path
-            out = Console.get_output(Path.combine(Path.commands(), &#34;res&#34;, &#34;file.exe&#34;), &#34;-i&#34;, path)
-            try:
-                return out.split(&#34;; &#34;)[1]
-            except IndexError:
-                return &#34;unknown&#34;
-
-    @staticmethod
-    def set_modification_time(filepath, datetime):
-        import time
-        import os
-
-        mod_time = time.mktime(datetime.timetuple())
-
-        os.utime(filepath, (mod_time, mod_time))
-
-    all_encodings = [&#39;ascii&#39;, &#39;big5&#39;, &#39;big5hkscs&#39;, &#39;cp037&#39;, &#39;cp273&#39;, &#39;cp424&#39;, &#39;cp437&#39;, &#39;cp500&#39;, &#39;cp720&#39;, &#39;cp737&#39;,
-                     &#39;cp775&#39;, &#39;cp850&#39;, &#39;cp852&#39;, &#39;cp855&#39;, &#39;cp856&#39;, &#39;cp857&#39;, &#39;cp858&#39;, &#39;cp860&#39;, &#39;cp861&#39;, &#39;cp862&#39;, &#39;cp863&#39;,
-                     &#39;cp864&#39;, &#39;cp865&#39;, &#39;cp866&#39;, &#39;cp869&#39;, &#39;cp874&#39;, &#39;cp875&#39;, &#39;cp932&#39;, &#39;cp949&#39;, &#39;cp950&#39;, &#39;cp1006&#39;,
-                     &#39;cp1026&#39;, &#39;cp1125&#39;, &#39;cp1140&#39;, &#39;cp1250&#39;, &#39;cp1251&#39;, &#39;cp1252&#39;, &#39;cp1253&#39;, &#39;cp1254&#39;, &#39;cp1255&#39;, &#39;cp1256&#39;,
-                     &#39;cp1257&#39;, &#39;cp1258&#39;, &#39;cp65001&#39;, &#39;euc_jp&#39;, &#39;euc_jis_2004&#39;, &#39;euc_jisx0213&#39;, &#39;euc_kr&#39;, &#39;gb2312&#39;, &#39;gbk&#39;,
-                     &#39;gb18030&#39;, &#39;hz&#39;, &#39;iso2022_jp&#39;, &#39;iso2022_jp_1&#39;, &#39;iso2022_jp_2&#39;, &#39;iso2022_jp_2004&#39;, &#39;iso2022_jp_3&#39;,
-                     &#39;iso2022_jp_ext&#39;, &#39;iso2022_kr&#39;, &#39;latin_1&#39;, &#39;iso8859_2&#39;, &#39;iso8859_3&#39;, &#39;iso8859_4&#39;, &#39;iso8859_5&#39;,
-                     &#39;iso8859_6&#39;, &#39;iso8859_7&#39;, &#39;iso8859_8&#39;, &#39;iso8859_9&#39;, &#39;iso8859_10&#39;, &#39;iso8859_11&#39;, &#39;iso8859_13&#39;,
-                     &#39;iso8859_14&#39;, &#39;iso8859_15&#39;, &#39;iso8859_16&#39;, &#39;johab&#39;, &#39;koi8_r&#39;, &#39;koi8_t&#39;, &#39;koi8_u&#39;, &#39;kz1048&#39;,
-                     &#39;mac_cyrillic&#39;, &#39;mac_greek&#39;, &#39;mac_iceland&#39;, &#39;mac_latin2&#39;, &#39;mac_roman&#39;, &#39;mac_turkish&#39;, &#39;ptcp154&#39;,
-                     &#39;shift_jis&#39;, &#39;shift_jis_2004&#39;, &#39;shift_jisx0213&#39;, &#39;utf_32&#39;, &#39;utf_32_be&#39;, &#39;utf_32_le&#39;, &#39;utf_16&#39;,
-                     &#39;utf_16_be&#39;, &#39;utf_16_le&#39;, &#39;utf_7&#39;, &#39;utf_8&#39;, &#39;utf_8_sig&#39;]</code></pre>
-</details>
 </section>
 <section>
 </section>
@@ -401,7 +50,6 @@ class File:
 <span>class <span class="ident">File</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Class to work with files</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -758,11 +406,12 @@ class File:
                      &#39;shift_jis&#39;, &#39;shift_jis_2004&#39;, &#39;shift_jisx0213&#39;, &#39;utf_32&#39;, &#39;utf_32_be&#39;, &#39;utf_32_le&#39;, &#39;utf_16&#39;,
                      &#39;utf_16_be&#39;, &#39;utf_16_le&#39;, &#39;utf_7&#39;, &#39;utf_8&#39;, &#39;utf_8_sig&#39;]</code></pre>
 </details>
+<div class="desc"><p>Class to work with files</p></div>
 <h3>Class variables</h3>
 <dl>
 <dt id="commands.file9.File.all_encodings"><code class="name">var <span class="ident">all_encodings</span></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>The type of the None singleton.</p></div>
 </dd>
 </dl>
 <h3>Static methods</h3>
@@ -777,53 +426,11 @@ class File:
 <br><code>param hide</code> boolean, define hide file or not
 <br><code>param quiet</code> boolean, suppress print to console
 <br><code>return</code></p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def backup(cls, filename, subdirectory=&#34;bak&#34;, hide=True, quiet=False):
-    &#34;&#34;&#34;Move file to subdirectory, adds sort of timestamp to filename and hide file if &#39;hide&#39; argument is True
-    &lt;br&gt;`param filename` string with path to file
-    &lt;br&gt;`param subdirectory` string with name of subdirectory of backed up files
-    &lt;br&gt;`param hide` boolean, define hide file or not
-    &lt;br&gt;`param quiet` boolean, suppress print to console
-    &lt;br&gt;`return`
-    &#34;&#34;&#34;
-    import os
-    import shutil
-    from .path9 import Path
-    from .dir9 import Dir
-    from .time9 import Time
-    filename = Path.full(filename)  # normalize filename
-    backup_filename = str(filename) + &#34;.&#34; + Time.dotted() + &#34;.bak&#34;  # add dotted time to back up filename
-    backup_filename = os.path.split(backup_filename)  # splitting filename to folder and file
-    try:  # if subdirectory has no len
-        if len(subdirectory) &lt; 1:  # if subdirectory has zero len
-            raise TypeError(&#34;subdirectory must have non-zero len&#34;)
-    except TypeError:  # if subdirectory has no len
-        subdirectory = &#34;bak&#34;  # set subdirectory to default
-        print(&#34;len(subdirectory) &lt; 1, so subdirectory = &#39;bak&#39;&#34;)  # print error
-    subdirectory = Path.combine(backup_filename[0], subdirectory)  # append subdirectory name
-    Dir.create(subdirectory)  # create subdirectory
-    backup_filename = Path.combine(subdirectory, backup_filename[1])  # backup file name full path
-    shutil.copy2(filename, backup_filename)  # finally backup file
-    if hide:
-        backup_filename = cls.hide(backup_filename)  # hiding file
-    if not os.path.isfile(backup_filename):  # if file is not created
-        raise FileNotFoundError(backup_filename + &#34; isn&#39;t created while backup&#34;)
-    if not quiet:
-        print(&#34;backup of file&#34;, filename, &#34;created as&#34;, backup_filename)  # all is ok, print that
-    return backup_filename</code></pre>
-</details>
 </dd>
 <dt id="commands.file9.File.copy"><code class="name flex">
 <span>def <span class="ident">copy</span></span>(<span>input_file, output_file)</span>
 </code></dt>
 <dd>
-<div class="desc"><p><br><code>param input_file</code> string with path to existing file
-<br><code>param output_file</code> string with path to new file
-<br><code>return</code> None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -838,6 +445,9 @@ def copy(input_file, output_file):
     import shutil
     shutil.copy2(input_file, output_file)</code></pre>
 </details>
+<div class="desc"><p><br><code>param input_file</code> string with path to existing file
+<br><code>param output_file</code> string with path to new file
+<br><code>return</code> None</p></div>
 </dd>
 <dt id="commands.file9.File.create"><code class="name flex">
 <span>def <span class="ident">create</span></span>(<span>filename, quiet=True)</span>
@@ -847,39 +457,6 @@ def copy(input_file, output_file):
 <br><code>param filename</code> string with path to creating file
 <br><code>param quiet</code> boolean, if True, suppress output to console
 <br><code>return</code> None</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def create(cls, filename, quiet=True):
-    &#34;&#34;&#34;Creates subdirectories, if needed
-    &lt;br&gt;`param filename` string with path to creating file
-    &lt;br&gt;`param quiet` boolean, if True, suppress output to console
-    &lt;br&gt;`return` None
-    &#34;&#34;&#34;
-    import os
-    from .path9 import Path
-    from .dir9 import Dir
-    if not isinstance(quiet, bool):
-        raise TypeError(&#34;argument &#39;quiet&#39; must be boolean&#34;)
-    filename = Path.full(filename)
-    if os.path.split(filename)[0] != &#34;&#34;:
-        Dir.create(os.path.split(filename)[0])
-    if not quiet:
-        print(f&#34;Creating file {filename}&#34;)
-    if not cls.exist(filename):
-        with open(filename, &#39;a&#39;):  # open file and close after
-            os.utime(filename, None)  # change time of file modification
-    else:
-        raise FileExistsError(&#34;file &#34; + str(filename) + &#34; exist&#34;)
-    if not cls.exist(filename):
-        import sys
-        raise FileNotFoundError(&#34;error while creating file &#34; + filename +
-                                &#34;try to repair script at &#34; + Path.full(sys.argv[0]))
-    elif not quiet:
-        print(f&#34;File {filename} created&#34;)</code></pre>
-</details>
 </dd>
 <dt id="commands.file9.File.delete"><code class="name flex">
 <span>def <span class="ident">delete</span></span>(<span>path, quiet=True, no_sleep=False)</span>
@@ -891,43 +468,11 @@ def create(cls, filename, quiet=True):
 (to ensure than file
 deleted before next code run)
 <br><code>return</code> None</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def delete(cls, path, quiet=True, no_sleep=False):
-    &#34;&#34;&#34;
-    &lt;br&gt;`param path` string with path to deleting file
-    &lt;br&gt;`param quiet` boolean, suppress print to console
-    &lt;br&gt;`param no_sleep` boolean, if True - function skip sleep in 0.05 seconds after deleting file
-    (to ensure than file
-    deleted before next code run)
-    &lt;br&gt;`return` None
-    &#34;&#34;&#34;
-    import time
-    import os
-    if os.path.isdir(path):
-        raise IsADirectoryError(path + &#34; is directory, use Dir.delete to delete&#34;)
-    try:
-        os.remove(path)
-    except FileNotFoundError:
-        if not quiet:
-            print(&#34;file&#34;, path, &#34;is not exist&#34;)
-    if not quiet:
-        print(&#34;file&#34;, path, &#34;is deleted&#34;)
-    if not no_sleep:
-        time.sleep(0.05)
-        if cls.exist(path):
-            raise FileExistsError(path + &#34; is not deleted&#34;)</code></pre>
-</details>
 </dd>
 <dt id="commands.file9.File.exist"><code class="name flex">
 <span>def <span class="ident">exist</span></span>(<span>filename)</span>
 </code></dt>
 <dd>
-<div class="desc"><p><br><code>param filename</code> string with path to file
-<br><code>return</code> boolean that means existence of file</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -941,12 +486,13 @@ def exist(filename):
     import os
     return os.path.isfile(filename)</code></pre>
 </details>
+<div class="desc"><p><br><code>param filename</code> string with path to file
+<br><code>return</code> boolean that means existence of file</p></div>
 </dd>
 <dt id="commands.file9.File.format_size_human_readable"><code class="name flex">
 <span>def <span class="ident">format_size_human_readable</span></span>(<span>size_in_bytes)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -987,14 +533,12 @@ def format_size_human_readable(size_in_bytes):
 
     return size_string.strip()</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.file9.File.get_encoding"><code class="name flex">
-<span>def <span class="ident">get_encoding</span></span>(<span>path, count_of_symbols: Union[bool, int] = True)</span>
+<span>def <span class="ident">get_encoding</span></span>(<span>path, count_of_symbols: bool | int = True)</span>
 </code></dt>
 <dd>
-<div class="desc"><p><br><code>param path</code> path to file
-<br><code>param count_of_symbols</code> how much symbols use to auto define decoding, if True, uses 10000
-<br><code>return</code> string, file encoding</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1015,12 +559,14 @@ def get_encoding(path, count_of_symbols: Union[bool, int] = True):
     encoding = Bytes.get_encoding(slice_of_raw_data)
     return encoding</code></pre>
 </details>
+<div class="desc"><p><br><code>param path</code> path to file
+<br><code>param count_of_symbols</code> how much symbols use to auto define decoding, if True, uses 10000
+<br><code>return</code> string, file encoding</p></div>
 </dd>
 <dt id="commands.file9.File.get_extension"><code class="name flex">
 <span>def <span class="ident">get_extension</span></span>(<span>filepath)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1031,12 +577,12 @@ def get_extension(filepath):
     filename, file_extension = os.path.splitext(filepath)
     return file_extension</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.file9.File.get_mime"><code class="name flex">
 <span>def <span class="ident">get_mime</span></span>(<span>path)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1059,13 +605,12 @@ def get_mime(path):
         except IndexError:
             return &#34;unknown&#34;</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.file9.File.get_modification_time"><code class="name flex">
 <span>def <span class="ident">get_modification_time</span></span>(<span>filename)</span>
 </code></dt>
 <dd>
-<div class="desc"><p><br><code>param filename</code> string, path to file
-<br><code>return</code> float,</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1079,6 +624,8 @@ def get_modification_time(filename):
     import os
     return os.path.getmtime(filename)</code></pre>
 </details>
+<div class="desc"><p><br><code>param filename</code> string, path to file
+<br><code>return</code> float,</p></div>
 </dd>
 <dt id="commands.file9.File.get_size"><code class="name flex">
 <span>def <span class="ident">get_size</span></span>(<span>filename, human_readable=False)</span>
@@ -1086,23 +633,6 @@ def get_modification_time(filename):
 <dd>
 <div class="desc"><p><br><code>param filename</code> string with path to file
 <br><code>return</code> int with file size in bytes</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def get_size(cls, filename, human_readable=False):  # return size in bytes
-    &#34;&#34;&#34;
-    &lt;br&gt;`param filename` string with path to file
-    &lt;br&gt;`return` int with file size in bytes
-    &#34;&#34;&#34;
-    import os
-    size_in_bytes = os.stat(filename).st_size
-    if not human_readable:
-        return size_in_bytes
-
-    return cls.format_size_human_readable(size_in_bytes=size_in_bytes)</code></pre>
-</details>
 </dd>
 <dt id="commands.file9.File.hide"><code class="name flex">
 <span>def <span class="ident">hide</span></span>(<span>filename, quiet=True)</span>
@@ -1113,35 +643,6 @@ file, if running on Windows
 <br><code>param filename</code> string with path to file
 <br><code>param quiet</code> suppress print to console
 <br><code>return</code> string with new filename</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def hide(cls, filename, quiet=True):
-    &#34;&#34;&#34;Adding dot to filename and set attribute FILE_ATTRIBUTE_HIDDEN to
-    file, if running on Windows
-    &lt;br&gt;`param filename` string with path to file
-    &lt;br&gt;`param quiet` suppress print to console
-    &lt;br&gt;`return` string with new filename
-    &#34;&#34;&#34;
-    import os
-    from .path9 import Path
-    from .os9 import OS
-    filename = Path.full(filename)
-    if OS.windows:
-        import win32api
-        import win32con
-        win32api.SetFileAttributes(filename, win32con.FILE_ATTRIBUTE_HIDDEN)  # hiding file like windows do
-    elif OS.unix_family:
-        dotted_file = Path.combine(os.path.split(filename)[0], &#34;.&#34; + os.path.split(filename)[1])  # adding dot
-        filename = cls.rename(filename, dotted_file)  # adding dot
-    else:
-        raise NotImplementedError(&#34;Your OS doesn&#39;t supported&#34;)
-    if not quiet:
-        print(&#34;file&#34;, filename, &#34;is hidden now&#34;)
-    return filename</code></pre>
-</details>
 </dd>
 <dt id="commands.file9.File.move"><code class="name flex">
 <span>def <span class="ident">move</span></span>(<span>input_file, output_file)</span>
@@ -1150,62 +651,14 @@ def hide(cls, filename, quiet=True):
 <div class="desc"><p><br><code>param input_file</code> string with path to previous file place
 <br><code>param output_file</code> string with path to new file place
 <br><code>return</code> None</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def move(cls, input_file, output_file):
-    &#34;&#34;&#34;
-    &lt;br&gt;`param input_file` string with path to previous file place
-    &lt;br&gt;`param output_file` string with path to new file place
-    &lt;br&gt;`return` None
-    &#34;&#34;&#34;
-    import shutil
-    if cls.exist(input_file):
-        return shutil.move(input_file, output_file)
-    raise FileNotFoundError(f&#34;When trying to move/rename file &#39;{input_file}&#39;&gt;&#39;{output_file}&#39;: &#34;
-                            f&#34;File &#39;{input_file}&#39; not found&#34;)</code></pre>
-</details>
 </dd>
 <dt id="commands.file9.File.read"><code class="name flex">
-<span>def <span class="ident">read</span></span>(<span>path, encoding: str = 'utf-8', auto_detect_encoding: Union[bool, int] = True, mode: str = 'r')</span>
+<span>def <span class="ident">read</span></span>(<span>path,<br>encoding: str = 'utf-8',<br>auto_detect_encoding: bool | int = True,<br>mode: str = 'r')</span>
 </code></dt>
 <dd>
 <div class="desc"><p><br><code>param path</code> path to file
 <br><code>param auto_detect_encoding</code> how much symbols use to auto define decoding, if True, uses 10000
 <br><code>return</code> pipe, to file text content with utf-8 decoding</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def read(cls, path, encoding: str = &#34;utf-8&#34;, auto_detect_encoding: Union[bool, int] = True, mode: str = &#34;r&#34;):
-    # return pipe to file content
-    &#34;&#34;&#34;
-    &lt;br&gt;`param path` path to file
-    &lt;br&gt;`param auto_detect_encoding` how much symbols use to auto define decoding, if True, uses 10000
-    &lt;br&gt;`return` pipe, to file text content with utf-8 decoding
-    &#34;&#34;&#34;
-    if mode == &#34;r&#34;:
-        try:
-            if auto_detect_encoding:
-                encoding = cls.get_encoding(path, count_of_symbols=auto_detect_encoding)
-            try:
-                return cls._read_with_encoding(path, encoding)
-            except LookupError:
-                if encoding.lower() == &#34;EUC-TW&#34;.lower():
-                    return cls._read_with_encoding(path, &#34;TIS-620&#34;)  # crude fix for EUC-TW
-        except UnicodeDecodeError:
-            import codecs
-            with codecs.open(path, encoding=&#39;cp1251&#39;, errors=&#39;replace&#39;) as file:
-                content = file.read()
-                return content
-    elif mode in [&#34;b&#34;, &#34;rb&#34;]:
-        with open(path, &#34;rb&#34;) as file:
-            content = file.read()
-            return content</code></pre>
-</details>
 </dd>
 <dt id="commands.file9.File.rename"><code class="name flex">
 <span>def <span class="ident">rename</span></span>(<span>input_file, output_file)</span>
@@ -1214,25 +667,11 @@ def read(cls, path, encoding: str = &#34;utf-8&#34;, auto_detect_encoding: Union
 <div class="desc"><p><br><code>param input_file</code> string with path to previous file place
 <br><code>param output_file</code> string with path to new file place
 <br><code>return</code> string with path to new file place</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def rename(cls, input_file, output_file):
-    &#34;&#34;&#34;
-    &lt;br&gt;`param input_file` string with path to previous file place
-    &lt;br&gt;`param output_file` string with path to new file place
-    &lt;br&gt;`return` string with path to new file place
-    &#34;&#34;&#34;
-    return cls.move(input_file, output_file)</code></pre>
-</details>
 </dd>
 <dt id="commands.file9.File.set_modification_time"><code class="name flex">
 <span>def <span class="ident">set_modification_time</span></span>(<span>filepath, datetime)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1246,12 +685,12 @@ def set_modification_time(filepath, datetime):
 
     os.utime(filepath, (mod_time, mod_time))</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.file9.File.sha256_checksum"><code class="name flex">
 <span>def <span class="ident">sha256_checksum</span></span>(<span>filename, block_size=65536)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1265,14 +704,12 @@ def sha256_checksum(filename, block_size=65536):
             sha256.update(block)
     return sha256.hexdigest()</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.file9.File.wipe"><code class="name flex">
 <span>def <span class="ident">wipe</span></span>(<span>path)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Erase content of file
-<br><code>param path</code> string with path to file
-<br><code>return</code> None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1286,18 +723,14 @@ def wipe(path):
     file = open(path, &#39;w&#39;)
     file.close()</code></pre>
 </details>
+<div class="desc"><p>Erase content of file
+<br><code>param path</code> string with path to file
+<br><code>return</code> None</p></div>
 </dd>
 <dt id="commands.file9.File.write"><code class="name flex">
 <span>def <span class="ident">write</span></span>(<span>filename, what_to_write, mode='a', encoding='utf-8', quiet=True)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Write to end of file if "mode" arg isn't redefined
-<br><code>param filename</code> string with path to file
-<br><code>param what_to_write</code> string to write
-<br><code>param mode</code> string with any mode that supported by python open() func
-<br><code>param encoding</code> string with any encoding
-<br><code>param quiet</code> boolean, if True, suppress output to console
-<br><code>return</code> None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1325,6 +758,13 @@ def write(filename, what_to_write, mode=&#34;a&#34;, encoding=&#34;utf-8&#34;, q
     if not quiet:
         print(f&#34;Written to file {filename}&#34;)</code></pre>
 </details>
+<div class="desc"><p>Write to end of file if "mode" arg isn't redefined
+<br><code>param filename</code> string with path to file
+<br><code>param what_to_write</code> string to write
+<br><code>param mode</code> string with any mode that supported by python open() func
+<br><code>param encoding</code> string with any encoding
+<br><code>param quiet</code> boolean, if True, suppress output to console
+<br><code>return</code> None</p></div>
 </dd>
 </dl>
 </dd>
@@ -1332,7 +772,6 @@ def write(filename, what_to_write, mode=&#34;a&#34;, encoding=&#34;utf-8&#34;, q
 </section>
 </article>
 <nav id="sidebar">
-<h1>Index</h1>
 <div class="toc">
 <ul></ul>
 </div>
@@ -1375,7 +814,7 @@ def write(filename, what_to_write, mode=&#34;a&#34;, encoding=&#34;utf-8&#34;, q
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
 </footer>
 </body>
 </html>

@@ -2,18 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.10.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
 <title>commands.cli9 API documentation</title>
-<meta name="description" content="Internal module to work with commandline interfaces" />
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
-<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<meta name="description" content="Internal module to work with commandline interfaces">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
-<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
 </head>
 <body>
 <main>
@@ -23,253 +37,6 @@
 </header>
 <section id="section-intro">
 <p>Internal module to work with commandline interfaces</p>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">#! python3
-# -*- coding: utf-8 -*-
-&#34;&#34;&#34;Internal module to work with commandline interfaces
-&#34;&#34;&#34;
-__version__ = &#34;0.5.1&#34;
-
-
-class CLI:
-    &#34;&#34;&#34;Class to work with commandline interfaces
-    &#34;&#34;&#34;
-
-    @staticmethod
-    def get_y_n(question, default=None):
-        &#34;&#34;&#34;Obtain answer yes or no from user in commandline.
-        &lt;br&gt;`param question` string with question to user
-        &lt;br&gt;`param answer` predefined string with answer, must be &#34;y&#34; or &#34;n&#34;
-        &lt;br&gt;`return` boolean
-        &#34;&#34;&#34;
-
-        def check_answer(string: str):  # pylint: disable=inconsistent-return-statements
-            &#34;&#34;&#34;Check input from user or argument &#34;answer&#34;
-            &lt;br&gt;`param string` input string, check answer for &#34;y&#34; or &#34;n&#34;, for other values return None
-            &lt;br&gt;`return` True|False|None
-            &#34;&#34;&#34;
-            from .keyboard9 import Keyboard
-            import thefuck.const
-
-            if string is None:
-                return
-
-            if isinstance(string, thefuck.const._GenConst):
-                string_t = string._name
-                if string == thefuck.const.KEY_CTRL_C:
-                    raise KeyboardInterrupt
-            else:
-                string = string.lower()
-                string_t = Keyboard.translate_string(string)
-
-            if string != string_t:
-                print(&#34; &gt; &#34; + string_t, end=&#34;&#34;)
-                string = string_t
-
-            if string == &#34;y&#34;:
-                return True
-            if string == &#34;n&#34;:
-                return False
-            return
-
-        while True:
-            print_str = f&#34;{question} (y/n)? &#34;
-            if default:
-                print_str += f&#34; default &#39;{default}&#39;&#34;
-            try:
-                import thefuck.system
-                print(print_str, end=&#34;&#34;, flush=True)
-                input_str = thefuck.system.get_key()
-                print(input_str, end=&#34;&#34;)
-            except Exception:
-                input_str = input(print_str)
-                input_str = input_str.strip()
-            output = check_answer(input_str)
-            print()
-            if output is not None:
-                return output
-            elif check_answer(default) is not None:
-                return check_answer(default)
-
-    @staticmethod
-    def get_ints(question, count_of_ints):
-        &#34;&#34;&#34;Obtain answer with integers from user in commandline.
-        &lt;br&gt;`param question` string with question to user
-        &lt;br&gt;`param count_of_ints` int of ints must be in answer
-        &lt;br&gt;`param answer` predefined string with answer
-        &lt;br&gt;`return` integer or list of integers
-        &#34;&#34;&#34;
-        from .str9 import Str
-
-        while True:
-            input_str = input(f&#34;{question} (answer {count_of_ints} integer_s): &#34;)
-            ints = Str.get_integers(input_str, float_support=False)
-            output = None
-            if len(ints) == count_of_ints:
-                if count_of_ints == 1:
-                    output = ints[0]
-                else:
-                    output = ints
-            if output is not None:
-                return output
-
-    @classmethod
-    def get_int(cls, question):
-        return cls.get_ints(question=question, count_of_ints=1)
-
-    @classmethod
-    def get_integer(cls, question):
-        return cls.get_int(question=question)
-
-    @classmethod
-    def get_integers(cls, question, count_of_ints):
-        return cls.get_ints(question=question, count_of_ints=count_of_ints)
-
-    wait_update_pos = 0
-
-    @classmethod
-    def wait_update(cls, quiet=False):
-        &#34;&#34;&#34;Print &#39;spinning&#39; (if function called multiple times) stick, used for long processes to show user that some
-        progress are going.
-        &lt;br&gt;`param quiet` boolean, suppress print to console
-        &lt;br&gt;`return` string with &#39;stick&#39; in new position
-        &#34;&#34;&#34;
-        from .const9 import backslash
-        stick = None
-        if cls.wait_update_pos == 0:
-            stick = &#34;|&#34;
-        elif cls.wait_update_pos == 1:
-            stick = &#34;/&#34;
-        elif cls.wait_update_pos == 2:
-            stick = &#34;-&#34;
-        elif cls.wait_update_pos == 3:
-            stick = backslash
-            cls.wait_update_pos = -1
-        cls.wait_update_pos += 1
-        if not quiet:
-            from .print9 import Print
-            Print.rewrite(stick)
-        return stick
-
-    @staticmethod
-    def progressbar(done, total, done_repr=&#34;&#34;, total_repr=&#34;&#34;, reverse=False):
-        &#34;&#34;&#34;
-        Generates a progress bar string with text representation of progress.
-
-        :param done: Number of completed units.
-        :param total: Total number of units.
-        :param done_repr: String representing completed units.
-        :param total_repr: String representing total units.
-        :param reverse: If True, progress will be counting backwards (from total to 0).
-        :return: A string representing the progress bar.
-        &#34;&#34;&#34;
-        from .console9 import Console
-        from .os9 import OS
-        console_width = Console.width()
-
-        if OS.windows:  # windows add symbol to end of string :(
-            console_width -= 1
-
-        if reverse:
-            done = total - done
-        if done &gt; total:
-            done = total
-
-        if done &lt; 0:
-            done = 0
-        
-        add_split = done_repr != &#34;&#34; and total_repr != &#34;&#34;
-        add_space = done_repr != &#34;&#34; or total_repr != &#34;&#34;
-
-        done_repr = str(done_repr)
-        total_repr = str(total_repr)
-
-        proportion_done = done / total if total else 0
-
-        additional_space = (3 if add_split else 0) + (1 if add_space else 0)
-
-        text_length = len(done_repr) + len(total_repr) + additional_space
-        bar_length = console_width - text_length
-
-        full_blocks = int(proportion_done * bar_length)
-        remainder = (proportion_done * bar_length) % 1
-        blocks = [&#34;&#34;, &#34;▏&#34;, &#34;▎&#34;, &#34;▍&#34;, &#34;▌&#34;, &#34;▋&#34;, &#34;▊&#34;, &#34;▉&#34;, &#34;█&#34;]
-        medium_shade = blocks[int(remainder * 8)]
-
-        split = &#34; / &#34; if add_split else &#34;&#34;
-        space = &#34; &#34; if add_space else &#34;&#34;
-
-        progress_bar = (f&#34;{done_repr}{split}{total_repr}{space}&#34;
-                        + f&#34;{&#39;█&#39; * full_blocks}{medium_shade}&#34;
-                        + f&#34;{&#39; &#39; * (bar_length - full_blocks - len(medium_shade))}&#34;)
-
-        return progress_bar
-
-    @staticmethod
-    def multiline_input(question: str) -&gt; str:
-        print(&#34;\nEnter|paste your content. Ctrl-D or Ctrl-Z (Windows) to save it.&#34;)
-        print(question)
-        lines = []
-        while True:
-            try:
-                lines.append(input())
-            except EOFError:
-                print()
-                break
-        return &#34;\n&#34;.join(lines)
-
-    @staticmethod
-    def get_date(date_name: str, always_return_date: bool = False):
-        &#34;&#34;&#34;Gets date from user input.
-
-        :param date_name: string, name of date for user
-        :param always_return_date: bool, ask user a date until valid is entered
-        :return None if date is not entered and always_return_date is False
-        :return datetime.datetime if correct data is entered (time is 00:00:00)&#34;&#34;&#34;
-        from .time9 import Time
-        date = None
-        while date is None:
-            date_str = input(f&#34;Enter date of {date_name} like \&#34;{str(Time.datetime().day).zfill(2)}\&#34; &#34;
-                             f&#34;or with month \&#34;{str(Time.datetime().day).zfill(2)}&#34;
-                             f&#34;{str(Time.datetime().month).zfill(2)}\&#34; &#34;
-                             f&#34;or with year \&#34;{str(Time.datetime().day).zfill(2)}&#34;
-                             f&#34;{str(Time.datetime().month).zfill(2)}&#34;
-                             f&#34;{str(Time.datetime().year).zfill(4)}\&#34;: &#34;).strip()
-            if date_str:
-                date = Time.datetime()
-                try:
-                    day = int(date_str[:2])
-                except ValueError:
-                    day = date.day
-                try:
-                    month = int(date_str[2:4])
-                except ValueError:
-                    month = date.month
-                try:
-                    year = int(date_str[4:])
-                    if len(str(year)) == 2:
-                        year += 2000
-                except ValueError:
-                    year = date.year
-
-                try:
-                    date = date.replace(day=day, month=month, year=year, hour=0, minute=0, second=0, microsecond=0)
-                    break
-                except ValueError:
-                    print(&#34;Wrong date.&#34;)
-                    date = None
-            else:
-                if always_return_date:
-                    print(&#34;Please, enter date.&#34;)
-                    continue
-                else:
-                    break
-
-        return date</code></pre>
-</details>
 </section>
 <section>
 </section>
@@ -284,7 +51,6 @@ class CLI:
 <span>class <span class="ident">CLI</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Class to work with commandline interfaces</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -525,11 +291,12 @@ class CLI:
 
         return date</code></pre>
 </details>
+<div class="desc"><p>Class to work with commandline interfaces</p></div>
 <h3>Class variables</h3>
 <dl>
 <dt id="commands.cli9.CLI.wait_update_pos"><code class="name">var <span class="ident">wait_update_pos</span></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>The type of the None singleton.</p></div>
 </dd>
 </dl>
 <h3>Static methods</h3>
@@ -538,11 +305,6 @@ class CLI:
 <span>def <span class="ident">get_date</span></span>(<span>date_name: str, always_return_date: bool = False)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Gets date from user input.</p>
-<p>:param date_name: string, name of date for user
-:param always_return_date: bool, ask user a date until valid is entered
-:return None if date is not entered and always_return_date is False
-:return datetime.datetime if correct data is entered (time is 00:00:00)</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -596,58 +358,34 @@ def get_date(date_name: str, always_return_date: bool = False):
 
     return date</code></pre>
 </details>
+<div class="desc"><p>Gets date from user input.</p>
+<p>:param date_name: string, name of date for user
+:param always_return_date: bool, ask user a date until valid is entered
+:return None if date is not entered and always_return_date is False
+:return datetime.datetime if correct data is entered (time is 00:00:00)</p></div>
 </dd>
 <dt id="commands.cli9.CLI.get_int"><code class="name flex">
 <span>def <span class="ident">get_int</span></span>(<span>question)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def get_int(cls, question):
-    return cls.get_ints(question=question, count_of_ints=1)</code></pre>
-</details>
 </dd>
 <dt id="commands.cli9.CLI.get_integer"><code class="name flex">
 <span>def <span class="ident">get_integer</span></span>(<span>question)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def get_integer(cls, question):
-    return cls.get_int(question=question)</code></pre>
-</details>
 </dd>
 <dt id="commands.cli9.CLI.get_integers"><code class="name flex">
 <span>def <span class="ident">get_integers</span></span>(<span>question, count_of_ints)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def get_integers(cls, question, count_of_ints):
-    return cls.get_ints(question=question, count_of_ints=count_of_ints)</code></pre>
-</details>
 </dd>
 <dt id="commands.cli9.CLI.get_ints"><code class="name flex">
 <span>def <span class="ident">get_ints</span></span>(<span>question, count_of_ints)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Obtain answer with integers from user in commandline.
-<br><code>param question</code> string with question to user
-<br><code>param count_of_ints</code> int of ints must be in answer
-<br><code>param answer</code> predefined string with answer
-<br><code>return</code> integer or list of integers</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -674,15 +412,16 @@ def get_ints(question, count_of_ints):
         if output is not None:
             return output</code></pre>
 </details>
+<div class="desc"><p>Obtain answer with integers from user in commandline.
+<br><code>param question</code> string with question to user
+<br><code>param count_of_ints</code> int of ints must be in answer
+<br><code>param answer</code> predefined string with answer
+<br><code>return</code> integer or list of integers</p></div>
 </dd>
 <dt id="commands.cli9.CLI.get_y_n"><code class="name flex">
 <span>def <span class="ident">get_y_n</span></span>(<span>question, default=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Obtain answer yes or no from user in commandline.
-<br><code>param question</code> string with question to user
-<br><code>param answer</code> predefined string with answer, must be "y" or "n"
-<br><code>return</code> boolean</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -743,12 +482,15 @@ def get_y_n(question, default=None):
         elif check_answer(default) is not None:
             return check_answer(default)</code></pre>
 </details>
+<div class="desc"><p>Obtain answer yes or no from user in commandline.
+<br><code>param question</code> string with question to user
+<br><code>param answer</code> predefined string with answer, must be "y" or "n"
+<br><code>return</code> boolean</p></div>
 </dd>
 <dt id="commands.cli9.CLI.multiline_input"><code class="name flex">
 <span>def <span class="ident">multiline_input</span></span>(<span>question: str) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -766,18 +508,12 @@ def multiline_input(question: str) -&gt; str:
             break
     return &#34;\n&#34;.join(lines)</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.cli9.CLI.progressbar"><code class="name flex">
 <span>def <span class="ident">progressbar</span></span>(<span>done, total, done_repr='', total_repr='', reverse=False)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Generates a progress bar string with text representation of progress.</p>
-<p>:param done: Number of completed units.
-:param total: Total number of units.
-:param done_repr: String representing completed units.
-:param total_repr: String representing total units.
-:param reverse: If True, progress will be counting backwards (from total to 0).
-:return: A string representing the progress bar.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -836,6 +572,13 @@ def progressbar(done, total, done_repr=&#34;&#34;, total_repr=&#34;&#34;, revers
 
     return progress_bar</code></pre>
 </details>
+<div class="desc"><p>Generates a progress bar string with text representation of progress.</p>
+<p>:param done: Number of completed units.
+:param total: Total number of units.
+:param done_repr: String representing completed units.
+:param total_repr: String representing total units.
+:param reverse: If True, progress will be counting backwards (from total to 0).
+:return: A string representing the progress bar.</p></div>
 </dd>
 <dt id="commands.cli9.CLI.wait_update"><code class="name flex">
 <span>def <span class="ident">wait_update</span></span>(<span>quiet=False)</span>
@@ -845,34 +588,6 @@ def progressbar(done, total, done_repr=&#34;&#34;, total_repr=&#34;&#34;, revers
 progress are going.
 <br><code>param quiet</code> boolean, suppress print to console
 <br><code>return</code> string with 'stick' in new position</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def wait_update(cls, quiet=False):
-    &#34;&#34;&#34;Print &#39;spinning&#39; (if function called multiple times) stick, used for long processes to show user that some
-    progress are going.
-    &lt;br&gt;`param quiet` boolean, suppress print to console
-    &lt;br&gt;`return` string with &#39;stick&#39; in new position
-    &#34;&#34;&#34;
-    from .const9 import backslash
-    stick = None
-    if cls.wait_update_pos == 0:
-        stick = &#34;|&#34;
-    elif cls.wait_update_pos == 1:
-        stick = &#34;/&#34;
-    elif cls.wait_update_pos == 2:
-        stick = &#34;-&#34;
-    elif cls.wait_update_pos == 3:
-        stick = backslash
-        cls.wait_update_pos = -1
-    cls.wait_update_pos += 1
-    if not quiet:
-        from .print9 import Print
-        Print.rewrite(stick)
-    return stick</code></pre>
-</details>
 </dd>
 </dl>
 </dd>
@@ -880,7 +595,6 @@ def wait_update(cls, quiet=False):
 </section>
 </article>
 <nav id="sidebar">
-<h1>Index</h1>
 <div class="toc">
 <ul></ul>
 </div>
@@ -913,7 +627,7 @@ def wait_update(cls, quiet=False):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
 </footer>
 </body>
 </html>

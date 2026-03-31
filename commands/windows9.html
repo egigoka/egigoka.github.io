@@ -2,18 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.10.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
 <title>commands.windows9 API documentation</title>
-<meta name="description" content="Internal module to work with Windows-specific functions" />
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
-<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
-<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
-<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
-<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<meta name="description" content="Internal module to work with Windows-specific functions">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
 <style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
-<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
 </head>
 <body>
 <main>
@@ -23,337 +37,6 @@
 </header>
 <section id="section-intro">
 <p>Internal module to work with Windows-specific functions</p>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">#! python3
-# -*- coding: utf-8 -*-
-&#34;&#34;&#34;Internal module to work with Windows-specific functions
-&#34;&#34;&#34;
-__version__ = &#34;0.7.4&#34;
-
-
-class Windows:
-    &#34;&#34;&#34;Class to work with Windows-specific functions
-    &#34;&#34;&#34;
-
-    class RemoteSystem:
-        def __init__(self, hostname, username, password, port=None, transport=&#34;ntlm&#34;):
-            import winrm  # pywinrm
-            # FIX winrm #
-
-            def fix_run_ps(self, script):
-                from base64 import b64encode
-                encoded_ps = b64encode(script.encode(&#39;utf_16_le&#39;)).decode(&#39;ascii&#39;)
-                rs = self.run_cmd(&#39;powershell -encodedcommand {0}&#39;.format(encoded_ps))
-                if len(rs.std_err):
-                    rs.std_err = self._clean_error_msg(rs.std_err.decode(&#39;utf-8&#39;))
-                return rs
-
-            winrm.Session.run_ps = fix_run_ps
-
-            # END FIX winrm #
-
-            if port is None:
-                port = 5986 if transport == &#39;ssl&#39; else 5985
-
-            self.session = winrm.Session(fr&#34;{hostname}:{port}&#34;, auth=(username, password), transport=transport)
-
-        def ps(self, script):
-            output = self.session.run_ps(script)
-            if output.std_err.startswith(&#34;#&lt; CLIXML\r\n&#34;):
-                output.std_err = output.std_err[len(&#34;#&lt; CLIXML\r\n&#34;):]
-
-            out = output.std_out.decode()
-            err = output.std_err
-            return out, err, output.status_code
-
-        def cmd(self, program, *args):
-            from commands.list9 import List
-            args = List.to_strings(args)
-            output = self.session.run_cmd(program, args)
-
-            out = output.std_out.decode()
-            err = output.std_err.decode()
-            return out, err, output.status_code
-
-
-    @staticmethod
-    def lock():
-        &#34;&#34;&#34;Locking Windows workstation, doesn&#39;t work with Windows 10
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
-        from .os9 import OS
-        if OS.windows_version and (OS.windows_version != 10):
-            import ctypes
-            ctypes.windll.LockWorkStation()  # todo fix Windows 10
-        else:
-            raise OSError(&#34;Locking work only on Windows &lt; 10&#34;)
-
-    @classmethod
-    def set_cmd_code_page(cls, code_page):
-        import os
-        import subprocess
-        subprocess.Popen(f&#34;chcp {code_page}&#34;.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-        os.system(&#34;set PYTHONIOENCODING = utf - 8&#34;)
-        cls.get_cmd_code_page()  # it&#39;s fucking magick, don&#39;t touch
-        return code_page
-
-    @staticmethod
-    def get_cmd_code_page(debug=False):
-        import subprocess
-        out, err = subprocess.Popen(&#34;chcp&#34;, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
-        if err:
-            return &#34;Error getting current codepage&#34;
-        try:
-            from .str9 import Str
-            if debug:
-                print(out)
-            out = Str.substring(out, &#34;: &#34;, &#34;\r\n&#34;)
-            if debug:
-                print(out)
-            return int(out)
-        except KeyError:
-            return &#34;Cannot get current codepage&#34;
-
-    @classmethod
-    def fix_unicode_encode_error(cls, safe=False):
-        &#34;&#34;&#34;Fix UnicodeConsoleError on old versions of Python
-        &lt;br&gt;`return` int, current code_page number
-        &#34;&#34;&#34;
-        from .path9 import Path
-        from .file9 import File
-        from .print9 import Print
-        lockfile = Path.combine(Path.commands(), &#34;.windows_codepage_lock&#34;)
-        if File.exist(lockfile):
-            cp = cls.get_cmd_code_page()
-            if not safe:
-                raise IOError(f&#34;Cannot use codepage 65001, continue using {cp}, &#34;
-                              f&#34;you can set other by Windows.set_cmd_code_page&#34;)
-            return cp
-        previous_codepage = cls.get_cmd_code_page()
-        try:
-            if previous_codepage != 65001:
-                cls.set_cmd_code_page(65001)
-            import os
-            with Print.s_print_lock:
-                command = r&#39;&#39;&#39;python3 -c &#34;print(&#39;йЙ\r&#39;, end=&#39;&#39;)&#34;&#39;&#39;&#39;
-            Print(&#34;йЙ\r&#34;, end=&#34;&#34;)
-            Print(&#34;  \r&#34;, end=&#34;&#34;)
-            os.system(command)
-            Print(&#34;  \r&#34;, end=&#34;&#34;)
-            return cls.get_cmd_code_page()
-        except Exception:
-            if int(previous_codepage) &gt;= 0:
-                if previous_codepage != 65001:
-                    cls.set_cmd_code_page(previous_codepage)
-                else:
-                    cls.set_cmd_code_page(437)
-                Print(&#34;  \r&#34;, end=&#34;&#34;)
-                from .os9 import OS
-                OS._cyrillic_support = False
-                File.create(lockfile)
-                if not safe:
-                    raise IOError(f&#34;Cannot use codepage 65001, returning to {previous_codepage}, &#34;
-                                  f&#34;you can set other by Windows.set_cmd_code_page&#34;)
-                return previous_codepage
-
-    @staticmethod
-    def user_exists(username):
-        &#34;&#34;&#34;
-        &lt;br&gt;`param username` string
-        &lt;br&gt;`return` boolean, existence of local user
-        &#34;&#34;&#34;
-        import subprocess
-        from .console9 import Console
-        try:
-            Console.get_output(f&#34;net user {username}&#34;)
-            return True
-        except subprocess.CalledProcessError:
-            return False
-
-    def _user(self, username, password=None, create=False, remove=False, retry_cnt=0):
-        &#34;&#34;&#34;Creates or removes user using net user command
-        &lt;br&gt;`param username` string
-        &lt;br&gt;`param password` string
-        &lt;br&gt;`param create` boolean, True for create user
-        &lt;br&gt;`param remove` boolean, True for remove user
-        &lt;br&gt;`param retry_cnt` int, internally used to not raise RecursionError
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
-        import subprocess
-        from .console9 import Console
-        retry_times = 5
-
-        if not isinstance(username, str):
-            raise TypeError(f&#34;Username must be string, got {username}, of {type(username)}&#34;)
-
-        try:
-            if create:
-                if self.user_exists(username):
-                    raise OSError(f&#34;User {username} already exists.&#34;)
-                if not password:
-                    raise ValueError(&#34;Password can&#39;t be empty&#34;)
-                command = f&#34;net user {username} {password} /ADD&#34;
-            elif remove:
-                if not self.user_exists(username):
-                    raise OSError(f&#34;User {username} already doesn&#39;t exists.&#34;)
-                command = f&#34;net user {username} /DELETE&#34;
-            else:
-                raise NotImplementedError
-            output = Console.get_output(command)
-            if &#34;The command completed successfully.&#34; in output:
-                return
-            else:
-                if create:
-                    raise OSError(f&#34;User {username} failed to create. {output}&#34;)
-                elif remove:
-                    raise OSError(f&#34;User {username} failed to remove. {output}&#34;)
-        except subprocess.CalledProcessError:
-            if retry_cnt &lt; retry_times:
-                retry_cnt += 1
-                return self._user(username, password, create, remove, retry_cnt)
-            else:
-                if create:
-                    raise OSError(f&#34;User {username} failed to create.&#34;)
-                elif remove:
-                    raise OSError(f&#34;User {username} failed to remove.&#34;)
-
-    def create_user(self, username, password):
-        &#34;&#34;&#34;Creates user using net user command
-        &lt;br&gt;`param username` string
-        &lt;br&gt;`param password` string
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
-        return self._user(username=username, password=password, create=True)
-
-    def remove_user(self, username):  # remove only users from json file
-        &#34;&#34;&#34;Removes user using net user command
-        &lt;br&gt;`param username` string
-        &lt;br&gt;`return` None
-        &#34;&#34;&#34;
-        return self._user(username=username, remove=True)
-
-    @staticmethod
-    def dump_auditpol(filename=None, category=&#34;*&#34;, fast_name=None, quiet=False):
-        from .file9 import File
-        from .console9 import Console
-        from .time9 import Time
-        import subprocess
-        if not filename:
-            filename = f&#34;auditpol_{Time.dotted()}.txt&#34;
-        if fast_name:
-            filename = f&#34;auditpol_{Time.dotted()}--{fast_name}.txt&#34;
-        try:
-            output = Console.get_output(f&#34;auditpol /get /category:{category}&#34;)
-        except subprocess.CalledProcessError:
-            raise OSError(&#34;Try to run under elevated commandline&#34;)
-        File.write(filename, output)
-        if not quiet:
-            print(f&#34;Audit politics saved to {filename}&#34;)
-
-    winreg_imported = False
-
-    @classmethod
-    def import_winreg(cls):
-        if not cls.winreg_imported:
-            from .os9 import OS
-            import winreg
-            cls.winreg = winreg
-            cls.winreg_imported = True
-        return cls.winreg
-
-    @classmethod
-    def getenv(cls, name, scope=&#34;user&#34;):
-        winreg = cls.import_winreg()
-        assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
-        if scope == &#39;user&#39;:
-            root = winreg.HKEY_CURRENT_USER
-            subkey = &#39;Environment&#39;
-        else:
-            root = winreg.HKEY_LOCAL_MACHINE
-            subkey = r&#39;SYSTEM\CurrentControlSet\Control\Session Manager\Environment&#39;
-        key = winreg.OpenKey(root, subkey, 0, winreg.KEY_READ)
-        try:
-            value, _ = winreg.QueryValueEx(key, name)
-        except WindowsError:
-            value = &#39;&#39;
-        return value
-
-    @classmethod
-    def setenv(cls, name, value, scope=&#34;user&#34;):
-        # Note: for &#39;system&#39; scope, you must run this as Administrator
-        from .console9 import Console
-        from .path9 import Path
-        winreg = cls.import_winreg()
-        assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
-        if scope == &#39;user&#39;:
-            root = winreg.HKEY_CURRENT_USER
-            subkey = &#39;Environment&#39;
-        else:
-            root = winreg.HKEY_LOCAL_MACHINE
-            subkey = r&#39;SYSTEM\CurrentControlSet\Control\Session Manager\Environment&#39;
-        key = winreg.OpenKey(root, subkey, 0, winreg.KEY_ALL_ACCESS)
-        winreg.SetValueEx(key, name, 0, winreg.REG_EXPAND_SZ, value)
-        winreg.CloseKey(key)
-        # For some strange reason, calling SendMessage from the current process
-        # doesn&#39;t propagate environment changes at all.
-        return Console.get_output(Path.python(), &#34;-c&#34;, &#34;import win32api, win32con; &#34;
-                                                       &#34;assert win32api.SendMessage(win32con.HWND_BROADCAST, &#34;
-                                                       &#34;win32con.WM_SETTINGCHANGE, 0, &#39;Environment&#39;)&#34;)
-
-    @staticmethod
-    def get_powershell_execution_policy():
-        from .console9 import Console
-        powershell_fix_command = f&#39;&#39;&#39;powershell -command &#34;&amp; {{&amp;&#39;Get-ExecutionPolicy&#39;}}&#34;&#39;&#39;&#39;
-        out, err = Console.get_output(powershell_fix_command, return_merged=False)
-        if err:
-            raise OSError(err)
-        return out.strip()
-
-    @staticmethod
-    def set_powershell_execution_policy(policy_name):
-        from .console9 import Console
-        powershell_fix_command = f&#39;&#39;&#39;powershell -command &#34;&amp; {{&amp;&#39;Set-ExecutionPolicy&#39; {policy_name}}}&#34;&#39;&#39;&#39;
-        # &#34;Set-ExecutionPolicy {policy_name}&#34;
-        out, err = Console.get_output(powershell_fix_command, return_merged=False)
-        if err:
-            raise OSError(err)
-        return out
-
-    @classmethod
-    def run_powershell(cls, ps1_script):
-        from .random9 import Random
-        from .file9 import File
-        from .console9 import Console
-
-        temp_ps1_file = Random.string(10)+&#34;.ps1&#34;
-
-        old_policy = cls.get_powershell_execution_policy()
-        if old_policy != &#34;RemoteSigned&#34;:
-            cls.set_powershell_execution_policy(&#34;RemoteSigned&#34;)
-
-        File.write(temp_ps1_file, ps1_script)
-        out, err = Console.get_output(fr&#39;powershell .\&#34;{temp_ps1_file}&#34;&#39;, return_merged=False,
-                                      create_cmd_subprocess=True)
-        File.delete(temp_ps1_file)
-
-        if old_policy != &#34;RemoteSigned&#34;:
-            cls.set_powershell_execution_policy(old_policy)
-
-        if err:
-            raise OSError(err)
-
-        return out
-
-    @staticmethod
-    def change_wallpaper(image_path):
-        import ctypes
-        SPI_SETDESKWALLPAPER = 20
-        ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, image_path, 0)
-        ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, image_path, 3)</code></pre>
-</details>
 </section>
 <section>
 </section>
@@ -368,7 +51,6 @@ class Windows:
 <span>class <span class="ident">Windows</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Class to work with Windows-specific functions</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -693,15 +375,16 @@ class Windows:
         ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, image_path, 0)
         ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, image_path, 3)</code></pre>
 </details>
+<div class="desc"><p>Class to work with Windows-specific functions</p></div>
 <h3>Class variables</h3>
 <dl>
 <dt id="commands.windows9.Windows.RemoteSystem"><code class="name">var <span class="ident">RemoteSystem</span></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>The type of the None singleton.</p></div>
 </dd>
 <dt id="commands.windows9.Windows.winreg_imported"><code class="name">var <span class="ident">winreg_imported</span></code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>The type of the None singleton.</p></div>
 </dd>
 </dl>
 <h3>Static methods</h3>
@@ -710,7 +393,6 @@ class Windows:
 <span>def <span class="ident">change_wallpaper</span></span>(<span>image_path)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -722,12 +404,12 @@ def change_wallpaper(image_path):
     ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, image_path, 0)
     ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, image_path, 3)</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.windows9.Windows.dump_auditpol"><code class="name flex">
 <span>def <span class="ident">dump_auditpol</span></span>(<span>filename=None, category='*', fast_name=None, quiet=False)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -750,6 +432,7 @@ def dump_auditpol(filename=None, category=&#34;*&#34;, fast_name=None, quiet=Fal
     if not quiet:
         print(f&#34;Audit politics saved to {filename}&#34;)</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.windows9.Windows.fix_unicode_encode_error"><code class="name flex">
 <span>def <span class="ident">fix_unicode_encode_error</span></span>(<span>safe=False)</span>
@@ -757,58 +440,11 @@ def dump_auditpol(filename=None, category=&#34;*&#34;, fast_name=None, quiet=Fal
 <dd>
 <div class="desc"><p>Fix UnicodeConsoleError on old versions of Python
 <br><code>return</code> int, current code_page number</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def fix_unicode_encode_error(cls, safe=False):
-    &#34;&#34;&#34;Fix UnicodeConsoleError on old versions of Python
-    &lt;br&gt;`return` int, current code_page number
-    &#34;&#34;&#34;
-    from .path9 import Path
-    from .file9 import File
-    from .print9 import Print
-    lockfile = Path.combine(Path.commands(), &#34;.windows_codepage_lock&#34;)
-    if File.exist(lockfile):
-        cp = cls.get_cmd_code_page()
-        if not safe:
-            raise IOError(f&#34;Cannot use codepage 65001, continue using {cp}, &#34;
-                          f&#34;you can set other by Windows.set_cmd_code_page&#34;)
-        return cp
-    previous_codepage = cls.get_cmd_code_page()
-    try:
-        if previous_codepage != 65001:
-            cls.set_cmd_code_page(65001)
-        import os
-        with Print.s_print_lock:
-            command = r&#39;&#39;&#39;python3 -c &#34;print(&#39;йЙ\r&#39;, end=&#39;&#39;)&#34;&#39;&#39;&#39;
-        Print(&#34;йЙ\r&#34;, end=&#34;&#34;)
-        Print(&#34;  \r&#34;, end=&#34;&#34;)
-        os.system(command)
-        Print(&#34;  \r&#34;, end=&#34;&#34;)
-        return cls.get_cmd_code_page()
-    except Exception:
-        if int(previous_codepage) &gt;= 0:
-            if previous_codepage != 65001:
-                cls.set_cmd_code_page(previous_codepage)
-            else:
-                cls.set_cmd_code_page(437)
-            Print(&#34;  \r&#34;, end=&#34;&#34;)
-            from .os9 import OS
-            OS._cyrillic_support = False
-            File.create(lockfile)
-            if not safe:
-                raise IOError(f&#34;Cannot use codepage 65001, returning to {previous_codepage}, &#34;
-                              f&#34;you can set other by Windows.set_cmd_code_page&#34;)
-            return previous_codepage</code></pre>
-</details>
 </dd>
 <dt id="commands.windows9.Windows.get_cmd_code_page"><code class="name flex">
 <span>def <span class="ident">get_cmd_code_page</span></span>(<span>debug=False)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -830,12 +466,12 @@ def get_cmd_code_page(debug=False):
     except KeyError:
         return &#34;Cannot get current codepage&#34;</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.windows9.Windows.get_powershell_execution_policy"><code class="name flex">
 <span>def <span class="ident">get_powershell_execution_policy</span></span>(<span>)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -849,59 +485,24 @@ def get_powershell_execution_policy():
         raise OSError(err)
     return out.strip()</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.windows9.Windows.getenv"><code class="name flex">
 <span>def <span class="ident">getenv</span></span>(<span>name, scope='user')</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def getenv(cls, name, scope=&#34;user&#34;):
-    winreg = cls.import_winreg()
-    assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
-    if scope == &#39;user&#39;:
-        root = winreg.HKEY_CURRENT_USER
-        subkey = &#39;Environment&#39;
-    else:
-        root = winreg.HKEY_LOCAL_MACHINE
-        subkey = r&#39;SYSTEM\CurrentControlSet\Control\Session Manager\Environment&#39;
-    key = winreg.OpenKey(root, subkey, 0, winreg.KEY_READ)
-    try:
-        value, _ = winreg.QueryValueEx(key, name)
-    except WindowsError:
-        value = &#39;&#39;
-    return value</code></pre>
-</details>
 </dd>
 <dt id="commands.windows9.Windows.import_winreg"><code class="name flex">
 <span>def <span class="ident">import_winreg</span></span>(<span>)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def import_winreg(cls):
-    if not cls.winreg_imported:
-        from .os9 import OS
-        import winreg
-        cls.winreg = winreg
-        cls.winreg_imported = True
-    return cls.winreg</code></pre>
-</details>
 </dd>
 <dt id="commands.windows9.Windows.lock"><code class="name flex">
 <span>def <span class="ident">lock</span></span>(<span>)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Locking Windows workstation, doesn't work with Windows 10
-<br><code>return</code> None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -918,66 +519,25 @@ def lock():
     else:
         raise OSError(&#34;Locking work only on Windows &lt; 10&#34;)</code></pre>
 </details>
+<div class="desc"><p>Locking Windows workstation, doesn't work with Windows 10
+<br><code>return</code> None</p></div>
 </dd>
 <dt id="commands.windows9.Windows.run_powershell"><code class="name flex">
 <span>def <span class="ident">run_powershell</span></span>(<span>ps1_script)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def run_powershell(cls, ps1_script):
-    from .random9 import Random
-    from .file9 import File
-    from .console9 import Console
-
-    temp_ps1_file = Random.string(10)+&#34;.ps1&#34;
-
-    old_policy = cls.get_powershell_execution_policy()
-    if old_policy != &#34;RemoteSigned&#34;:
-        cls.set_powershell_execution_policy(&#34;RemoteSigned&#34;)
-
-    File.write(temp_ps1_file, ps1_script)
-    out, err = Console.get_output(fr&#39;powershell .\&#34;{temp_ps1_file}&#34;&#39;, return_merged=False,
-                                  create_cmd_subprocess=True)
-    File.delete(temp_ps1_file)
-
-    if old_policy != &#34;RemoteSigned&#34;:
-        cls.set_powershell_execution_policy(old_policy)
-
-    if err:
-        raise OSError(err)
-
-    return out</code></pre>
-</details>
 </dd>
 <dt id="commands.windows9.Windows.set_cmd_code_page"><code class="name flex">
 <span>def <span class="ident">set_cmd_code_page</span></span>(<span>code_page)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def set_cmd_code_page(cls, code_page):
-    import os
-    import subprocess
-    subprocess.Popen(f&#34;chcp {code_page}&#34;.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-    os.system(&#34;set PYTHONIOENCODING = utf - 8&#34;)
-    cls.get_cmd_code_page()  # it&#39;s fucking magick, don&#39;t touch
-    return code_page</code></pre>
-</details>
 </dd>
 <dt id="commands.windows9.Windows.set_powershell_execution_policy"><code class="name flex">
 <span>def <span class="ident">set_powershell_execution_policy</span></span>(<span>policy_name)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -992,45 +552,18 @@ def set_powershell_execution_policy(policy_name):
         raise OSError(err)
     return out</code></pre>
 </details>
+<div class="desc"></div>
 </dd>
 <dt id="commands.windows9.Windows.setenv"><code class="name flex">
 <span>def <span class="ident">setenv</span></span>(<span>name, value, scope='user')</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">@classmethod
-def setenv(cls, name, value, scope=&#34;user&#34;):
-    # Note: for &#39;system&#39; scope, you must run this as Administrator
-    from .console9 import Console
-    from .path9 import Path
-    winreg = cls.import_winreg()
-    assert scope in (&#39;user&#39;, &#39;system&#39;), &#34;Houston we&#39;ve got a problem&#34;
-    if scope == &#39;user&#39;:
-        root = winreg.HKEY_CURRENT_USER
-        subkey = &#39;Environment&#39;
-    else:
-        root = winreg.HKEY_LOCAL_MACHINE
-        subkey = r&#39;SYSTEM\CurrentControlSet\Control\Session Manager\Environment&#39;
-    key = winreg.OpenKey(root, subkey, 0, winreg.KEY_ALL_ACCESS)
-    winreg.SetValueEx(key, name, 0, winreg.REG_EXPAND_SZ, value)
-    winreg.CloseKey(key)
-    # For some strange reason, calling SendMessage from the current process
-    # doesn&#39;t propagate environment changes at all.
-    return Console.get_output(Path.python(), &#34;-c&#34;, &#34;import win32api, win32con; &#34;
-                                                   &#34;assert win32api.SendMessage(win32con.HWND_BROADCAST, &#34;
-                                                   &#34;win32con.WM_SETTINGCHANGE, 0, &#39;Environment&#39;)&#34;)</code></pre>
-</details>
 </dd>
 <dt id="commands.windows9.Windows.user_exists"><code class="name flex">
 <span>def <span class="ident">user_exists</span></span>(<span>username)</span>
 </code></dt>
 <dd>
-<div class="desc"><p><br><code>param username</code> string
-<br><code>return</code> boolean, existence of local user</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1049,6 +582,8 @@ def user_exists(username):
     except subprocess.CalledProcessError:
         return False</code></pre>
 </details>
+<div class="desc"><p><br><code>param username</code> string
+<br><code>return</code> boolean, existence of local user</p></div>
 </dd>
 </dl>
 <h3>Methods</h3>
@@ -1057,10 +592,6 @@ def user_exists(username):
 <span>def <span class="ident">create_user</span></span>(<span>self, username, password)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Creates user using net user command
-<br><code>param username</code> string
-<br><code>param password</code> string
-<br><code>return</code> None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1073,14 +604,15 @@ def user_exists(username):
     &#34;&#34;&#34;
     return self._user(username=username, password=password, create=True)</code></pre>
 </details>
+<div class="desc"><p>Creates user using net user command
+<br><code>param username</code> string
+<br><code>param password</code> string
+<br><code>return</code> None</p></div>
 </dd>
 <dt id="commands.windows9.Windows.remove_user"><code class="name flex">
 <span>def <span class="ident">remove_user</span></span>(<span>self, username)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Removes user using net user command
-<br><code>param username</code> string
-<br><code>return</code> None</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1092,6 +624,9 @@ def user_exists(username):
     &#34;&#34;&#34;
     return self._user(username=username, remove=True)</code></pre>
 </details>
+<div class="desc"><p>Removes user using net user command
+<br><code>param username</code> string
+<br><code>return</code> None</p></div>
 </dd>
 </dl>
 </dd>
@@ -1099,7 +634,6 @@ def user_exists(username):
 </section>
 </article>
 <nav id="sidebar">
-<h1>Index</h1>
 <div class="toc">
 <ul></ul>
 </div>
@@ -1139,7 +673,7 @@ def user_exists(username):
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
 </footer>
 </body>
 </html>
