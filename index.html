@@ -98,6 +98,7 @@
     .intro-copy p { margin: 0 0 18px; }
     .availability {
       display: flex;
+      flex-wrap: wrap;
       gap: 9px;
       align-items: center;
       color: var(--green);
@@ -106,6 +107,7 @@
       text-transform: uppercase;
       letter-spacing: .08em;
     }
+    .nowrap { white-space: nowrap; }
     .availability::before {
       content: "";
       width: 7px;
@@ -408,8 +410,8 @@
         <h1 id="page-title">Commercial systems, native apps, and developer tools.</h1>
       </div>
       <div class="intro-copy">
-        <p>I have written software used in day-to-day business operations for nine years. Most of that code is private, so the cases below omit client names. The personal projects show what I build when I own the whole product.</p>
-        <div class="availability">Nine years of commercial software · public code below</div>
+        <p>For more than nine years, I have built and maintained software used in day-to-day business operations. Most of that code is private, so the cases below omit client names. The independent projects show what I build when I own the whole product.</p>
+        <div class="availability"><span>9+ years of commercial software development</span><span class="nowrap">· public code below</span></div>
       </div>
     </section>
 
@@ -424,13 +426,13 @@
           <div>
             <div class="kicker">Logistics integration</div>
             <h3>Distribution routing and delivery exchange</h3>
-            <p class="metadata-line">2023–2025 · 1C Integration Developer · Commercial team project</p>
+            <p class="metadata-line">2023–2025 · Senior 1C Developer · <span class="nowrap">Logistics integration</span></p>
           </div>
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Business problem</span><p>The route-planning service needed current orders and reference data from 1C. Planners also needed completed routes back in 1C.</p></div>
             <div class="case-detail"><span class="meta-label">My work</span><p>I built data exchanges for products, vehicles, delivery points, warehouses, shipment lines, and route results. I also built the operator screen and transfer log.</p></div>
             <div class="case-detail"><span class="meta-label">Technical complexity</span><p>Users could edit 1C documents after export. Records could also be deleted or duplicated, so the exchange compared prepared data with XML files already sent and let operators resend specific records.</p></div>
-            <div class="case-detail"><span class="meta-label">Result</span><p>The team tested the exchange with production-derived data, deployed it to one branch, and maintained it for later rollouts.</p></div>
+            <div class="case-detail"><span class="meta-label">Result</span><p>The exchange was tested with production-derived data, deployed at one branch, and supported in production while the team prepared further rollouts.</p></div>
           </div>
         </article>
 
@@ -438,13 +440,13 @@
           <div>
             <div class="kicker">Delivery operations</div>
             <h3>Field delivery and route control</h3>
-            <p class="metadata-line">2022–2024 · 1C Subsystem Developer · Commercial team project</p>
+            <p class="metadata-line">2022–2024 · Senior 1C Developer · <span class="nowrap">Delivery subsystem</span></p>
           </div>
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Business problem</span><p>Distribution branches needed accurate delivery reports, including results returned after midnight. The export also had to reject duplicate handheld-device IDs.</p></div>
             <div class="case-detail"><span class="meta-label">My work</span><p>I rewrote invoice exports, added previous-day result recovery, built delivery reports, and gave supervisors access to the routes they managed.</p></div>
             <div class="case-detail"><span class="meta-label">Technical complexity</span><p>Central 1C data had to match branch databases and driver devices. A distance cache grew large enough to stall synchronisation.</p></div>
-            <div class="case-detail"><span class="meta-label">Result</span><p>Several branches launched the subsystem. It recovered results from routes completed after midnight and caught duplicate device assignments before export.</p></div>
+            <div class="case-detail"><span class="meta-label">Result</span><p>The subsystem was deployed across several branches. It recovered results from routes completed after midnight and caught duplicate device assignments before export.</p></div>
           </div>
         </article>
 
@@ -452,7 +454,7 @@
           <div>
             <div class="kicker">Product catalogue</div>
             <h3>National product catalogue integration</h3>
-            <p class="metadata-line">2025–2026 · 1C Integration and Operations Developer · Commercial team project</p>
+            <p class="metadata-line">2025–2026 · Senior 1C Developer · <span class="nowrap">Catalogue integration</span></p>
           </div>
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Business problem</span><p>The company could not complete fiscal records or product registration until each item had an identifier from the national catalogue.</p></div>
@@ -487,10 +489,10 @@
             <p class="lede">Pomodorough is a timer for seven platforms. It works offline and keeps devices in sync. I built the Go server, the clients, and a Rust/WebAssembly rules engine. The same timer rules run everywhere.</p>
             <div class="release-status" aria-label="Pomodorough client release status">
               <div><strong>Live</strong><span>Web/PWA and synchronization service.</span></div>
-              <div><strong>Working unsigned builds</strong><span>iOS, iPadOS, macOS, Android, Linux, Windows, CLI, and TUI.</span></div>
+              <div><strong>Working development builds</strong><span>iOS, iPadOS, macOS, Android, Linux, Windows, CLI, and TUI.</span></div>
               <div><strong>Not store-released</strong><span>TestFlight, App Store, Play Store, and signed or notarized desktop distribution.</span></div>
             </div>
-            <p class="project-outcome"><strong>Result.</strong> There are working clients for seven platforms. The Android suite runs 218 instrumentation tests on API 35 and 36 at two font scales.</p>
+            <p class="project-outcome"><strong>Result.</strong> Working clients run across seven platforms, with additional CLI and TUI interfaces. The Android suite runs 218 instrumentation tests on API 35 and 36 at two font scales.</p>
             <div class="tags">
               <span class="tag">Swift 6</span><span class="tag">Kotlin</span><span class="tag">Go</span><span class="tag">Rust / WASM</span><span class="tag">Python / Qt</span><span class="tag">SQLite</span>
             </div>
@@ -512,7 +514,7 @@
             <h3>Struggl</h3>
             <p class="metadata-line">2026 · Solo developer · Working prototype / active development</p>
             <p class="lede">Struggl tells me how much I can spend today. Before I record a purchase, it shows how that purchase changes the daily budget for the rest of the period. I built the transaction entry, history, deadline changes, and period rollover.</p>
-            <p class="project-outcome"><strong>Result.</strong> The iPhone build implements six budgeting tasks. Its Swift test targets contain 86 test methods.</p>
+            <p class="project-outcome"><strong>Result.</strong> The working iPhone build covers transaction entry, history, deadline changes, and period rollover. Its Swift test targets contain 86 test methods.</p>
             <div class="tags">
               <span class="tag">SwiftUI</span><span class="tag">iOS 26</span><span class="tag">XcodeGen</span><span class="tag">GPLv3</span>
             </div>
@@ -527,7 +529,7 @@
             <h3>Series</h3>
             <p class="metadata-line">2026 · Solo developer · Working private deployment</p>
             <p class="lede">Series is an iPhone client for a shared watch-later list. I built the SwiftUI app, local cache, Google sign-in, API client, and test doubles. The saved list still opens when the server cannot be reached.</p>
-            <p class="project-outcome"><strong>Result.</strong> The deployed API accepts one invited account. Seventeen Swift test methods check sign-in, pagination, offline reads, and edits.</p>
+            <p class="project-outcome"><strong>Result.</strong> The app runs as a private, invite-only deployment. Seventeen Swift test methods cover sign-in, pagination, offline reads, and edits.</p>
             <div class="tags">
               <span class="tag">Swift 6</span><span class="tag">SwiftUI</span><span class="tag">Google Sign-In</span><span class="tag">REST</span><span class="tag">Offline reads</span>
             </div>
@@ -563,7 +565,7 @@
             <h3>Commands</h3>
             <p class="metadata-line">2018–present · Solo developer · Maintained library / active development</p>
             <p class="lede">Commands began as code copied out of my own automation scripts. I turned it into one Python package for terminal output, SSH, processes, networking, files, downloads, media, and operating-system calls.</p>
-            <p class="project-outcome"><strong>Result.</strong> The repository has 872 commits since 2018. It has 1,504 test functions in 189 files for 53 production Python files.</p>
+            <p class="project-outcome"><strong>Result.</strong> The repository has 872 commits since 2018. It has 1,504 test functions across 189 test files, covering 53 source modules.</p>
             <div class="tags">
               <span class="tag">Python 3.11+</span><span class="tag">Typed package</span><span class="tag">Windows / macOS / Linux</span><span class="tag">MIT</span>
             </div>
@@ -580,6 +582,10 @@
     <section class="shell capabilities" id="capabilities" aria-labelledby="capabilities-title">
       <h2 class="section-title" id="capabilities-title">Technical capabilities</h2>
       <div class="capability-list">
+        <div class="capability">
+          <span class="meta-label">Business systems</span>
+          <p>I build and maintain 1C:Enterprise subsystems, operator tools, reports, data exchanges, and integrations with external services.</p>
+        </div>
         <div class="capability">
           <span class="meta-label">Offline and sync</span>
           <p>Apps save changes before sending them. Failed requests stay queued and retry when the network returns. Newer local work is kept when server state arrives.</p>
