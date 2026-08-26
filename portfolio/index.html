@@ -549,8 +549,14 @@
       }
       .visual { min-height: 0; border-radius: 2mm; box-shadow: 0 0 0 1px #d8d8d3; }
       .pomodorough-collage { gap: 1.5mm; padding: 1.5mm; }
-      .project:first-child .pomodorough-collage { grid-column: 2 / 4; height: 72mm; margin-top: 2mm; }
+      .project:first-child .pomodorough-collage {
+        grid-column: 2 / 4;
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        height: 90mm;
+        margin-top: 2mm;
+      }
       .pomodorough-shot { border-radius: 1.3mm; }
+      .pomodorough-shot img { min-width: 0; min-height: 0; object-fit: contain; }
       .pomodorough-shot span { left: 1.5mm; bottom: 1.5mm; padding: 1mm; font-size: 5.5pt; }
       .screenshot-visual, .network-screenshots { min-height: 0; padding: 4mm; }
       .screenshot-visual img { max-width: 92%; height: 120mm; border-radius: 3mm; box-shadow: 0 8px 24px #0000001f; }
