@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Избранные приложения, системы и библиотеки Егора Егорова.">
-  <title>Егор Егоров | Избранные работы</title>
+  <meta name="description" content="Егор Егоров: разработка на 1С, интеграции логистики и документооборота, НКТ, бухгалтерский учёт и сопровождение.">
+  <title>Егор Егоров | Старший программист 1С</title>
   <style>
     :root {
       color-scheme: light;
@@ -577,6 +577,42 @@
       }
       .footer-inner { font-size: 7pt; }
     }
+
+    @media screen and (max-width: 600px) {
+      .nav { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 12px 0; }
+      .nav-links { grid-row: 2; grid-column: 1 / -1; flex-wrap: wrap; gap: 16px; }
+      .language-switch { grid-column: 2; grid-row: 1; }
+    }
+    .portfolio-name { margin: 0 0 16px; font: 20px var(--sans); }
+    .supporting { padding: 34px 0; border-top: 1px solid var(--line); }
+    .supporting > p { color: var(--muted); line-height: 1.5; }
+    .support-project { padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .support-project h3 { margin: 0 0 8px; font-size: 20px; }
+    .support-project p { margin: 0 0 8px; line-height: 1.5; }
+    .support-stack, .other-projects { font-size: 13px; color: var(--muted); }
+    @media print {
+      .portfolio-name { font-size: 12pt; margin-bottom: 3mm; }
+      .intro { padding-bottom: 6mm; gap: 4mm; }
+      .commercial-work { margin-top: 6mm; }
+      .commercial-case { display: block; padding: 5mm; }
+      .commercial-case h3 { font-size: 22pt; }
+      .commercial-case .metadata-line { margin: 2mm 0; font-size: 8pt; }
+      .case-details { display: grid; grid-template-columns: 1fr 1fr; }
+      .case-detail p { font-size: 9pt; line-height: 1.4; }
+      .meta-label { font-size: 7pt; }
+      .commercial-case:nth-child(2), .commercial-case:nth-child(4) { break-before: page; }
+      .commercial-list { display: block; }
+      .commercial-case + .commercial-case { margin-top: 5mm; }
+      .capabilities { display: block; padding: 6mm 0; }
+      .capabilities .section-title, .supporting .section-title { font-size: 20pt; }
+      .capability p { font-size: 8.5pt; }
+      .supporting { padding: 4mm 0 0; break-inside: avoid; }
+      .supporting > p { font-size: 8.5pt; margin: 2mm 0; }
+      .support-project { padding: 2mm 0; }
+      .support-project h3 { font-size: 10pt; margin-bottom: 1mm; }
+      .support-project p, .support-stack { font-size: 8pt; margin-bottom: 1mm; }
+      .other-projects { font-size: 8pt; }
+    }
   </style>
 </head>
 <body>
@@ -600,11 +636,11 @@
     <section class="shell intro" aria-labelledby="page-title">
       <div>
         <p class="eyebrow">Старший программист 1С · бизнес-системы и интеграции</p>
-        <h1 id="page-title">Системы и интеграции на 1С, а также независимые проекты.</h1>
+        <p class="portfolio-name">Егор Егоров</p><h1 id="page-title">Разработка и интеграции на 1С.</h1>
       </div>
       <div class="intro-copy">
-        <p>Более шести лет я разрабатываю и поддерживаю системы на платформе 1С:Предприятие для дистрибуции, бухгалтерского учёта, логистики, документооборота и регистрации товаров. Большая часть этого кода закрыта, поэтому в примерах ниже нет названий клиентов. Независимые проекты показывают, что я создаю, когда отвечаю за продукт целиком.</p>
-        <div class="availability"><span>6+ лет коммерческой разработки ПО</span><span class="nowrap">· публичный код ниже</span></div>
+        <p>Более шести лет я разрабатываю и поддерживаю системы на платформе 1С:Предприятие для дистрибуции, бухгалтерского учёта, логистики, документооборота и регистрации товаров. Большая часть этого кода закрыта, поэтому в примерах ниже нет названий клиентов. Моя работа включает разработку, тестирование, внедрение в филиалах и сопровождение рабочих баз.</p>
+        <div class="availability"><span>6+ лет коммерческой разработки ПО</span><span class="nowrap">· интеграции и сопровождение</span></div>
       </div>
     </section>
 
@@ -617,9 +653,23 @@
       <div class="commercial-list">
         <article class="commercial-case">
           <div>
+            <div class="kicker">Каталог товаров</div>
+            <h3>Интеграция с национальным каталогом товаров</h3>
+            <p class="metadata-line">2025–2026 · Старший программист 1С · <span class="nowrap">Интеграция каталога</span></p>
+          </div>
+          <div class="case-details">
+            <div class="case-detail"><span class="meta-label">Задача бизнеса</span><p>Для регистрации товаров и заполнения фискальных документов в 1С требовались актуальные коды и наименования НКТ. Также нужно было обрабатывать ошибки портала и дубли кодов.</p></div>
+            <div class="case-detail"><span class="meta-label">Моя работа</span><p>Я доработал регистр и обработку НКТ: получение недостающих NTIN по GTIN через API, массовую замену дублей NTIN, загрузку ошибок из Excel и актуализацию наименований.</p></div>
+            <div class="case-detail"><span class="meta-label">Техническая сложность</span><p>Портал отклонял неверные и повторяющиеся идентификаторы. Сотрудники обменивались списками ошибок в таблицах, а исправления требовалось переносить в несколько рабочих баз 1С, не перезаписывая корректные записи.</p></div>
+            <div class="case-detail"><span class="meta-label">Результат</span><p>Регистр перенесён в рабочие базы 1С. Сотрудники могут массово получать недостающие коды и загружать исправленные строки. Я также подготовил инструкцию по загрузке, отправке на портал, статусам и ошибкам.</p></div>
+          </div>
+        </article>
+
+        <article class="commercial-case">
+          <div>
             <div class="kicker">Интеграция логистики</div>
             <h3>Маршрутизация дистрибуции и обмен данными о доставке</h3>
-            <p class="metadata-line">2023–2025 · Старший программист 1С · <span class="nowrap">Интеграция логистики</span></p>
+            <p class="metadata-line">2023–2026 · Старший программист 1С · <span class="nowrap">Интеграция логистики</span></p>
           </div>
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Задача бизнеса</span><p>Сервис планирования маршрутов должен был получать из 1С актуальные заказы и справочные данные. Результаты выполненных маршрутов требовалось возвращать в 1С.</p></div>
@@ -645,20 +695,6 @@
 
         <article class="commercial-case">
           <div>
-            <div class="kicker">Каталог товаров</div>
-            <h3>Интеграция с национальным каталогом товаров</h3>
-            <p class="metadata-line">2025–2026 · Старший программист 1С · <span class="nowrap">Интеграция каталога</span></p>
-          </div>
-          <div class="case-details">
-            <div class="case-detail"><span class="meta-label">Задача бизнеса</span><p>Компания не могла завершить оформление фискальных документов и регистрацию товаров, пока каждому товару не был присвоен идентификатор национального каталога.</p></div>
-            <div class="case-detail"><span class="meta-label">Моя работа</span><p>Я создал регистр 1С, подключил его к API каталога и разработал инструменты для исправления дублей, загрузки ошибок портала и обновления статусов записей.</p></div>
-            <div class="case-detail"><span class="meta-label">Техническая сложность</span><p>Портал отклонял неверные и повторяющиеся идентификаторы. Сотрудники обменивались списками ошибок в таблицах, а исправления требовалось переносить в несколько рабочих баз 1С, не перезаписывая корректные записи.</p></div>
-            <div class="case-detail"><span class="meta-label">Результат</span><p>После внедрения сотрудники смогли массово запрашивать недостающие идентификаторы и повторно загружать исправленные строки вместо ручной обработки каждого товара.</p></div>
-          </div>
-        </article>
-
-        <article class="commercial-case">
-          <div>
             <div class="kicker">Разработка на платформе 1С</div>
             <h3>Торговля, бухгалтерский учёт и работа выездных сотрудников</h3>
             <p class="metadata-line">2022–2024 · Старший программист 1С · <span class="nowrap">Разработка и сопровождение платформы</span></p>
@@ -673,126 +709,9 @@
       </div>
     </section>
 
-    <section class="shell" id="work" aria-labelledby="work-title">
-      <div class="work-head">
-        <div class="work-heading">
-          <h2 id="work-title">Избранные независимые проекты</h2>
-          <p>Эти проекты лучше всего показывают мой подход к работе.</p>
-        </div>
-        <div class="filters" role="group" aria-label="Фильтр проектов">
-          <button class="filter" type="button" data-filter="all" aria-pressed="true">Все</button>
-          <button class="filter" type="button" data-filter="app" aria-pressed="false">Приложения</button>
-          <button class="filter" type="button" data-filter="system" aria-pressed="false">Системы</button>
-          <button class="filter" type="button" data-filter="library" aria-pressed="false">Библиотеки</button>
-        </div>
-      </div>
-
-      <div class="project-list">
-        <article class="project" data-kind="app system">
-          <div class="project-number">01 / Основной проект</div>
-          <div>
-            <h3>Pomodorough</h3>
-            <p class="metadata-line">2026–н. в. · Единственный разработчик · Версии с тегами / активная разработка</p>
-            <p class="lede">Pomodorough — таймер для семи платформ. Он работает без сети и синхронизирует данные между устройствами. Я разработал сервер на Go, клиентские приложения и общий модуль правил на Rust/WebAssembly. На всех платформах работают одни и те же правила таймера.</p>
-            <div class="release-status" aria-label="Статус выпуска клиентов Pomodorough">
-              <div><strong>Работает</strong><span>Web/PWA и сервис синхронизации.</span></div>
-              <div><strong>Рабочие сборки для разработки</strong><span>iOS, iPadOS, macOS, Android, Linux, Windows, CLI и TUI.</span></div>
-              <div><strong>Публично не распространяется</strong><span>Пока нет выпусков в TestFlight, App Store и Play Store, а также подписанных или нотаризованных настольных версий.</span></div>
-            </div>
-            <p class="project-outcome"><strong>Результат.</strong> У меня есть рабочие клиенты для семи платформ, а также интерфейсы CLI и TUI. Для Android написано 218 инструментальных тестов, которые выполняются на API 35 и 36 с двумя масштабами шрифта.</p>
-            <div class="tags">
-              <span class="tag">Swift 6</span><span class="tag">Kotlin</span><span class="tag">Go</span><span class="tag">Rust / WASM</span><span class="tag">Python / Qt</span><span class="tag">SQLite</span>
-            </div>
-            <div class="project-links">
-              <a href="https://pomodorough.egigoka.me">Рабочее веб-приложение</a>
-              <a href="https://github.com/Pomodoro-Everywhere">Исходный код</a>
-              <a href="https://pomodorough.egigoka.me/openapi.yaml">OpenAPI</a>
-            </div>
-          </div>
-          <div class="visual pomodorough-collage" aria-label="Интерфейсы Pomodorough на пяти платформах">
-            <a class="pomodorough-shot pomodorough-macos" href="https://egigoka.github.io/portfolio/assets/pomodorough-macos.png" target="_blank" rel="noopener" aria-label="Открыть полноразмерный снимок macOS"><img src="assets/pomodorough-macos.png" alt="Pomodorough с запущенным таймером фокусировки на macOS"><span>macOS</span></a>
-            <a class="pomodorough-shot pomodorough-ios" href="https://egigoka.github.io/portfolio/assets/pomodorough-ios27-17promax.png" target="_blank" rel="noopener" aria-label="Открыть полноразмерный снимок iPhone"><img src="assets/pomodorough-ios27-17promax.png" alt="Таймер фокусировки Pomodorough на iOS 27 и iPhone 17 Pro Max"><span>iOS</span></a>
-            <a class="pomodorough-shot pomodorough-android" href="https://egigoka.github.io/portfolio/assets/pomodorough-android.png" target="_blank" rel="noopener" aria-label="Открыть полноразмерный снимок Android"><img src="assets/pomodorough-android.png" alt="Клиент Pomodorough для Android в эмуляторе Android 15"><span>Android</span></a>
-            <a class="pomodorough-shot pomodorough-linux" href="https://egigoka.github.io/portfolio/assets/steamdeck-desktop.png" target="_blank" rel="noopener" aria-label="Открыть полноразмерный снимок Steam Deck"><img src="assets/steamdeck-desktop.png" alt="Настольный клиент Pomodorough для Linux на Steam Deck"><span>Linux</span></a>
-            <a class="pomodorough-shot pomodorough-windows" href="https://egigoka.github.io/portfolio/assets/pomodorough-windows.png" target="_blank" rel="noopener" aria-label="Открыть полноразмерный снимок Windows"><img src="assets/pomodorough-windows.png" alt="Нативный настольный клиент Pomodorough для Windows"><span>Windows</span></a>
-          </div>
-        </article>
-
-        <article class="project" data-kind="app">
-          <div class="project-number">02 / iOS</div>
-          <div>
-            <h3>Struggl</h3>
-            <p class="metadata-line">2026 · Единственный разработчик · Рабочий прототип / активная разработка</p>
-            <p class="lede">Struggl показывает, сколько я могу потратить сегодня. Перед записью покупки приложение показывает, как она изменит дневной бюджет до конца периода. Я разработал ввод операций, историю, изменение срока и переход между периодами.</p>
-            <p class="project-outcome"><strong>Результат.</strong> Рабочая версия для iPhone поддерживает ввод операций, историю, изменение срока и переход между периодами. Тестовые таргеты Swift содержат 86 тестовых методов.</p>
-            <div class="tags">
-              <span class="tag">SwiftUI</span><span class="tag">iOS 26</span><span class="tag">XcodeGen</span><span class="tag">GPLv3</span>
-            </div>
-            <div class="project-links"><a href="https://github.com/egigoka/Struggl">Исходный код</a></div>
-          </div>
-          <div class="visual screenshot-visual"><img src="assets/struggl-ios27-17promax.png" alt="Интерфейс бюджета Struggl на iOS 27 и iPhone 17 Pro Max"></div>
-        </article>
-
-        <article class="project" data-kind="app system">
-          <div class="project-number">03 / iOS</div>
-          <div>
-            <h3>Series</h3>
-            <p class="metadata-line">2026 · Единственный разработчик · Закрытая версия в эксплуатации</p>
-            <p class="lede">Series — клиент для iPhone с общим списком отложенного просмотра. Я разработал приложение на SwiftUI, локальный кэш, вход через Google, API-клиент и тестовые заглушки. Сохранённый список открывается, даже когда сервер недоступен.</p>
-            <p class="project-outcome"><strong>Результат.</strong> Приложение используется в закрытой версии с доступом по приглашениям. Семнадцать тестовых методов Swift проверяют вход, постраничную загрузку, чтение без сети и редактирование.</p>
-            <div class="tags">
-              <span class="tag">Swift 6</span><span class="tag">SwiftUI</span><span class="tag">Google Sign-In</span><span class="tag">REST</span><span class="tag">Чтение без сети</span>
-            </div>
-            <div class="project-links"><a href="https://github.com/egigoka/seriesbot">Исходный код</a></div>
-          </div>
-          <div class="visual screenshot-visual"><img src="assets/series-ios27-17promax.png" alt="Общий список отложенного просмотра Series на iOS 27 и iPhone 17 Pro Max"></div>
-        </article>
-
-        <article class="project" data-kind="app">
-          <div class="project-number">04 / Сеть</div>
-          <div>
-            <h3>Pinger + MenubarPing</h3>
-            <p class="metadata-line">2026 · Единственный разработчик · Прототип Pinger / версия MenubarPing 1.0 с тегом</p>
-            <p class="lede">Я разработал два нативных сетевых монитора. Pinger показывает на iPhone график задержки HTTP, потери за несколько периодов и данные маршрута. MenubarPing выводит в строке меню macOS состояние ICMP, HTTP, публичный IP-адрес, страну и безопасность VPN.</p>
-            <p class="project-outcome"><strong>Результат.</strong> Pinger хранит последние 300 проверок и показывает потери за пять периодов. У MenubarPing есть тег 1.0.0 и скрипт установки.</p>
-            <div class="tags">
-              <span class="tag">SwiftUI</span><span class="tag">Swift Concurrency</span><span class="tag">iOS</span><span class="tag">macOS</span><span class="tag">Без внешних зависимостей</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/egigoka/pinger">Исходный код Pinger</a>
-              <a href="https://github.com/egigoka/menubarping">Исходный код MenubarPing</a>
-            </div>
-          </div>
-          <div class="visual network-screenshots" aria-label="Pinger на iPhone и MenubarPing на macOS">
-            <img src="assets/pinger-ios27-17promax.png" alt="Pinger показывает текущую задержку HTTP и потери за несколько периодов на iOS 27">
-            <img src="assets/menubarping.png" alt="MenubarPing показывает состояние VPN, публичного IP-адреса и узлов в строке меню macOS">
-          </div>
-        </article>
-
-        <article class="project" data-kind="library">
-          <div class="project-number">05 / Библиотека</div>
-          <div>
-            <h3>Commands</h3>
-            <p class="metadata-line">2018–н. в. · Единственный разработчик · Поддерживаемая библиотека / активная разработка</p>
-            <p class="lede">Проект Commands начался с кода из моих скриптов автоматизации. Я собрал его в один пакет Python для вывода в терминал, SSH, процессов, сети, файлов, загрузок, медиа и вызовов операционной системы.</p>
-            <p class="project-outcome"><strong>Результат.</strong> С 2018 года в репозитории сделано 872 коммита. В 189 тестовых файлах находятся 1 504 тестовые функции, которые покрывают 53 модуля исходного кода.</p>
-            <div class="tags">
-              <span class="tag">Python 3.11+</span><span class="tag">Типизированный пакет</span><span class="tag">Windows / macOS / Linux</span><span class="tag">MIT</span>
-            </div>
-            <div class="project-links"><a href="https://github.com/egigoka/commands">Исходный код</a></div>
-          </div>
-          <div class="visual network-visual" style="background:#221d18" aria-label="Краткое описание библиотеки Commands">
-            <div class="latency" style="font-size:clamp(48px,6vw,76px)">commands</div>
-            <div style="font:12px/1.8 var(--mono);color:#c8b7a3">консоль · ssh · процессы · сеть<br>медиа · файлы · адаптеры платформ</div>
-          </div>
-        </article>
-      </div>
-    </section>
-
     <section class="shell capabilities" id="capabilities" aria-labelledby="capabilities-title">
-      <h2 class="section-title" id="capabilities-title">Технические компетенции</h2>
-      <div class="capability-list">
-        <div class="capability">
+<h2 class="section-title" id="capabilities-title">Компетенции 1С</h2>
+<div class="capability-list">        <div class="capability">
           <span class="meta-label">Разработка на 1С:Предприятие</span>
           <p>Я разрабатываю управляемые формы, документы, регистры, отчёты, роли, обмены данными и рабочие места операторов на платформе 1С:Предприятие.</p>
         </div>
@@ -804,52 +723,37 @@
           <span class="meta-label">Сопровождение 1С и исправление данных</span>
           <p>Я отслеживаю обмены между базами филиалов, исправляю дубли и удалённые записи, обновляю существующие подсистемы и разрабатываю проверки, повторную отправку и журналирование.</p>
         </div>
-        <div class="capability">
-          <span class="meta-label">Работа без сети и синхронизация</span>
-          <p>Приложения сохраняют изменения до отправки. Неудачные запросы остаются в очереди и повторяются после восстановления сети. При получении состояния сервера более новые локальные изменения сохраняются.</p>
-        </div>
-        <div class="capability">
-          <span class="meta-label">Нативные клиенты</span>
-          <p>Я разрабатываю приложения на SwiftUI, Jetpack Compose и PySide6. Также я работаю с доступностью, хранилищами ОС, будильниками, уведомлениями, подписью и выпуском пакетов.</p>
-        </div>
-        <div class="capability">
-          <span class="meta-label">Серверная часть</span>
-          <p>Я пишу сервисы на Go с SQLite, описываю REST API через OpenAPI и реализую OAuth, ротацию токенов и события, отправляемые сервером.</p>
-        </div>
-        <div class="capability">
-          <span class="meta-label">Общие правила</span>
-          <p>Правила таймера написаны на Rust и компилируются в WebAssembly. Swift, Kotlin, Python, JavaScript и Go используют одну реализацию.</p>
-        </div>
-        <div class="project-links" aria-label="Технические ссылки">
-          <a href="https://github.com/egigoka">Профиль GitHub</a>
-          <a href="https://pomodorough.egigoka.me">Рабочее приложение Pomodorough</a>
-          <a href="https://pomodorough.egigoka.me/openapi.yaml">Спецификация OpenAPI</a>
-        </div>
-      </div>
-    </section>
+</div>
+</section>
+
+    <section class="shell supporting" id="work" aria-labelledby="work-title">
+<h2 class="section-title" id="work-title">Дополнительные проекты</h2>
+<p>Личные проекты дополняют коммерческий опыт: автоматизация на Python, серверная разработка и нативные клиенты.</p>
+<article class="support-project">
+<h3>
+<a href="https://github.com/egigoka/commands">Commands</a>
+</h3>
+<p>Библиотека для автоматизации: SSH, процессы, сеть, файлы и вызовы ОС.</p>
+<span class="support-stack">Python · 2018–н. в.</span>
+</article>
+<article class="support-project">
+<h3>
+<a href="https://github.com/Pomodoro-Everywhere">Pomodorough</a>
+</h3>
+<p>Таймер с работой без сети и синхронизацией. Я разработал сервер, клиенты и общий модуль правил. Web/PWA работает; нативные клиенты остаются сборками для разработки.</p>
+<span class="support-stack">Go · Rust/WASM · SQLite · Swift · Kotlin</span>
+</article>
+<p class="other-projects">Другие проекты на Swift: <a href="https://github.com/egigoka/Struggl">Struggl</a>, <a href="https://github.com/egigoka/seriesbot">Series</a>, <a href="https://github.com/egigoka/pinger">Pinger</a>, <a href="https://github.com/egigoka/menubarping">MenubarPing</a>.</p>
+</section>
   </main>
 
   <footer>
     <div class="shell footer-inner">
-      <span>Избранные работы · обновлено в 2026 году.</span>
+      <span>Портфолио 1С · сентябрь 2026.</span>
       <a href="https://github.com/egigoka">github.com/egigoka</a>
     </div>
   </footer>
 
-  <script>
-    const filters = document.querySelectorAll('[data-filter]');
-    const projects = document.querySelectorAll('.project[data-kind]');
 
-    filters.forEach((button) => {
-      button.addEventListener('click', () => {
-        const selected = button.dataset.filter;
-        filters.forEach((candidate) => candidate.setAttribute('aria-pressed', String(candidate === button)));
-        projects.forEach((project) => {
-          const kinds = project.dataset.kind.split(' ');
-          project.hidden = selected !== 'all' && !kinds.includes(selected);
-        });
-      });
-    });
-  </script>
 </body>
 </html>

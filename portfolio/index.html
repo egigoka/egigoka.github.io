@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Selected applications, systems, and libraries by Egor Egorov.">
-  <title>Egor Egorov | Selected work</title>
+  <meta name="description" content="Egor Egorov: 1C development, logistics and document integrations, national product catalogue, accounting and production support.">
+  <title>Egor Egorov | Senior 1C Developer</title>
   <style>
     :root {
       color-scheme: light;
@@ -577,6 +577,42 @@
       }
       .footer-inner { font-size: 7pt; }
     }
+
+    @media screen and (max-width: 600px) {
+      .nav { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 12px 0; }
+      .nav-links { grid-row: 2; grid-column: 1 / -1; flex-wrap: wrap; gap: 16px; }
+      .language-switch { grid-column: 2; grid-row: 1; }
+    }
+    .portfolio-name { margin: 0 0 16px; font: 20px var(--sans); }
+    .supporting { padding: 34px 0; border-top: 1px solid var(--line); }
+    .supporting > p { color: var(--muted); line-height: 1.5; }
+    .support-project { padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .support-project h3 { margin: 0 0 8px; font-size: 20px; }
+    .support-project p { margin: 0 0 8px; line-height: 1.5; }
+    .support-stack, .other-projects { font-size: 13px; color: var(--muted); }
+    @media print {
+      .portfolio-name { font-size: 12pt; margin-bottom: 3mm; }
+      .intro { padding-bottom: 6mm; gap: 4mm; }
+      .commercial-work { margin-top: 6mm; }
+      .commercial-case { display: block; padding: 5mm; }
+      .commercial-case h3 { font-size: 22pt; }
+      .commercial-case .metadata-line { margin: 2mm 0; font-size: 8pt; }
+      .case-details { display: grid; grid-template-columns: 1fr 1fr; }
+      .case-detail p { font-size: 9pt; line-height: 1.4; }
+      .meta-label { font-size: 7pt; }
+      .commercial-case:nth-child(2), .commercial-case:nth-child(4) { break-before: page; }
+      .commercial-list { display: block; }
+      .commercial-case + .commercial-case { margin-top: 5mm; }
+      .capabilities { display: block; padding: 6mm 0; }
+      .capabilities .section-title, .supporting .section-title { font-size: 20pt; }
+      .capability p { font-size: 8.5pt; }
+      .supporting { padding: 4mm 0 0; break-inside: avoid; }
+      .supporting > p { font-size: 8.5pt; margin: 2mm 0; }
+      .support-project { padding: 2mm 0; }
+      .support-project h3 { font-size: 10pt; margin-bottom: 1mm; }
+      .support-project p, .support-stack { font-size: 8pt; margin-bottom: 1mm; }
+      .other-projects { font-size: 8pt; }
+    }
   </style>
 </head>
 <body>
@@ -600,11 +636,11 @@
     <section class="shell intro" aria-labelledby="page-title">
       <div>
         <p class="eyebrow">Senior 1C Developer · business systems and integrations</p>
-        <h1 id="page-title">1C business systems, integrations, and independent software.</h1>
+        <p class="portfolio-name">Egor Egorov</p><h1 id="page-title">1C development and integrations.</h1>
       </div>
       <div class="intro-copy">
-        <p>For more than six years, I have developed and maintained 1C:Enterprise systems used in distribution, accounting, logistics, document management, and product registration. Most of that code is private, so the cases below omit client names. The independent projects show what I build when I own the whole product.</p>
-        <div class="availability"><span>6+ years of commercial software development</span><span class="nowrap">· public code below</span></div>
+        <p>For more than six years, I have developed and maintained 1C:Enterprise systems used in distribution, accounting, logistics, document management, and product registration. Most of that code is private, so the cases below omit client names. My work covers development, testing, branch rollout, and production support.</p>
+        <div class="availability"><span>6+ years of commercial software development</span><span class="nowrap">· integrations and production support</span></div>
       </div>
     </section>
 
@@ -617,9 +653,23 @@
       <div class="commercial-list">
         <article class="commercial-case">
           <div>
+            <div class="kicker">Product catalogue</div>
+            <h3>National product catalogue integration</h3>
+            <p class="metadata-line">2025–2026 · Senior 1C Developer · <span class="nowrap">Catalogue integration</span></p>
+          </div>
+          <div class="case-details">
+            <div class="case-detail"><span class="meta-label">Business problem</span><p>Product registration and fiscal-document workflows needed current catalogue identifiers and names in 1C. Staff also needed to resolve portal errors and duplicate codes.</p></div>
+            <div class="case-detail"><span class="meta-label">My work</span><p>I developed the catalogue register and processing tools: API retrieval of missing NTINs by GTIN, bulk replacement of duplicate NTINs, Excel error imports, and product-name updates.</p></div>
+            <div class="case-detail"><span class="meta-label">Technical complexity</span><p>The portal rejected invalid or duplicate identifiers. Staff exchanged error lists in spreadsheets, and fixes had to reach several production 1C databases without overwriting valid records.</p></div>
+            <div class="case-detail"><span class="meta-label">Result</span><p>The register was transferred to production 1C databases. Staff could retrieve missing identifiers in bulk and reload corrected rows. I also prepared instructions for uploads, portal submission, statuses, and errors.</p></div>
+          </div>
+        </article>
+
+        <article class="commercial-case">
+          <div>
             <div class="kicker">Logistics integration</div>
             <h3>Distribution routing and delivery exchange</h3>
-            <p class="metadata-line">2023–2025 · Senior 1C Developer · <span class="nowrap">Logistics integration</span></p>
+            <p class="metadata-line">2023–2026 · Senior 1C Developer · <span class="nowrap">Logistics integration</span></p>
           </div>
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Business problem</span><p>The route-planning service needed current orders and reference data from 1C. Planners also needed completed routes back in 1C.</p></div>
@@ -645,20 +695,6 @@
 
         <article class="commercial-case">
           <div>
-            <div class="kicker">Product catalogue</div>
-            <h3>National product catalogue integration</h3>
-            <p class="metadata-line">2025–2026 · Senior 1C Developer · <span class="nowrap">Catalogue integration</span></p>
-          </div>
-          <div class="case-details">
-            <div class="case-detail"><span class="meta-label">Business problem</span><p>The company could not complete fiscal records or product registration until each item had an identifier from the national catalogue.</p></div>
-            <div class="case-detail"><span class="meta-label">My work</span><p>I built the 1C register, connected it to the catalogue API, and wrote tools to correct duplicates, import portal errors, and update record status.</p></div>
-            <div class="case-detail"><span class="meta-label">Technical complexity</span><p>The portal rejected invalid or duplicate identifiers. Staff exchanged error lists in spreadsheets, and fixes had to reach several production 1C databases without overwriting valid records.</p></div>
-            <div class="case-detail"><span class="meta-label">Result</span><p>After rollout, staff could request missing identifiers in bulk and reload corrected rows instead of fixing each product by hand.</p></div>
-          </div>
-        </article>
-
-        <article class="commercial-case">
-          <div>
             <div class="kicker">1C platform development</div>
             <h3>Trade, accounting, and field operations</h3>
             <p class="metadata-line">2022–2024 · Senior 1C Developer · <span class="nowrap">Platform development and support</span></p>
@@ -673,126 +709,9 @@
       </div>
     </section>
 
-    <section class="shell" id="work" aria-labelledby="work-title">
-      <div class="work-head">
-        <div class="work-heading">
-          <h2 id="work-title">Selected independent projects</h2>
-          <p>These projects best represent how I work.</p>
-        </div>
-        <div class="filters" role="group" aria-label="Filter projects">
-          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
-          <button class="filter" type="button" data-filter="app" aria-pressed="false">Apps</button>
-          <button class="filter" type="button" data-filter="system" aria-pressed="false">Systems</button>
-          <button class="filter" type="button" data-filter="library" aria-pressed="false">Libraries</button>
-        </div>
-      </div>
-
-      <div class="project-list">
-        <article class="project" data-kind="app system">
-          <div class="project-number">01 / Flagship</div>
-          <div>
-            <h3>Pomodorough</h3>
-            <p class="metadata-line">2026–present · Solo developer · Tagged releases / active development</p>
-            <p class="lede">Pomodorough is a timer for seven platforms. It works offline and keeps devices in sync. I built the Go server, the clients, and a Rust/WebAssembly rules engine. The same timer rules run everywhere.</p>
-            <div class="release-status" aria-label="Pomodorough client release status">
-              <div><strong>Live</strong><span>Web/PWA and synchronisation service.</span></div>
-              <div><strong>Working development builds</strong><span>iOS, iPadOS, macOS, Android, Linux, Windows, CLI, and TUI.</span></div>
-              <div><strong>Not publicly distributed</strong><span>No TestFlight, App Store, Play Store, or signed/notarized desktop release yet.</span></div>
-            </div>
-            <p class="project-outcome"><strong>Result.</strong> I have working clients on seven platforms, plus CLI and TUI interfaces. The Android suite runs 218 instrumentation tests on API 35 and 36 at two font scales.</p>
-            <div class="tags">
-              <span class="tag">Swift 6</span><span class="tag">Kotlin</span><span class="tag">Go</span><span class="tag">Rust / WASM</span><span class="tag">Python / Qt</span><span class="tag">SQLite</span>
-            </div>
-            <div class="project-links">
-              <a href="https://pomodorough.egigoka.me">Live web app</a>
-              <a href="https://github.com/Pomodoro-Everywhere">Source</a>
-              <a href="https://pomodorough.egigoka.me/openapi.yaml">OpenAPI</a>
-            </div>
-          </div>
-          <div class="visual pomodorough-collage" aria-label="Pomodorough interfaces on five platforms">
-            <a class="pomodorough-shot pomodorough-macos" href="https://egigoka.github.io/portfolio/assets/pomodorough-macos.png" target="_blank" rel="noopener" aria-label="Open the full-size macOS screenshot"><img src="assets/pomodorough-macos.png" alt="Pomodorough running focus timer on macOS"><span>macOS</span></a>
-            <a class="pomodorough-shot pomodorough-ios" href="https://egigoka.github.io/portfolio/assets/pomodorough-ios27-17promax.png" target="_blank" rel="noopener" aria-label="Open the full-size iPhone screenshot"><img src="assets/pomodorough-ios27-17promax.png" alt="Pomodorough focus timer on iOS 27 running on iPhone 17 Pro Max"><span>iOS</span></a>
-            <a class="pomodorough-shot pomodorough-android" href="https://egigoka.github.io/portfolio/assets/pomodorough-android.png" target="_blank" rel="noopener" aria-label="Open the full-size Android screenshot"><img src="assets/pomodorough-android.png" alt="Pomodorough Android client running in an Android 15 emulator"><span>Android</span></a>
-            <a class="pomodorough-shot pomodorough-linux" href="https://egigoka.github.io/portfolio/assets/steamdeck-desktop.png" target="_blank" rel="noopener" aria-label="Open the full-size Steam Deck screenshot"><img src="assets/steamdeck-desktop.png" alt="Pomodorough Linux desktop client running on Steam Deck"><span>Linux</span></a>
-            <a class="pomodorough-shot pomodorough-windows" href="https://egigoka.github.io/portfolio/assets/pomodorough-windows.png" target="_blank" rel="noopener" aria-label="Open the full-size Windows screenshot"><img src="assets/pomodorough-windows.png" alt="Pomodorough native Windows desktop client"><span>Windows</span></a>
-          </div>
-        </article>
-
-        <article class="project" data-kind="app">
-          <div class="project-number">02 / iOS</div>
-          <div>
-            <h3>Struggl</h3>
-            <p class="metadata-line">2026 · Solo developer · Working prototype / active development</p>
-            <p class="lede">Struggl tells me how much I can spend today. Before I record a purchase, it shows how that purchase changes the daily budget for the rest of the period. I built the transaction entry, history, deadline changes, and period rollover.</p>
-            <p class="project-outcome"><strong>Result.</strong> The working iPhone build covers transaction entry, history, deadline changes, and period rollover. Its Swift test targets contain 86 test methods.</p>
-            <div class="tags">
-              <span class="tag">SwiftUI</span><span class="tag">iOS 26</span><span class="tag">XcodeGen</span><span class="tag">GPLv3</span>
-            </div>
-            <div class="project-links"><a href="https://github.com/egigoka/Struggl">Source</a></div>
-          </div>
-          <div class="visual screenshot-visual"><img src="assets/struggl-ios27-17promax.png" alt="Struggl budgeting interface on iOS 27 running on iPhone 17 Pro Max"></div>
-        </article>
-
-        <article class="project" data-kind="app system">
-          <div class="project-number">03 / iOS</div>
-          <div>
-            <h3>Series</h3>
-            <p class="metadata-line">2026 · Solo developer · Working private deployment</p>
-            <p class="lede">Series is an iPhone client for a shared watch-later list. I built the SwiftUI app, local cache, Google sign-in, API client, and test doubles. The saved list still opens when the server cannot be reached.</p>
-            <p class="project-outcome"><strong>Result.</strong> The app runs as a private, invite-only deployment. Seventeen Swift test methods cover sign-in, pagination, offline reads, and edits.</p>
-            <div class="tags">
-              <span class="tag">Swift 6</span><span class="tag">SwiftUI</span><span class="tag">Google Sign-In</span><span class="tag">REST</span><span class="tag">Offline reads</span>
-            </div>
-            <div class="project-links"><a href="https://github.com/egigoka/seriesbot">Source</a></div>
-          </div>
-          <div class="visual screenshot-visual"><img src="assets/series-ios27-17promax.png" alt="Series shared watch-later library on iOS 27 running on iPhone 17 Pro Max"></div>
-        </article>
-
-        <article class="project" data-kind="app">
-          <div class="project-number">04 / Network</div>
-          <div>
-            <h3>Pinger + MenubarPing</h3>
-            <p class="metadata-line">2026 · Solo developer · Pinger prototype / MenubarPing 1.0 tagged</p>
-            <p class="lede">I built both native network monitors. Pinger charts HTTP latency, rolling loss, and route metadata on iPhone. MenubarPing keeps ICMP, HTTP, public IP, country, and VPN safety state visible in the macOS menu bar.</p>
-            <p class="project-outcome"><strong>Result.</strong> Pinger keeps the latest 300 checks and reports loss over five time windows. MenubarPing has a 1.0.0 tag and an install script.</p>
-            <div class="tags">
-              <span class="tag">SwiftUI</span><span class="tag">Swift Concurrency</span><span class="tag">iOS</span><span class="tag">macOS</span><span class="tag">No runtime dependencies</span>
-            </div>
-            <div class="project-links">
-              <a href="https://github.com/egigoka/pinger">Pinger source</a>
-              <a href="https://github.com/egigoka/menubarping">MenubarPing source</a>
-            </div>
-          </div>
-          <div class="visual network-screenshots" aria-label="Pinger on iPhone and MenubarPing on macOS">
-            <img src="assets/pinger-ios27-17promax.png" alt="Pinger showing live HTTP latency and packet-loss windows on iOS 27">
-            <img src="assets/menubarping.png" alt="MenubarPing showing VPN, public IP, and endpoint status in the macOS menu bar">
-          </div>
-        </article>
-
-        <article class="project" data-kind="library">
-          <div class="project-number">05 / Library</div>
-          <div>
-            <h3>Commands</h3>
-            <p class="metadata-line">2018–present · Solo developer · Maintained library / active development</p>
-            <p class="lede">Commands began as code copied out of my own automation scripts. I turned it into one Python package for terminal output, SSH, processes, networking, files, downloads, media, and operating-system calls.</p>
-            <p class="project-outcome"><strong>Result.</strong> The repository has 872 commits since 2018. It has 1,504 test functions across 189 test files, covering 53 source modules.</p>
-            <div class="tags">
-              <span class="tag">Python 3.11+</span><span class="tag">Typed package</span><span class="tag">Windows / macOS / Linux</span><span class="tag">MIT</span>
-            </div>
-            <div class="project-links"><a href="https://github.com/egigoka/commands">Source</a></div>
-          </div>
-          <div class="visual network-visual" style="background:#221d18" aria-label="Commands library summary">
-            <div class="latency" style="font-size:clamp(48px,6vw,76px)">commands</div>
-            <div style="font:12px/1.8 var(--mono);color:#c8b7a3">console · ssh · process · network<br>media · files · platform adapters</div>
-          </div>
-        </article>
-      </div>
-    </section>
-
     <section class="shell capabilities" id="capabilities" aria-labelledby="capabilities-title">
-      <h2 class="section-title" id="capabilities-title">Technical capabilities</h2>
-      <div class="capability-list">
-        <div class="capability">
+<h2 class="section-title" id="capabilities-title">1C capabilities</h2>
+<div class="capability-list">        <div class="capability">
           <span class="meta-label">1C:Enterprise development</span>
           <p>I develop managed forms, documents, registers, reports, roles, data exchanges, and operator tools in 1C:Enterprise.</p>
         </div>
@@ -804,52 +723,37 @@
           <span class="meta-label">1C support and data repair</span>
           <p>I trace exchanges across branch databases, repair duplicate and deleted records, update existing subsystems, and build validation, resend, and logging tools.</p>
         </div>
-        <div class="capability">
-          <span class="meta-label">Offline and sync</span>
-          <p>Apps save changes before sending them. Failed requests stay queued and retry when the network returns. Newer local work is kept when server state arrives.</p>
-        </div>
-        <div class="capability">
-          <span class="meta-label">Native clients</span>
-          <p>I build apps with SwiftUI, Jetpack Compose, and PySide6. I also handle accessibility, OS storage, alarms, notifications, signing, and release packages.</p>
-        </div>
-        <div class="capability">
-          <span class="meta-label">Backend</span>
-          <p>I write Go services backed by SQLite, document REST APIs with OpenAPI, and implement OAuth, token rotation, and server-sent events.</p>
-        </div>
-        <div class="capability">
-          <span class="meta-label">Shared rules</span>
-          <p>The timer rules live in Rust and compile to WebAssembly. Swift, Kotlin, Python, JavaScript, and Go use the same implementation.</p>
-        </div>
-        <div class="project-links" aria-label="Technical links">
-          <a href="https://github.com/egigoka">GitHub profile</a>
-          <a href="https://pomodorough.egigoka.me">Pomodorough live app</a>
-          <a href="https://pomodorough.egigoka.me/openapi.yaml">OpenAPI specification</a>
-        </div>
-      </div>
-    </section>
+</div>
+</section>
+
+    <section class="shell supporting" id="work" aria-labelledby="work-title">
+<h2 class="section-title" id="work-title">Supporting independent projects</h2>
+<p>Personal projects complement my commercial work with Python automation, backend development, and native clients.</p>
+<article class="support-project">
+<h3>
+<a href="https://github.com/egigoka/commands">Commands</a>
+</h3>
+<p>Python library for automation: SSH, processes, networking, files, and OS calls.</p>
+<span class="support-stack">Python · 2018–present</span>
+</article>
+<article class="support-project">
+<h3>
+<a href="https://github.com/Pomodoro-Everywhere">Pomodorough</a>
+</h3>
+<p>Offline timer with device sync. I built the server, clients, and shared rules engine. Web/PWA is live; native clients remain development builds.</p>
+<span class="support-stack">Go · Rust/WASM · SQLite · Swift · Kotlin</span>
+</article>
+<p class="other-projects">Other Swift projects: <a href="https://github.com/egigoka/Struggl">Struggl</a>, <a href="https://github.com/egigoka/seriesbot">Series</a>, <a href="https://github.com/egigoka/pinger">Pinger</a>, <a href="https://github.com/egigoka/menubarping">MenubarPing</a>.</p>
+</section>
   </main>
 
   <footer>
     <div class="shell footer-inner">
-      <span>Selected work · updated in 2026.</span>
+      <span>1C portfolio · September 2026.</span>
       <a href="https://github.com/egigoka">github.com/egigoka</a>
     </div>
   </footer>
 
-  <script>
-    const filters = document.querySelectorAll('[data-filter]');
-    const projects = document.querySelectorAll('.project[data-kind]');
 
-    filters.forEach((button) => {
-      button.addEventListener('click', () => {
-        const selected = button.dataset.filter;
-        filters.forEach((candidate) => candidate.setAttribute('aria-pressed', String(candidate === button)));
-        projects.forEach((project) => {
-          const kinds = project.dataset.kind.split(' ');
-          project.hidden = selected !== 'all' && !kinds.includes(selected);
-        });
-      });
-    });
-  </script>
 </body>
 </html>
