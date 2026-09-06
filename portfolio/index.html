@@ -639,7 +639,7 @@
         <p class="portfolio-name">Egor Egorov</p><h1 id="page-title">1C development and integrations.</h1>
       </div>
       <div class="intro-copy">
-        <p>For more than six years, I have developed and maintained 1C:Enterprise systems used in distribution, accounting, logistics, document management, and product registration. Most of that code is private, so the cases below omit client names. My work covers development, testing, branch rollout, and production support.</p>
+        <p>I build missing workflows and fix failing ones in 1C:Enterprise. For more than six years, my work has covered distribution, accounting, logistics, document management, and product registration—from development and testing to branch rollout and production support.</p>
         <div class="availability"><span>6+ years of commercial software development</span><span class="nowrap">· integrations and production support</span></div>
       </div>
     </section>
@@ -659,8 +659,8 @@
           </div>
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Business problem</span><p>Product registration and fiscal-document workflows needed current catalogue identifiers and names in 1C. Staff also needed to resolve portal errors and duplicate codes.</p></div>
-            <div class="case-detail"><span class="meta-label">My work</span><p>I developed the catalogue register and processing tools: API retrieval of missing NTINs by GTIN, bulk replacement of duplicate NTINs, Excel error imports, and product-name updates.</p></div>
-            <div class="case-detail"><span class="meta-label">Technical complexity</span><p>The portal rejected invalid or duplicate identifiers. Staff exchanged error lists in spreadsheets, and fixes had to reach several production 1C databases without overwriting valid records.</p></div>
+            <div class="case-detail"><span class="meta-label">My work</span><p>I developed the catalogue register and tools to retrieve NTINs by barcode (GTIN), replace duplicate or deactivated codes, reload corrections from Excel, and refresh Russian and Kazakh product names in batches.</p></div>
+            <div class="case-detail"><span class="meta-label">Technical complexity</span><p>I added bounded retries for rate limits and server errors, plus mock success and error responses for testing without the live portal. Updates follow replacement-code chains and preserve existing names when the portal returns empty values.</p></div>
             <div class="case-detail"><span class="meta-label">Result</span><p>The register was transferred to production 1C databases. Staff could retrieve missing identifiers in bulk and reload corrected rows. I also prepared instructions for uploads, portal submission, statuses, and errors.</p></div>
           </div>
         </article>
@@ -673,8 +673,8 @@
           </div>
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Business problem</span><p>The route-planning service needed current orders and reference data from 1C. Planners also needed completed routes back in 1C.</p></div>
-            <div class="case-detail"><span class="meta-label">My work</span><p>I built data exchanges for products, vehicles, delivery points, warehouses, shipment lines, and route results. I also built the operator screen and transfer log.</p></div>
-            <div class="case-detail"><span class="meta-label">Technical complexity</span><p>Users could edit 1C documents after export. Records could also be deleted or duplicated, so the exchange compared prepared data with XML files already sent and let operators resend specific records.</p></div>
+            <div class="case-detail"><span class="meta-label">My work</span><p>I developed and extended exchanges for products, vehicles, delivery points, warehouses, shipment lines, and route results, with an operator screen, transfer logs, and selective resending.</p></div>
+            <div class="case-detail"><span class="meta-label">Technical complexity</span><p>Documents could change after export. I added reconciliation against saved outgoing XML: quantities, prices, weights, and volumes, with field-level mismatch logs and decimal-precision handling across branch databases.</p></div>
             <div class="case-detail"><span class="meta-label">Result</span><p>The exchange was tested with production-derived data, deployed at one branch, and supported in production while the team prepared further rollouts.</p></div>
           </div>
         </article>
@@ -702,8 +702,8 @@
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Business problem</span><p>Branch teams used 1C Trade and 1C Accounting for delivery control, accounting documents, reports, and mobile sales workflows. Existing external reports and processors also had to be maintained inside the configurations.</p></div>
             <div class="case-detail"><span class="meta-label">My work</span><p>I developed a fuel write-off document for autonomous heaters, updated tyre-mileage and branch-cost reports, moved selected external reports and processors into 1C Accounting, and added delivery-control reports and a supervisor role to the GIS subsystem.</p></div>
-            <div class="case-detail"><span class="meta-label">Technical complexity</span><p>The delivery subsystem had to handle routes completed after midnight, duplicate vehicle and mobile-device mappings, historical records, and a large distance-cache exchange.</p></div>
-            <div class="case-detail"><span class="meta-label">Result</span><p>The work produced a new 1C accounting document, updated reports, supervisor access, and fixes for late delivery results and distance-cache synchronisation.</p></div>
+            <div class="case-detail"><span class="meta-label">Technical complexity</span><p>I extended delivery exports to include orders from linked warehouses. Other fixes covered routes completed after midnight, duplicate vehicle/device mappings, historical records, and distance-cache synchronisation.</p></div>
+            <div class="case-detail"><span class="meta-label">Result</span><p>Branch staff gained a fuel write-off document, updated accounting and delivery reports, and supervisor access. Delivery workflows could include linked warehouses and correctly handle late route results.</p></div>
           </div>
         </article>
       </div>
