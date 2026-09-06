@@ -659,7 +659,7 @@
           </div>
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Business problem</span><p>Product registration and fiscal-document workflows needed current catalogue identifiers and names in 1C. Staff also needed to resolve portal errors and duplicate codes.</p></div>
-            <div class="case-detail"><span class="meta-label">My work</span><p>I developed the catalogue register and tools to retrieve NTINs by barcode (GTIN), replace duplicate or deactivated codes, reload corrections from Excel, and refresh Russian and Kazakh product names in batches.</p></div>
+            <div class="case-detail"><span class="meta-label">My work</span><p>I developed the catalogue register and tools to retrieve NTINs by barcode (GTIN), replace duplicate or deactivated codes, reload corrections from Excel, and refresh Russian and Kazakh product names in batches. I added record history with user and timestamp tracking, including deletions.</p></div>
             <div class="case-detail"><span class="meta-label">Technical complexity</span><p>I added bounded retries for rate limits and server errors, plus mock success and error responses for testing without the live portal. Updates follow replacement-code chains and preserve existing names when the portal returns empty values.</p></div>
             <div class="case-detail"><span class="meta-label">Result</span><p>The register was transferred to production 1C databases. Staff could retrieve missing identifiers in bulk and reload corrected rows. I also prepared instructions for uploads, portal submission, statuses, and errors.</p></div>
           </div>
@@ -701,7 +701,7 @@
           </div>
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Business problem</span><p>Branch teams used 1C Trade and 1C Accounting for delivery control, accounting documents, reports, and mobile sales workflows. Existing external reports and processors also had to be maintained inside the configurations.</p></div>
-            <div class="case-detail"><span class="meta-label">My work</span><p>I developed a fuel write-off document for autonomous heaters, updated tyre-mileage and branch-cost reports, moved selected external reports and processors into 1C Accounting, and added delivery-control reports and a supervisor role to the GIS subsystem.</p></div>
+            <div class="case-detail"><span class="meta-label">My work</span><p>I built a heater fuel write-off document, updated tyre-mileage and branch-cost reports, and moved external tools into 1C Accounting. In GIS, I added supervisor access and scheduled delivery reports using the Data Composition System (СКД), exported to Excel and emailed by organisation.</p></div>
             <div class="case-detail"><span class="meta-label">Technical complexity</span><p>I extended delivery exports to include orders from linked warehouses. Other fixes covered routes completed after midnight, duplicate vehicle/device mappings, historical records, and distance-cache synchronisation.</p></div>
             <div class="case-detail"><span class="meta-label">Result</span><p>Branch staff gained a fuel write-off document, updated accounting and delivery reports, and supervisor access. Delivery workflows could include linked warehouses and correctly handle late route results.</p></div>
           </div>
