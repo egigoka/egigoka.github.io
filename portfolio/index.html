@@ -659,9 +659,9 @@
           </div>
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Business problem</span><p>Product registration and fiscal-document workflows needed current catalogue identifiers and names in 1C. Staff also needed to resolve portal errors and duplicate codes.</p></div>
-            <div class="case-detail"><span class="meta-label">My work</span><p>I developed the catalogue register and tools to retrieve NTINs by barcode (GTIN), replace duplicate or deactivated codes, reload corrections from Excel, and refresh Russian and Kazakh product names in batches. I added record history with user and timestamp tracking, including deletions.</p></div>
+            <div class="case-detail"><span class="meta-label">My work</span><p>I extended the catalogue register and processing tools with NTIN lookup by barcode (GTIN), replacement of duplicate or deactivated codes, Excel correction imports, and batch updates of Russian and Kazakh names. I added record history with user and timestamp tracking, including deletions.</p></div>
             <div class="case-detail"><span class="meta-label">Technical complexity</span><p>I added bounded retries for rate limits and server errors, plus mock success and error responses for testing without the live portal. Updates follow replacement-code chains and preserve existing names when the portal returns empty values.</p></div>
-            <div class="case-detail"><span class="meta-label">Result</span><p>The register was transferred to production 1C databases. Staff could retrieve missing identifiers in bulk and reload corrected rows. I also prepared instructions for uploads, portal submission, statuses, and errors.</p></div>
+            <div class="case-detail"><span class="meta-label">Result</span><p>In production 1C databases, staff can retrieve missing identifiers and reload corrected rows in bulk. Record history makes catalogue edits and deletions traceable to a user and time. I also prepared operating instructions.</p></div>
           </div>
         </article>
 
@@ -673,9 +673,9 @@
           </div>
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Business problem</span><p>The route-planning service needed current orders and reference data from 1C. Planners also needed completed routes back in 1C.</p></div>
-            <div class="case-detail"><span class="meta-label">My work</span><p>I developed and extended exchanges for products, vehicles, delivery points, warehouses, shipment lines, and route results, with an operator screen, transfer logs, and selective resending.</p></div>
+            <div class="case-detail"><span class="meta-label">My work</span><p>I extended the existing logistics exchange for products, vehicles, delivery points, warehouses, shipment lines, and route results. I built the operator screen and transfer logs, and added selective resending.</p></div>
             <div class="case-detail"><span class="meta-label">Technical complexity</span><p>Documents could change after export. I added reconciliation against saved outgoing XML: quantities, prices, weights, and volumes, with field-level mismatch logs and decimal-precision handling across branch databases.</p></div>
-            <div class="case-detail"><span class="meta-label">Result</span><p>The exchange was tested with production-derived data, deployed at one branch, and supported in production while the team prepared further rollouts.</p></div>
+            <div class="case-detail"><span class="meta-label">Result</span><p>After testing with production-derived data, the exchange was deployed at one branch. Operators could identify shipment mismatches by field and resend selected records. I supported production operation while the team prepared further rollouts.</p></div>
           </div>
         </article>
 
@@ -689,21 +689,21 @@
             <div class="case-detail"><span class="meta-label">Business problem</span><p>The document-management system received email and XML data, created sales and return documents in 1C, and exchanged master data. Its SOAP interface also had to move to REST.</p></div>
             <div class="case-detail"><span class="meta-label">My work</span><p>I rewrote the DMS API from SOAP to REST, made request headers and parameters case-insensitive, mapped incoming values to 1C reference data, added new XML fields and return rules, and rebuilt the master-data export as a one-action managed form.</p></div>
             <div class="case-detail"><span class="meta-label">Technical complexity</span><p>Incoming files could contain missing or mismatched reference values. Database refreshes required the integration to reload messages and restore its initial state. I also added document validation, cache cleanup, consolidated logs, and a log viewer.</p></div>
-            <div class="case-detail"><span class="meta-label">Result</span><p>The integration passed final testing in one branch with document checks and updated loading flows. Operators could trace which 1C documents came from each message and review exchange logs.</p></div>
+            <div class="case-detail"><span class="meta-label">Result</span><p>Operators could trace each incoming message to its 1C documents and inspect exchange logs when a load failed. The integration passed final testing in one branch with document validation and updated loading flows.</p></div>
           </div>
         </article>
 
         <article class="commercial-case">
           <div>
             <div class="kicker">1C platform development</div>
-            <h3>Trade, accounting, and field operations</h3>
+            <h3>Accounting and delivery automation</h3>
             <p class="metadata-line">2022–2024 · Senior 1C Developer · <span class="nowrap">Platform development and support</span></p>
           </div>
           <div class="case-details">
             <div class="case-detail"><span class="meta-label">Business problem</span><p>Branch teams used 1C Trade and 1C Accounting for delivery control, accounting documents, reports, and mobile sales workflows. Existing external reports and processors also had to be maintained inside the configurations.</p></div>
             <div class="case-detail"><span class="meta-label">My work</span><p>I built a heater fuel write-off document, updated tyre-mileage and branch-cost reports, and moved external tools into 1C Accounting. In GIS, I added supervisor access and scheduled delivery reports using the Data Composition System (СКД), exported to Excel and emailed by organisation.</p></div>
             <div class="case-detail"><span class="meta-label">Technical complexity</span><p>I extended delivery exports to include orders from linked warehouses. Other fixes covered routes completed after midnight, duplicate vehicle/device mappings, historical records, and distance-cache synchronisation.</p></div>
-            <div class="case-detail"><span class="meta-label">Result</span><p>Branch staff gained a fuel write-off document, updated accounting and delivery reports, and supervisor access. Delivery workflows could include linked warehouses and correctly handle late route results.</p></div>
+            <div class="case-detail"><span class="meta-label">Result</span><p>Delivery reports are generated on schedule and emailed as Excel files to recipients for each organisation. Staff can record heater fuel write-offs in 1C; delivery workflows include linked warehouses and account for routes completed after midnight.</p></div>
           </div>
         </article>
       </div>
